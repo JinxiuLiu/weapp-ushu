@@ -1,0 +1,36 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/cart/cart",
+    "pages/user/user"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "USHU",
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#ececec"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff4444",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "image/index.png",
+      "selectedIconPath": "image/index-select.png"
+    }, {
+      "pagePath": "pages/cart/cart",
+      "text": "购物车",
+      "iconPath": "image/cart.png",
+      "selectedIconPath": "image/cart-select.png"
+    }, {
+      "pagePath": "pages/user/user",
+      "text": "我的",
+      "iconPath": "image/user.png",
+      "selectedIconPath": "image/user-select.png"
+    }],
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white"
+  }
+}
