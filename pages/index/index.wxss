@@ -17,3 +17,149 @@ page {
 .weui-search-bar__label {
 	background: #f0f0f0;
 }
+
+.slide-image {
+	width: 100%;
+	height: 300rpx;
+}
+
+/* 书单 */
+.bookList {
+	background: #fff;
+	margin-bottom: 27rpx;
+}
+
+.bookList-founder {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 42rpx 45rpx 60rpx;
+}
+
+.founder-info {
+	display: flex;
+}
+
+.founder-info .founder-avatar {
+	display: inline-block;
+	width: 80rpx;
+	height: 80rpx
+}
+
+.founder-info .founder-name {
+	padding-left: 20rpx;
+}
+
+.founder-info .founder-name .name {
+	font-size: 14px;
+	color: #333;
+}
+
+.founder-info .founder-name .time {
+	font-size: 12px;
+	color: #999;
+}
+
+.founder-concern {
+	width: 170rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	border: 1px solid #ff4444;
+	border-radius: 30rpx;
+	text-align: center;
+	font-size: 14px;
+	color: #ff4444;
+}
+
+.bookList-info {
+
+}
+
+.bookList-name {
+	padding: 0 45rpx;
+	font-size: 15px;
+	color: #333;
+	line-height: 85rpx;
+}
+
+.bookList-video {
+	padding: 0 45rpx;
+	height: 370rpx;
+	margin-bottom: 59rpx;
+}
+
+.bookList-audio {
+	padding-left: 45rpx;
+	margin-bottom: 36rpx;
+}
+
+.bookList-video video {
+	width: 100%;
+	height: 100%;
+}
+
+.bookList-item {
+	padding-left: 45rpx;
+}
+
+.bookList-item swiper swiper-item {
+	width: 160rpx !important;
+	height: 225rpx !important;
+	padding-right: 34rpx;
+}
+
+.scroll-view_H{
+	white-space: nowrap;
+	height: 225rpx;
+}
+
+.scroll-view-item{
+  height: 300rpx;
+}
+
+.scroll-view-item_H{
+  display: inline-block;
+  width: 160rpx;
+  height: 100%;
+  padding-right: 34rpx;
+}
+
+.bookList-tag {
+	display: flex;
+	padding: 0 45rpx;
+}
+
+.bookList-tag .tag {
+	width: 114rpx;
+	height: 48rpx;
+	margin: 28rpx 0;
+	line-height: 48rpx;
+	margin-right: 20rpx;
+	border: 1px solid #999;
+	border-radius: 6rpx;
+	font-size: 14px;
+	color: #999;
+	text-align: center;
+}
+
+.bookList-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 88rpx;
+	line-height: 88rpx;
+	padding: 0 45rpx;
+	background: #f7f7f7;
+	color: #aaa;
+}
+
+.bookList-footer .hot,
+.bookList-footer .comment {
+	display: inline-block;
+	font-size: 30rpx;
+	color: #aaa;
+}
+
+.bookList-footer .comment {
+	padding-left: 40rpx;
+}

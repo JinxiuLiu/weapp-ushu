@@ -21,6 +21,11 @@
       "selectedIconPath": "image/index-select.png"
     }, {
       "pagePath": "pages/cart/cart",
+      "text": "添加",
+      "iconPath": "image/add.png",
+      "selectedIconPath": "image/add-select.png"
+    }, {
+      "pagePath": "pages/cart/cart",
       "text": "购物车",
       "iconPath": "image/cart.png",
       "selectedIconPath": "image/cart-select.png"
