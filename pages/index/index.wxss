@@ -1,8 +1,7 @@
-/**index.wxss**/
-page {
-	background: #ececec;
-}
-
+/**
+ * Created by Liujx on 2017-10-17 10:01:58
+ * index.wxss
+ */
 .weui-search-bar {
 	border: none;
 	background: #fff;
@@ -33,7 +32,7 @@ page {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 42rpx 45rpx 60rpx;
+	padding: 42rpx 40rpx 60rpx;
 }
 
 .founder-info {
@@ -76,20 +75,20 @@ page {
 }
 
 .bookList-name {
-	padding: 0 45rpx;
+	padding: 0 40rpx;
 	font-size: 15px;
 	color: #333;
 	line-height: 85rpx;
 }
 
 .bookList-video {
-	padding: 0 45rpx;
+	padding: 0 40rpx;
 	height: 370rpx;
 	margin-bottom: 59rpx;
 }
 
 .bookList-audio {
-	padding-left: 45rpx;
+	padding-left: 40rpx;
 	margin-bottom: 36rpx;
 }
 
@@ -99,7 +98,7 @@ page {
 }
 
 .bookList-item {
-	padding-left: 45rpx;
+	padding-left: 40rpx;
 }
 
 .bookList-item swiper swiper-item {
@@ -126,7 +125,7 @@ page {
 
 .bookList-tag {
 	display: flex;
-	padding: 0 45rpx;
+	padding: 0 40rpx;
 }
 
 .bookList-tag .tag {
@@ -148,7 +147,7 @@ page {
 	align-items: center;
 	height: 88rpx;
 	line-height: 88rpx;
-	padding: 0 45rpx;
+	padding: 0 40rpx;
 	background: #f7f7f7;
 	color: #aaa;
 }

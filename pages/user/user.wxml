@@ -1,0 +1,86 @@
+<view class="user-info">
+	<view class="user-bg">
+		<view class="user-avatar">
+			<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
+		</view>
+		<view class="user-name">
+			<text>showmetheloli</text>		
+		</view>
+		<view class="user-earnings">
+			<view class="user-earnings-info">
+				<text>累计收益：¥88888</text>
+				<image style="" src="../../image/right-arrow.png"></image>	
+			</view>
+		</view>
+	</view>
+</view>
+<view class="user-list">
+	<navigator url="./about/about" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/user-user.png"></image>
+				<text>个人资料</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
+		</view>
+	</navigator>
+	<navigator url="./myBookList/myBookList" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/user-booklist.png"></image>
+				<text>我的书单</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
+		</view>
+	</navigator>
+	<view class="user-list-item">
+		<view class="item-left">
+			<image style="width: 42rpx; height: 32rpx" src="../../image/attention.png"></image>
+			<text>我的关注</text>
+		</view>
+		<view class="item-right">
+			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+		</view>
+	</view>
+	<view class="user-list-item">
+		<view class="item-left">
+			<image style="width: 42rpx; height: 42rpx" src="../../image/user-collect.png"></image>
+			<text>我的收藏</text>
+		</view>
+		<view class="item-right">
+			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+		</view>
+	</view>
+	<view class="user-list-item">
+		<view class="item-left">
+			<image style="width: 42rpx; height: 42rpx" src="../../image/share.png"></image>
+			<text>我的分享</text>
+		</view>
+		<view class="item-right">
+			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+		</view>
+	</view>
+	<view class="user-list-item">
+		<view class="item-left">
+			<image style="width: 42rpx; height: 42rpx" src="../../image/indent.png"></image>
+			<text>我的订单</text>
+		</view>
+		<view class="item-right">
+			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+		</view>
+	</view>
+	<view class="user-list-item no-border">
+		<view class="item-left">
+			<image style="width: 42rpx; height: 42rpx" src="../../image/location.png"></image>
+			<text>收货地址</text>
+		</view>
+		<view class="item-right">
+			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+		</view>
+	</view>
+</view>
+<button type="primary">退出登录</button>

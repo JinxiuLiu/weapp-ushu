@@ -1,0 +1,110 @@
+<view class="myBookList">
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单</text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<switch checked color="#ff4444" bindchange="switch1Change"/>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单</text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<switch checked color="#ff4444" bindchange="switch1Change"/>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单</text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<switch checked color="#ff4444" bindchange="switch1Change"/>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单</text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<switch checked color="#ff4444" bindchange="switch1Change"/>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>		

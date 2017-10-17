@@ -1,8 +1,11 @@
 {
   "pages":[
+    "pages/user/myBookList/myBookList",
+    "pages/user/user",
     "pages/index/index",
     "pages/cart/cart",
-    "pages/user/user"
+    "pages/create/create",
+    "pages/user/about/about"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -20,8 +23,8 @@
       "iconPath": "image/index.png",
       "selectedIconPath": "image/index-select.png"
     }, {
-      "pagePath": "pages/cart/cart",
-      "text": "添加",
+      "pagePath": "pages/create/create",
+      "text": "创建书单",
       "iconPath": "image/add.png",
       "selectedIconPath": "image/add-select.png"
     }, {
