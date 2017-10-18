@@ -1,0 +1,67 @@
+.myAddress {
+	border-top: 1rpx solid #dcdcdc;
+	padding-bottom: 46px;
+}
+
+.address-item {
+	background: #fff;
+	margin-bottom: 20rpx;
+}
+
+.address-item .item-top {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 159rpx;
+	padding: 0 40rpx 20rpx;
+}
+
+.address-item .item-top .address {
+	font-size: 12px;
+	color: #666;
+}
+
+.address-item .item-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 88rpx;
+	padding: 0 40rpx;
+	border-top: 1rpx solid #f0f0f0;
+}
+
+.address-item .item-bottom .bottom-left,
+.address-item .item-bottom .bottom-right {
+	display: flex;
+}
+
+.address-item .item-bottom .bottom-right {
+	font-size: 14px;
+	color: #666;
+}
+
+.address-item .item-bottom .bottom-right .hot {
+	padding-right: 30rpx;
+}
+
+.address-item .item-bottom .text {
+	font-size: 12px;
+	color: #666;
+	padding-left: 46rpx;
+}
+
+.address-item .item-bottom .text image {
+	width: 36rpx;
+	height: 36rpx;
+	vertical-align: middle;
+	margin-top: -6rpx;
+	padding-right: 10rpx;
+}
+
+button[type="primary"] {
+	width: 100%;
+	margin: 0;
+	border-radius: 0;
+	position: fixed;
+	bottom: 0;
+}

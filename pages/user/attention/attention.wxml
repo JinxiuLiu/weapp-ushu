@@ -1,0 +1,18 @@
+<view class="attention">
+	<view class="attention-item">
+		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
+		<text>可乐可乐</text>
+	</view>
+	<view class="attention-item">
+		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
+		<text>可乐可乐</text>
+	</view>
+	<view class="attention-item">
+		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
+		<text>可乐可乐</text>
+	</view>
+	<view class="attention-item">
+		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
+		<text>可乐可乐</text>
+	</view>
+</view>

@@ -1,0 +1,26 @@
+/* attention.wxss */
+.attention {
+	border-top: 1rpx solid #dcdcdc;
+	background: #fff;
+}
+
+.attention .attention-item {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 148rpx;
+	padding: 0 24rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.attention .attention-item:last-child {
+	border-bottom: none;
+}
+
+.attention .attention-item image {
+	width: 100rpx;
+	height: 100rpx;
+	margin-right: 40rpx;
+	vertical-align: middle;
+	border-radius: 10rpx;
+}

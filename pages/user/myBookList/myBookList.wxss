@@ -47,7 +47,7 @@
 }
 
 .booklist-item .item-bottom .bottom-right .hot {
-	padding-right: 30rpx;
+	padding-right: 20rpx;
 }
 
 .booklist-item .item-bottom .text {

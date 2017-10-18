@@ -1,0 +1,99 @@
+.page {
+	border-top: 1rpx solid #dcdcdc;
+	background: #fff;
+}
+
+.weui-navbar {
+	border-bottom: 1rpx solid #dcdcdc;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+	color: #ff4444;
+}
+
+.weui-navbar__item {
+	height: 80rpx;
+	line-height: 80rpx;
+	padding: 0;
+}
+
+.weui-navbar__slider {
+	background-color: #ff4444;
+}
+
+.weui-tab__panel {
+	padding-top: 82rpx;
+}
+
+.bookList-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 150rpx;
+	padding: 0 40rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.bookList-item:last-child,
+.collect-book:last-child {
+	border-bottom: none;
+}
+
+.bookList-item .item-top {
+	display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.bookList-item .user-name {
+	font-size: 12px;
+	color: #929ebb;
+}
+
+.bookList-item .user-name .time {
+	font-size: 12px;
+	color: #999;
+	margin-left: 10rpx;
+}
+
+.collect-book {
+	display: flex;
+	height: 200rpx;
+	padding: 0 40rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.collect-book image {
+	width: 140rpx;
+	height: 178rpx;
+}
+
+.collect-book .book-img,
+.collect-book .book-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.collect-book .book-text {
+	padding-left: 20rpx;
+}
+
+.collect-book .book-text .book-name {
+	display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+}
+
+.collect-book .book-text .book-from {
+	font-size: 12px;
+	color: #999;
+	margin-top: 20rpx;
+}

@@ -1,11 +1,28 @@
 /**
  * Created by Liujx on 2017-10-10 15:44:49
  */
- 
+@import 'weui.wxss';
+
 page {
 	background: #ececec;
+	font-size: 16px;
+	color: #333;
+}
+
+.color-red {
+	color: #ff4444;
 }
 
 .marginBottom {
 	margin-bottom: 20rpx;
+}
+
+button[type="primary"] {
+	margin: 28rpx 32rpx 54rpx;
+	background-color: #ff4444;
+}
+
+.button-hover[type="primary"] {
+	color:rgba(255, 255, 255, 0.6);
+	background-color: rgba(255, 69, 68, 0.8);
 }

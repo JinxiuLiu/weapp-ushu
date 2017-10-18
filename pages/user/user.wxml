@@ -26,6 +26,17 @@
 			</view>
 		</view>
 	</navigator>
+	<navigator url="./about/about" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/inform.png"></image>
+				<text>个人通知</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
+		</view>
+	</navigator>
 	<navigator url="./myBookList/myBookList" hover-class="none">
 		<view class="user-list-item">
 			<view class="item-left">
@@ -37,33 +48,39 @@
 			</view>
 		</view>
 	</navigator>
-	<view class="user-list-item">
-		<view class="item-left">
-			<image style="width: 42rpx; height: 32rpx" src="../../image/attention.png"></image>
-			<text>我的关注</text>
+	<navigator url="./attention/attention" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 32rpx" src="../../image/attention.png"></image>
+				<text>我的关注</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-		<view class="item-right">
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+	</navigator>
+	<navigator url="./collect/collect" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/user-collect.png"></image>
+				<text>我的收藏</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-	</view>
-	<view class="user-list-item">
-		<view class="item-left">
-			<image style="width: 42rpx; height: 42rpx" src="../../image/user-collect.png"></image>
-			<text>我的收藏</text>
+	</navigator>
+	<navigator url="./share/share" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/share.png"></image>
+				<text>我的分享</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-		<view class="item-right">
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
-		</view>
-	</view>
-	<view class="user-list-item">
-		<view class="item-left">
-			<image style="width: 42rpx; height: 42rpx" src="../../image/share.png"></image>
-			<text>我的分享</text>
-		</view>
-		<view class="item-right">
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
-		</view>
-	</view>
+	</navigator>
 	<view class="user-list-item">
 		<view class="item-left">
 			<image style="width: 42rpx; height: 42rpx" src="../../image/indent.png"></image>
@@ -73,14 +90,16 @@
 			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
 		</view>
 	</view>
-	<view class="user-list-item no-border">
-		<view class="item-left">
-			<image style="width: 42rpx; height: 42rpx" src="../../image/location.png"></image>
-			<text>收货地址</text>
+	<navigator url="./myAddress/myAddress" hover-class="none">
+		<view class="user-list-item no-border">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/location.png"></image>
+				<text>收货地址</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-		<view class="item-right">
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
-		</view>
-	</view>
+	</navigator>
 </view>
 <button type="primary">退出登录</button>

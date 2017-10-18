@@ -1,0 +1,141 @@
+<view class="myAddress">
+	<view class="address-item">
+		<view class="item-top">
+			<text class="name">王珞丹</text>
+			<text class="address">山东省济南市历下区姚家街道工业南路舜华路会展中心2号楼 3单元 306室</text>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<label class="radio">
+				    <radio value="默认地址" checked="true" color="#ff4444"/>默认地址
+				</label>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="address-item">
+		<view class="item-top">
+			<text class="name">王珞丹</text>
+			<text class="address">山东省济南市历下区姚家街道工业南路舜华路会展中心2号楼 3单元 306室</text>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<label class="radio">
+				    <radio value="默认地址" checked="" color="#ff4444"/>默认地址
+				</label>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="address-item">
+		<view class="item-top">
+			<text class="name">王珞丹</text>
+			<text class="address">山东省济南市历下区姚家街道工业南路舜华路会展中心2号楼 3单元 306室</text>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<label class="radio">
+				    <radio value="默认地址" checked="" color="#ff4444"/>默认地址
+				</label>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="address-item">
+		<view class="item-top">
+			<text class="name">王珞丹</text>
+			<text class="address">山东省济南市历下区姚家街道工业南路舜华路会展中心2号楼 3单元 306室</text>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<label class="radio">
+				    <radio value="默认地址" checked="" color="#ff4444"/>默认地址
+				</label>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="address-item">
+		<view class="item-top">
+			<text class="name">王珞丹</text>
+			<text class="address">山东省济南市历下区姚家街道工业南路舜华路会展中心2号楼 3单元 306室</text>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<label class="radio">
+				    <radio value="默认地址" checked="" color="#ff4444"/>默认地址
+				</label>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="address-item">
+		<view class="item-top">
+			<text class="name">王珞丹</text>
+			<text class="address">山东省济南市历下区姚家街道工业南路舜华路会展中心2号楼 3单元 306室</text>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-right">
+				<label class="radio">
+				    <radio value="默认地址" checked="" color="#ff4444"/>默认地址
+				</label>
+			</view>
+			<view class="bottom-left">
+				<view class="text">
+					<image src="../../../image/compile.png"></image>
+					<text>编辑</text>
+				</view>
+				<view class="text">
+					<image src="../../../image/delete.png"></image>
+					<text>删除</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+<button type="primary">新增收货地址</button>

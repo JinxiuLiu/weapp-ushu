@@ -1,11 +1,16 @@
 {
   "pages":[
-    "pages/user/myBookList/myBookList",
-    "pages/user/user",
+    "pages/user/order/order",
     "pages/index/index",
     "pages/cart/cart",
     "pages/create/create",
-    "pages/user/about/about"
+    "pages/user/user",
+    "pages/user/about/about",
+    "pages/user/myBookList/myBookList",
+    "pages/user/attention/attention",
+    "pages/user/collect/collect",
+    "pages/user/myAddress/myAddress",
+    "pages/user/share/share"
   ],
   "window":{
     "backgroundTextStyle":"light",
