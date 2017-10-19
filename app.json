@@ -5,6 +5,8 @@
     "pages/create/create",
     "pages/user/user",
     "pages/user/about/about",
+    "pages/user/earnings/earnings",
+    "pages/user/earnings/earningsInfo/earningsInfo",
     "pages/user/about/certification/certification",
     "pages/user/about/bindmobile/bindmobile",
     "pages/user/about/nickname/nickname",

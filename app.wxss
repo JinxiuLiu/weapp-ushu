@@ -26,3 +26,32 @@ button[type="primary"] {
 	color:rgba(255, 255, 255, 0.6);
 	background-color: rgba(255, 69, 68, 0.8);
 }
+
+/* tab切换栏 */
+.page {
+	border-top: 1rpx solid #dcdcdc;
+	background: #fff;
+}
+
+.weui-navbar {
+	border-bottom: 1rpx solid #dcdcdc;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+	color: #ff4444;
+}
+
+.weui-navbar__item {
+	height: 80rpx;
+	line-height: 80rpx;
+	padding: 0;
+}
+
+.weui-navbar__slider {
+	background-color: #ff4444;
+}
+
+.weui-tab__panel {
+	padding-top: 82rpx;
+}
+/* tab切换栏END */

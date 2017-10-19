@@ -1,0 +1,37 @@
+.earningsInfo {
+	border-top: 1rpx solid #dcdcdc;
+}
+
+.earningsInfo .earningsInfo-title {
+	height: 99rpx;
+	line-height: 99rpx;
+	padding: 0 32rpx;
+	background: #fff;
+	margin-bottom: 18rpx;
+}
+
+.earningsInfo-list {
+	background: #fff;
+}
+
+.earningsInfo-list .earningsInfo-item {
+	display: flex;
+	-ms-align-items: center;
+	align-items: center;
+	height: 118rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+	font-size: 14px;
+	color: #666;
+}
+
+.earningsInfo-list .earningsInfo-item text {
+	display: flex;
+	width: 33.33%;
+	justify-content: center;
+}
+
+.earningsInfo-list .earningsInfo-item.item-title {
+	height: 69rpx;
+	font-size: 16px;
+	color: #333;
+}

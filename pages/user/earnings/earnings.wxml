@@ -1,0 +1,100 @@
+<view class="earnings">
+	<view class="earnings-info">
+		<view class="earnings-item">
+			<text class="earnings-text">累计收益</text>
+			<text class="earnings-num">¥88888</text>
+		</view>
+		<view class="earnings-item">
+			<text class="earnings-text">可提现金额</text>
+			<text class="earnings-num">¥88888</text>
+		</view>
+	</view>
+	<view class="page">
+		<view class="page__bd">
+	        <view class="weui-tab">
+	            <view class="weui-navbar">
+	                <block wx:for="{{tabs}}" wx:key="*this">
+	                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+	                        <view class="weui-navbar__title">{{item}}</view>
+	                    </view>
+	                </block>
+	                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+	            </view>
+	            <view class="weui-tab__panel">
+	                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+	                	<navigator url="./earningsInfo/earningsInfo" hover-class="none">
+		                    <view class="earnings-record">
+		                    	<text>2017必看的10本书跳转收益详情</text>
+		                    	<text>收益：<text class="color-red">¥528</text></text>
+		                    </view>
+		                </navigator>
+	                    <navigator url="./earningsInfo/earningsInfo" hover-class="none">
+		                    <view class="earnings-record">
+		                    	<text>2017必看的10本书跳转收益详情</text>
+		                    	<text>收益：<text class="color-red">¥528</text></text>
+		                    </view>
+		                </navigator>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2017必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                </view>
+	                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+	                    <view class="earnings-record">
+	                    	<text>2018必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2018必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2018必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2018必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                    <view class="earnings-record">
+	                    	<text>2018必看的10本书</text>
+	                    	<text>收益：<text class="color-red">¥528</text></text>
+	                    </view>
+	                </view>
+	            </view>
+	        </view>
+	    </view>
+	</view>
+	<view class="earnings-bottom">
+		<view class="bottom-item">
+			<text>提现记录</text>
+		</view>
+		<view class="bottom-item">
+			<text>提现</text>
+		</view>
+	</view>
+</view>

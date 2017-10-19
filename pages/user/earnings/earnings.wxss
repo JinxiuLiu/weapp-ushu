@@ -1,0 +1,92 @@
+.earnings {
+
+}
+
+.earnings-info {
+	display: flex;
+	justify-content: space-around;
+	-ms-align-items: center;
+	align-items: center;
+	width: 100%;
+	height: 239rpx;
+	background: #ff4444;
+	padding: 30rpx 0;
+	position: relative;
+}
+
+.earnings-info .earnings-item {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	color: #fff;
+}
+
+.earnings-info:before {
+	content: " ";
+	position: absolute;
+	top: 30rpx;
+	right: 50%;
+	width: 1rpx;
+	border-top: 239rpx solid #ff6868;
+	color: #ff6868;
+}
+
+.earnings-info .earnings-item .earnings-text {
+	font-size: 14px;
+}
+
+.earnings-info .earnings-item .earnings-num {
+	font-size: 24px;
+}
+
+.earnings-record {
+	display: flex;
+	justify-content: space-between;
+	-ms-align-items: center;
+	align-items: center;
+	height: 145rpx;
+	padding: 0 40rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+	font-size: 14px;
+	color: #666;
+}
+
+navigator {
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+navigator:last-child {
+	border-bottom: none;
+}
+
+.earnings-record:last-child {
+	border-bottom: none;
+}
+
+.weui-tab__content {
+	margin-bottom: 96rpx;
+}
+
+.earnings-bottom {
+	display: flex;
+	justify-content: space-around;
+	-ms-align-items: center;
+	align-items: center;
+	width: 100%;
+	height: 72rpx;
+	border-top: 1rpx solid #dcdcdc;
+	background: #fff;
+	padding: 12rpx 0;
+	position: fixed;
+	bottom: 0;
+}
+
+.earnings-bottom:before {
+	content: " ";
+	position: absolute;
+	top: 12rpx;
+	right: 50%;
+	width: 1rpx;
+	border-top: 72rpx solid #dcdcdc;
+	color: #dcdcdc;
+}

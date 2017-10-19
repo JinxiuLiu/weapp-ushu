@@ -7,10 +7,12 @@
 			<text>showmetheloli</text>		
 		</view>
 		<view class="user-earnings">
-			<view class="user-earnings-info">
-				<text>累计收益：¥88888</text>
-				<image style="" src="../../image/right-arrow.png"></image>	
-			</view>
+			<navigator url="./earnings/earnings" hover-class="none">
+				<view class="user-earnings-info">
+					<text>累计收益：¥88888</text>
+					<image style="" src="../../image/right-arrow.png"></image>
+				</view>
+			</navigator>
 		</view>
 	</view>
 </view>
