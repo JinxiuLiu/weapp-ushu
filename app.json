@@ -5,10 +5,12 @@
     "pages/create/create",
     "pages/user/user",
     "pages/user/about/about",
+    "pages/user/about/nickname/nickname",
     "pages/user/myBookList/myBookList",
     "pages/user/attention/attention",
-    "pages/user/collect/collect",
     "pages/user/myAddress/myAddress",
+    "pages/user/collect/collect",
+    "pages/user/inform/inform",
     "pages/user/order/order",
     "pages/user/share/share"
   ],

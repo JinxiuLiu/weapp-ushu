@@ -26,7 +26,7 @@
 			</view>
 		</view>
 	</navigator>
-	<navigator url="./about/about" hover-class="none">
+	<navigator url="./inform/inform" hover-class="none">
 		<view class="user-list-item">
 			<view class="item-left">
 				<image style="width: 42rpx; height: 42rpx" src="../../image/inform.png"></image>

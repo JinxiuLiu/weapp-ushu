@@ -1,0 +1,89 @@
+.page {
+    border-top: 1rpx solid #dcdcdc;
+}
+
+.weui-navbar {
+    background: #fff;
+    border-bottom: 1rpx solid #dcdcdc;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+    color: #ff4444;
+}
+
+.weui-navbar__item {
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0;
+}
+
+.weui-navbar__slider {
+    background-color: #ff4444;
+}
+
+.weui-tab__panel {
+    padding-top: 82rpx;
+}
+
+.attention {
+    display: flex;
+    height: 149rpx;
+    padding: 0 28rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+    background: #fff;
+}
+
+.attention:last-child {
+    border-bottom: none;
+}
+
+.attention image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.attention .attention-img,
+.attention .attention-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.attention .attention-text {
+    padding-left: 20rpx;
+    font-size: 14px;
+    color: #666;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.attention .attention-text .name {
+    color: #333;
+}
+
+.attention .attention-text .booklist {
+    color: #929ebb;
+}
+
+.attention .attention-text .time {
+    font-size: 12px;
+    color: #999;
+}
+
+.attention.earnings .attention-text {
+    padding-left: 0;
+}
+
+.earnings {
+    justify-content: space-between;
+}
+
+.earnings .number {
+    display: flex;
+    justify-content: flex-end;
+    -ms-align-items: center;
+    align-items: center;
+    width: 30%;
+    font-size: 16px;
+    color: #ff4444;
+}

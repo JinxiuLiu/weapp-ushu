@@ -1,0 +1,7 @@
+<view class="weui-search-bar__box">
+    <input type="text" class="weui-search-bar__input" placeholder="请输入您的昵称" value="{{inputVal}}" focus="true" bindinput="inputTyping" />
+    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="18"></icon>
+    </view>
+</view>
+<button type="primary">完成</button>

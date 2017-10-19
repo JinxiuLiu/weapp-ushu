@@ -1,0 +1,23 @@
+.weui-search-bar__box {
+	display: flex;
+	justify-content: space-between;
+	-ms-align-items: center;
+	align-items: center;
+	margin-top: 26rpx;
+	margin-bottom: 60rpx;
+	background: #fff;
+	padding: 0 32rpx;
+}
+
+.weui-search-bar__input {
+	width: 90%;
+	height: 100rpx;
+	line-height: 100rpx;
+	font-size: 16px;
+	color: #666;
+}
+
+.weui-icon-clear {
+	position: static;
+	padding: 0;
+}
