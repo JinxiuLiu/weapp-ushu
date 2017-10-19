@@ -1,0 +1,35 @@
+.certification {
+	border-top: 1rpx solid #dcdcdc;
+}
+
+.certification .certification-item {
+	background: #fff;
+	margin-bottom: 15rpx;
+}
+
+.certification .certification-title {
+	height: 88rpx;
+	line-height: 88rpx;
+	padding: 0 10rpx;
+	font-size: 14px;
+}
+
+.certification .certification-img {
+	height: 174rpx;
+	padding: 0 30rpx;
+	border-top: 1rpx solid #f0f0f0;
+}
+
+.weui-uploader__input-box,
+.weui-uploader__img {
+	width: 114rpx;
+	height: 114rpx;
+	margin-top: 30rpx;
+	margin-bottom: 30rpx;
+}
+
+.tip {
+	padding: 10rpx 32rpx 30rpx;
+	font-size: 12px;
+	color: #999;
+}

@@ -163,5 +163,6 @@
 
 .order-item .item-bottom .invoice {
 	background: #ff761b;
+	border: 1rpx solid #ff761b;
 	margin-left: 18rpx;
 }

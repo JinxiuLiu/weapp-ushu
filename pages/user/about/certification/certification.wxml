@@ -1,0 +1,42 @@
+<view class="certification">
+    <view class="certification-item">
+        <view class="certification-title">
+            <text><text class="color-red">* </text>身份证个人信息面</text>
+        </view>
+        <view class="certification-img">
+            <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                    <block wx:for="{{imageList}}" wx:for-item="image">
+                        <view class="weui-uploader__file">
+                            <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                        </view>
+                    </block>
+                </view>
+                <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="certification-item">
+        <view class="certification-title">
+            <text><text class="color-red">* </text>身份证国徽面</text>
+        </view>
+        <view class="certification-img">
+            <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                    <block wx:for="{{imageList}}" wx:for-item="image">
+                        <view class="weui-uploader__file">
+                            <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                        </view>
+                    </block>
+                </view>
+                <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="tip">所有上传证件信息必须清晰可见，身份证件必须能看清证件号。</view>
+<button type="primary">提交</button>

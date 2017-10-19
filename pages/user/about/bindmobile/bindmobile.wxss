@@ -1,0 +1,40 @@
+.bindmobile {
+	border-top: 1rpx solid #dcdcdc;
+	background: #fff;
+	padding-left: 32rpx;
+	margin-bottom: 58rpx;
+}
+
+.bindmobile input {
+	height: 99rpx;
+	line-height: 99rpx;
+	font-size: 16px;
+	color: #999;
+}
+
+.bindmobile .mobile-view {
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.bindmobile .mobile-view:last-child {
+	border-bottom: none;
+}
+
+.bindmobile .verification {
+	display: flex;
+	justify-content: space-between;
+}
+
+.bindmobile .verification input {
+	width: 70%;
+}
+
+.bindmobile .verification .send {
+	width: 180rpx;
+	height: 99rpx;
+	line-height: 98rpx;
+	background: #ff4444;
+	text-align: center;
+	color: #fff;
+	font-size: 16px;
+}

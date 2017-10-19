@@ -1,0 +1,13 @@
+<view class="bindmobile">
+	<view class="mobile-view">
+		<input type="number" placeholder="请输入原手机号"/>
+	</view>
+	<view class="mobile-view">
+		<input type="number" placeholder="请输入新手机号"/>
+	</view>
+	<view class="mobile-view verification">
+		<input type="number" placeholder="请输入验证码"/>
+		<view class="send">发送验证码</view>
+	</view>
+</view>
+<button type="primary">完成</button>

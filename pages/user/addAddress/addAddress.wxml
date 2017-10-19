@@ -1,0 +1,48 @@
+<view class="addAddress">
+	<view class="weui-cell weui-cell_input">
+	    <view class="weui-cell__hd">
+	        <view class="weui-label">收货人</view>
+	    </view>
+	    <view class="weui-cell__bd">
+	        <input class="weui-input"  type="text" placeholder=""/>
+	    </view>
+	</view>
+	<view class="weui-cell weui-cell_input">
+	    <view class="weui-cell__hd">
+	        <view class="weui-label">联系电话</view>
+	    </view>
+	    <view class="weui-cell__bd">
+	        <input class="weui-input" type="number" placeholder=""/>
+	    </view>
+	</view>
+	<view class="weui-cell weui-cell_input">
+	    <view class="weui-cell__hd">
+	        <view class="weui-label">邮编</view>
+	    </view>
+	    <view class="weui-cell__bd">
+	        <input class="weui-input" type="number" placeholder=""/>
+	    </view>
+	</view>
+	<view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">所在地区</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+                <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+            </picker>
+        </view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入详细地址" />
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">设为默认收货地址</view>
+        <view class="weui-cell__ft">
+            <switch color="#ff4444" checked />
+        </view>
+    </view>
+    <button type="primary">完成</button>
+</view>

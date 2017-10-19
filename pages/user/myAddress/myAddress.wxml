@@ -138,4 +138,6 @@
 		</view>
 	</view>
 </view>
-<button type="primary">新增收货地址</button>
+<navigator url="../addAddress/addAddress" hover-class="none">
+	<button type="primary">新增收货地址</button>
+</navigator>

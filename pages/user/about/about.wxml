@@ -8,18 +8,22 @@
 			</view>
 		</view>
 	</navigator>
-	<view class="about-item">
-		<text>绑定手机号</text>
-		<view class="item-right">
-			<text>138****8888</text>
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
+	<navigator url="./bindmobile/bindmobile" hover-class="none">
+		<view class="about-item">
+			<text>绑定手机号</text>
+			<view class="item-right">
+				<text>138****8888</text>
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-	</view>
-	<view class="about-item no-border">
-		<text>身份信息验证</text>
-		<view class="item-right">
-			<text>未验证</text>
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
+	</navigator>
+	<navigator url="./certification/certification" hover-class="none">
+		<view class="about-item no-border">
+			<text>身份信息验证</text>
+			<view class="item-right">
+				<text>未验证</text>
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-	</view>
+	</navigator>
 </view>
