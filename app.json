@@ -1,6 +1,5 @@
 {
   "pages":[
-    "pages/user/order/order",
     "pages/index/index",
     "pages/cart/cart",
     "pages/create/create",
@@ -10,6 +9,7 @@
     "pages/user/attention/attention",
     "pages/user/collect/collect",
     "pages/user/myAddress/myAddress",
+    "pages/user/order/order",
     "pages/user/share/share"
   ],
   "window":{

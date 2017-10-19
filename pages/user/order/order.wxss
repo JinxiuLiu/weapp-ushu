@@ -1,9 +1,9 @@
 .page {
 	border-top: 1rpx solid #dcdcdc;
-	background: #fff;
 }
 
 .weui-navbar {
+	background: #fff;
 	border-bottom: 1rpx solid #dcdcdc;
 }
 
@@ -26,7 +26,8 @@
 }
 
 .order-item {
-
+	background: #fff;
+	margin-bottom: 18rpx;
 }
 
 .order-item .item-top {
@@ -48,14 +49,21 @@
 
 .order-item .item-book {
 	display: flex;
+	justify-content: space-between;
 	height: 200rpx;
 	padding: 12rpx 40rpx;
 	background: #fafafa;
+	border-bottom: 3rpx solid #ededed;
+}
+
+.order-item .item-book:last-of-type {
+	border-bottom: none;
 }
 
 .order-item .item-book .book-left {
 	display: flex;
 	align-items: center;
+	max-width: 90%;
 }
 
 .book-left .left-image {
@@ -72,7 +80,7 @@
 	display: flex;
 	flex-direction: column;
 	align-self: baseline;
-	max-width:70%;
+	max-width: 70%;
 	padding-left: 20rpx;
 	padding-top: 20rpx;
 }
@@ -93,7 +101,67 @@
 	position: relative;
 }
 
+.item-book .book-right .price {
+	font-size: 14px;
+}
+
 .item-book .book-right .number {
 	position: absolute;
 	bottom: 8rpx;
+}
+
+.item-center .statistics {
+	display: flex;
+	justify-content: flex-end;
+	-ms-align-items: center;
+	align-items: center;
+	height: 80rpx;
+	padding: 0 40rpx;
+	font-size: 12px;
+}
+
+.item-center .statistics .price {
+	font-size: 16px;
+}
+
+.order-item .item-bottom {
+	display: flex;
+	justify-content: flex-end;
+	-ms-align-items: center;
+	align-items: center;
+	height: 100rpx;
+	border-top: 1rpx solid #f0f0f0;
+	padding: 0 40rpx;
+}
+
+.order-item .item-bottom .delete {
+	width: 145rpx;
+	height: 54rpx;
+	line-height: 54rpx;
+	border-radius: 27rpx;
+	border: 1rpx solid #adadad;
+	text-align: center;
+	font-size: 12px;
+	margin-left: 18rpx;
+}
+
+.order-item .item-bottom .affirm,
+.order-item .item-bottom .invoice,
+.order-item .item-bottom .give,
+.order-item .item-bottom .logistics {
+	width: 145rpx;
+	height: 54rpx;
+	line-height: 54rpx;
+	border-radius: 27rpx;
+	border: 1rpx solid #ff4444;
+	background: #ff4444;
+	color: #fff;
+	text-align: center;
+	font-size: 12px;
+	margin-left: 18rpx;
+}
+
+.order-item .item-bottom .invoice {
+	background: #ff761b;
+	margin-left: 18rpx;
 }

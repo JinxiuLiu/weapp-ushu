@@ -81,15 +81,17 @@
 			</view>
 		</view>
 	</navigator>
-	<view class="user-list-item">
-		<view class="item-left">
-			<image style="width: 42rpx; height: 42rpx" src="../../image/indent.png"></image>
-			<text>我的订单</text>
+	<navigator url="./order/order" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/indent.png"></image>
+				<text>我的订单</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-		<view class="item-right">
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
-		</view>
-	</view>
+	</navigator>
 	<navigator url="./myAddress/myAddress" hover-class="none">
 		<view class="user-list-item no-border">
 			<view class="item-left">
