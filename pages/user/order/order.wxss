@@ -1,3 +1,11 @@
+.page .page__bd {
+	background: #ededed;
+}
+
+.weui-navbar {
+	background: #fff;
+}
+
 .order-item {
 	background: #fff;
 	margin-bottom: 18rpx;

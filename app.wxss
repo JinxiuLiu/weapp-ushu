@@ -28,7 +28,7 @@ button[type="primary"] {
 }
 
 /* tab切换栏 */
-.page {
+.page__bd {
 	border-top: 1rpx solid #dcdcdc;
 	background: #fff;
 }

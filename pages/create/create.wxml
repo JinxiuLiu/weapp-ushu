@@ -1,0 +1,123 @@
+<view class="create">
+	<view class="weui-cells__title"><text class="color-red">*</text>书单名称</view>
+	<view class="weui-cells weui-cells_after-title">
+	    <view class="weui-cell weui-cell_input">
+	        <view class="weui-cell__bd">
+	            <input class="weui-input" placeholder="请输入书单名称" />
+	        </view>
+	    </view>
+	</view>
+	<view class="weui-cells__title">上传视频</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="page-body-info">
+			<block wx:if="{{src === ''}}">
+				<view class="image-plus image-plus-nb" bindtap="chooseVideo">
+					<view class="image-plus-horizontal"></view>
+					<view class="image-plus-vertical"></view>
+				</view>
+				<view class="image-plus-text">添加视频</view>
+			</block>
+			<block wx:if="{{src != ''}}">
+				<video src="{{src}}" class="video"></video>
+			</block>
+		</view>
+	</view>
+	<view class="weui-cells__title">上传音频</view>
+	<view class="weui-cells weui-cells_after-title">
+		<block wx:if="{{recording === false && playing === false && hasRecord === false}}">
+			<view class="page-body-time">
+				<text class="time-big">{{formatedRecordTime}}</text>
+			</view>
+			<view class="page-body-buttons">
+				<view class="page-body-button"></view>
+				<view class="page-body-button" bindtap="startRecord">
+					<image src="../../image/record.png"></image>
+				</view>
+				<view class="page-body-button"></view>
+			</view>
+		</block>
+
+		<block wx:if="{{recording === true}}">
+			<view class="page-body-time">
+				<text class="time-big">{{formatedRecordTime}}</text>
+			</view>
+			<view class="page-body-buttons">
+				<view class="page-body-button"></view>
+				<view class="page-body-button" bindtap="stopRecord">
+					<view class="button-stop-record"></view>
+				</view>
+				<view class="page-body-button"></view>
+			</view>
+		</block>
+
+		<block wx:if="{{hasRecord === true && playing === false}}">
+			<view class="page-body-time">
+				<text class="time-big">{{formatedPlayTime}}</text>
+				<text class="time-small">{{formatedRecordTime}}</text>
+			</view>
+			<view class="page-body-buttons">
+				<view class="page-body-button"></view>
+				<view class="page-body-button" bindtap="playVoice">
+					<image src="../../image/play.png"></image>
+				</view>
+				<view class="page-body-button" bindtap="clear">
+					<image src="../../image/trash.png"></image>
+				</view>
+			</view>
+		</block>
+
+		<block wx:if="{{hasRecord === true && playing === true}}">
+			<view class="page-body-time">
+				<text class="time-big">{{formatedPlayTime}}</text>
+				<text class="time-small">{{formatedRecordTime}}</text>
+			</view>
+			<view class="page-body-buttons">
+				<view class="page-body-button" bindtap="stopVoice">
+					<image src="../../image/stop.png"></image>
+				</view>
+				<view class="page-body-button" bindtap="clear">
+					<image src="../../image/trash.png"></image>
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="weui-cells__title">上传图片{{imageList.length}}/9</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-uploader__bd">
+		    <view class="weui-uploader__files">
+		        <block wx:for="{{imageList}}" wx:for-item="image">
+		            <view class="weui-uploader__file">
+		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+		            </view>
+		        </block>
+		    </view>
+		    <view class="weui-uploader__input-box">
+		        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+		    </view>
+		</view>
+	</view>
+	<view class="weui-cells__title">编辑内容</view>
+	<view class="weui-cells weui-cells_after-title">
+		 <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+            </view>
+        </view>
+	</view>
+	<view class="weui-cells__title">选择图书最多选择9本{{imageList.length}}/9</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-uploader__bd">
+		    <view class="weui-uploader__files">
+		        <block wx:for="{{imageList}}" wx:for-item="image">
+		            <view class="weui-uploader__file">
+		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+		            </view>
+		        </block>
+		    </view>
+		    <view class="weui-uploader__input-box">
+		        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+		    </view>
+		</view>
+	</view>
+</view>
+<button type="primary">提交</button>

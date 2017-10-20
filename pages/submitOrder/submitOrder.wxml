@@ -1,0 +1,55 @@
+<view class="submitOrder">
+	<view class="submitOrder-address">
+		<view class="address-img">
+			<image style="width: 32rpx; height: 46rpx" src="../../image/address.png"></image>
+		</view>
+		<view class="address-details">
+			<view class="contacts">
+				<text class="name">收货人:王淑丹</text>
+				<text class="mobile">13864055555</text>
+			</view>
+			<text class="address">收货地址：山东省济南市历下区姚家街道工业南 路舜华路会展中心 2号楼 3单元 306室</text>
+		</view>
+		<view class="address-img">
+			<image style="width: 28rpx; height: 42rpx" src="../../image/right-arrow-gray.png"></image>
+		</view>
+	</view>
+	<view class="cart-item">
+		<view class="title">书单：2017必读的10本书</view>
+		<view class="bookinfo">
+            <view class="item-book">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59</text>
+                            <text class="number">x1</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="item-book">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59</text>
+                            <text class="number">x1</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="bookinfo-bottom">
+            	<text>共2件商品     合计（含运费）¥118</text>
+            </view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,122 @@
+.create {
+	margin-bottom: 97rpx;
+}
+
+.weui-cells__title {
+	margin: 0;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 14px;
+}
+
+.weui-input {
+	height: 100rpx;
+	line-height: 100rpx;
+	min-height: 100rpx;
+	font-size: 14px;
+	color: #999;
+}
+
+.page-body-info {
+  display: flex;
+  padding: 0;
+  height: 300rpx;
+  border-top: 1rpx solid #D9D9D9;
+  border-bottom: 1rpx solid #D9D9D9;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.image-plus {
+  width: 150rpx;
+  height: 150rpx;
+  border: 2rpx solid #D9D9D9;
+  position: relative;
+}
+
+.image-plus-nb{
+  border: 0;
+}
+
+.image-plus-text{
+  color: #888888;
+  font-size: 28rpx;
+}
+
+.image-plus-horizontal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 4rpx;
+  height: 80rpx;
+  transform: translate(-50%, -50%);
+}
+
+.image-plus-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 80rpx;
+  height: 4rpx;
+  transform: translate(-50%, -50%);
+}
+
+/* 录音 */
+image {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.page-body-wrapper {
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-bottom: 300rpx;
+}
+
+.page-body-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-big {
+  font-size: 60rpx;
+  margin: 20rpx;
+}
+
+.time-small {
+  font-size: 30rpx;
+}
+
+.page-body-buttons {
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: space-around;
+}
+
+.page-body-button {
+  width: 250rpx;
+  text-align: center;
+}
+
+.button-stop-record {
+  width: 110rpx;
+  height: 110rpx;
+  border: 20rpx solid #fff;
+  background-color: #f55c23;
+  border-radius: 130rpx;
+  margin: 0 auto;
+}
+
+button[type="primary"] {
+	width: 100%;
+	height: 97rpx;
+	line-height: 97rpx;
+	margin: 0;
+	border-radius: 0;
+	position: fixed;
+	bottom: 0;
+}

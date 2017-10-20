@@ -1,0 +1,10 @@
+@import '../user/myBookList/myBookList.wxss';
+
+.item-top-left .number {
+	color: #999;
+}
+
+.item-top-right image {
+	width: 42rpx;
+	height: 42rpx;
+}

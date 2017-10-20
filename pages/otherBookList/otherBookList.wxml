@@ -1,0 +1,78 @@
+<view class="myBookList">
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单<text class="number"> (共9本)</text></text>
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<image src="../../image/collect-select.png"></image>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-left">
+			</view>
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+		</view>
+	</view>
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单<text class="number"> (共9本)</text></text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<image src="../../image/collect-select.png"></image>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-left">
+			</view>
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+		</view>
+	</view>
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单<text class="number"> (共9本)</text></text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<image src="../../image/collect.png"></image>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-left">
+			</view>
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+		</view>
+	</view>
+	<view class="booklist-item">
+		<view class="item-top">
+			<view class="item-top-left">
+				<text>2017年度最佳书单<text class="number"> (共9本)</text></text>		
+				<text class="time">2017-10-12</text>		
+			</view>
+			<view class="item-top-right">
+				<image src="../../image/collect-select.png"></image>
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view class="bottom-left">
+			</view>
+			<view class="bottom-right">
+				<view class="hot"><text>热度(25)</text></view>
+                <view class="comment"><text>评论(55)</text></view>
+			</view>
+		</view>
+	</view>
+</view>		
