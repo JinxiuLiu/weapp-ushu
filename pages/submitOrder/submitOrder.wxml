@@ -52,4 +52,27 @@
             </view>
 		</view>
 	</view>
+    <view class="submitOrder-bottom">
+        <view class="bottom-item">
+            <text>支付方式</text>
+            <view class="wxzf">
+                <image src="../../image/wxzf.png" />
+                <text>微信支付</text>
+            </view>
+        </view>
+        <view class="bottom-item">
+            <text>运费</text>
+            <text>满89包邮</text>
+        </view>
+        <view class="bottom-item">
+            <label class="radio">
+                <radio color="#ff4444" value="1" />
+                <text>开具电子发票</text>
+            </label>
+        </view>
+    </view>
+</view>
+<view class="submitOrder-btn">
+    <text class="total">合计：<text class="color-red">¥58</text></text>
+    <view class="btn">提交订单</view>
 </view>
