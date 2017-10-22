@@ -77,10 +77,12 @@
 		<radio color="#ff4444" />
         <text class="all">全选</text>
 	</label>
-    <!-- <view class="bottom-right">
+    <view class="bottom-right">
         <text class="total">合计：<text class="color-red">¥58</text></text>
         <view class="give">赠朋友</view>
-        <view class="settlement">结算(<text>0</text>)</view>
-    </view> -->
-    <view class="bottom-del">删除</view>
+        <navigator url="../submitOrder/submitOrder" hover-class="none">
+            <view class="settlement">结算(<text>0</text>)</view>
+        </navigator>
+    </view>
+    <!-- <view class="bottom-del">删除</view> -->
 </view>

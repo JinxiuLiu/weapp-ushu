@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/create/create",
     "pages/index/index",
     "pages/cart/cart",
-    "pages/create/create",
     "pages/user/user",
     "pages/submitOrder/submitOrder",
     "pages/otherBookList/otherBookList",

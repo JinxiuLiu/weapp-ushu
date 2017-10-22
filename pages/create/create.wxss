@@ -1,5 +1,24 @@
 .create {
-	margin-bottom: 97rpx;
+	margin-bottom: 137rpx;
+}
+
+.weui-cells::after,
+.weui-cells::before {
+    content: none;
+}
+
+.create .page-page-info,
+.create .page-body-info {
+    border: none;
+}
+
+.weui-uploader__bd {
+    padding: 30rpx 15px;
+    margin: 0;
+}
+
+.weui-uploader__bd .weui-uploader__input-box {
+    margin: 0;
 }
 
 .weui-cells__title {
@@ -7,6 +26,12 @@
 	height: 60rpx;
 	line-height: 60rpx;
 	font-size: 14px;
+}
+
+.weui-textarea {
+    height: 350rpx;
+    font-size: 14px;
+    color: #999;
 }
 
 .weui-input {
@@ -65,11 +90,6 @@
 }
 
 /* 录音 */
-image {
-  width: 150rpx;
-  height: 150rpx;
-}
-
 .page-body-wrapper {
   justify-content: space-between;
   flex-grow: 1;
@@ -83,31 +103,39 @@ image {
 }
 
 .time-big {
-  font-size: 60rpx;
-  margin: 20rpx;
+  font-size: 24px;
+  margin: 10rpx;
 }
 
 .time-small {
-  font-size: 30rpx;
+    font-size: 30rpx;
 }
 
 .page-body-buttons {
-  margin-top: 60rpx;
-  display: flex;
-  justify-content: space-around;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100rpx;
 }
 
 .page-body-button {
-  width: 250rpx;
+  width: 33.33%;
+  height: 100rpx;
   text-align: center;
 }
 
+image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
 .button-stop-record {
-  width: 110rpx;
-  height: 110rpx;
-  border: 20rpx solid #fff;
+  width: 60rpx;
+  height: 60rpx;
   background-color: #f55c23;
   border-radius: 130rpx;
+  border: 20rpx solid #fff;
   margin: 0 auto;
 }
 
