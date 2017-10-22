@@ -70,10 +70,6 @@
 	color: #ff4444;
 }
 
-.bookList-info {
-
-}
-
 .bookList-name {
 	padding: 0 40rpx;
 	font-size: 15px;

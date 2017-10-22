@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/create/create",
+    "pages/bookList/bookList",
     "pages/index/index",
+    "pages/create/create",
     "pages/cart/cart",
     "pages/user/user",
     "pages/submitOrder/submitOrder",

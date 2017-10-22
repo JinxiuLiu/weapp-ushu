@@ -147,4 +147,5 @@ button[type="primary"] {
 	border-radius: 0;
 	position: fixed;
 	bottom: 0;
+  z-index: 9999;
 }

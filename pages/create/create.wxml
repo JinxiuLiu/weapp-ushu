@@ -100,7 +100,7 @@
 	<view class="weui-cells weui-cells_after-title">
 		 <view class="weui-cell">
             <view class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" />
+                <textarea show-confirm-bar="false" class="weui-textarea" placeholder="请输入文本" />
             </view>
         </view>
 	</view>
