@@ -1,0 +1,135 @@
+.bookDetails {
+	margin-bottom: 118rpx;
+}
+
+.bookDetails .bookDetails-info {
+	margin-bottom: 20rpx;
+	background: #fff;
+}
+
+.bookDetails .swiper {
+	height: 624rpx;
+}
+
+.bookDetails .swiper image {
+	width: 434rpx;
+	height: 544rpx;
+	padding: 40rpx 159rpx;
+}
+
+.bookDetails .from {
+	display: flex;
+	align-items: center;
+	height: 88rpx;
+	padding: 0 36rpx;
+	background: #fff3c9;
+	font-size: 12px;
+	color: #a76c34;
+}
+
+.bookDetails .book-info {
+	padding: 36rpx;
+}
+
+.bookDetails .book-info text {
+	display: flex;
+}
+
+.bookDetails .book-info .title {
+	font-size: 16px;
+}
+
+.bookDetails .book-info .price {
+	font-size: 24px;
+	font-weight: bold;
+	color: #ff4444;
+}
+
+.bookDetails .book-info .name {
+	font-size: 14px;
+	color: #999;
+}
+
+.bookDetails .book-info .introduce {
+	font-size: 14px;
+}
+
+/* tab */
+.bookDetails-catalog {
+	margin-bottom: 20rpx;
+	background: #fff;
+}
+
+.weui-tab__content {
+	padding: 26rpx 36rpx;
+}
+
+.weui-tab__content text {
+	display: flex;
+	line-height: 60rpx;
+	font-size: 14px;
+	color: #666;
+}
+
+/* 底部 */
+.bookDetails-bottom {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 98rpx;
+	position: fixed;
+	bottom: 0;
+	z-index: 9999;
+}
+
+.bookDetails-bottom .bottom-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 25%;
+	height: 98rpx;
+	background: #ff4444;
+	font-size: 14px;
+	color: #fff;
+}
+
+.bookDetails-bottom .bottom-item:first-child {
+	flex-direction: column;
+	background: #fff;
+	font-size: 12px;
+	color: #999;
+}
+
+.bookDetails-bottom .bottom-item image {
+	width: 42rpx;
+	height: 42rpx;
+}
+
+.bookDetails-bottom .line {
+	position: relative;
+}
+
+.bookDetails-bottom .line:before {
+	content: " ";
+	position: absolute;
+	top: 26rpx;
+	right: 100%;
+	width: 1rpx;
+	border-top: 50rpx solid #ffabab;
+	color: #ffabab;
+}
+
+.bookDetails-bottom .line:after {
+	content: " ";
+	position: absolute;
+	top: 26rpx;
+	left: 100%;
+	width: 1rpx;
+	border-top: 50rpx solid #ffabab;
+	color: #ffabab;
+}
+
+.bookDetails-bottom .give image {
+	padding-right: 18rpx;
+}

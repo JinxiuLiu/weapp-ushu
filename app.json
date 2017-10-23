@@ -5,6 +5,7 @@
     "pages/cart/cart",
     "pages/user/user",
     "pages/bookList/bookList",
+    "pages/bookDetails/bookDetails",
     "pages/submitOrder/submitOrder",
     "pages/otherBookList/otherBookList",
     "pages/user/about/about",

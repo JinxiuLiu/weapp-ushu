@@ -30,23 +30,25 @@
             <text>作者：含、Fata、非鱼、小然、Twoco、zack、wooooh</text>
         </view>
         <view class="bookList-details">
-            <view class="details-item">
-                <view class="book-left">
-                    <view class="left-image">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                    </view>
-                    <view class="left-text">
-                        <text class="name">鸟哥的Linux私房菜</text>
-                        <text class="work-name">鸟哥 著</text>
-                        <view class="book-right">
-                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
-                            <view class="number">
-                                <image src="../../image/bookadd.png"></image>
+            <navigator url="../bookDetails/bookDetails" hover-class="none">
+                <view class="details-item">
+                    <view class="book-left">
+                        <view class="left-image">
+                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                        </view>
+                        <view class="left-text">
+                            <text class="name">鸟哥的Linux私房菜</text>
+                            <text class="work-name">鸟哥 著</text>
+                            <view class="book-right">
+                                <text class="color-red price">¥59<text class="old-price">¥59</text></text>
+                                <view class="number">
+                                    <image src="../../image/bookadd.png"></image>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </view>
-            </view>
+            </navigator>
             <view class="details-item">
                 <view class="book-left">
                     <view class="left-image">
@@ -177,5 +179,11 @@
             <image src="../../image/share-white.png"></image>
             <text>分享</text>
         </view>
+    </view>
+</view>
+<view class="cart">
+    <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+        <view class="cart-img"><image src="../../image/cart-right.png"/></view>
+        <view class="weui-badge">8</view>
     </view>
 </view>

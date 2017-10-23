@@ -42,9 +42,11 @@
             </view>
             <view class="bookList-item">
                 <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
-                    <view class="scroll-view-item_H">
-                        <image style="width: 100%; height: 100%;" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
-                    </view>
+                    <navigator url="../bookDetails/bookDetails" hover-class="none">
+                        <view class="scroll-view-item_H">
+                            <image style="width: 100%; height: 100%;" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+                        </view>
+                    </navigator>
                     <view class="scroll-view-item_H">
                         <image style="width: 100%; height: 100%;" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
                     </view>

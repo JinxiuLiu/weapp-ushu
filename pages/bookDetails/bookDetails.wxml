@@ -1,0 +1,61 @@
+<view class="bookDetails">
+	<view class="bookDetails-info">
+		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" class="swiper">
+			<block wx:for="{{imgUrls}}">
+				<swiper-item>
+					<image src="{{item}}" class="slide-image"/>
+				</swiper-item>
+			</block>
+		</swiper>
+		<view class="from">出自  showmetheloli  的书单  2017必读的10本书</view>
+		<view class="book-info">
+			<text class="title">鸟哥的Linux私房菜 基础学习篇(第三版)</text>
+			<text class="price">¥ 79</text>
+			<text class="name">鸟哥 著</text>
+			<text class="introduce">Linux领域名人鸟哥带你迈Linux殿堂</text>
+		</view>
+	</view>
+	<view class="bookDetails-catalog">
+		<view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                    <text>ISBN：978-7-115-22626-6</text>
+                    <text>开本：16开</text>
+                    <text>语种：中文版</text>
+                    <text>出版时间：201709</text>
+                    <text>包装：平装</text>
+                    <text>页数：778</text>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+                    
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+                    
+                </view>
+            </view>
+        </view>
+	</view>
+</view>
+<view class="bookDetails-bottom">
+	<view class="bottom-item">
+		<image src="../../image/collect-kong.png"></image>
+		<text>收藏</text>
+	</view>
+	<view class="bottom-item give">
+		<image src="../../image/give.png"></image>
+		<text>赠朋友</text>
+	</view>
+	<view class="bottom-item line">加入购物车</view>
+	<view class="bottom-item">立即购买</view>
+</view>
