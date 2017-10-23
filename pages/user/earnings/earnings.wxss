@@ -21,6 +21,10 @@
 	color: #fff;
 }
 
+.earnings-bottom .bottom-item {
+	border-bottom: none;
+}
+
 .earnings-info:before {
 	content: " ";
 	position: absolute;

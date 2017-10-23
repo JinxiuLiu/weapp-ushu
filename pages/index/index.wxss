@@ -2,8 +2,34 @@
  * Created by Liujx on 2017-10-17 10:01:58
  * index.wxss
  */
+
+.page__bd {
+ 	display: flex;
+ }
+
+ .page__bd .weui-search-bar {
+ 	width: 90%;
+ 	padding-right:0;
+ }
+
+.page__bd .ranking {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 10%;
+}
+
+.ranking image {
+	width: 42rpx;
+	height: 42rpx;
+}
+
 .weui-search-bar {
 	border: none;
+	background: #fff;
+}
+
+.weui-navbar {
 	background: #fff;
 }
 

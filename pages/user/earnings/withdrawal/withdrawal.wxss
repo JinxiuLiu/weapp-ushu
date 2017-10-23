@@ -1,0 +1,20 @@
+.withdrawal {
+	border-top: 1rpx solid #dcdcdc;
+	background: #fff;
+}
+
+.withdrawal-item {
+	display: flex;
+	justify-content: space-between;
+	-ms-align-items: center;
+	align-items: center;
+	height: 145rpx;
+	padding: 0 40rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+	font-size: 14px;
+	color: #666;
+}
+
+.withdrawal-item:last-child {
+	border-bottom: none;
+}

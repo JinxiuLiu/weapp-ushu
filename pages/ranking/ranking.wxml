@@ -1,0 +1,90 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                    <view class="weui-cell">
+		                <view class="weui-cell__hd first">1</view>
+		                <view class="weui-cell__bd">猜猜我是谁</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd second">2</view>
+		                <view class="weui-cell__bd">showmetheloli</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">3</view>
+		                <view class="weui-cell__bd">showmetheloli</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">4</view>
+		                <view class="weui-cell__bd">showmetheloli</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">5</view>
+		                <view class="weui-cell__bd">showmetheloli</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">6</view>
+		                <view class="weui-cell__bd">showmetheloli</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">7</view>
+		                <view class="weui-cell__bd">showmetheloli</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <view class="weui-cell">
+		                <view class="weui-cell__hd first">1</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd second">2</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">3</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">4</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">5</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">6</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+		            <view class="weui-cell">
+		                <view class="weui-cell__hd">7</view>
+		                <view class="weui-cell__bd">书单书单</view>
+		                <view class="weui-cell__ft">¥ 88888</view>
+		            </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

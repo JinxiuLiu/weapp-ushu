@@ -1,0 +1,37 @@
+.weui-cell__hd {
+	width: 40rpx;
+	height: 40rpx;
+	line-height: 40rpx;
+	text-align: center;
+	font-size: 14px;
+	background: #f0f0f0;
+	color: #333;
+	margin-right: 22rpx;
+}
+
+.weui-cell__bd {
+	font-size: 14px;
+	color: #666;
+}
+
+.weui-cell__ft {
+	font-size: 14px;
+}
+
+.weui-cell .first {
+	background: #cb0000;
+	color: #fff;
+}
+
+.weui-cell .second {
+	background: #ff7200;
+	color: #fff;
+}
+
+.weui-cell {
+	padding:15px;
+}
+
+.weui-cell::before {
+	border-top:1rpx solid #f0f0f0;
+}

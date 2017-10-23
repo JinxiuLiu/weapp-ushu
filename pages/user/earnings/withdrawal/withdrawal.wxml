@@ -1,0 +1,22 @@
+<view class="withdrawal">
+	<view class="withdrawal-item">
+		<text>2017-10-25 19:23</text>
+		<text class="color-red">- ¥528</text>
+	</view>
+	<view class="withdrawal-item">
+		<text>2017-10-25 19:23</text>
+		<text class="color-red">- ¥528</text>
+	</view>
+	<view class="withdrawal-item">
+		<text>2017-10-25 19:23</text>
+		<text class="color-red">- ¥528</text>
+	</view>
+	<view class="withdrawal-item">
+		<text>2017-10-25 19:23</text>
+		<text class="color-red">- ¥528</text>
+	</view>
+	<view class="withdrawal-item">
+		<text>2017-10-25 19:23</text>
+		<text class="color-red">- ¥528</text>
+	</view>
+</view>

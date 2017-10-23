@@ -90,9 +90,9 @@
 	    </view>
 	</view>
 	<view class="earnings-bottom">
-		<view class="bottom-item">
+		<navigator class="bottom-item" url="./withdrawal/withdrawal" hover-class="none">
 			<text>提现记录</text>
-		</view>
+		</navigator>
 		<view class="bottom-item">
 			<text>提现</text>
 		</view>

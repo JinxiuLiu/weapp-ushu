@@ -1,0 +1,38 @@
+.weui-search-bar {
+	padding:8px 40rpx;
+	background-color: #fff;
+	border-top: none;
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.weui-search-bar__form {
+	background-color: #f0f0f0;
+	border: none;
+}
+
+.selectBook-list {
+	background-color: #fff;
+}
+
+.selectBook-list .list-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 145rpx;
+	padding: 0 40rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.selectBook-list .list-item:last-child {
+	border-bottom: none;
+}
+
+.selectBook-list .list-item .name {
+	font-size: 14px;
+	color: #333;
+}
+
+.selectBook-list .list-item .ISBN {
+	font-size: 12px;
+	color: #999;
+}

@@ -2,8 +2,10 @@
   "pages":[
     "pages/index/index",
     "pages/create/create",
+    "pages/create/selectBook/selectBook",
     "pages/cart/cart",
     "pages/user/user",
+    "pages/ranking/ranking",
     "pages/bookList/bookList",
     "pages/bookDetails/bookDetails",
     "pages/submitOrder/submitOrder",
@@ -11,6 +13,7 @@
     "pages/user/about/about",
     "pages/user/earnings/earnings",
     "pages/user/earnings/earningsInfo/earningsInfo",
+    "pages/user/earnings/withdrawal/withdrawal",
     "pages/user/about/certification/certification",
     "pages/user/about/bindmobile/bindmobile",
     "pages/user/about/nickname/nickname",

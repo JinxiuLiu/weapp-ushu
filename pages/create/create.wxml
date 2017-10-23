@@ -115,7 +115,7 @@
 		        </block>
 		    </view>
 		    <view class="weui-uploader__input-box">
-		        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+		        <view class="weui-uploader__input"></view>
 		    </view>
 		</view>
 	</view>
