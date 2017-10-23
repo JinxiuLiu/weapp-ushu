@@ -29,5 +29,153 @@
             <text>指导：王先亮</text>
             <text>作者：含、Fata、非鱼、小然、Twoco、zack、wooooh</text>
         </view>
+        <view class="bookList-details">
+            <view class="details-item">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
+                            <view class="number">
+                                <image src="../../image/bookadd.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="details-item">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
+                            <view class="number">
+                                <image src="../../image/bookadd.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="details-item">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
+                            <view class="number">
+                                <image src="../../image/bookadd.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="details-item">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
+                            <view class="number">
+                                <image src="../../image/bookadd.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="details-item">
+                <view class="book-left">
+                    <view class="left-image">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    </view>
+                    <view class="left-text">
+                        <text class="name">鸟哥的Linux私房菜</text>
+                        <text class="work-name">鸟哥 著</text>
+                        <view class="book-right">
+                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
+                            <view class="number">
+                                <image src="../../image/bookadd.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="comment">
+        <view class="comment-title">
+            <view class="weui-loadmore weui-loadmore_line">
+                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">以下为最新评论</view>
+            </view>
+        </view>
+        <view>
+            <view class="comment-item">
+                <view class="founder-info">
+                    <view class="founder-avatar">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+                    </view>
+                    <view class="founder-name">
+                        <view class="name"><text>可爱的小果冻</text></view>
+                        <view class="time"><text>2017-09-20</text></view>
+                    </view>
+                </view>
+                <view class="comment-info">
+                    <text>大家可以在我们公众号上投票，选出你最喜欢的字母，9月24文章截止到 10月1日 ID：LOGO研究所。</text>
+                </view>
+            </view>
+            <view class="comment-item">
+                <view class="founder-info">
+                    <view class="founder-avatar">
+                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+                    </view>
+                    <view class="founder-name">
+                        <view class="name"><text>可爱的小果冻</text></view>
+                        <view class="time"><text>2017-09-20</text></view>
+                    </view>
+                </view>
+                <view class="comment-info">
+                    <text>大家可以在我们公众号上投票，选出你最喜欢的字母，9月24文章截止到 10月1日 ID：LOGO研究所。</text>
+                </view>
+            </view>
+        </view>
+        <view class="comment-more">
+            <text>查看全部30条</text>
+        </view>
+    </view>
+    <view class="tag">
+        <image src="../../image/tag.png"></image>
+        <view class="tag-item">
+            <text>插画</text>
+            <text>水彩</text>
+            <text>123</text>
+        </view>
+    </view>
+</view>
+<view class="bookList-bottom">
+    <text class="hot">热度(15)</text>
+    <view class="bottom-right">
+        <view class="collect">
+            <image src="../../image/collect-white.png"></image>
+            <text>收藏</text>
+        </view>
+        <view class="share">
+            <image src="../../image/share-white.png"></image>
+            <text>分享</text>
+        </view>
     </view>
 </view>

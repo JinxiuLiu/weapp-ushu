@@ -1,10 +1,10 @@
 {
   "pages":[
-    "pages/bookList/bookList",
     "pages/index/index",
     "pages/create/create",
     "pages/cart/cart",
     "pages/user/user",
+    "pages/bookList/bookList",
     "pages/submitOrder/submitOrder",
     "pages/otherBookList/otherBookList",
     "pages/user/about/about",

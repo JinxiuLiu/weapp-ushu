@@ -1,6 +1,6 @@
 .bookList {
 	background: #fff;
-	margin-bottom: 27rpx;
+	margin-bottom: 98rpx;
 }
 
 .bookList-founder {
@@ -94,4 +94,199 @@
 	line-height: 54rpx;
 	font-size: 14px;
 	color: #666;
+}
+
+/* 书单列表 */
+.bookList-details {
+	margin-top: 36rpx;
+}
+
+.bookList-details .details-item {
+	padding: 30rpx 15px;
+	border-bottom: 1rpx solid #eee;
+}
+
+.bookList-details .details-item:last-child {
+	border-bottom: none;
+}
+
+.book-left {
+	display: flex;
+	align-items: center;
+}
+
+.book-left .left-image {
+	width: 22%;
+	height: 177rpx;
+	border: 1rpx solid #f0f0f0;
+}
+
+.book-left .left-image image {
+	width: 100%;
+	height: 100%;
+}
+
+.book-left .left-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	width: 78%;
+	height: 177rpx;
+	padding-left: 20rpx;
+	position: relative;
+}
+
+.book-left .left-text .name {
+	align-self: flex-start;
+	max-width:90%;
+	font-size: 14px;
+}
+
+.book-left .left-text .work-name {
+	display: flex;
+	align-self: flex-start;
+	width: 78%;
+	font-size: 12px;
+	color: #999;
+}
+
+.details-item .book-right {
+	display: flex;
+	justify-content: space-between;
+	align-self: flex-start;
+	width: 95%;
+	font-size: 14px;
+	margin-top: 10rpx;
+	position: absolute;
+	bottom: 0;
+}
+
+.details-item .book-right .old-price {
+	padding-left: 25rpx;
+	text-decoration: line-through;
+	color: #999;
+}
+
+.details-item .book-right .number {
+	width: 48rpx;
+	height: 48rpx;
+}
+
+.book-right .number image {
+	width: 100%;
+	height: 100%;
+}
+
+/* 评论 */
+.comment {
+}
+
+.comment .comment-title {
+	padding: 0 15px;
+}
+
+.comment .comment-item {
+	padding: 20rpx 15px 0;
+	border-top: 1rpx solid #f0f0f0;
+}
+
+.comment .comment-item:first-child {
+	padding: 0 15px 20rpx;
+	border-top: none;
+}
+
+.weui-loadmore {
+	width: 100%;
+}
+
+.comment .founder-info .founder-name {
+	padding-left: 30rpx;
+}
+
+.comment .comment-info {
+	padding: 20rpx 0;
+	line-height: 46rpx;
+	font-size: 12px;
+	color: #333;
+}
+
+.comment .comment-more {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 146rpx;
+}
+
+.comment .comment-more text {
+	width: 218rpx;
+	height: 46rpx;
+	line-height: 46rpx;
+	border-radius: 24rpx;
+	text-align: center;
+	border: 1rpx solid #ff4444;
+	font-size: 12px;
+	color: #ff4444;
+}
+
+/* 标签 */
+.tag {
+	display: flex;
+	align-items: center;
+	height: 80rpx;
+	padding: 0 15px;
+	background: #f5f5f5;
+}
+
+.tag image {
+	width: 38rpx;
+	height: 38rpx;
+}
+
+.tag text {
+	padding: 30rpx;
+	font-size: 14px;
+	color: #aaa;
+}
+
+.tag text:first-child {
+	padding-left: 60rpx;
+}
+
+/* 底部 */
+.bookList-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 98rpx;
+	background: #ff4444;
+	position: fixed;
+	bottom: 0;
+	font-size: 14px;
+	color: #fff;
+}
+
+.bookList-bottom .hot {
+	padding-left: 66rpx;
+}
+
+.bottom-right {
+	display: flex;
+	height: 98rpx;
+}
+
+.bottom-right .collect,
+.bottom-right .share {
+	display: flex;
+	align-items: center;
+}
+
+.bottom-right .share {
+	padding: 0 26rpx 0 66rpx;
+}
+
+.bottom-right image {
+	width: 38rpx;
+	height: 38rpx;
+	padding-right: 12rpx;
 }
