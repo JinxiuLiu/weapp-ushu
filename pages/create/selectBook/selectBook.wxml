@@ -4,7 +4,7 @@
             <view class="weui-search-bar__form">
                 <view class="weui-search-bar__box">
                     <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" placeholder="请输入图书名或ISBN号" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <input type="text" confirm-type="search" class="weui-search-bar__input" placeholder="请输入图书名或ISBN号" value="{{inputVal}}" focus="true" bindinput="inputTyping" bindconfirm="searchRequest" />
                     <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                         <icon type="clear" size="14"></icon>
                     </view>
@@ -13,25 +13,11 @@
         </view>
     </view>
     <view class="selectBook-list">
-        <view class="list-item">
-            <text class="name">计算机技术与应用</text>
-            <text class="ISBN">ISBN:7-301-04815-7</text>
-        </view>
-        <view class="list-item">
-            <text class="name">计算机技术与应用</text>
-            <text class="ISBN">ISBN:7-301-04815-7</text>
-        </view>
-        <view class="list-item">
-            <text class="name">计算机技术与应用</text>
-            <text class="ISBN">ISBN:7-301-04815-7</text>
-        </view>
-        <view class="list-item">
-            <text class="name">计算机技术与应用</text>
-            <text class="ISBN">ISBN:7-301-04815-7</text>
-        </view>
-        <view class="list-item">
-            <text class="name">计算机技术与应用</text>
-            <text class="ISBN">ISBN:7-301-04815-7</text>
-        </view>
+        <block wx:for="{{rows}}">
+            <view class="list-item">
+                <text class="name">{{item.bookName}}</text>
+                <text class="ISBN">{{item.isbn}}</text>
+            </view>
+        </block>
     </view>
 </view>

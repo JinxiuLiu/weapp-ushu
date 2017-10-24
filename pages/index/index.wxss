@@ -103,6 +103,28 @@
 	line-height: 85rpx;
 }
 
+.bookList-img {
+	height: 350rpx;
+	padding: 0 40rpx;
+	margin-bottom: 59rpx;
+}
+
+.bookList-img image {
+	width: 100%;
+	height: 100%;
+}
+
+.bookList-text {
+	padding: 0 40rpx;
+}
+
+.bookList-text text {
+	display: flex;
+	line-height: 54rpx;
+	font-size: 14px;
+	color: #666;
+}
+
 .bookList-video {
 	padding: 0 40rpx;
 	height: 370rpx;
