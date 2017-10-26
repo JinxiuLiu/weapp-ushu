@@ -12,11 +12,11 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 159rpx;
-	padding: 0 40rpx 20rpx;
+	padding: 20rpx 40rpx;
 }
 
 .address-item .item-top .address {
+	padding-top: 10rpx;
 	font-size: 12px;
 	color: #666;
 }
@@ -47,7 +47,11 @@
 .address-item .item-bottom .text {
 	font-size: 12px;
 	color: #666;
-	padding-left: 46rpx;
+	padding: 0 26rpx;
+}
+
+.address-item .item-bottom .text:last-child {
+	padding-right: 0;
 }
 
 .address-item .item-bottom .text image {

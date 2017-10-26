@@ -7,6 +7,8 @@
     "pages/user/user",
     "pages/ranking/ranking",
     "pages/bookList/bookList",
+    "pages/user/myAddress/myAddress",
+    "pages/user/addAddress/addAddress",
     "pages/bookDetails/bookDetails",
     "pages/submitOrder/submitOrder",
     "pages/otherBookList/otherBookList",
@@ -19,8 +21,6 @@
     "pages/user/about/nickname/nickname",
     "pages/user/myBookList/myBookList",
     "pages/user/attention/attention",
-    "pages/user/myAddress/myAddress",
-    "pages/user/addAddress/addAddress",
     "pages/user/collect/collect",
     "pages/user/inform/inform",
     "pages/user/order/order",
@@ -31,7 +31,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "USHU",
     "navigationBarTextStyle":"black",
-    "backgroundColor": "#ececec"
+    "backgroundColor": "#ececec",
+    "onReachBottomDistance": 50
   },
   "tabBar": {
     "color": "#999999",

@@ -20,7 +20,20 @@ var config = {
     CreateListUrl: `${host}/bookList/save`,
 
     // 上传文件接口
-    uploadFileUrl: `${host}/file_upload`
+    uploadFileUrl: `${host}/file_upload`,
+
+    // 新增收货地址
+    addAddressUrl: `${host}/consignee/edit`,
+
+    // 收货地址列表
+    addressListUrl: `${host}/consignee/list_my`,
+
+    // 设为默认地址
+    defAddressUrl: `${host}/consignee/def`,
+
+    // 删除地址
+    delAddressUrl: `${host}/consignee/del`
+    
 
 };
 

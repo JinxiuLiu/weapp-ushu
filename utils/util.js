@@ -30,7 +30,21 @@ function formatLocation(longitude, latitude) {
   }
 }
 
+function showMessage(that, text, time) {
+    that.setData({
+        showMessage: true,
+        messageContent: text
+    })
+    setTimeout(function(){
+        that.setData({
+            showMessage: false,
+            messageContent: ''
+        })
+    }, time)
+}
+
 module.exports = {
   formatTime: formatTime,
-  formatLocation: formatLocation
+  formatLocation: formatLocation,
+  showMessage: showMessage
 }

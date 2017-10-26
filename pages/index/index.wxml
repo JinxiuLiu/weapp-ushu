@@ -3,7 +3,7 @@
         <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
                 <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                <input type="text" class="weui-search-bar__input" placeholder="2017必读10本书" value="{{inputVal}}" focus="false" bindinput="inputTyping" />
+                <input type="text" class="weui-search-bar__input" placeholder="2017必读10本书" value="{{inputVal}}" bindinput="inputTyping" />
                 <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                     <icon type="clear" size="14"></icon>
                 </view>
@@ -34,60 +34,58 @@
     <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
             <block wx:for="{{bookListItem}}">
-                <navigator url="../bookList/bookList?id={{item.id}}" hover-class="none">
-                    <view class="bookList">
-                        <view class="bookList-founder">
-                            <view class="founder-info">
-                                <view class="founder-avatar">
-                                    <image style="width: 100%; height: 100%;" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
-                                </view>
-                                <view class="founder-name">
-                                    <view class="name"><text>{{item.creatorName}}</text></view>
-                                    <view class="time"><text>{{item.created}}</text></view>
-                                </view>
+                <view class="bookList" data-id="{{item.id}}" bindtap="tapBookList">
+                    <view class="bookList-founder">
+                        <view class="founder-info">
+                            <view class="founder-avatar">
+                                <image style="width: 100%; height: 100%;" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
                             </view>
-                            <view class="founder-concern">
-                                <text>关注</text>
+                            <view class="founder-name">
+                                <view class="name"><text>{{item.creatorName}}</text></view>
+                                <view class="time"><text>{{item.created}}</text></view>
                             </view>
                         </view>
-                        <view class="bookList-info">
-                            <view class="bookList-name"><text>{{item.title}}</text></view>
-                            <view class="bookList-img" wx:for="{{item.images}}">
-                                <image src="{{host}}{{item.url}}"></image>
-                            </view>
-                            <view class="bookList-video" wx-if="{{!!item.video}}">
-                                <video id="myVideo" src="{{host}}{{item.video.url}}" controls></video>
-                            </view>
-                            <view class="bookList-audio" wx-if="{{!!item.voice}}">
-                                <audio author="{{item.creatorName}}" name="{{item.voice.fileName}}" src="{{host}}{{item.voice.url}}" id="myAudio" controls loop></audio>
-                            </view>
-                            <view class="bookList-text">
-                                <text>{{item.content}}</text>
-                            </view>
-                            <view class="bookList-item">
-                                <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
-                                    <view class="scroll-view-item_H" wx:for="{{item.items}}">
-                                        <image style="width: 100%; height: 100%;" src="{{host}}{{item.picPath}}"></image>
-                                    </view>
-                                </scroll-view>
-                            </view>
-                            <view class="bookList-tag">
-                                <view class="tag"><text>插画</text></view>
-                                <view class="tag"><text>水彩</text></view>
-                                <view class="tag"><text>123</text></view>
-                            </view>
-                            <view class="bookList-footer">
-                                <view class="text">
-                                    <view class="hot"><text>热度(25)</text></view>
-                                    <view class="comment"><text>评论(55)</text></view>
+                        <view class="founder-concern">
+                            <text>关注</text>
+                        </view>
+                    </view>
+                    <view class="bookList-info">
+                        <view class="bookList-name"><text>{{item.title}}</text></view>
+                        <view class="bookList-img" wx:for="{{item.images}}">
+                            <image src="{{item.url}}"></image>
+                        </view>
+                        <view class="bookList-video" wx-if="{{!!item.video}}">
+                            <video id="myVideo" src="{{item.video.url}}" controls></video>
+                        </view>
+                        <view class="bookList-audio" wx-if="{{!!item.voice}}">
+                            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
+                        </view>
+                        <view class="bookList-text">
+                            <text>{{item.content}}</text>
+                        </view>
+                        <view class="bookList-item" id="bookList">
+                            <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
+                                <view class="scroll-view-item_H" bindtap="tapBook" wx:for="{{item.items}}">
+                                    <image style="width: 100%; height: 100%;" src="{{item.picPath}}"></image>
                                 </view>
-                                <view style="padding-top: 8rpx;">
-                                    <image style="width: 37rpx; height: 37rpx;" src="../../image/collect.png"></image>
-                                </view>
+                            </scroll-view>
+                        </view>
+                        <view class="bookList-tag">
+                            <view class="tag"><text>插画</text></view>
+                            <view class="tag"><text>水彩</text></view>
+                            <view class="tag"><text>123</text></view>
+                        </view>
+                        <view class="bookList-footer">
+                            <view class="text">
+                                <view class="hot"><text>热度(25)</text></view>
+                                <view class="comment"><text>评论(55)</text></view>
+                            </view>
+                            <view style="padding-top: 8rpx;">
+                                <image style="width: 37rpx; height: 37rpx;" src="../../image/collect.png"></image>
                             </view>
                         </view>
                     </view>
-                </navigator>
+                </view>
             </block>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">

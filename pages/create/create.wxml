@@ -3,7 +3,7 @@
 	<view class="weui-cells weui-cells_after-title">
 	    <view class="weui-cell weui-cell_input">
 	        <view class="weui-cell__bd">
-	            <input class="weui-input" placeholder="请输入书单名称" />
+	            <input class="weui-input" value="{{bookListName}}" placeholder="请输入书单名称" bindinput="bindinput" />
 	        </view>
 	    </view>
 	</view>
@@ -19,6 +19,10 @@
 			</block>
 			<block wx:if="{{src != ''}}">
 				<video src="{{src}}" class="video"></video>
+				<view class="video-btn">
+					<view class="video-again" bindtap="chooseVideo">重新上传</view>
+					<view class="video-del" bindtap="delVideo">删除</view>
+				</view>
 			</block>
 		</view>
 	</view>
@@ -88,10 +92,11 @@
 		        <block wx:for="{{imageList}}" wx:for-item="image">
 		            <view class="weui-uploader__file">
 		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+		                <view class="del-img" data-src="{{image}}" bindtap="delImage">删除</view>
 		            </view>
 		        </block>
 		    </view>
-		    <view class="weui-uploader__input-box">
+		    <view class="weui-uploader__input-box" wx:if="{{!(imageList.length == 9)}}">
 		        <view class="weui-uploader__input" bindtap="chooseImage"></view>
 		    </view>
 		</view>
@@ -100,7 +105,7 @@
 	<view class="weui-cells weui-cells_after-title">
 		 <view class="weui-cell">
             <view class="weui-cell__bd">
-                <textarea show-confirm-bar="false" class="weui-textarea" placeholder="请输入文本" />
+                <textarea show-confirm-bar="false" value="{{content}}" class="weui-textarea" bindinput="bindTextArea" placeholder="请输入文本" />
             </view>
         </view>
 	</view>
@@ -108,16 +113,17 @@
 	<view class="weui-cells weui-cells_after-title">
 		<view class="weui-uploader__bd">
 		    <view class="weui-uploader__files">
-		        <block wx:for="{{imageList}}" wx:for-item="image">
+		        <block wx:for="{{bookImgUrl}}" wx:for-item="image">
 		            <view class="weui-uploader__file">
-		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap=""></image>
+		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}"></image>
 		            </view>
 		        </block>
 		    </view>
 		    <view class="weui-uploader__input-box">
-		        <view class="weui-uploader__input"></view>
+		        <view class="weui-uploader__input" bindtap="selectBook"></view>
 		    </view>
 		</view>
 	</view>
 </view>
-<button type="primary">提交</button>
+<button type="primary" bindtap="submitFun">提交</button>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

@@ -53,6 +53,22 @@ Page({
             activeIndex: e.currentTarget.id
         });
     },
+    tapBookList: function(e) {
+        console.log(e);
+        if(e.target.id === "myVideo" || e.target.id === "myAudio") {
+            console.log('123');
+            return false;
+        }
+        let BookListID = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../bookList/bookList?id=' + BookListID
+        })
+    },
+    tapBook: function() {
+        wx.navigateTo({
+            url: '../bookDetails/bookDetails?id='
+        })
+    },
     getBookListRequest: function() {
         var self = this
         wx.showToast({
