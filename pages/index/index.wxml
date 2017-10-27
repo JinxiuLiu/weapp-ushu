@@ -51,9 +51,14 @@
                     </view>
                     <view class="bookList-info">
                         <view class="bookList-name" data-id="{{item.id}}" bindtap="tapBookList"><text>{{item.title}}</text></view>
-                        <view class="bookList-img" wx:for="{{item.images}}">
-                            <image src="{{item.url}}"></image>
-                        </view>
+                        <swiper class="bookList-img" indicator-dots="false"
+                          autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
+                            <block wx:for="{{item.images}}">
+                                <swiper-item>
+                                    <image src="{{item.url}}" class="slide-image"/>
+                                </swiper-item>
+                            </block>
+                        </swiper>
                         <view class="bookList-video" wx-if="{{!!item.video}}">
                             <video id="myVideo" src="{{item.video.url}}" controls></video>
                         </view>
