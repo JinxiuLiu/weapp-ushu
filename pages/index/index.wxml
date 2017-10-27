@@ -51,7 +51,7 @@
                     </view>
                     <view class="bookList-info">
                         <view class="bookList-name" data-id="{{item.id}}" bindtap="tapBookList"><text>{{item.title}}</text></view>
-                        <swiper class="bookList-img" indicator-dots="false"
+                        <swiper wx-if="{{!!item.images}}" class="bookList-img" indicator-dots="false"
                           autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
                             <block wx:for="{{item.images}}">
                                 <swiper-item>
