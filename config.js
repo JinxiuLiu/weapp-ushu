@@ -32,7 +32,26 @@ var config = {
     defAddressUrl: `${host}/consignee/def`,
 
     // 删除地址
-    delAddressUrl: `${host}/consignee/del`
+    delAddressUrl: `${host}/consignee/del`,
+
+    // 加入购物车
+    addCartUrl: `${host}/shopCart/save`,
+
+    // 购物车列表
+    shopCartUrl: `${host}/shopCart/list_my`,
+
+    // 选择商品
+    selectCartUrl: `${host}/shopCart/total_money`,
+
+    // 更改购物车数量
+    changeCartUrl: `${host}/shopCart/change_quantity`,
+
+    // 购物车删除商品
+    delCartUrl: `${host}/shopCart/delete`,
+
+    // 书单详情
+    detailUrl: `${host}/bookList/detail`,
+
     
 
 };

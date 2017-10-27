@@ -34,7 +34,7 @@
     <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
             <block wx:for="{{bookListItem}}">
-                <view class="bookList" data-id="{{item.id}}" bindtap="tapBookList">
+                <view class="bookList">
                     <view class="bookList-founder">
                         <view class="founder-info">
                             <view class="founder-avatar">
@@ -50,7 +50,7 @@
                         </view>
                     </view>
                     <view class="bookList-info">
-                        <view class="bookList-name"><text>{{item.title}}</text></view>
+                        <view class="bookList-name" data-id="{{item.id}}" bindtap="tapBookList"><text>{{item.title}}</text></view>
                         <view class="bookList-img" wx:for="{{item.images}}">
                             <image src="{{item.url}}"></image>
                         </view>

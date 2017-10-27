@@ -52,10 +52,10 @@
 }
 
 .bookList-name {
-	padding: 0 40rpx;
-	font-size: 15px;
-	color: #333;
-	line-height: 85rpx;
+	padding:0 40rpx 10rpx;
+	font-size:20px;
+	color:#333;
+	line-height:85rpx;
 }
 
 .bookList-video {

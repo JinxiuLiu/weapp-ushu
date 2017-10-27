@@ -54,11 +54,6 @@ Page({
         });
     },
     tapBookList: function(e) {
-        console.log(e);
-        if(e.target.id === "myVideo" || e.target.id === "myAudio") {
-            console.log('123');
-            return false;
-        }
         let BookListID = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: '../bookList/bookList?id=' + BookListID

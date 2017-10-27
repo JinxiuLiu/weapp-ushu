@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/cart/cart",
     "pages/index/index",
     "pages/create/create",
     "pages/create/selectBook/selectBook",
-    "pages/cart/cart",
     "pages/user/user",
     "pages/ranking/ranking",
     "pages/bookList/bookList",

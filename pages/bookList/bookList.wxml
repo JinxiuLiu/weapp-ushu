@@ -1,12 +1,16 @@
-<view class="bookList">
+<view class="weui-loadmore" wx:if="{{loadmore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view class="bookList" wx:for="{{detailList}}">
     <view class="bookList-founder">
         <view class="founder-info">
             <view class="founder-avatar">
                 <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
             </view>
             <view class="founder-name">
-                <view class="name"><text>可爱的小果冻</text></view>
-                <view class="time"><text>13小时前</text></view>
+                <view class="name"><text>{{item.creatorName}}</text></view>
+                <view class="time"><text>{{item.created}}</text></view>
             </view>
         </view>
         <view class="founder-concern">
@@ -14,103 +18,31 @@
         </view>
     </view>
     <view class="bookList-info">
-        <view class="bookList-name"><text>《从A到Z》</text></view>
-        <view class="bookList-video">
-            <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" controls></video>
+        <view class="bookList-name"><text>{{item.title}}</text></view>
+        <view class="bookList-video" wx-if="{{!!item.video}}">
+            <video id="myVideo" src="{{item.video.url}}" controls></video>
         </view>
         <view class="bookList-audio">
-            <audio author="可爱的小果冻" name="《从A到Z》" src="http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46" id="myAudio" controls loop></audio>
+            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
         </view>
-        <view class="bookList-img">
-            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+        <view class="bookList-img" wx:for="{{item.images}}">
+            <image src="{{item.url}}"></image>
         </view>
         <view class="bookList-text">
-            <text>8月命题《A-Z字母+动物结合》</text>
-            <text>指导：王先亮</text>
-            <text>作者：含、Fata、非鱼、小然、Twoco、zack、wooooh</text>
+            <text>{{item.content}}</text>
         </view>
         <view class="bookList-details">
-            <navigator url="../bookDetails/bookDetails" hover-class="none">
-                <view class="details-item">
-                    <view class="book-left">
-                        <view class="left-image">
-                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                        </view>
-                        <view class="left-text">
-                            <text class="name">鸟哥的Linux私房菜</text>
-                            <text class="work-name">鸟哥 著</text>
-                            <view class="book-right">
-                                <text class="color-red price">¥59<text class="old-price">¥59</text></text>
-                                <view class="number">
-                                    <image src="../../image/bookadd.png"></image>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </navigator>
-            <view class="details-item">
+            <view class="details-item" wx:for="{{item.items}}">
                 <view class="book-left">
                     <view class="left-image">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                        <image src="{{item.picPath}}"></image>
                     </view>
                     <view class="left-text">
-                        <text class="name">鸟哥的Linux私房菜</text>
+                        <text class="name">{{item.bookName}}</text>
                         <text class="work-name">鸟哥 著</text>
                         <view class="book-right">
-                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
-                            <view class="number">
-                                <image src="../../image/bookadd.png"></image>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <view class="details-item">
-                <view class="book-left">
-                    <view class="left-image">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                    </view>
-                    <view class="left-text">
-                        <text class="name">鸟哥的Linux私房菜</text>
-                        <text class="work-name">鸟哥 著</text>
-                        <view class="book-right">
-                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
-                            <view class="number">
-                                <image src="../../image/bookadd.png"></image>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <view class="details-item">
-                <view class="book-left">
-                    <view class="left-image">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                    </view>
-                    <view class="left-text">
-                        <text class="name">鸟哥的Linux私房菜</text>
-                        <text class="work-name">鸟哥 著</text>
-                        <view class="book-right">
-                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
-                            <view class="number">
-                                <image src="../../image/bookadd.png"></image>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <view class="details-item">
-                <view class="book-left">
-                    <view class="left-image">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                    </view>
-                    <view class="left-text">
-                        <text class="name">鸟哥的Linux私房菜</text>
-                        <text class="work-name">鸟哥 著</text>
-                        <view class="book-right">
-                            <text class="color-red price">¥59<text class="old-price">¥59</text></text>
-                            <view class="number">
+                            <text class="color-red price">¥{{item.price}}<text class="old-price">¥59</text></text>
+                            <view class="number" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">
                                 <image src="../../image/bookadd.png"></image>
                             </view>
                         </view>

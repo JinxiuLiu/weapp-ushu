@@ -35,21 +35,39 @@
 	left: 80rpx;
 }
 
-.item-book {
-	display: flex;
-	justify-content: space-between;
-	height: 179rpx;
-	padding: 30rpx 12rpx 30rpx 0;
-	border-bottom: 3rpx solid #ededed;
-}
-
-.item-book:last-of-type {
-	border-bottom: none;
-}
-
-.item-book .book-left {
+.weui-cell__bd {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	height: 180rpx;
+	padding: 30rpx;
+}
+
+.weui-cell__bd .radio-group {
+	display: flex;
+	margin-right: 20rpx;
+}
+
+.book-left {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	position: relative;
+}
+
+.book-left:after {
+	content: " ";
+	position: absolute;
+	bottom: -30rpx;
+	right: -30rpx;
+	width: 105%;
+	border-top: 1rpx solid #f0f0f0;
+	color: #f0f0f0;
+}
+
+.bookinfo:last-child .book-left:after {
+	content: none;
 }
 
 .book-left .left-image {
@@ -65,30 +83,39 @@
 .book-left .left-text {
 	display: flex;
 	flex-direction: column;
-	align-self: flex-end;
-	height: 100%;
-	padding-left: 20rpx;
+	align-self: flex-start;
+	width: 72%;
+	height:177rpx;
+	position: relative;
 }
 
 .book-left .left-text .name {
-	max-width:90%;
 	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
 .book-left .left-text .work-name {
 	font-size: 12px;
 	color: #999;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.item-book .book-right {
+.book-right {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	width: 100%;
 	font-size: 14px;
 	margin-top: 10rpx;
+	position: absolute;
+	bottom: 0;
 }
 
-.item-book .book-right .number {
+.book-right .number {
 	color: #999;
 }
 
@@ -114,11 +141,9 @@
 	font-size: 17px;
 }
 
-.cart-bottom .all {
-	width: 100rpx;
-	position: absolute;
-	bottom: 0;
-	font-size: 14px;
+.cart-bottom .select-all {
+	margin-left: 10rpx;
+	font-size:14px;
 }
 
 .cart-bottom .radio {
@@ -152,10 +177,7 @@
 
 /* 编辑-加减 */
 .modified {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-left: 149rpx;
+	padding-right: 100rpx;
 }
 
 .modified .modified-item {
