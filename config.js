@@ -7,7 +7,6 @@ var host = "http://192.168.0.111:8081"
 
 var config = {
 
-    // 下面的地址配合云端 Server 工作
     host,
 
     // 选择图书
@@ -49,10 +48,20 @@ var config = {
     // 购物车删除商品
     delCartUrl: `${host}/shopCart/delete`,
 
+    // 生成订单
+    generateUrl: `${host}/order/generate`,
+
+    // 提交订单
+    commitUrl: `${host}/order/commit`,
+
+    // 订单详情
+    orderDetailUrl: `${host}/order/detail`,
+
+    // 订单列表
+    orderListUrl: `${host}/order/list_my`,
+
     // 书单详情
     detailUrl: `${host}/bookList/detail`,
-
-    
 
 };
 

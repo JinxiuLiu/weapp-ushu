@@ -1,23 +1,26 @@
 /**
  * Created by Liujx on 2017-10-13 09:41:39
+ * 购物车
  */
 const shopCartUrl = require('../../config').shopCartUrl;
 const selectCartUrl = require('../../config').selectCartUrl;
 const changeCartUrl = require('../../config').changeCartUrl;
 const delCartUrl = require('../../config').delCartUrl;
+const generateUrl = require('../../config').generateUrl;
 
 Page({
-	data: {
-		isEdit: false,
+    data: {
+        isEdit: false,
         loadmore: true,
         cartList: [],
         selectGoods: [],
+        settlementItems: [],
         isChecked: false,
         goodsChecked: false,
         selectAllStatus: false,
         total: '0'
-	},
-    onLoad: function() {
+    },
+    onShow: function() {
         let self = this;
         wx.request({
             url: shopCartUrl,
@@ -36,11 +39,11 @@ Page({
         let self = this;
         let index = e.currentTarget.dataset.index;
         let i = e.currentTarget.dataset.i;
-        self.data.cartList[index].items[i].checked = !self.data.cartList[index].items[i].checked;                    // 获取购物车列表
+        self.data.cartList[index].items[i].checked = !self.data.cartList[index].items[i].checked; // 获取购物车列表
         let tempCartList = self.data.cartList;
         for (var j = 0; j < tempCartList.length; j++) {
             for (var k = 0; k < tempCartList[j].items.length; k++) {
-                if(!tempCartList[j].items[k].checked) {
+                if (!tempCartList[j].items[k].checked) {
                     self.data.selectAllStatus = false;
                     break;
                 } else {
@@ -49,15 +52,17 @@ Page({
             }
         }
         self.data.selectGoods = [];
+        self.data.settlementItems = [];
         for (var j = 0; j < tempCartList.length; j++) {
             for (var k = 0; k < tempCartList[j].items.length; k++) {
-                if(tempCartList[j].items[k].checked) {
+                if (tempCartList[j].items[k].checked) {
                     self.data.selectGoods.push(tempCartList[j].items[k].id);
+                    self.data.settlementItems.push({"bookListItemId": tempCartList[j].items[k].bookListItemId,"shopCartId": tempCartList[j].items[k].id,"fromShareId": tempCartList[j].items[k].fromShareId,"quantity": tempCartList[j].items[k].quantity});
                 }
             }
         }
         // 判断是否为空数组
-        if(self.data.selectGoods.length) {
+        if (self.data.selectGoods.length) {
             // 获取总价
             self.selectGoodsRequest(self.data.selectGoods);
         } else {
@@ -75,24 +80,26 @@ Page({
         let self = this;
         let selectAllStatus = !self.data.selectAllStatus;
         let tempCartList = self.data.cartList;
-        if(selectAllStatus) {
-            tempCartList.filter(function (item) {
+        if (selectAllStatus) {
+            tempCartList.filter(function(item) {
                 item.items.filter(function(val) {
                     val.checked = true;
                 })
             })
         } else {
-            tempCartList.filter(function (item) {
+            tempCartList.filter(function(item) {
                 item.items.filter(function(val) {
                     val.checked = false;
                 })
             })
         }
         self.data.selectGoods = [];
+        self.data.settlementItems = [];
         for (var j = 0; j < tempCartList.length; j++) {
             for (var k = 0; k < tempCartList[j].items.length; k++) {
-                if(tempCartList[j].items[k].checked) {
+                if (tempCartList[j].items[k].checked) {
                     self.data.selectGoods.push(tempCartList[j].items[k].id);
+                    self.data.settlementItems.push({"bookListItemId": tempCartList[j].items[k].bookListItemId,"shopCartId": tempCartList[j].items[k].id,"fromShareId": tempCartList[j].items[k].fromShareId,"quantity": tempCartList[j].items[k].quantity});
                 }
             }
         }
@@ -136,10 +143,10 @@ Page({
         let i = e.currentTarget.dataset.i;
         let id = e.currentTarget.dataset.id;
         this.data.cartList[index].items[i].quantity--;
-        if( this.data.cartList[index].items[i].quantity <= 0 ) {
+        if (this.data.cartList[index].items[i].quantity <= 0) {
             this.data.cartList[index].items[i].quantity = 1;
             this.showMessage('已经不能再减少了!')
-        }else {
+        } else {
             this.setData({
                 cartList: self.data.cartList
             })
@@ -161,9 +168,9 @@ Page({
     //更改购物车数量
     changeNum(id, quantity) {
         var idArr = [];
-        for(var i=0; i<this.data.cartList.length; i++) {
-            this.data.cartList[i].items.filter(function (item) {
-                if(item.checked) {
+        for (var i = 0; i < this.data.cartList.length; i++) {
+            this.data.cartList[i].items.filter(function(item) {
+                if (item.checked) {
                     idArr.push(item.id);
                 }
             })
@@ -172,7 +179,7 @@ Page({
         wx.request({
             url: changeCartUrl,
             method: 'POST',
-            data:{
+            data: {
                 id: id,
                 quantity: quantity,
                 checkedIds: idArr
@@ -180,10 +187,9 @@ Page({
             header: {
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
-            success: function(data){
-                console.log(data.data.success);
-                if(data.data.success) {
-                    if(!!data.data.data) {
+            success: function(data) {
+                if (data.data.success) {
+                    if (!!data.data.data) {
                         self.setData({
                             total: data.data.data
                         })
@@ -194,49 +200,78 @@ Page({
             }
         });
     },
+    // 删除
     delCart: function() {
         let self = this;
+        let id = self.data.selectGoods;
+        if(!id.length) {
+            self.showMessage('请选择图书!');
+            return false;
+        }
         wx.request({
             url: delCartUrl,
             method: 'POST',
-            data: {id: id},
+            data: { id: id },
             header: {
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
-            success:function(data){
-                if(data.data.success) {
-                    self.data.cartList[index].items.splice(i, 1);
-                    if(!self.data.cartList[index].items.length) {
-                        self.data.cartList.splice(index, 1);
-                    }
-                    self.setData({
-                        cartList: self.data.cartList
-                    })
-                    self.showMessage('操作成功!');
-                }else{
+            success: function(data) {
+                console.log(data);
+                if (data.data.success) {
+                    self.onShow();
+                    self.showMessage('删除成功!');
+                } else {
                     self.showMessage(data.data.msg);
                 }
             }
         });
     },
     // 编辑
-	cartEditFun: function() {
+    cartEditFun: function() {
         let self = this;
         self.setData({
             isEdit: !self.data.isEdit
         })
     },
+    // 结算 && 赠送朋友 生成订单
+    settlementFun: function(e) {
+        const self = this;
+        let isGive = e.currentTarget.dataset.give;
+        let items = self.data.settlementItems;
+        if(!items.length) {
+            self.showMessage('请选择商品！');
+            return false;
+        }
+        wx.request({
+            url: generateUrl,
+            method: 'POST',
+            data: {
+                give: isGive,
+                items: items
+            },
+            success: function(data) {
+                if (data.data.success) {
+                    wx.navigateTo({
+                        url: '../submitOrder/submitOrder?id=' + data.data.data
+                    })
+                } else {
+                    self.showMessage(data.data.msg);
+                }
+            }
+        });
+        
+    },
     showMessage: function(text) {
         var that = this
         that.setData({
-          showMessage: true,
-          messageContent: text
+            showMessage: true,
+            messageContent: text
         })
-        setTimeout(function(){
-          that.setData({
-            showMessage: false,
-            messageContent: ''
-          })
+        setTimeout(function() {
+            that.setData({
+                showMessage: false,
+                messageContent: ''
+            })
         }, 3000)
     }
 })

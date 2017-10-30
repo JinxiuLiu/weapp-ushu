@@ -4,19 +4,17 @@
 
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const getBookListUrl = require('../../config').getBookListUrl;
-const host = require('../../config').host;
 
 Page({
     data: {
-        host: host,
         inputVal: "",
         imgUrls: [
-          'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-          'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
+            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
         ],
         tabs: ["最新", "最热"],
         activeIndex: 0,
@@ -25,21 +23,21 @@ Page({
         page: 1,
         bookListItem: []
     },
-    clearInput: function () {
+    clearInput: function() {
         this.setData({
             inputVal: ""
         });
     },
-    inputTyping: function (e) {
+    inputTyping: function(e) {
         this.setData({
             inputVal: e.detail.value
         });
     },
-    onLoad: function () {
+    onLoad: function() {
         var that = this;
         that.getBookListRequest();
         wx.getSystemInfo({
-            success: function(res) {
+            success: res => {
                 that.setData({
                     sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
@@ -47,7 +45,7 @@ Page({
             }
         });
     },
-    tabClick: function (e) {
+    tabClick: function(e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
@@ -76,14 +74,17 @@ Page({
             data: {
                 "page": self.data.page
             },
-            success: function(result) {
+            success: result => {
                 wx.hideLoading();
-                self.setData({
-                    bookListItem: result.data.data.rows
-                });
+                if(result.data.success) {
+                    self.setData({
+                        bookListItem: result.data.data.rows
+                    });
+                } else {
+                    console.log(result.data.msg)
+                }
             },
-            fail: function({errMsg}) {
-                console.log('request fail', errMsg)
+            fail: function({ errMsg }) {
                 self.setData({
                     loading: false
                 })

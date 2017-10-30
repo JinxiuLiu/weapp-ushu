@@ -26,7 +26,6 @@
 
 .cart-item {
 	background: #fff;
-	margin-bottom: 20rpx;
 }
 
 .cart-item .title {
@@ -53,8 +52,9 @@
 
 .item-book .book-left {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
+	width: 100%;
 }
 
 .book-left .left-image {
@@ -71,17 +71,24 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	padding-left: 20rpx;
+	width:75%;
 	position: relative;
 }
 
 .book-left .left-text .name {
 	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
 .book-left .left-text .work-name {
 	font-size: 12px;
 	color: #999;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .item-book .book-right {
@@ -105,8 +112,11 @@
 	align-items: center;
 	height: 88rpx;
 	padding: 0 26rpx;
+	margin-bottom: 20rpx;
+	border-top: 1rpx solid #f0f0f0;
 	font-size: 14px;
 	color: #999;
+	background-color: #fff;
 }
 
 /* 底部详情 */

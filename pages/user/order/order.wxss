@@ -68,11 +68,18 @@
 
 .book-left .left-text .name {
 	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
 .book-left .left-text .work-name {
 	font-size: 12px;
 	color: #999;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .order-item .item-book .book-right {

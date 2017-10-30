@@ -45,10 +45,8 @@
     </view>
     <view class="bottom-right" wx:if="{{!isEdit}}">
         <text class="total">合计：<text class="color-red">¥{{total}}</text></text>
-        <view class="give">赠朋友</view>
-        <navigator url="../submitOrder/submitOrder" hover-class="none">
-            <view class="settlement">结算</view>
-        </navigator>
+        <view class="give" data-give="true" bindtap="settlementFun">赠朋友</view>
+        <view class="settlement" data-give="false" bindtap="settlementFun">结算</view>
     </view>
     <view class="bottom-del" wx:elif="{{isEdit}}" bindtap="delCart">删除</view>
 </view>

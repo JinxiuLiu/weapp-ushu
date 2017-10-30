@@ -11,168 +11,164 @@
             </view>
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <view class="order-item">
+                    <view class="order-item" wx:for="{{orderList}}" wx:for-item="allItem">
                         <view class="item-top">
-                            <text class="booklist-name">书单：2017必读的20本书</text>
-                            <text class="color-red">交易成功</text>
+                            <text class="booklist-name">订单编号：{{allItem.orderNo}}</text>
+                            <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
+                            <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
+                            <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
+                            <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
+                            <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
                         </view>
                         <view class="item-center">
                             <view>
-                                <view class="item-book">
+                                <view class="item-book" wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
                                     <view class="book-left">
                                         <view class="left-image">
-                                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                                            <image src="{{bookItem.bookListItem.picPath}}"></image>
                                         </view>
                                         <view class="left-text">
-                                            <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
-                                            <text class="work-name">鸟哥 著</text>
+                                            <text class="name">{{bookItem.bookListItem.bookName}}</text>
+                                            <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
                                         </view>
                                     </view>
                                     <view class="book-right">
-                                        <text class="color-red price">¥59</text>
-                                        <text class="number">x1</text>
+                                        <text class="color-red price">¥{{bookItem.bookListItem.price}}</text>
+                                        <text class="number">x{{bookItem.quantity}}</text>
                                     </view>
                                 </view>
                             </view>
                             <view class="statistics">
-                                <text>共1本书　合计：<text class="price">¥59</text></text>
+                                <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
                             </view>
                         </view>
-                        <view class="item-bottom">
+                        <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
                             <view class="delete"><text>删除订单</text></view>
-                            <view class="invoice"><text>电子发票</text></view>
-                            <view class="give"><text>赠朋友</text></view>
+                            <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                            <view class="give" wx:if="{{allItem.give}}"><text>赠朋友</text></view>
                         </view>
-                    </view>
-                    <view class="order-item">
-                        <view class="item-top">
-                            <text class="booklist-name">书单：2017必读的20本书</text>
-                            <text class="color-red">交易成功</text>
-                        </view>
-                        <view class="item-center">
-                            <view>
-                                <view class="item-book">
-                                    <view class="book-left">
-                                        <view class="left-image">
-                                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                                        </view>
-                                        <view class="left-text">
-                                            <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
-                                            <text class="work-name">鸟哥 著</text>
-                                        </view>
-                                    </view>
-                                    <view class="book-right">
-                                        <text class="color-red price">¥59</text>
-                                        <text class="number">x1</text>
-                                    </view>
-                                </view>
-                                <view class="item-book">
-                                    <view class="book-left">
-                                        <view class="left-image">
-                                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                                        </view>
-                                        <view class="left-text">
-                                            <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
-                                            <text class="work-name">鸟哥 著</text>
-                                        </view>
-                                    </view>
-                                    <view class="book-right">
-                                        <text class="color-red price">¥59</text>
-                                        <text class="number">x1</text>
-                                    </view>
-                                </view>
-                            </view>
-                            <view class="statistics">
-                                <text>共2本书　合计：<text class="price">¥118</text></text>
-                            </view>
-                        </view>
-                        <view class="item-bottom">
+                        <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
                             <view class="delete"><text>删除订单</text></view>
                             <view class="affirm"><text>确认付款</text></view>
+                        </view>
+                        <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
+                            <view class="delete"><text>删除订单</text></view>
+                        </view>
+                        <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
+                            <view class="logistics"><text>查看物流</text></view>
+                        </view>
+                        <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
+                            <view class="logistics"><text>查看物流</text></view>
                         </view>
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="order-item">
-                        <view class="item-top">
-                            <text class="booklist-name">书单：2017必读的20本书</text>
-                            <text class="color-red">待付款</text>
-                        </view>
-                        <view class="item-center">
-                            <view>
-                                <view class="item-book">
-                                    <view class="book-left">
-                                        <view class="left-image">
-                                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    <block wx:for="{{orderList}}" wx:for-item="allItem">
+                        <view class="order-item" wx:if="{{allItem.status == 'PendingPay'}}">
+                            <view class="item-top">
+                                <text class="booklist-name">订单编号：{{allItem.orderNo}}</text>
+                                <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
+                                <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
+                                <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
+                                <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
+                                <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
+                            </view>
+                            <view class="item-center">
+                                <view>
+                                    <view class="item-book" wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
+                                        <view class="book-left">
+                                            <view class="left-image">
+                                                <image src="{{bookItem.bookListItem.picPath}}"></image>
+                                            </view>
+                                            <view class="left-text">
+                                                <text class="name">{{bookItem.bookListItem.bookName}}</text>
+                                                <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                            </view>
                                         </view>
-                                        <view class="left-text">
-                                            <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
-                                            <text class="work-name">鸟哥 著</text>
+                                        <view class="book-right">
+                                            <text class="color-red price">¥{{bookItem.bookListItem.price}}</text>
+                                            <text class="number">x{{bookItem.quantity}}</text>
                                         </view>
-                                    </view>
-                                    <view class="book-right">
-                                        <text class="color-red price">¥59</text>
-                                        <text class="number">x1</text>
                                     </view>
                                 </view>
-                                <view class="item-book">
-                                    <view class="book-left">
-                                        <view class="left-image">
-                                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-                                        </view>
-                                        <view class="left-text">
-                                            <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
-                                            <text class="work-name">鸟哥 著</text>
-                                        </view>
-                                    </view>
-                                    <view class="book-right">
-                                        <text class="color-red price">¥59</text>
-                                        <text class="number">x1</text>
-                                    </view>
+                                <view class="statistics">
+                                    <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
                                 </view>
                             </view>
-                            <view class="statistics">
-                                <text>共2本书　合计：<text class="price">¥118</text></text>
+                            <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
+                                <view class="delete"><text>删除订单</text></view>
+                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <view class="give" wx:if="{{allItem.give}}"><text>赠朋友</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
+                                <view class="delete"><text>删除订单</text></view>
+                                <view class="affirm"><text>确认付款</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
+                                <view class="delete"><text>删除订单</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
+                                <view class="logistics"><text>查看物流</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
+                                <view class="logistics"><text>查看物流</text></view>
                             </view>
                         </view>
-                        <view class="item-bottom">
-                            <view class="delete"><text>删除订单</text></view>
-                            <view class="affirm"><text>确认付款</text></view>
-                        </view>
-                    </view>
+                    </block>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                    <view class="order-item">
-                        <view class="item-top">
-                            <text class="booklist-name">书单：2017必读的20本书</text>
-                            <text class="color-red">待收货</text>
-                        </view>
-                        <view class="item-center">
-                            <view>
-                                <view class="item-book">
-                                    <view class="book-left">
-                                        <view class="left-image">
-                                            <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+                    <block wx:for="{{orderList}}" wx:for-item="allItem">
+                        <view class="order-item" wx:if="{{allItem.status == 'Delivered'}}">
+                            <view class="item-top">
+                                <text class="booklist-name">订单编号：{{allItem.orderNo}}</text>
+                                <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
+                                <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
+                                <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
+                                <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
+                                <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
+                            </view>
+                            <view class="item-center">
+                                <view>
+                                    <view class="item-book" wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
+                                        <view class="book-left">
+                                            <view class="left-image">
+                                                <image src="{{bookItem.bookListItem.picPath}}"></image>
+                                            </view>
+                                            <view class="left-text">
+                                                <text class="name">{{bookItem.bookListItem.bookName}}</text>
+                                                <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                            </view>
                                         </view>
-                                        <view class="left-text">
-                                            <text class="name">鸟哥的Linux私房菜 基础学习 篇(第三版)</text>
-                                            <text class="work-name">鸟哥 著</text>
+                                        <view class="book-right">
+                                            <text class="color-red price">¥{{bookItem.bookListItem.price}}</text>
+                                            <text class="number">x{{bookItem.quantity}}</text>
                                         </view>
-                                    </view>
-                                    <view class="book-right">
-                                        <text class="color-red price">¥59</text>
-                                        <text class="number">x1</text>
                                     </view>
                                 </view>
+                                <view class="statistics">
+                                    <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
+                                </view>
                             </view>
-                            <view class="statistics">
-                                <text>共1本书　合计：<text class="price">¥59</text></text>
+                            <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
+                                <view class="delete"><text>删除订单</text></view>
+                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <view class="give" wx:if="{{allItem.give}}"><text>赠朋友</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
+                                <view class="delete"><text>删除订单</text></view>
+                                <view class="affirm"><text>确认付款</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
+                                <view class="delete"><text>删除订单</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
+                                <view class="logistics"><text>查看物流</text></view>
+                            </view>
+                            <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
+                                <view class="logistics"><text>查看物流</text></view>
                             </view>
                         </view>
-                        <view class="item-bottom">
-                            <view class="logistics"><text>查看物流</text></view>
-                        </view>
-                    </view>
+                    </block>
                 </view>
             </view>
         </view>

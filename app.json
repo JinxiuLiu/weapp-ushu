@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/cart/cart",
     "pages/index/index",
+    "pages/cart/cart",
     "pages/create/create",
     "pages/create/selectBook/selectBook",
     "pages/user/user",
@@ -13,6 +13,7 @@
     "pages/submitOrder/submitOrder",
     "pages/otherBookList/otherBookList",
     "pages/user/about/about",
+    "pages/user/order/order",
     "pages/user/earnings/earnings",
     "pages/user/earnings/earningsInfo/earningsInfo",
     "pages/user/earnings/withdrawal/withdrawal",
@@ -23,7 +24,6 @@
     "pages/user/attention/attention",
     "pages/user/collect/collect",
     "pages/user/inform/inform",
-    "pages/user/order/order",
     "pages/user/share/share"
   ],
   "window":{
