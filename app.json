@@ -1,12 +1,13 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/bookList/bookList",
+    "pages/user/myBookList/myBookList",
     "pages/cart/cart",
     "pages/create/create",
     "pages/create/selectBook/selectBook",
     "pages/user/user",
     "pages/ranking/ranking",
-    "pages/bookList/bookList",
     "pages/user/myAddress/myAddress",
     "pages/user/addAddress/addAddress",
     "pages/bookDetails/bookDetails",
@@ -20,7 +21,6 @@
     "pages/user/about/certification/certification",
     "pages/user/about/bindmobile/bindmobile",
     "pages/user/about/nickname/nickname",
-    "pages/user/myBookList/myBookList",
     "pages/user/attention/attention",
     "pages/user/collect/collect",
     "pages/user/inform/inform",

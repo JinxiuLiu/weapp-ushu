@@ -1,18 +1,11 @@
+<view class="weui-loadmore" wx:if="{{loadmore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
 <view class="attention">
-	<view class="attention-item">
-		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
-		<text>可乐可乐</text>
-	</view>
-	<view class="attention-item">
-		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
-		<text>可乐可乐</text>
-	</view>
-	<view class="attention-item">
-		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
-		<text>可乐可乐</text>
-	</view>
-	<view class="attention-item">
-		<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
-		<text>可乐可乐</text>
+	<view class="attention-item" wx:for="{{myAttentionList}}">
+		<image src="{{item.targetPhoto.url}}"></image>
+		<text>{{item.targetName}}</text>
 	</view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

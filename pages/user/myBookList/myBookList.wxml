@@ -1,110 +1,34 @@
+<view class="weui-loadmore" wx:if="{{loadmore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
 <view class="myBookList">
-	<view class="booklist-item">
+	<view class="booklist-item" wx:for="{{myBookList}}">
 		<view class="item-top">
 			<view class="item-top-left">
-				<text>2017年度最佳书单</text>		
-				<text class="time">2017-10-12</text>		
+				<text>{{item.title}}</text>		
+				<text class="time">{{item.created}}</text>		
 			</view>
 			<view class="item-top-right">
-				<switch checked color="#ff4444" bindchange="switch1Change"/>
+				<switch checked="{{item.published}}" data-id="{{item.id}}" color="#ff4444" bindchange="switchChange"/>
 			</view>
 		</view>
 		<view class="item-bottom">
 			<view class="bottom-right">
-				<view class="hot"><text>热度(25)</text></view>
-                <view class="comment"><text>评论(55)</text></view>
+				<view class="hot"><text>热度({{item.readCount}})</text></view>
+                <view class="comment"><text>评论({{item.commentCount}})</text></view>
 			</view>
 			<view class="bottom-left">
-				<view class="text">
+				<view class="text" data-id="{{item.id}}">
 					<image src="../../../image/compile.png"></image>
 					<text>编辑</text>
 				</view>
-				<view class="text">
+				<view class="text" data-id="{{item.id}}" bindtap="delBookListFun">
 					<image src="../../../image/delete.png"></image>
 					<text>删除</text>
 				</view>
 			</view>
 		</view>
 	</view>
-	<view class="booklist-item">
-		<view class="item-top">
-			<view class="item-top-left">
-				<text>2017年度最佳书单</text>		
-				<text class="time">2017-10-12</text>		
-			</view>
-			<view class="item-top-right">
-				<switch checked color="#ff4444" bindchange="switch1Change"/>
-			</view>
-		</view>
-		<view class="item-bottom">
-			<view class="bottom-right">
-				<view class="hot"><text>热度(25)</text></view>
-                <view class="comment"><text>评论(55)</text></view>
-			</view>
-			<view class="bottom-left">
-				<view class="text">
-					<image src="../../../image/compile.png"></image>
-					<text>编辑</text>
-				</view>
-				<view class="text">
-					<image src="../../../image/delete.png"></image>
-					<text>删除</text>
-				</view>
-			</view>
-		</view>
-	</view>
-	<view class="booklist-item">
-		<view class="item-top">
-			<view class="item-top-left">
-				<text>2017年度最佳书单</text>		
-				<text class="time">2017-10-12</text>		
-			</view>
-			<view class="item-top-right">
-				<switch checked color="#ff4444" bindchange="switch1Change"/>
-			</view>
-		</view>
-		<view class="item-bottom">
-			<view class="bottom-right">
-				<view class="hot"><text>热度(25)</text></view>
-                <view class="comment"><text>评论(55)</text></view>
-			</view>
-			<view class="bottom-left">
-				<view class="text">
-					<image src="../../../image/compile.png"></image>
-					<text>编辑</text>
-				</view>
-				<view class="text">
-					<image src="../../../image/delete.png"></image>
-					<text>删除</text>
-				</view>
-			</view>
-		</view>
-	</view>
-	<view class="booklist-item">
-		<view class="item-top">
-			<view class="item-top-left">
-				<text>2017年度最佳书单</text>		
-				<text class="time">2017-10-12</text>		
-			</view>
-			<view class="item-top-right">
-				<switch checked color="#ff4444" bindchange="switch1Change"/>
-			</view>
-		</view>
-		<view class="item-bottom">
-			<view class="bottom-right">
-				<view class="hot"><text>热度(25)</text></view>
-                <view class="comment"><text>评论(55)</text></view>
-			</view>
-			<view class="bottom-left">
-				<view class="text">
-					<image src="../../../image/compile.png"></image>
-					<text>编辑</text>
-				</view>
-				<view class="text">
-					<image src="../../../image/delete.png"></image>
-					<text>删除</text>
-				</view>
-			</view>
-		</view>
-	</view>
-</view>		
+</view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

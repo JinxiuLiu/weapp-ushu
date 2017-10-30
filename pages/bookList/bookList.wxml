@@ -6,7 +6,7 @@
     <view class="bookList-founder">
         <view class="founder-info">
             <view class="founder-avatar">
-                <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+                <image src="{{item.creatorPhoto.url}}"></image>
             </view>
             <view class="founder-name">
                 <view class="name"><text>{{item.creatorName}}</text></view>
@@ -22,13 +22,13 @@
         <view class="bookList-video" wx-if="{{!!item.video}}">
             <video id="myVideo" src="{{item.video.url}}" controls></video>
         </view>
-        <view class="bookList-audio">
+        <view class="bookList-audio" wx-if="{{!!item.voice}}">
             <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
         </view>
-        <view class="bookList-img" wx:for="{{item.images}}">
+        <view class="bookList-img" wx-if="{{!!item.images}}" wx:for="{{item.images}}">
             <image src="{{item.url}}"></image>
         </view>
-        <view class="bookList-text">
+        <view class="bookList-text" wx-if="{{!!item.content}}">
             <text>{{item.content}}</text>
         </view>
         <view class="bookList-details">
@@ -101,7 +101,7 @@
     </view>
 </view>
 <view class="bookList-bottom">
-    <text class="hot">热度(15)</text>
+    <text class="hot">热度({{readCount}})</text>
     <view class="bottom-right">
         <view class="collect">
             <image src="../../image/collect-white.png"></image>
@@ -119,3 +119,4 @@
         <view class="weui-badge">8</view>
     </view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

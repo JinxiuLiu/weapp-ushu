@@ -18,6 +18,18 @@ var config = {
     // 创建书单
     CreateListUrl: `${host}/bookList/save`,
 
+    // 我的书单
+    myBookListUrl: `${host}/bookList/grid_my`,
+
+    // 书单 更改发布状态
+    changeBookListUrl: `${host}/bookList/change`,
+
+    // 删除书单
+    deleteBookListUrl: `${host}/bookList/delete`,
+
+    // 书单浏览记录
+    readBookListUrl: `${host}/bookList/read`,
+
     // 上传文件接口
     uploadFileUrl: `${host}/file_upload`,
 
@@ -62,6 +74,12 @@ var config = {
 
     // 书单详情
     detailUrl: `${host}/bookList/detail`,
+
+    // 添加关注
+    addAttentionUrl: `${host}/follow/add`,
+
+    // 我的关注
+    myAttentionUrl: `${host}/follow/list_my`,
 
 };
 

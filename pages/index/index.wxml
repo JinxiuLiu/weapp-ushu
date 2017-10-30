@@ -48,7 +48,7 @@
                                 </view>
                             </view>
                         </view>
-                        <view class="founder-concern">
+                        <view class="founder-concern" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
                             <text>关注</text>
                         </view>
                     </view>
@@ -188,3 +188,4 @@
         </view>
     </view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
