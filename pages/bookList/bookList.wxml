@@ -2,121 +2,109 @@
     <view class="weui-loading"></view>
     <view class="weui-loadmore__tips">正在加载</view>
 </view>
-<view class="bookList" wx:for="{{detailList}}">
-    <view class="bookList-founder">
-        <view class="founder-info">
-            <view class="founder-avatar">
-                <image src="{{item.creatorPhoto.url}}"></image>
+<block wx:for="{{detailList}}">
+    <view class="bookList">
+        <view class="bookList-founder">
+            <view class="founder-info">
+                <view class="founder-avatar">
+                    <image src="{{item.creatorPhoto.url}}"></image>
+                </view>
+                <view class="founder-name">
+                    <view class="name"><text>{{item.creatorName}}</text></view>
+                    <view class="time"><text>{{item.created}}</text></view>
+                </view>
             </view>
-            <view class="founder-name">
-                <view class="name"><text>{{item.creatorName}}</text></view>
-                <view class="time"><text>{{item.created}}</text></view>
+            <view class="founder-concern" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
+                <text>{{item.followed ? '已关注' : '关注'}}</text>
             </view>
         </view>
-        <view class="founder-concern">
-            <text>关注</text>
-        </view>
-    </view>
-    <view class="bookList-info">
-        <view class="bookList-name"><text>{{item.title}}</text></view>
-        <view class="bookList-video" wx-if="{{!!item.video}}">
-            <video id="myVideo" src="{{item.video.url}}" controls></video>
-        </view>
-        <view class="bookList-audio" wx-if="{{!!item.voice}}">
-            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
-        </view>
-        <view class="bookList-img" wx-if="{{!!item.images}}" wx:for="{{item.images}}">
-            <image src="{{item.url}}"></image>
-        </view>
-        <view class="bookList-text" wx-if="{{!!item.content}}">
-            <text>{{item.content}}</text>
-        </view>
-        <view class="bookList-details">
-            <view class="details-item" wx:for="{{item.items}}">
-                <view class="book-left">
-                    <view class="left-image">
-                        <image src="{{item.picPath}}"></image>
-                    </view>
-                    <view class="left-text">
-                        <text class="name">{{item.bookName}}</text>
-                        <text class="work-name">鸟哥 著</text>
-                        <view class="book-right">
-                            <text class="color-red price">¥{{item.price}}<text class="old-price">¥59</text></text>
-                            <view class="number" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">
-                                <image src="../../image/bookadd.png"></image>
+        <view class="bookList-info">
+            <view class="bookList-name"><text>{{item.title}}</text></view>
+            <view class="bookList-video" wx-if="{{!!item.video}}">
+                <video id="myVideo" src="{{item.video.url}}" controls></video>
+            </view>
+            <view class="bookList-audio" wx-if="{{!!item.voice}}">
+                <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
+            </view>
+            <view class="bookList-img" wx-if="{{!!item.images}}" wx:for="{{item.images}}">
+                <image src="{{item.url}}"></image>
+            </view>
+            <view class="bookList-text" wx-if="{{!!item.content}}">
+                <text>{{item.content}}</text>
+            </view>
+            <view class="bookList-details">
+                <view class="details-item" wx:for="{{item.items}}">
+                    <view class="book-left">
+                        <view class="left-image">
+                            <image src="{{item.picPath}}"></image>
+                        </view>
+                        <view class="left-text">
+                            <text class="name">{{item.bookName}}</text>
+                            <text class="work-name">鸟哥 著</text>
+                            <view class="book-right">
+                                <text class="color-red price">¥{{item.price}}<text class="old-price">¥59</text></text>
+                                <view class="number" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">
+                                    <image src="../../image/bookadd.png"></image>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
-    </view>
-    <view class="comment">
-        <view class="comment-title">
-            <view class="weui-loadmore weui-loadmore_line">
-                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">以下为最新评论</view>
-            </view>
-        </view>
-        <view>
-            <view class="comment-item">
-                <view class="founder-info">
-                    <view class="founder-avatar">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
-                    </view>
-                    <view class="founder-name">
-                        <view class="name"><text>可爱的小果冻</text></view>
-                        <view class="time"><text>2017-09-20</text></view>
-                    </view>
-                </view>
-                <view class="comment-info">
-                    <text>大家可以在我们公众号上投票，选出你最喜欢的字母，9月24文章截止到 10月1日 ID：LOGO研究所。</text>
+        <view class="comment">
+            <view class="comment-title">
+                <view class="weui-loadmore weui-loadmore_line">
+                    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">以下为最新评论</view>
                 </view>
             </view>
-            <view class="comment-item">
-                <view class="founder-info">
-                    <view class="founder-avatar">
-                        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+            <view>
+                <view class="comment-item" wx:for="{{commentList}}">
+                    <view class="founder-info">
+                        <view class="founder-avatar">
+                            <image src="{{item.creatorPhoto.url}}"></image>
+                        </view>
+                        <view class="founder-name">
+                            <view class="name"><text>{{item.creatorName}}</text></view>
+                            <view class="time"><text>{{item.created}}</text></view>
+                        </view>
                     </view>
-                    <view class="founder-name">
-                        <view class="name"><text>可爱的小果冻</text></view>
-                        <view class="time"><text>2017-09-20</text></view>
+                    <view class="comment-info">
+                        <text>{{item.content}}</text>
                     </view>
-                </view>
-                <view class="comment-info">
-                    <text>大家可以在我们公众号上投票，选出你最喜欢的字母，9月24文章截止到 10月1日 ID：LOGO研究所。</text>
                 </view>
             </view>
+            <view class="comment-more" data-id="{{item.id}}" wx:if="{{isComment}}" bindtap="commentTotalFun">
+                <text>查看全部{{commentTotal}}条</text>
+            </view>
         </view>
-        <view class="comment-more">
-            <text>查看全部30条</text>
-        </view>
-    </view>
-    <view class="tag">
-        <image src="../../image/tag.png"></image>
-        <view class="tag-item">
-            <text>插画</text>
-            <text>水彩</text>
-            <text>123</text>
-        </view>
-    </view>
-</view>
-<view class="bookList-bottom">
-    <text class="hot">热度({{readCount}})</text>
-    <view class="bottom-right">
-        <view class="collect">
-            <image src="../../image/collect-white.png"></image>
-            <text>收藏</text>
-        </view>
-        <view class="share">
-            <image src="../../image/share-white.png"></image>
-            <text>分享</text>
+        <view class="tag" wx:if="{{item.tags}}">
+            <image src="../../image/tag.png"></image>
+            <view class="tag-item">
+                <text>插画</text>
+                <text>水彩</text>
+                <text>123</text>
+            </view>
         </view>
     </view>
-</view>
-<view class="cart">
-    <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-        <view class="cart-img"><image src="../../image/cart-right.png"/></view>
-        <view class="weui-badge">8</view>
+    <view class="bookList-bottom">
+        <text class="hot">热度({{readCount}})</text>
+        <view class="bottom-right">
+            <view class="collect" data-id="{{item.id}}" bindtap="collectFun">
+                <image src="../../image/collect-white.png"></image>
+                <text>{{item.collected ? '已收藏' : '收藏'}}</text>
+            </view>
+            <view class="share">
+                <image src="../../image/share-white.png"></image>
+                <text>分享</text>
+            </view>
+        </view>
     </view>
-</view>
+    <view class="cart" bindtap="navigateToCart">
+        <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+            <view class="cart-img"><image src="../../image/cart-right.png"/></view>
+            <view class="weui-badge">{{cartTotal}}</view>
+        </view>
+    </view>
+</block>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

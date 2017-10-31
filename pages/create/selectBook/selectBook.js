@@ -58,11 +58,11 @@ Page({
                     util.showMessage(self, "没有更多数据了！", 3000);
                 } else {
                     self.data.page++
-                        self.setData({
-                            loadmore: false,
-                            rows: self.data.rows.concat(result.data.rows),
-                            page: self.data.page
-                        });
+                    self.setData({
+                        loadmore: false,
+                        rows: self.data.rows.concat(result.data.rows),
+                        page: self.data.page
+                    });
                 }
             },
             fail: function({ errMsg }) {

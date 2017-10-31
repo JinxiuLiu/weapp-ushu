@@ -286,7 +286,7 @@ Page({
                 "items": bookKey
             },
             success: result => {
-                if(result.data.success) {
+                if (result.data.success) {
                     util.showMessage(that, result.data.msg, 2000);
                 } else {
                     util.showMessage(that, result.data.msg, 2000);

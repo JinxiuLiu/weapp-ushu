@@ -30,6 +30,21 @@ var config = {
     // 书单浏览记录
     readBookListUrl: `${host}/bookList/read`,
 
+    // 书单详情-评论列表
+    commentListUrl: `${host}/comment/list`,
+
+    // 书单详情-评论分页
+    commentGridUrl: `${host}/comment/datagrid`,
+
+    // 收藏接口
+    collectUrl: `${host}/collection/add`,
+
+    // 我的收藏（书单)
+    collectBookListUrl: `${host}/collection/grid_list_my`,
+
+    // 我的收藏（图书）
+    collectBookUrl: `${host}/collection/grid_item_my`,
+
     // 上传文件接口
     uploadFileUrl: `${host}/file_upload`,
 
@@ -56,6 +71,9 @@ var config = {
 
     // 更改购物车数量
     changeCartUrl: `${host}/shopCart/change_quantity`,
+
+    // 购物车总数量
+    cartTotalUrl: `${host}/shopCart/total_quantity`,
 
     // 购物车删除商品
     delCartUrl: `${host}/shopCart/delete`,

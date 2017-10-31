@@ -20,8 +20,8 @@
 }
 
 .ranking image {
-    width: 42rpx;
-    height: 42rpx;
+    width: 52rpx;
+    height: 52rpx;
 }
 
 .weui-search-bar {
@@ -207,4 +207,24 @@
 
 .bookList-footer .comment {
     padding-left: 40rpx;
+}
+
+.bookList-footer .footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.bookList-footer .footer-right .share,
+.bookList-footer .footer-right .collect {
+    font-size: inherit;
+    margin: 0;
+    padding: 8rpx 30rpx 0;
+}
+
+.bookList-footer .footer-right .share:after {
+    content: none;
+}
+
+.bookList-footer .footer-right .collect {
+    padding-right: 0;
 }
