@@ -25,7 +25,7 @@ Page({
     onLoad: function(options) {
         this.detailRequest(options.id);
         this.readBookListRequest(options.id);
-        this.commentRequest();
+        this.commentRequest(options.id);
         this.cartTotalRequest();
     },
     // 请求详情
@@ -137,12 +137,13 @@ Page({
         })
     },
     // 评论分页接口
-    commentRequest: function() {
+    commentRequest: function(val) {
         let self = this;
         wx.request({
             url: commentGridUrl,
             method: 'POST',
             data: {
+                bookListId: val,
                 page: 1,
                 rows: 2
             },
@@ -158,12 +159,15 @@ Page({
         })
     },
     // 查看全部评论
-    commentTotalFun: function() {
+    commentTotalFun: function(e) {
         let self = this;
+        let bookListId = e.currentTarget.dataset.id;
         wx.request({
             url: commentListUrl,
             method: 'POST',
-            data: {},
+            data: {
+                bookListId: bookListId
+            },
             header: {
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
