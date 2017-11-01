@@ -1,44 +1,132 @@
 /**
  * Created by Liujx on 2017-10-19 13:52:27
  */
+const identityCardUrl = require('../../../../config').identityCardUrl;
+const commitCardUrl = require('../../../../config').commitCardUrl;
+const myCardUrl = require('../../../../config').myCardUrl;
+const util = require('../../../../utils/util');
 
 Page({
-  data: {
-    imageList: [],
-  },
-  sourceTypeChange: function (e) {
-    this.setData({
-      sourceTypeIndex: e.detail.value
-    })
-  },
-  sizeTypeChange: function (e) {
-    this.setData({
-      sizeTypeIndex: e.detail.value
-    })
-  },
-  countChange: function (e) {
-    this.setData({
-      countIndex: e.detail.value
-    })
-  },
-  chooseImage: function () {
-    var that = this
-    wx.chooseImage({
-      count: 1,
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          imageList: res.tempFilePaths
+    data: {
+        imageListOne: [],
+        imageListTwo: [],
+        id: '',
+        frontId: '',
+        backId: ''
+    },
+    onLoad: function() {
+        let self = this;
+        wx.request({
+            url: myCardUrl,
+            method: 'POST',
+            data: {},
+            success: data => {
+                if(data.data.success) {
+                    if(!data.data.data) return false;
+                    self.setData({
+                        imageListOne: [data.data.data.front.url],
+                        imageListTwo: [data.data.data.back.url],
+                        frontId: data.data.data.front.id,
+                        backId: data.data.data.back.id,
+                        id: data.data.data.id
+                    })
+                }
+            }
         })
-      }
-    })
-  },
-  previewImage: function (e) {
-    var current = e.target.dataset.src
-
-    wx.previewImage({
-      current: current,
-      urls: this.data.imageList
-    })
-  }
+    },
+    sourceTypeChange: function(e) {
+        this.setData({
+            sourceTypeIndex: e.detail.value
+        })
+    },
+    sizeTypeChange: function(e) {
+        this.setData({
+            sizeTypeIndex: e.detail.value
+        })
+    },
+    countChange: function(e) {
+        this.setData({
+            countIndex: e.detail.value
+        })
+    },
+    // 个人信息面 上传
+    chooseImageOne: function() {
+        var self = this
+        wx.chooseImage({
+            count: 1,
+            success: res => {
+                console.log(res);
+                self.setData({
+                    imageListOne: res.tempFilePaths
+                })
+                wx.uploadFile({
+                    url: identityCardUrl,
+                    filePath: res.tempFilePaths[0],
+                    name: 'file',
+                    success: data => {
+                        let frontID = JSON.parse(data.data).data[0].id
+                        self.setData({
+                            frontId: frontID
+                        })
+                    },
+                    fail: res => {
+                        util.showMessage(self, "服务器端错误！");
+                    }
+                })
+            }
+        })
+    },
+    // 国徽面 上传
+    chooseImageTwo: function() {
+        var self = this
+        wx.chooseImage({
+            count: 1,
+            success: res => {
+                self.setData({
+                    imageListTwo: res.tempFilePaths
+                })
+                wx.uploadFile({
+                    url: identityCardUrl,
+                    filePath: res.tempFilePaths[0],
+                    name: 'file',
+                    success: data => {
+                        let backID = JSON.parse(data.data).data[0].id
+                        self.setData({
+                            backId: backID
+                        })
+                    },
+                    fail: res => {
+                        util.showMessage(self, "服务器端错误！");
+                    }
+                })
+            }
+        })
+    },
+    // 提交认证
+    authenticationFun: function() {
+        let self = this;
+        console.log(self.data.id);
+        wx.request({
+            url: commitCardUrl,
+            method: 'POST',
+            data: {
+                id: self.data.id,
+                front: {
+                    id: self.data.frontId
+                },
+                back: {
+                    id: self.data.backId
+                }
+            },
+            success: data => {
+                let self = this;
+                if(data.data.success) {
+                    util.showMessage(this, data.data.msg);
+                    setTimeout(function() {
+                        wx.navigateBack()
+                    }, 2000)
+                }
+            }
+        })
+    }
 })

@@ -4,4 +4,5 @@
         <icon type="clear" size="18"></icon>
     </view>
 </view>
-<button type="primary">完成</button>
+<button type="primary" bindtap="nickNameFun">完成</button>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

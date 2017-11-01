@@ -19,7 +19,7 @@
                 <view class="comment"><text>评论({{item.commentCount}})</text></view>
 			</view>
 			<view class="bottom-left">
-				<view class="text" data-id="{{item.id}}">
+				<view class="text" data-id="{{item.id}}" bindtap="editBookListFun">
 					<image src="../../../image/compile.png"></image>
 					<text>编辑</text>
 				</view>

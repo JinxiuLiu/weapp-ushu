@@ -9,6 +9,24 @@ var config = {
 
     host,
 
+    // 上传文件接口
+    uploadFileUrl: `${host}/file_upload`,
+
+    // 身份证上传接口
+    identityCardUrl: `${host}/identityCard/upload`,
+
+    // 身份证提交认证
+    commitCardUrl: `${host}/identityCard/commit`,
+
+    // 我的身份证信息
+    myCardUrl: `${host}/identityCard/my`,
+
+    // 发送验证码
+    sendCodeUrl: `${host}/mobile/code`,
+
+    // 绑定手机号
+    bindMobileUrl: `${host}/mobile/bind`,
+
     // 选择图书
     getBookListUrl: `${host}/bookList/grid_items`,
 
@@ -44,9 +62,6 @@ var config = {
 
     // 我的收藏（图书）
     collectBookUrl: `${host}/collection/grid_item_my`,
-
-    // 上传文件接口
-    uploadFileUrl: `${host}/file_upload`,
 
     // 新增收货地址
     addAddressUrl: `${host}/consignee/edit`,
@@ -98,6 +113,12 @@ var config = {
 
     // 我的关注
     myAttentionUrl: `${host}/follow/list_my`,
+
+    // 我的资料
+    aboutUrl: `${host}/member/detail/my`,
+
+    // 修改昵称
+    updateNameUrl: `${host}/member/detail/update_name`,
 
 };
 

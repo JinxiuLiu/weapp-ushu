@@ -7,6 +7,7 @@ const SelectBookUrl = require('../../../config').SelectBookUrl
 Page({
     data: {
         loadmore: true,
+        isNone: false,
         tempBookKey: [],
         tempImgUrl: [],
         inputVal: "",
@@ -14,6 +15,7 @@ Page({
         seq: 1,
         page: 2
     },
+    // 首屏加载
     onLoad: function(option) {
         var self = this;
         this.setData({
@@ -39,6 +41,7 @@ Page({
             }
         })
     },
+    // 上拉加载
     onReachBottom: function() {
         var self = this
         wx.showToast({
@@ -58,11 +61,11 @@ Page({
                     util.showMessage(self, "没有更多数据了！", 3000);
                 } else {
                     self.data.page++
-                    self.setData({
-                        loadmore: false,
-                        rows: self.data.rows.concat(result.data.rows),
-                        page: self.data.page
-                    });
+                        self.setData({
+                            loadmore: false,
+                            rows: self.data.rows.concat(result.data.rows),
+                            page: self.data.page
+                        });
                 }
             },
             fail: function({ errMsg }) {
@@ -73,18 +76,24 @@ Page({
             }
         })
     },
+    // 清除input
     clearInput: function() {
         this.setData({
             inputVal: ""
         });
     },
+    // 输入
     inputTyping: function(e) {
         this.setData({
             inputVal: e.detail.value
         });
     },
-    searchRequest: function(e) {
-        var self = this
+    // 搜索接口e.detail.value
+    searchRequest: function(val) {
+        let self = this
+        self.setData({
+            isNone: false
+        })
         wx.showToast({
             title: '数据加载中',
             icon: 'loading',
@@ -93,23 +102,32 @@ Page({
         wx.request({
             url: SelectBookUrl,
             data: {
-                "searchStr": e.detail.value
+                "searchStr": val
             },
-            success: function(result) {
+            success: data => {
+                if(!data.data.rows.length) {
+                    self.setData({
+                        isNone: true
+                    })
+                }
                 wx.hideLoading();
                 self.setData({
-                    rows: result.data.rows,
-                    inputVal: e.detail.value,
+                    rows: data.data.rows,
+                    inputVal: val,
                 });
             },
             fail: function({ errMsg }) {
-                console.log('request fail', errMsg)
                 self.setData({
                     loading: false
                 })
             }
         })
     },
+    // 点击搜索
+    searchFun: function(e) {
+        this.searchRequest(e.detail.value);
+    },
+    // 选择图书
     selectBook: function(e) {
         let that = this;
         let pages = getCurrentPages();
@@ -124,5 +142,17 @@ Page({
             tempBookKey: that.data.tempBookKey
         });
         wx.navigateBack();
+    },
+    // 扫码搜索
+    scanFun: function() {
+        var self = this
+        wx.scanCode({
+            success: data => {
+                self.setData({
+                    inputVal: data.result
+                })
+                self.searchRequest(data.result);
+            }
+        })
     }
 })

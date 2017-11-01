@@ -1,9 +1,31 @@
+.page__bd {
+    display: flex;
+}
+
+.page__bd .weui-search-bar {
+    width: 90%;
+    padding-right: 0;
+}
+
+.page__bd .ranking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+}
+
+.ranking image {
+    width: 52rpx;
+    height: 52rpx;
+}
+
 .weui-search-bar {
     padding: 8px 40rpx;
     background-color: #fff;
     border-top: none;
     border-bottom: 1rpx solid #f0f0f0;
 }
+
 
 .weui-search-bar__form {
     background-color: #f0f0f0;

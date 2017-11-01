@@ -6,14 +6,14 @@
         <view class="certification-img">
             <view class="weui-uploader__bd">
                 <view class="weui-uploader__files">
-                    <block wx:for="{{imageList}}" wx:for-item="image">
+                    <block wx:for="{{imageListOne}}" wx:for-item="image">
                         <view class="weui-uploader__file">
-                            <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                            <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}"></image>
                         </view>
                     </block>
                 </view>
                 <view class="weui-uploader__input-box">
-                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                    <view class="weui-uploader__input" bindtap="chooseImageOne"></view>
                 </view>
             </view>
         </view>
@@ -25,18 +25,19 @@
         <view class="certification-img">
             <view class="weui-uploader__bd">
                 <view class="weui-uploader__files">
-                    <block wx:for="{{imageList}}" wx:for-item="image">
+                    <block wx:for="{{imageListTwo}}" wx:for-item="image">
                         <view class="weui-uploader__file">
-                            <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                            <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}"></image>
                         </view>
                     </block>
                 </view>
                 <view class="weui-uploader__input-box">
-                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                    <view class="weui-uploader__input" bindtap="chooseImageTwo"></view>
                 </view>
             </view>
         </view>
     </view>
 </view>
 <view class="tip">所有上传证件信息必须清晰可见，身份证件必须能看清证件号。</view>
-<button type="primary">提交</button>
+<button type="primary" bindtap="authenticationFun">提交</button>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

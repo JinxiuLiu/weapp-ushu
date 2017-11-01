@@ -1,13 +1,14 @@
 <view class="bindmobile">
 	<view class="mobile-view">
-		<input type="number" placeholder="请输入原手机号"/>
+		<input type="number" placeholder="请输入原手机号" value="{{originalMobile}}" bindinput="originalMobileFun"/>
 	</view>
 	<view class="mobile-view">
-		<input type="number" placeholder="请输入新手机号"/>
+		<input type="number" placeholder="请输入新手机号" value="{{NowMobile}}" bindinput="NowMobileFun"/>
 	</view>
 	<view class="mobile-view verification">
-		<input type="number" placeholder="请输入验证码"/>
-		<view class="send">发送验证码</view>
+		<input type="number" placeholder="请输入验证码" value="{{verificationCode}}" bindinput="verificationCodeFun" />
+		<view class="send" bindtap="sendMsgFun">{{countDown}}<text hidden="{{countDown == '发送验证码'}}">S</text></view>
 	</view>
 </view>
-<button type="primary">完成</button>
+<button type="primary" bindtap="submitFun">完成</button>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
