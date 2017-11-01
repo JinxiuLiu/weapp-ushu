@@ -2,13 +2,17 @@
  * Created by Liujx on 2017-10-17 10:05:57
  */
 const util = require('../../utils/util.js');
-const uploadFileUrl = require('../../config.js').uploadFileUrl;
-const CreateListUrl = require('../../config.js').CreateListUrl;
+const uploadFileUrl = require('../../config').uploadFileUrl;
+const CreateListUrl = require('../../config').CreateListUrl;
+const detailUrl = require('../../config').detailUrl;
 var playTimeInterval;
 var recordTimeInterval;
 
 Page({
     data: {
+        isEdit: false,
+        isSelectBook: false,
+        bookListId: '',
         src: '',
         imageList: [],
         bookImgUrl: [],
@@ -29,21 +33,127 @@ Page({
         content: '', // 书单内容
         bookKey: [] // 图书key
     },
+    // 页面隐藏
+    onHide: function() {
+        if (this.data.playing) {
+            this.stopVoice()
+        } else if (this.data.recording) {
+            this.stopRecordUnexpectedly()
+        }
+        if(!this.data.isSelectBook) {
+            this.setData({
+                isEdit: false,
+                bookListId: '',
+                src: '',
+                imageList: [],
+                bookImgUrl: [],
+                tempBookImgUrl: [],
+                tempBookKey: [],
+                recording: false,
+                playing: false,
+                hasRecord: false,
+                recordTime: 0,
+                playTime: 0,
+                seq: 1,
+                formatedRecordTime: '00:00:00',
+                formatedPlayTime: '00:00:00',
+                bookListName: '', // 书单名称
+                videoKey: '', // 视频key
+                voiceKey: '', // 音频key
+                imagesKey: [], // 图片key
+                content: '', // 书单内容
+                bookKey: [] // 图书key
+            })
+        }
+        this.setData({
+            isSelectBook: false,
+        })
+        // 删除 缓存中的bookListId
+        wx.removeStorage({
+            key: 'bookListId'
+        })
+    },
+    // 页面显示
+    onShow: function(option) {
+        let self = this;
+        if(self.data.isSelectBook) {
+            self.setData({
+                bookImgUrl: self.data.bookImgUrl.concat(self.data.tempBookImgUrl),
+                bookKey: self.data.bookKey.concat(self.data.tempBookKey)
+            })
+        }
+        wx.getStorage({
+            key: 'bookListId',
+            success: data => {
+                let bookListId = data.data;
+                if(!bookListId) return false;
+                wx.request({
+                    url: detailUrl,
+                    method: 'POST',
+                    data: {
+                        id: bookListId
+                    },
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded' // 默认值
+                    },
+                    success: data => {
+                        if(data.data.success) {
+                            let item = data.data.data;
+                            let tempImageList = [];
+                            let tempBookImgUrl = [];
+                            wx.setNavigationBarTitle({
+                                title: '编辑书单'
+                            })
+                            item.images.filter(function(item) {
+                                tempImageList.push(item.url);
+                                self.data.imagesKey.push({ "id": item.id })
+                            })
+                            item.items.filter(function(item, index) {
+                                console.log(item, index+1);
+                                tempBookImgUrl.push(item.picPath);
+                                self.data.bookKey.push({'bookId': item.bookId, "id": item.id, "seq": index+1});
+                            })
+                            self.setData({
+                                isEdit: true,
+                                seq: item.items.length + 1,
+                                bookListId: bookListId,
+                                bookListName: item.title,
+                                src: item.video.url,
+                                videoKey: item.video.id,
+                                voiceKey: item.voice.id,
+                                voiceSrc: item.voice.url,
+                                imageList: tempImageList,
+                                imagesKey: self.data.imagesKey,
+                                content: item.content,
+                                bookImgUrl: tempBookImgUrl,
+                                bookKey: self.data.bookKey
+                            })
+                        } else {
+                            util.showMessage(self, data.data.msg)
+                        }
+                    }
+                })
+            }
+        })
+    },
+    // 书单名称 输入
     bindinput: function(e) {
         this.setData({
             bookListName: e.detail.value
         })
     },
+    // 书单内容 输入
     bindTextArea: function(e) {
         this.setData({
             content: e.detail.value
         })
     },
+    // 上传视频
     chooseVideo: function() {
-        var that = this
+        var self = this
         wx.chooseVideo({
             success: function(res) {
-                that.setData({
+                self.setData({
                     src: res.tempFilePath
                 })
                 wx.uploadFile({
@@ -51,66 +161,53 @@ Page({
                     filePath: res.tempFilePath,
                     name: 'file',
                     success: function(res) {
-                        that.data.videoKey = JSON.parse(res.data).data[0].id;
+                        self.data.videoKey = JSON.parse(res.data).data[0].id;
                     },
                     fail: function(res) {
-                        util.showMessage(that, "服务器端错误！", 3000);
+                        util.showMessage(self, "服务器端错误！", 3000);
                     }
                 })
             }
         })
     },
+    // 删除视频
     delVideo: function() {
         this.setData({
             src: '',
             videoKey: ''
         })
     },
-    onHide: function() {
-        if (this.data.playing) {
-            this.stopVoice()
-        } else if (this.data.recording) {
-            this.stopRecordUnexpectedly()
-        }
-    },
-    onShow: function() {
-        let that = this;
-        that.setData({
-            bookImgUrl: that.data.bookImgUrl.concat(that.data.tempBookImgUrl),
-            bookKey: that.data.bookKey.concat(that.data.tempBookKey)
-        })
-    },
     startRecord: function() {
         this.setData({ recording: true })
-        var that = this
+        var self = this
         recordTimeInterval = setInterval(function() {
-            var recordTime = that.data.recordTime += 1
-            that.setData({
-                formatedRecordTime: util.formatTime(that.data.recordTime),
+            var recordTime = self.data.recordTime += 1
+            self.setData({
+                formatedRecordTime: util.formatTime(self.data.recordTime),
                 recordTime: recordTime
             })
         }, 1000)
         wx.startRecord({
             success: function(res) {
-                that.setData({
+                self.setData({
                     hasRecord: true,
                     tempFilePath: res.tempFilePath,
-                    formatedPlayTime: util.formatTime(that.data.playTime)
+                    formatedPlayTime: util.formatTime(self.data.playTime)
                 })
                 wx.uploadFile({
                     url: uploadFileUrl,
                     filePath: res.tempFilePath,
                     name: 'file',
                     success: function(res) {
-                        that.data.voiceKey = JSON.parse(res.data).data[0].id;
+                        self.data.voiceKey = JSON.parse(res.data).data[0].id;
                     },
                     fail: function(res) {
-                        util.showMessage(that, "服务器端错误！", 3000);
+                        util.showMessage(self, "服务器端错误！", 3000);
                     }
                 })
             },
             complete: function() {
-                that.setData({ recording: false })
+                self.setData({ recording: false })
                 clearInterval(recordTimeInterval)
             }
         })
@@ -119,11 +216,11 @@ Page({
         wx.stopRecord()
     },
     stopRecordUnexpectedly: function() {
-        var that = this
+        var self = this
         wx.stopRecord({
             success: function() {
                 clearInterval(recordTimeInterval)
-                that.setData({
+                self.setData({
                     recording: false,
                     hasRecord: false,
                     recordTime: 0,
@@ -133,10 +230,10 @@ Page({
         })
     },
     playVoice: function() {
-        var that = this
+        var self = this
         playTimeInterval = setInterval(function() {
-            var playTime = that.data.playTime + 1
-            that.setData({
+            var playTime = self.data.playTime + 1
+            self.setData({
                 playing: true,
                 formatedPlayTime: util.formatTime(playTime),
                 playTime: playTime
@@ -147,7 +244,7 @@ Page({
             success: function() {
                 clearInterval(playTimeInterval)
                 var playTime = 0
-                that.setData({
+                self.setData({
                     playing: false,
                     formatedPlayTime: util.formatTime(playTime),
                     playTime: playTime
@@ -183,30 +280,33 @@ Page({
             playTime: 0
         })
     },
+    // 上传图片
     chooseImage: function() {
-        var that = this
-        that.data.imagesKey = [];
+        var self = this
+        self.data.imagesKey = [];
         wx.chooseImage({
-            count: 9 - that.data.imageList.length,
+            count: 9 - self.data.imageList.length,
             success: (res) => {
-                that.setData({
-                    imageList: that.data.imageList.concat(res.tempFilePaths)
+                self.setData({
+                    imageList: self.data.imageList.concat(res.tempFilePaths)
                 })
                 var successUp = 0; //成功个数
                 var failUp = 0; //失败个数
-                var length = that.data.imageList.length; //总共个数
+                var length = self.data.imageList.length; //总共个数
                 var i = 0; //第几个
-                that.uploadDIY(that.data.imageList, successUp, failUp, i, length);
+                self.uploadDIY(self.data.imageList, successUp, failUp, i, length);
             }
         })
     },
+    // 删除图片
     delImage: function(e) {
-        var that = this;
-        that.removeByValue(that.data.imageList, e.target.dataset.src)
-        that.setData({
-            imageList: that.data.imageList
+        var self = this;
+        self.removeByValue(self.data.imageList, e.target.dataset.src)
+        self.setData({
+            imageList: self.data.imageList
         })
     },
+    // 查看图片大图
     previewImage: function(e) {
         var current = e.target.dataset.src
         wx.previewImage({
@@ -214,15 +314,16 @@ Page({
             urls: this.data.imageList
         })
     },
+    // 递归 上传图片
     uploadDIY(filePaths, successUp, failUp, i, length) {
-        var that = this;
+        var self = this;
         wx.uploadFile({
             url: uploadFileUrl,
             filePath: filePaths[i],
             name: 'fileData',
             success: (resp) => {
                 successUp++;
-                that.data.imagesKey.push({ "id": JSON.parse(resp.data).data[0].id })
+                self.data.imagesKey.push({ "id": JSON.parse(resp.data).data[0].id })
             },
             fail: (res) => {
                 failUp++;
@@ -230,22 +331,27 @@ Page({
             complete: () => {
                 i++;
                 if (i == length) {
-                    util.showMessage(that, '总共' + successUp + '张上传成功', 3000);
-                    that.setData({
-                        imagesKey: that.data.imagesKey
+                    util.showMessage(self, '总共' + successUp + '张上传成功', 3000);
+                    self.setData({
+                        imagesKey: self.data.imagesKey
                     })
                 } else { //递归调用uploadDIY函数
-                    that.uploadDIY(filePaths, successUp, failUp, i, length);
+                    self.uploadDIY(filePaths, successUp, failUp, i, length);
                 }
             },
         });
     },
+    // 选择图书
     selectBook: function() {
-        let that = this;
+        let self = this;
+        self.setData({
+            isSelectBook: true
+        })
         wx.navigateTo({
-            url: './selectBook/selectBook?seq=' + that.data.seq++
+            url: './selectBook/selectBook?seq=' + self.data.seq++
         })
     },
+    // 删除数组某一项
     removeByValue: function(arr, val) {
         for (var i = 0; i < arr.length; i++) {    
             if (arr[i] == val) {
@@ -254,24 +360,16 @@ Page({
             }
         }
     },
-    removeDuplicatedItem: function(ar) {
-        var ret = [];
-        ar.forEach(function(e, i, ar) {
-            if (ar.indexOf(e) === i) {
-                ret.push(e);
-            }
-        });
-        return ret;
-    },
+    // 提交书单
     submitFun: function() {
-        let that = this;
-        let bookListName = that.data.bookListName;
-        let videoKey = that.data.videoKey;
-        let voiceKey = that.data.voiceKey;
-        let imagesKey = that.data.imagesKey;
-        let content = that.data.content;
-        let bookKey = that.data.bookKey;
-
+        let self = this;
+        let bookListName = self.data.bookListName;
+        let videoKey = self.data.videoKey;
+        let voiceKey = self.data.voiceKey;
+        let imagesKey = self.data.imagesKey;
+        let content = self.data.content;
+        let bookKey = self.data.bookKey;
+        let bookListId = self.data.bookListId;
         wx.request({
             url: CreateListUrl,
             method: 'POST',
@@ -281,19 +379,20 @@ Page({
                     "video": { "id": videoKey },
                     "voice": { "id": voiceKey },
                     "images": imagesKey,
-                    "content": content
+                    "content": content,
+                    "id": bookListId
                 },
                 "items": bookKey
             },
             success: result => {
                 if (result.data.success) {
-                    util.showMessage(that, result.data.msg, 2000);
+                    util.showMessage(self, result.data.msg, 2000);
                 } else {
-                    util.showMessage(that, result.data.msg, 2000);
+                    util.showMessage(self, result.data.msg, 2000);
                 }
             },
             fail: function({ errMsg }) {
-                util.showMessage(that, errMsg, 2000);
+                util.showMessage(self, errMsg, 2000);
                 self.setData({
                     loading: false
                 })

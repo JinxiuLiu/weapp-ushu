@@ -139,7 +139,8 @@ Page({
         that.data.tempImgUrl.push(bookImgUrl);
         prevPage.setData({
             tempBookImgUrl: that.data.tempImgUrl,
-            tempBookKey: that.data.tempBookKey
+            tempBookKey: that.data.tempBookKey,
+            isSelectBook: true,
         });
         wx.navigateBack();
     },

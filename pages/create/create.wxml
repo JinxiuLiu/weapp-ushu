@@ -28,7 +28,8 @@
 	</view>
 	<view class="weui-cells__title">上传音频</view>
 	<view class="weui-cells weui-cells_after-title">
-		<block wx:if="{{recording === false && playing === false && hasRecord === false}}">
+		<block wx:if="{{!isEdit}}">
+			<block wx:if="{{recording === false && playing === false && hasRecord === false}}">
 			<view class="page-body-time">
 				<text class="time-big">{{formatedRecordTime}}</text>
 			</view>
@@ -39,51 +40,50 @@
 				</view>
 				<view class="page-body-button"></view>
 			</view>
+			</block>
+			<block wx:if="{{recording === true}}">
+				<view class="page-body-time">
+					<text class="time-big">{{formatedRecordTime}}</text>
+				</view>
+				<view class="page-body-buttons">
+					<view class="page-body-button"></view>
+					<view class="page-body-button" bindtap="stopRecord">
+						<view class="button-stop-record"></view>
+					</view>
+					<view class="page-body-button"></view>
+				</view>
+			</block>
+			<block wx:if="{{hasRecord === true && playing === false}}">
+				<view class="page-body-time">
+					<text class="time-big">{{formatedPlayTime}}</text>
+					<text class="time-small">{{formatedRecordTime}}</text>
+				</view>
+				<view class="page-body-buttons">
+					<view class="page-body-button"></view>
+					<view class="page-body-button" bindtap="playVoice">
+						<image src="../../image/play.png"></image>
+					</view>
+					<view class="page-body-button" bindtap="clear">
+						<image src="../../image/trash.png"></image>
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{hasRecord === true && playing === true}}">
+				<view class="page-body-time">
+					<text class="time-big">{{formatedPlayTime}}</text>
+					<text class="time-small">{{formatedRecordTime}}</text>
+				</view>
+				<view class="page-body-buttons">
+					<view class="page-body-button" bindtap="stopVoice">
+						<image src="../../image/stop.png"></image>
+					</view>
+					<view class="page-body-button" bindtap="clear">
+						<image src="../../image/trash.png"></image>
+					</view>
+				</view>
+			</block>
 		</block>
-
-		<block wx:if="{{recording === true}}">
-			<view class="page-body-time">
-				<text class="time-big">{{formatedRecordTime}}</text>
-			</view>
-			<view class="page-body-buttons">
-				<view class="page-body-button"></view>
-				<view class="page-body-button" bindtap="stopRecord">
-					<view class="button-stop-record"></view>
-				</view>
-				<view class="page-body-button"></view>
-			</view>
-		</block>
-
-		<block wx:if="{{hasRecord === true && playing === false}}">
-			<view class="page-body-time">
-				<text class="time-big">{{formatedPlayTime}}</text>
-				<text class="time-small">{{formatedRecordTime}}</text>
-			</view>
-			<view class="page-body-buttons">
-				<view class="page-body-button"></view>
-				<view class="page-body-button" bindtap="playVoice">
-					<image src="../../image/play.png"></image>
-				</view>
-				<view class="page-body-button" bindtap="clear">
-					<image src="../../image/trash.png"></image>
-				</view>
-			</view>
-		</block>
-
-		<block wx:if="{{hasRecord === true && playing === true}}">
-			<view class="page-body-time">
-				<text class="time-big">{{formatedPlayTime}}</text>
-				<text class="time-small">{{formatedRecordTime}}</text>
-			</view>
-			<view class="page-body-buttons">
-				<view class="page-body-button" bindtap="stopVoice">
-					<image src="../../image/stop.png"></image>
-				</view>
-				<view class="page-body-button" bindtap="clear">
-					<image src="../../image/trash.png"></image>
-				</view>
-			</view>
-		</block>
+		<audio wx:else name="{{bookListName}}" src="{{voiceSrc}}" id="myAudio" controls loop></audio>
 	</view>
 	<view class="weui-cells__title">上传图片{{imageList.length}}/9</view>
 	<view class="weui-cells weui-cells_after-title">
@@ -125,5 +125,5 @@
 		</view>
 	</view>
 </view>
-<button type="primary" bindtap="submitFun">提交</button>
+<button type="primary" bindtap="submitFun">{{isEdit ? '提交编辑' : '提交'}}</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

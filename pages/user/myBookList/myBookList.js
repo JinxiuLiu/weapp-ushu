@@ -81,8 +81,12 @@ Page({
     // 编辑书单
     editBookListFun: function(e) {
         let id = e.currentTarget.dataset.id;
+        wx.setStorage({
+            key: 'bookListId',
+            data: id
+        })
         wx.switchTab({
-            url: '../../create/create?id=' + id
+            url: '../../create/create'
         })
     }
 })
