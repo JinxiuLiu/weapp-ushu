@@ -3,7 +3,7 @@
         <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
                 <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                <input type="text" class="weui-search-bar__input" placeholder="2017必读10本书" value="{{inputVal}}" bindinput="inputTyping" />
+                <input type="text" class="weui-search-bar__input" placeholder="2017必读10本书" value="{{inputVal}}" bindinput="inputTyping" bindconfirm="searchFun" />
                 <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                     <icon type="clear" size="14"></icon>
                 </view>
@@ -17,7 +17,7 @@
 <swiper indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
     <block wx:for="{{imgUrls}}">
         <swiper-item>
-            <image src="{{item}}" class="slide-image" height="150" />
+            <image src="{{item.image.url}}" class="slide-image" height="150" />
         </swiper-item>
     </block>
 </swiper>
@@ -48,7 +48,7 @@
                                 </view>
                             </view>
                         </view>
-                        <view class="founder-concern" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
+                        <view class="founder-concern" data-followed="{{item.followed}}" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
                             <text>{{item.followed ? '已关注' : '关注'}}</text>
                         </view>
                     </view>
@@ -80,14 +80,8 @@
                             </scroll-view>
                         </view>
                         <view class="bookList-tag" wx-if="{{item.tags}}">
-                            <view class="tag">
-                                <text>插画</text>
-                            </view>
-                            <view class="tag">
-                                <text>水彩</text>
-                            </view>
-                            <view class="tag">
-                                <text>123</text>
+                            <view class="tag" wx:for="{{item.tags}}">
+                                <text>{{item}}</text>
                             </view>
                         </view>
                         <view class="bookList-footer">
@@ -100,7 +94,7 @@
                                 </view>
                             </view>
                             <view class="footer-right">
-                                <button hover-class="" open-type="share" class="share" bindtap="shareFun">
+                                <button hover-class="" data-item="{{item}}" open-type="share" class="share">
                                     <image style="width: 37rpx; height: 37rpx;" src="../../image/index-share.png"></image>
                                 </button>
                                 <view class="collect" data-id="{{item.id}}" bindtap="collectFun">
@@ -112,7 +106,7 @@
                     </view>
                 </view>
             </block>
-            <view class="weui-loadmore" wx:if="{{loadmore}}">
+            <view class="weui-loadmore" wx:if="{{loadmoreDef}}">
                 <view class="weui-loading"></view>
                 <view class="weui-loadmore__tips">正在加载</view>
             </view>
@@ -186,7 +180,7 @@
                                 </view>
                             </view>
                             <view class="footer-right">
-                                <button hover-class="" open-type="share" class="share" bindtap="shareFun">
+                                <button hover-class="" data-item="{{item}}" open-type="share" class="share">
                                     <image style="width: 37rpx; height: 37rpx;" src="../../image/index-share.png"></image>
                                 </button>
                                 <view class="collect" data-id="{{item.id}}" bindtap="collectFun">
@@ -198,7 +192,7 @@
                     </view>
                 </view>
             </block>
-            <view class="weui-loadmore" wx:if="{{loadmore}}">
+            <view class="weui-loadmore" wx:if="{{loadmoreHot}}">
                 <view class="weui-loading"></view>
                 <view class="weui-loadmore__tips">正在加载</view>
             </view>

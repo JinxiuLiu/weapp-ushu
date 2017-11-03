@@ -1,5 +1,9 @@
-.earnings {
+.page__bd {
+	background: #ececec;
+}
 
+.weui-navbar {
+	background: #fff;
 }
 
 .earnings-info {
@@ -69,6 +73,7 @@ navigator:last-child {
 
 .weui-tab__content {
 	margin-bottom: 96rpx;
+	background: #fff;
 }
 
 .earnings-bottom {

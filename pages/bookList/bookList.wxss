@@ -291,6 +291,12 @@ navigator:last-child {
 
 .bottom-right .share {
 	padding: 0 26rpx 0 66rpx;
+	background: #ff4444;
+}
+
+.bottom-right .share text {
+	font-size: 14px;
+	color: #fff;
 }
 
 .bottom-right image {

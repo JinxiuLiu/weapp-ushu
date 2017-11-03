@@ -175,8 +175,8 @@
 }
 
 .bookList-tag .tag {
-    width: 114rpx;
     height: 48rpx;
+    padding: 0 10rpx;
     margin: 28rpx 0;
     line-height: 48rpx;
     margin-right: 20rpx;

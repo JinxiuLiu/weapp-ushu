@@ -8,21 +8,36 @@ const util = require('../../../utils/util');
 
 Page({
     data: {
-        page: 2,
+        page: 1,
         loadmore: true,
         myBookList: []
     },
+    onReachBottom: function() {
+        this.onLoad();
+    },
     onLoad: function() {
         let self = this;
+        self.setData({
+            loadmore: true
+        })
         wx.request({
             url: myBookListUrl,
             data: {
-                page: 1
+                page: self.data.page
             },
             success: data => {
+                if(!data.data.rows.length) {
+                    util.showMessage(self, '没有更多数据了！');
+                    self.setData({
+                        loadmore: false
+                    })
+                    return false;
+                }
+                self.data.page++
                 self.setData({
                     loadmore: false,
-                    myBookList: data.data.rows
+                    page: self.data.page,
+                    myBookList: self.data.myBookList.concat(data.data.rows)
                 })
             }
         })
@@ -41,7 +56,18 @@ Page({
         })
         if(publishedNum >= 5 && published) {
             util.showMessage(self, '最多开启5个书单！');
-            self.onLoad();
+            wx.request({
+                url: myBookListUrl,
+                data: {
+                    page: 1
+                },
+                success: data => {
+                    self.setData({
+                        loadmore: false,
+                        myBookList: data.data.rows
+                    })
+                }
+            })
             return false;
         }
         wx.request({
@@ -52,7 +78,18 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    self.onLoad();
+                    wx.request({
+                        url: myBookListUrl,
+                        data: {
+                            page: 1
+                        },
+                        success: data => {
+                            self.setData({
+                                loadmore: false,
+                                myBookList: data.data.rows
+                            })
+                        }
+                    })
                     util.showMessage(self, data.data.msg);
                 } else {
                     util.showMessage(self, data.data.msg);

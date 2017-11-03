@@ -7,22 +7,36 @@
  Page({
  	data: {
  		loadmore: true,
- 		myAttentionList: []
+ 		myAttentionList: [],
+        page: 1
  	},
+    onReachBottom: function() {
+        this.onLoad();
+    },
  	onLoad: function() {
  		let self = this;
+        self.setData({
+            loadmore: true
+        })
  		wx.request({
             url: myAttentionUrl,
-            data: {},
+            data: {
+                page: self.data.page
+            },
             success: data => {
-                if(data.data.success) {
-                	self.setData({
-                		loadmore: false,
-                		myAttentionList: data.data.data
-                	})
-                } else {
-                    util.showMessage(self, data.data.msg);
+                if(!data.data.rows.length) {
+                    util.showMessage(self, '没有更多数据了！');
+                    self.setData({
+                        loadmore: false
+                    })
+                    return false;
                 }
+                self.data.page++
+            	self.setData({
+                    page: self.data.page,
+                    loadmore: false,
+            		myAttentionList: self.data.myAttentionList.concat(data.data.rows)
+            	})
             }
         })
  	}

@@ -109,7 +109,6 @@ Page({
                                 self.data.imagesKey.push({ "id": item.id })
                             })
                             item.items.filter(function(item, index) {
-                                console.log(item, index+1);
                                 tempBookImgUrl.push(item.picPath);
                                 self.data.bookKey.push({'bookId': item.bookId, "id": item.id, "seq": index+1});
                             })
@@ -118,10 +117,10 @@ Page({
                                 seq: item.items.length + 1,
                                 bookListId: bookListId,
                                 bookListName: item.title,
-                                src: item.video.url,
-                                videoKey: item.video.id,
-                                voiceKey: item.voice.id,
-                                voiceSrc: item.voice.url,
+                                src: item.video ? item.video.url : '',
+                                videoKey: item.video ? item.video.id : '',
+                                voiceKey: item.voice ? item.voice.id : '',
+                                voiceSrc: item.voice ? item.voice.url : '',
                                 imageList: tempImageList,
                                 imagesKey: self.data.imagesKey,
                                 content: item.content,
@@ -151,6 +150,7 @@ Page({
     // 上传视频
     chooseVideo: function() {
         var self = this
+        self.data.isSelectBook = true;
         wx.chooseVideo({
             success: function(res) {
                 self.setData({
@@ -282,18 +282,19 @@ Page({
     },
     // 上传图片
     chooseImage: function() {
-        var self = this
+        let self = this
         self.data.imagesKey = [];
+        self.data.isSelectBook = true;
         wx.chooseImage({
             count: 9 - self.data.imageList.length,
             success: (res) => {
                 self.setData({
                     imageList: self.data.imageList.concat(res.tempFilePaths)
                 })
-                var successUp = 0; //成功个数
-                var failUp = 0; //失败个数
-                var length = self.data.imageList.length; //总共个数
-                var i = 0; //第几个
+                let successUp = 0; //成功个数
+                let failUp = 0; //失败个数
+                let length = self.data.imageList.length; //总共个数
+                let i = 0; //第几个
                 self.uploadDIY(self.data.imageList, successUp, failUp, i, length);
             }
         })
@@ -324,6 +325,7 @@ Page({
             success: (resp) => {
                 successUp++;
                 self.data.imagesKey.push({ "id": JSON.parse(resp.data).data[0].id })
+                console.log(JSON.parse(resp.data).data[0])
             },
             fail: (res) => {
                 failUp++;
@@ -370,6 +372,18 @@ Page({
         let content = self.data.content;
         let bookKey = self.data.bookKey;
         let bookListId = self.data.bookListId;
+        if(bookListName == '') {
+            util.showMessage(self, '请填写书单名称！', 2000);
+            return false;
+        }
+        if(content == '') {
+            util.showMessage(self, '请填写书单内容！', 2000);
+            return false;
+        }
+        if(!bookKey.length) {
+            util.showMessage(self, '请选择图书！', 2000);
+            return false;
+        }
         wx.request({
             url: CreateListUrl,
             method: 'POST',

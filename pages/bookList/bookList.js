@@ -9,6 +9,7 @@ const commentGridUrl = require('../../config').commentGridUrl;
 const cartTotalUrl = require('../../config').cartTotalUrl;
 const addAttentionUrl = require('../../config').addAttentionUrl;
 const collectUrl = require('../../config').collectUrl;
+const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
 
 Page({
@@ -20,6 +21,7 @@ Page({
         readCount: 0,
         cartTotal: 0,
         isComment: true,
+        fromId: ''
     },
     // 首屏渲染
     onLoad: function(options) {
@@ -27,6 +29,10 @@ Page({
         this.readBookListRequest(options.id);
         this.commentRequest(options.id);
         this.cartTotalRequest();
+        let fromId = options.uuid || '';
+        this.setData({
+            fromId: fromId
+        })
     },
     // 请求详情
     detailRequest: function(val) {
@@ -45,6 +51,9 @@ Page({
                     wx.setNavigationBarTitle({
                         title: data.data.data.title
                     })
+                    if(data.data.data.tags) {
+                        data.data.data.tags = data.data.data.tags.split(',')
+                    }
                     self.setData({
                         loadmore: false,
                         detailList: [data.data.data],
@@ -99,10 +108,55 @@ Page({
             success: data => {}
         })
     },
+    // 分享
+    onShareAppMessage: function(res) {
+        let self = this;
+        let title = '';
+        let path = '';
+        let bookListId = res.target.dataset.item.id;
+        let uuid = util.uuid();
+        if (res.from === 'button') {
+            title = res.target.dataset.item.title;
+            path = '/pages/bookList/bookList?id=' + bookListId + '&uuid=' + uuid
+        }
+        return {
+            title: title,
+            path: path,
+            success: function(res) {
+                // 转发成功
+                wx.request({
+                    url: shareSaveUrl,
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    data: {
+                        id: uuid,
+                        bookListId: bookListId,
+                        fromId: self.data.fromId
+                    },
+                    success: data => {
+                        if(data.data.success) {
+                            util.showMessage(self, data.data.msg)
+                        } else {
+                            util.showMessage(self, data.data.msg)
+                        }
+                    }
+                })
+            },
+            fail: function(res) {
+                // 转发失败
+            }
+        }
+    },
     // 关注
     attentionFun: function(e) {
         let self = this;
         let creatorId = e.currentTarget.dataset.creatorid;
+        if(e.currentTarget.dataset.followed) {
+            util.showMessage(self, '已关注');
+            return false;
+        }
         wx.request({
             url: addAttentionUrl,
             data: {
@@ -155,6 +209,11 @@ Page({
                     commentList: data.data.rows,
                     commentTotal: data.data.total
                 })
+                if(data.data.rows.length == 0) {
+                    self.setData({
+                        isComment: false
+                    })
+                }
             }
         })
     },

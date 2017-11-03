@@ -30,6 +30,9 @@ var config = {
     // 选择图书
     getBookListUrl: `${host}/bookList/grid_items`,
 
+    // 首页banner
+    bannerUrl: `${host}/banner/list`,
+
     // 选择图书
     SelectBookUrl: `${host}/book/grid`,
 
@@ -112,13 +115,40 @@ var config = {
     addAttentionUrl: `${host}/follow/add`,
 
     // 我的关注
-    myAttentionUrl: `${host}/follow/list_my`,
+    myAttentionUrl: `${host}/follow/grid_my`,
 
     // 我的资料
     aboutUrl: `${host}/member/detail/my`,
 
     // 修改昵称
     updateNameUrl: `${host}/member/detail/update_name`,
+
+    // 累计收益
+    totalMoneyUrl: `${host}/profit/total_money`,
+
+    // 可提现收益
+    canGetMoneyUrl: `${host}/profit/can_get_money`,
+
+    // 收益列表
+    moneyListUrl: `${host}/profit/money_list`,
+
+    // 书单收益明细
+    gridMyListUrl: `${host}/profit/grid_my`,
+
+    // 分享成功回调
+    shareSaveUrl: `${host}/share/save`,
+
+    // 关注通知
+    informAttentionUrl: `${host}/follow/grid_follow_me`,
+
+    // 收益通知
+    informEarningsUrl: `${host}/profit/grid_my`,
+
+    // 系统通知
+    informSystemUrl: `${host}/notice/grid_my`,
+
+    // 评论通知
+    informCommentUrl: `${host}/comment/to_me`,
 
 };
 

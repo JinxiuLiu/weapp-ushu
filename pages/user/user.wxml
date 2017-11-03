@@ -1,15 +1,15 @@
 <view class="user-info">
 	<view class="user-bg">
 		<view class="user-avatar">
-			<image src="https://mp.weixin.qq.com/debug/wxadoc/dev/image/cat/0.jpg?t=20171013"></image>
+			<image src="{{avatarUrl}}"></image>
 		</view>
 		<view class="user-name">
-			<text>showmetheloli</text>		
+			<text>{{userName}}</text>		
 		</view>
 		<view class="user-earnings">
-			<navigator url="./earnings/earnings" hover-class="none">
+			<navigator url="./earnings/earnings?totalMoney={{totalMoney}}" hover-class="none">
 				<view class="user-earnings-info">
-					<text>累计收益：¥88888</text>
+					<text>累计收益：¥{{totalMoney}}</text>
 					<image style="" src="../../image/right-arrow.png"></image>
 				</view>
 			</navigator>

@@ -6,32 +6,28 @@ const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位�
 const getBookListUrl = require('../../config').getBookListUrl;
 const addAttentionUrl = require('../../config').addAttentionUrl;
 const collectUrl = require('../../config').collectUrl;
+const bannerUrl = require('../../config').bannerUrl;
+const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
 
 Page({
     data: {
         inputVal: "",
-        imgUrls: [
-            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-        ],
+        searchVal: "",
+        imgUrls: [],
         tabs: ["最新", "最热"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
-        loadmore: true,
-        isTabClick: true,
-        pageOne: 2,
-        pageTwo: 2,
+        loadmoreDef: true,
+        loadmoreHot: true,
+        pageOne: 1,
+        pageTwo: 1,
         isMore: true,
         isHotMore: true,
-        isCollect: false,
         bookListItem: [],
-        hotBookListItem: []
+        hotBookListItem: [],
+        isCollect: false,
     },
     clearInput: function() {
         this.setData({
@@ -45,6 +41,8 @@ Page({
     },
     onLoad: function() {
         var self = this;
+        this.bannerRequest()
+        this.getBookListDefRequest()
         wx.getSystemInfo({
             success: res => {
                 self.setData({
@@ -52,106 +50,59 @@ Page({
                     sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
                 });
             }
-        });
-    },
-    // 页面显示
-    onShow: function() {
-        this.getBookListRequest(false);
-    },
-    // 页面隐藏
-    onHide: function() {
-        this.setData({
-            isTabClick: true,
-            isMore: true,
-            isHotMore: true,
         })
     },
     // 上拉加载更多
     onReachBottom: function() {
-        var self = this
-        
-        if(self.data.isTabClick) {
-            if(!self.data.isMore) return false;
-            // 默认列表
-            wx.request({
-                url: getBookListUrl,
-                data: {
-                    page: self.data.pageOne,
-                    rows: 10,
-                    sort: 'created',
-                    order: 'desc'
-                },
-                success: result => {
-                    if (result.data.success) {
-                        if(!result.data.data.rows.length) {
-                            util.showMessage(self, '没有更多数据了！');
-                            self.setData({
-                                isMore: false
-                            })
-                        }
-                        self.data.pageOne++
-                        self.setData({
-                            pageOne: self.data.pageOne,
-                            loadmore: false,
-                            bookListItem: self.data.bookListItem.concat(result.data.data.rows)
-                        })
-                    } else {
-                        util.showMessage(self, result.data.msg);
-                    }
-                }
+        let self = this;
+        if(this.data.activeIndex == 0) {
+            this.setData({
+                loadmoreDef: true,
             })
-        } else {
-            if(!self.data.isHotMore) return false;
-            // 热门列表
-            wx.request({
-                url: getBookListUrl,
-                data: {
-                    page: self.data.pageOne,
-                    rows: 10,
-                    sort: 'readCount',
-                    order: 'desc'
-                },
-                success: result => {
-                    if (result.data.success) {
-                        if(!result.data.data.rows.length) {
-                            util.showMessage(self, '没有更多数据了！');
-                            self.setData({
-                                isHotMore: false
-                            })
-                        }
-                        self.data.pageTwo++
-                        self.setData({
-                            pageTwo: self.data.pageTwo,
-                            loadmore: false,
-                            hotBookListItem: self.data.hotBookListItem.concat(result.data.data.rows)
-                        })
-                    } else {
-                        util.showMessage(self, result.data.msg);
-                    }
-                }
+            this.getBookListDefRequest(self.data.searchVal)
+        }
+
+        if(this.data.activeIndex == 1) {
+            this.setData({
+                loadmoreHot: true,
             })
+            this.getBookListHotRequest(self.data.searchVal)
         }
     },
     // tab 栏切换
     tabClick: function(e) {
+        let self = this;
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         })
-        if (!this.data.isTabClick) {
-            return false;
-        }
-        if (e.currentTarget.id) {
-            this.getBookListRequest(true)
+
+        if(this.data.activeIndex == 0) {
             this.setData({
-                isTabClick: false
+                pageOne: 1,
+                loadmoreDef: true,
+                bookListItem: [],
             })
+            this.getBookListDefRequest(self.data.searchVal)
+        }
+
+        if(this.data.activeIndex == 1) {
+            this.setData({
+                pageTwo: 1,
+                loadmoreHot: true,
+                hotBookListItem: [],
+            })
+            this.getBookListHotRequest(self.data.searchVal)
         }
     },
     // 关注
     attentionFun: function(e) {
         let self = this;
         let creatorId = e.currentTarget.dataset.creatorid;
+        if(e.currentTarget.dataset.followed) {
+            util.showMessage(self, '已关注');
+            return false;
+        }
         wx.request({
             url: addAttentionUrl,
             data: {
@@ -181,15 +132,38 @@ Page({
     },
     // 分享
     onShareAppMessage: function(res) {
+        let self = this;
+        let title = '';
+        let path = '';
+        let bookListId = res.target.dataset.item.id;
+        let uuid = util.uuid();
         if (res.from === 'button') {
-            // 来自页面内转发按钮
-            console.log(res.target)
+            title = res.target.dataset.item.title;
+            path = '/pages/bookList/bookList?id=' + bookListId + '&uuid=' + uuid
         }
         return {
-            title: '自定义转发标题',
-            path: '/page/user?id=123',
+            title: title,
+            path: path,
             success: function(res) {
                 // 转发成功
+                wx.request({
+                    url: shareSaveUrl,
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    data: {
+                        id: uuid,
+                        bookListId: bookListId
+                    },
+                    success: data => {
+                        if(data.data.success) {
+                            util.showMessage(self, data.data.msg)
+                        } else {
+                            util.showMessage(self, data.data.msg)
+                        }
+                    }
+                })
             },
             fail: function(res) {
                 // 转发失败
@@ -208,48 +182,121 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, '收藏成功！');
-                    self.getBookListRequest(!this.data.isTabClick)
                 } else {
                     util.showMessage(self, data.data.msg);
                 }
             }
         })
     },
-    // 书单列表请求
-    getBookListRequest: function(isReadCount) {
+    // 书单列表请求-最新
+    getBookListDefRequest: function(keyword) {
         let self = this;
-        let sort = isReadCount ? "readCount" : "created";
-        self.setData({
-            loadmore: true
-        })
         wx.request({
             url: getBookListUrl,
             data: {
-                page: 1,
+                page: self.data.pageOne,
                 rows: 10,
-                sort: sort,
-                order: "desc"
+                sort: 'created',
+                order: "desc",
+                keyword: keyword || ''
             },
             success: result => {
                 if (result.data.success) {
-                    if (isReadCount) {
+                    let items = result.data.data.rows;
+                    if(items.length == 0) {
                         self.setData({
-                            loadmore: false,
-                            hotBookListItem: result.data.data.rows
+                            loadmoreDef: false
                         })
-                    } else {
-                        self.setData({
-                            loadmore: false,
-                            bookListItem: result.data.data.rows
-                        })
+                        util.showMessage(self, '没有更多数据！')
+                        return false;
                     }
+                    items.filter(function(item) {
+                        if(item.tags) {
+                            item.tags = item.tags.split(',')
+                        }
+                    })
+                    self.data.pageOne++
+                        self.setData({
+                            page: self.data.pageOne,
+                            loadmoreDef: false,
+                            bookListItem: self.data.bookListItem.concat(result.data.data.rows)
+                        })
                 } else {
-                    util.showMessage(self, result.data.msg);
+                    util.showMessage(self, '服务端错误！');
                 }
+            }
+        })
+    },
+    // 书单列表请求-最热
+    getBookListHotRequest: function(keyword) {
+        let self = this;
+        wx.request({
+            url: getBookListUrl,
+            data: {
+                page: self.data.pageTwo,
+                rows: 10,
+                sort: 'readCount',
+                order: "desc",
+                keyword: keyword || ''
             },
-            fail: function({ errMsg }) {
+            success: result => {
+                if (result.data.success) {
+                    let items = result.data.data.rows;
+                    if(items.length == 0) {
+                        self.setData({
+                            loadmoreHot: false
+                        })
+                        util.showMessage(self, '没有更多数据！')
+                        return false;
+                    }
+                    items.filter(function(item) {
+                        if(item.tags) {
+                            item.tags = item.tags.split(',')
+                        }
+                    })
+                    self.data.pageTwo++
+                    self.setData({
+                        page: self.data.pageTwo,
+                        loadmoreHot: false,
+                        hotBookListItem: self.data.hotBookListItem.concat(result.data.data.rows)
+                    })
+                } else {
+                    util.showMessage(self, '服务端错误！');
+                }
+            }
+        })
+    },
+    // 书单搜索
+    searchFun: function(e) {
+        this.setData({
+            searchVal: e.detail.value
+        })
+        if(this.data.activeIndex == 0) {
+            this.setData({
+                pageOne: 1,
+                loadmoreDef: true,
+                bookListItem: []
+            })
+            this.getBookListDefRequest(e.detail.value);
+        }
+        if(this.data.activeIndex == 1) {
+            this.setData({
+                pageTwo: 1,
+                loadmoreHot: true,
+                hotBookListItem: []
+            })
+            this.getBookListHotRequest(e.detail.value);
+        }
+    },
+    // banner 
+    bannerRequest: function() {
+        let self = this;
+        wx.request({
+            url: bannerUrl,
+            data: {},
+            success: data => {
                 self.setData({
-                    loadmore: false
+                    imgUrls: data.data
                 })
             }
         })

@@ -11,113 +11,64 @@
             </view>
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <view class="attention earnings">
+                    <view class="attention earnings" wx:for="{{systemList}}">
                         <view class="attention-text">
-                            <text><text class="name">系统通系统通知系统通知系统通知系统通知系统通知知</text></text>
-                            <text class="time">2017-09-28　14:00</text>
+                            <text><text class="name">{{item.content}}</text></text>
+                            <text class="time">{{item.created}}</text>
                         </view>
                     </view>
-                    <view class="attention earnings">
-                        <view class="attention-text">
-                            <text><text class="name">系统通系统通知系统通知系统通知系统通知系统通知知</text></text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
-                    </view>
-                    <view class="attention earnings">
-                        <view class="attention-text">
-                            <text><text class="name">系统通系统通知系统通知系统通知系统通知系统通知知</text></text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
+                    <view class="weui-loadmore" wx:if="{{systemLoad}}">
+                        <view class="weui-loading"></view>
+                        <view class="weui-loadmore__tips">正在加载</view>
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="attention earnings">
+                    <view class="attention earnings" wx:for="{{earningsList}}" data-id="{{item.bookListId}}" bindtap="clickBookListFun">
                         <view class="attention-text">
-                            <text><text class="name">我分享的书单　</text><text class="booklist">虚空之遗虚空之遗虚空之遗虚空之遗虚空之遗虚空之遗</text></text>
-                            <text class="time">2017-09-28　14:00</text>
+                            <text><text class="name">我分享的书单　</text><text class="booklist">{{item.bookListItem.bookListTitle}}</text></text>
+                            <text class="time">{{item.created}}</text>
                         </view>
                         <view class="number">
-                            <text>+ ¥5</text>        
+                            <text>+ ¥{{item.money}}</text>        
                         </view>
                     </view>
-                    <view class="attention earnings">
-                        <view class="attention-text">
-                            <text><text class="name">我分享的图书</text><text class="booklist">《阿里巴巴与四十大盗》</text></text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
-                        <view class="number">
-                            <text>+ ¥5</text>        
-                        </view>
-                    </view>
-                    <view class="attention earnings">
-                        <view class="attention-text">
-                            <text><text class="name">我分享的书单　</text><text class="booklist">虚空之遗虚空之遗虚空之遗虚空之遗虚空之遗虚空之遗</text></text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
-                        <view class="number">
-                            <text>+ ¥5</text>        
-                        </view>
-                    </view>
-                    <view class="attention earnings">
-                        <view class="attention-text">
-                            <text><text class="name">我分享的图书</text><text class="booklist">《阿里巴巴与四十大盗》</text></text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
-                        <view class="number">
-                            <text>+ ¥5</text>        
-                        </view>
+                    <view class="weui-loadmore" wx:if="{{earningsLoad}}">
+                        <view class="weui-loading"></view>
+                        <view class="weui-loadmore__tips">正在加载</view>
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                    <view class="attention">
+                    <view class="attention" wx:for="{{attentionList}}">
                         <view class="attention-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
+                            <image src="{{item.targetPhoto.url}}"></image>
                         </view>
                         <view class="attention-text">
-                            <text><text class="name">ABCD</text>　关注了你</text>
-                            <text class="time">2017-09-28　14:00</text>
+                            <text><text class="name">{{item.targetName}}</text>　关注了你</text>
+                            <text class="time">{{item.created}}</text>
                         </view>
                     </view>
-                    <view class="attention">
-                        <view class="attention-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
-                        </view>
-                        <view class="attention-text">
-                            <text><text class="name">ABCD</text>　关注了你</text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
-                    </view>
-                    <view class="attention">
-                        <view class="attention-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
-                        </view>
-                        <view class="attention-text">
-                            <text><text class="name">ABCD</text>　关注了你</text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
+                    <view class="weui-loadmore" wx:if="{{attentionLoad}}">
+                        <view class="weui-loading"></view>
+                        <view class="weui-loadmore__tips">正在加载</view>
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
-                    <view class="attention">
+                    <view class="attention" wx:for="{{commentList}}">
                         <view class="attention-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
+                            <image src="{{item.creatorPhoto.url}}"></image>
                         </view>
-                        <view class="attention-text">
-                            <text><text class="name">ABCD</text>　评论了你的书单　<text class="booklist">虚空之遗虚空之遗虚空之遗虚空之遗虚空之遗虚空之遗</text></text>
-                            <text class="time">2017-09-28　14:00</text>
+                        <view class="attention-text" data-id="{{item.bookListId}}" bindtap="clickBookListFun">
+                            <text><text class="name">{{item.creatorName}}</text>　评论了你的书单　<text class="booklist">{{item.bookListTitle}}</text></text>
+                            <text class="time">{{item.created}}</text>
                         </view>
                     </view>
-                    <view class="attention">
-                        <view class="attention-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
-                        </view>
-                        <view class="attention-text">
-                            <text><text class="name">ABCD</text>　回复了你</text>
-                            <text class="time">2017-09-28　14:00</text>
-                        </view>
+                    <view class="weui-loadmore" wx:if="{{commentLoad}}">
+                        <view class="weui-loading"></view>
+                        <view class="weui-loadmore__tips">正在加载</view>
                     </view>
                 </view>
             </view>
         </view>
     </view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

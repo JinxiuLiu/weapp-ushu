@@ -14,7 +14,7 @@
                     <view class="time"><text>{{item.created}}</text></view>
                 </view>
             </view>
-            <view class="founder-concern" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
+            <view class="founder-concern" data-followed="{{item.followed}}" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
                 <text>{{item.followed ? '已关注' : '关注'}}</text>
             </view>
         </view>
@@ -40,9 +40,11 @@
                         </view>
                         <view class="left-text">
                             <text class="name">{{item.bookName}}</text>
-                            <text class="work-name">鸟哥 著</text>
+                            <text class="work-name">{{item.author}} 著</text>
                             <view class="book-right">
-                                <text class="color-red price">¥{{item.price}}<text class="old-price">¥59</text></text>
+                                <text class="color-red price">¥{{item.price}}
+                                    <!-- <text class="old-price">¥59</text> -->
+                                </text>
                                 <view class="number" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">
                                     <image src="../../image/bookadd.png"></image>
                                 </view>
@@ -73,6 +75,9 @@
                         <text>{{item.content}}</text>
                     </view>
                 </view>
+                <view class="NoData" wx:if="{{!isComment}}">
+                    <text>暂无最新评论</text>
+                </view>
             </view>
             <view class="comment-more" data-id="{{item.id}}" wx:if="{{isComment}}" bindtap="commentTotalFun">
                 <text>查看全部{{commentTotal}}条</text>
@@ -81,9 +86,7 @@
         <view class="tag" wx:if="{{item.tags}}">
             <image src="../../image/tag.png"></image>
             <view class="tag-item">
-                <text>插画</text>
-                <text>水彩</text>
-                <text>123</text>
+                <text wx:for="{{item.tags}}">{{item}}</text>
             </view>
         </view>
     </view>
@@ -94,10 +97,10 @@
                 <image src="../../image/collect-white.png"></image>
                 <text>{{item.collected ? '已收藏' : '收藏'}}</text>
             </view>
-            <view class="share">
-                <image src="../../image/share-white.png"></image>
+            <button hover-class="" data-item="{{item}}" open-type="share" class="share">
+                <image style="width: 37rpx; height: 37rpx;" src="../../image/share-white.png"></image>
                 <text>分享</text>
-            </view>
+            </button>
         </view>
     </view>
     <view class="cart" bindtap="navigateToCart">

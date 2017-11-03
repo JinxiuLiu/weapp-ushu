@@ -40,9 +40,11 @@ Page({
         let index = e.currentTarget.dataset.index;
         let i = e.currentTarget.dataset.i;
         self.data.cartList[index].items[i].checked = !self.data.cartList[index].items[i].checked; // 获取购物车列表
+
         let tempCartList = self.data.cartList;
         for (var j = 0; j < tempCartList.length; j++) {
             for (var k = 0; k < tempCartList[j].items.length; k++) {
+                console.log(tempCartList[j].items[k].checked);
                 if (!tempCartList[j].items[k].checked) {
                     self.data.selectAllStatus = false;
                     break;
@@ -51,6 +53,7 @@ Page({
                 }
             }
         }
+
         self.data.selectGoods = [];
         self.data.settlementItems = [];
         for (var j = 0; j < tempCartList.length; j++) {
@@ -61,6 +64,7 @@ Page({
                 }
             }
         }
+
         // 判断是否为空数组
         if (self.data.selectGoods.length) {
             // 获取总价
@@ -70,6 +74,7 @@ Page({
                 total: '0'
             })
         }
+
         self.setData({
             selectAllStatus: self.data.selectAllStatus,
             cartList: self.data.cartList
@@ -109,7 +114,7 @@ Page({
             cartList: self.data.cartList
         })
     },
-    // 选择商品
+    // 获取商品总价
     selectGoodsRequest: function(data) {
         let self = this;
         wx.request({
@@ -205,18 +210,14 @@ Page({
         let self = this;
         let id = self.data.selectGoods;
         if(!id.length) {
-            self.showMessage('请选择图书!');
+            self.showMessage('请选择删除的图书!');
             return false;
         }
         wx.request({
             url: delCartUrl,
             method: 'POST',
-            data: { id: id },
-            header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
-            },
+            data: id,
             success: function(data) {
-                console.log(data);
                 if (data.data.success) {
                     self.onShow();
                     self.showMessage('删除成功!');

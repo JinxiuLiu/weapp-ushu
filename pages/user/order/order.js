@@ -30,7 +30,6 @@ Page({
                   'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: data => {
-                console.log(data);
                 if (data.data.success) {
                     that.setData({
                         orderList: data.data.data
