@@ -28,6 +28,7 @@
 			</view>
 		</view>
 	</view>
+	<view wx:if="{{addressList.length == 0}}" class="NoData">暂无地址</view>
 </view>
 <navigator url="../addAddress/addAddress" hover-class="none">
 	<button type="primary">新增收货地址</button>

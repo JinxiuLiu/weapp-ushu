@@ -1,0 +1,25 @@
+.bottom-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 86rpx;
+	padding: 0 28rpx;
+	border-top: 1rpx solid #e5e5e5;
+	font-size: 14px;
+	background: #fff;
+}
+
+.bottom-item .wxzf {
+	display: flex;
+	align-items: center;
+}
+
+.bottom-item image {
+	width: 44rpx;
+	height: 44rpx;
+	padding-right: 14rpx;
+}
+
+button[type="primary"] {
+	margin-top: 100rpx;
+}

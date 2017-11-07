@@ -23,13 +23,12 @@
 	            <view class="weui-tab__panel">
 	                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 	                	<navigator url="./earningsInfo/earningsInfo?id={{item.id}}" wx:for="{{bookListMoneyItem}}" hover-class="none">
-	                		<text class="NoData" wx:if="{{!bookListMoneyItem.length}}">暂无书单收益</text>
 		                    <view class="earnings-record">
 		                    	<text>{{item.title}}</text>
 		                    	<text>收益：<text class="color-red">¥{{item.money}}</text></text>
 		                    </view>
 		                </navigator>
-	                    
+	                	<text class="NoData" wx:if="{{bookListMoneyItem.length == 0}}">暂无书单收益</text>
 	                </view>
 	                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 	                	<text class="NoData" wx:if="{{!shareMoneyItem.length}}">暂无分享收益</text>
@@ -46,7 +45,7 @@
 		<navigator class="bottom-item" url="./withdrawal/withdrawal" hover-class="none">
 			<text>提现记录</text>
 		</navigator>
-		<navigator class="bottom-item" url="./kiting/kiting" hover-class="none">
+		<navigator class="bottom-item" url="./kiting/kiting?money={{canGetMoney}}" hover-class="none">
 			<text>提现</text>
 		</navigator>
 	</view>

@@ -2,7 +2,7 @@
  * Created by Liujx on 2017-10-18 11:28:42
  */
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-const collectBookUrl = require('../../../config').collectBookUrl;
+const collectBookViewUrl = require('../../../config').collectBookViewUrl;
 const collectBookListUrl = require('../../../config').collectBookListUrl;
 const util = require('../../../utils/util');
 
@@ -12,18 +12,16 @@ Page({
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
-        isTabClick: true,
-        loadmore: true,
-        isMore: true,
-        isBookMore: true,
-        pageOne: 2,
-        pageTwo: 2,
+        bookLoadMore: true,
+        bookListLoadMore: true,
+        bookPage: 1,
+        bookListPage: 1,
         bookListItem: [],
         bookItem: []
     },
     onLoad: function () {
         var self = this;
-        self.collectRequest(collectBookListUrl, false);
+        self.collectBookList();
         wx.getSystemInfo({
             success: function(res) {
                 self.setData({
@@ -35,53 +33,17 @@ Page({
     },
     // 上拉加载更多
     onReachBottom: function() {
-        var self = this
-        if(self.data.isTabClick) {
-            if(!self.data.isMore) return false;
-            // 默认列表
-            wx.request({
-                url: collectBookListUrl,
-                data: {
-                    page: self.data.pageOne
-                },
-                success: data => {
-                    if(!data.data.rows.length) {
-                        util.showMessage(self, '没有更多数据了！');
-                        self.setData({
-                            isMore: false
-                        })
-                    }
-                    self.data.pageOne++
-                    self.setData({
-                        pageOne: self.data.pageOne,
-                        loadmore: false,
-                        bookListItem: self.data.bookListItem.concat(data.data.rows)
-                    })
-                }
+        if(this.data.activeIndex == 0) {
+            this.setData({
+                bookListLoadMore: true,
             })
-        } else {
-            if(!self.data.isBookMore) return false;
-            // 热门列表
-            wx.request({
-                url: collectBookUrl,
-                data: {
-                    page: self.data.pageTwo
-                },
-                success: data => {
-                    if(!data.data.rows.length) {
-                        util.showMessage(self, '没有更多数据了！');
-                        self.setData({
-                            isMore: false
-                        })
-                    }
-                    self.data.pageTwo++
-                    self.setData({
-                        pageTwo: self.data.pageTwo,
-                        loadmore: false,
-                        bookItem: self.data.bookItem.concat(data.data.rows)
-                    })
-                }
+            this.collectBookList()
+        }
+        if(this.data.activeIndex == 1) {
+            this.setData({
+                bookLoadMore: true,
             })
+            this.collectBook()
         }
     },
     // tab栏切换
@@ -90,35 +52,72 @@ Page({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         })
-        if (!this.data.isTabClick) {
-            return false;
-        }
-        if (e.currentTarget.id) {
-            this.collectRequest(collectBookUrl, true)
+        if(this.data.activeIndex == 0) {
             this.setData({
-                isTabClick: false
+                bookListPage: 1,
+                bookListLoadMore: true,
+                bookListItem: [],
             })
+            this.collectBookList()
+        }
+        if(this.data.activeIndex == 1) {
+            this.setData({
+                bookPage: 1,
+                bookLoadMore: true,
+                bookItem: [],
+            })
+            this.collectBook()
         }
     },
-    // 收藏请求
-    collectRequest: function(url, isBook) {
+    // 收藏书单请求
+    collectBookList: function() {
         let self = this;
         wx.request({
-            url: url,
-            data: {},
+            url: collectBookListUrl,
+            data: {
+                page: self.data.bookListPage,
+                rows: 10
+            },
             success: data => {
-                if(isBook) {
+                if(data.data.rows.length == 0) {
                     self.setData({
-                        loadmore: false,
-                        bookItem: data.data.rows
+                        bookListLoadMore: false,
                     })
-                } else {
-                    self.setData({
-                        loadmore: false,
-                        bookListItem: data.data.rows
-                    })
+                    util.showMessage(self, '没有数据啦！')
+                    return false;
                 }
-                
+                self.data.bookListPage++
+                self.setData({
+                    bookListPage: self.data.bookListPage,
+                    bookListLoadMore: false,
+                    bookListItem: self.data.bookListItem.concat(data.data.rows)
+                })
+            }
+        })
+    },
+    // 收藏图书请求
+    collectBook: function() {
+        let self = this;
+        wx.request({
+            url: collectBookViewUrl,
+            data: {
+                page: self.data.bookPage,
+                rows: 10
+            },
+            success: data => {
+                if(data.data.rows.length == 0) {
+                    self.setData({
+                        bookLoadMore: false,
+                    })
+                    util.showMessage(self, '没有数据啦！')
+                    return false;
+                }
+                self.data.bookPage++
+                self.setData({
+                    bookPage: self.data.bookPage,
+                    bookLoadMore: false,
+                    bookItem: self.data.bookItem.concat(data.data.rows)
+                })
             }
         })
     }

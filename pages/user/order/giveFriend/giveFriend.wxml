@@ -1,0 +1,16 @@
+<view class="giveAdvice">
+	<view class="title">赠言</view>
+	<view class="text">
+		<textarea wx:if="{{isShare}}" bindinput="bindinput" placeholder="{{bindinput}}" maxlength="40" auto-focus/>
+		<view wx:else class="shareText">{{bindinput}}</view>
+	</view>
+</view>
+<view class="book">
+	<block wx:for="{{bookItem}}">
+		<view class="book-item" wx:if="{{index < 3}}" wx:for="{{item.items}}" wx:for-index="index">
+			<image src="{{item.bookListItem.bookListItem}}"></image>
+			<text class="book-name">{{item.bookListItem.bookName}}</text>
+		</view>
+	</block>
+</view>
+<button type="primary" open-type="share" >发送给朋友</button>

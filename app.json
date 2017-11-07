@@ -1,11 +1,16 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/create/create",
+    "pages/user/order/giveFriend/giveFriend",
+    "pages/cart/cart",
+    "pages/giveAddress/giveAddress",
+    "pages/login/login",
+    "pages/submitOrder/payment/payment",
+    "pages/submitOrder/orderDetails/orderDetails",
     "pages/user/user",
     "pages/bookList/bookList",
     "pages/user/myBookList/myBookList",
-    "pages/cart/cart",
-    "pages/create/create",
     "pages/create/selectBook/selectBook",
     "pages/ranking/ranking",
     "pages/user/myAddress/myAddress",

@@ -1,61 +1,71 @@
-<view class="bookDetails">
+<block wx:for="{{bookDetailItem}}">
+	<view class="bookDetails">
 	<view class="bookDetails-info">
-		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" class="swiper">
-			<block wx:for="{{imgUrls}}">
-				<swiper-item>
-					<image src="{{item}}" class="slide-image"/>
-				</swiper-item>
-			</block>
-		</swiper>
-		<view class="from">出自  showmetheloli  的书单  2017必读的10本书</view>
+		<view class="swiper">
+			<image src="{{item.picPath}}" class="slide-image"/>
+		</view>
+		<view class="from">出自书单  {{item.bookListTitle}}</view>
 		<view class="book-info">
-			<text class="title">鸟哥的Linux私房菜 基础学习篇(第三版)</text>
-			<text class="price">¥ 79</text>
-			<text class="name">鸟哥 著</text>
-			<text class="introduce">Linux领域名人鸟哥带你迈Linux殿堂</text>
+			<text class="title">{{item.bookName}}</text>
+			<text class="price">¥ {{item.price}}</text>
+			<text class="name">{{item.author}} 著</text>
+			<!-- <rich-text nodes="{{item.author_intro}}" class="introduce"></rich-text> -->
 		</view>
 	</view>
 	<view class="bookDetails-catalog">
 		<view class="weui-tab">
-            <view class="weui-navbar">
-                <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                        <view class="weui-navbar__title">{{item}}</view>
-                    </view>
-                </block>
-                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-            </view>
-            <view class="weui-tab__panel">
-                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <text>ISBN：978-7-115-22626-6</text>
-                    <text>开本：16开</text>
-                    <text>语种：中文版</text>
-                    <text>出版时间：201709</text>
-                    <text>包装：平装</text>
-                    <text>页数：778</text>
-                </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    
-                </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-                    
-                </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
-                    
-                </view>
-            </view>
-        </view>
+	        <view class="weui-navbar">
+	            <block wx:for="{{tabs}}" wx:key="*this">
+	                <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+	                    <view class="weui-navbar__title">{{item}}</view>
+	                </view>
+	            </block>
+	            <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+	        </view>
+	        <view class="weui-tab__panel">
+	            <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+	                <text>ISBN：{{item.isbn}}</text>
+	                <text>开本：{{item.format}}</text>
+	                <text>语种：{{item.edition}}</text>
+	                <text>出版时间：{{item.publishDate}}</text>
+	                <text>包装：{{item.frame}}</text>
+	                <text>页数：{{item.pages}}</text>
+	            </view>
+	            <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+	                <rich-text nodes="{{item.directory}}"></rich-text>
+	            </view>
+	            <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+	                <rich-text nodes="{{item.resume}}"></rich-text>
+	            </view>
+	            <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+	                <rich-text nodes="{{item.author_intro}}"></rich-text>
+	            </view>
+	        </view>
+	    </view>
 	</view>
-</view>
-<view class="bookDetails-bottom">
-	<view class="bottom-item">
-		<image src="../../image/collect-kong.png"></image>
-		<text>收藏</text>
 	</view>
-	<view class="bottom-item give">
+	<view class="bookDetails-bottom">
+	<view class="bottom-item left-btn">
+		<view class="collect" bindtap="collectBookFun" data-id="{{item.id}}">
+			<image src="../../image/collect-kong.png"></image>
+			<text>{{item.collected ? '已收藏' : '收藏'}}</text>
+		</view>
+		<button hover-class="" open-type="share" class="share" bindtap="onShareAppMessage" data-id="{{item.id}}" data-title="{{item.bookName}}">
+			<image src="../../image/index-share.png"></image>
+		</button>
+	</view>
+	<view class="bottom-item give" data-give="true" data-id="{{item.id}}" bindtap="settlementFun">
 		<image src="../../image/give.png"></image>
 		<text>赠朋友</text>
 	</view>
-	<view class="bottom-item line">加入购物车</view>
-	<view class="bottom-item">立即购买</view>
+	<view class="bottom-item line" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">加入购物车</view>
+	<view class="bottom-item" data-give="false" data-id="{{item.id}}" bindtap="settlementFun">立即购买</view>
+	</view>
+</block>
+<view class="cart" bindtap="navigateToCart">
+    <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+        <view class="cart-img"><image src="../../image/cart-right.png"/></view>
+        <view class="weui-badge">{{cartTotal}}</view>
+    </view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

@@ -18,12 +18,12 @@
 	font-size: 14px;
 }
 
-.weui-cell .first {
+.weui-cell:first-child .weui-cell__hd {
 	background: #cb0000;
 	color: #fff;
 }
 
-.weui-cell .second {
+.weui-cell:nth-child(2) .weui-cell__hd {
 	background: #ff7200;
 	color: #fff;
 }

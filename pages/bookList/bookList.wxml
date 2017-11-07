@@ -20,16 +20,16 @@
         </view>
         <view class="bookList-info">
             <view class="bookList-name"><text>{{item.title}}</text></view>
-            <view class="bookList-video" wx-if="{{!!item.video}}">
+            <view class="bookList-video" wx-if="{{item.video}}">
                 <video id="myVideo" src="{{item.video.url}}" controls></video>
             </view>
-            <view class="bookList-audio" wx-if="{{!!item.voice}}">
+            <view class="bookList-audio" wx-if="{{item.voice}}">
                 <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
             </view>
-            <view class="bookList-img" wx-if="{{!!item.images}}" wx:for="{{item.images}}">
+            <view class="bookList-img" wx-if="{{!item.images.length}}" wx:for="{{item.images}}">
                 <image src="{{item.url}}"></image>
             </view>
-            <view class="bookList-text" wx-if="{{!!item.content}}">
+            <view class="bookList-text" wx-if="{{item.content}}">
                 <text>{{item.content}}</text>
             </view>
             <view class="bookList-details">
@@ -86,7 +86,7 @@
         <view class="tag" wx:if="{{item.tags}}">
             <image src="../../image/tag.png"></image>
             <view class="tag-item">
-                <text wx:for="{{item.tags}}">{{item}}</text>
+                <text wx:if="{{index < 3}}" wx:for="{{item.tags}}" wx:for-index="index">{{item}}</text>
             </view>
         </view>
     </view>

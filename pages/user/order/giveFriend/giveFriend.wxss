@@ -1,0 +1,63 @@
+Page {
+    background: #fff;
+    border-top: 1rpx solid #dcdcdc;
+}
+
+.giveAdvice {
+    padding: 48rpx 40rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.giveAdvice .title {
+    font-size: 14px;
+    color: #a8a8a8;
+}
+
+.giveAdvice textarea {
+    width: 100%;
+    height: 100rpx;
+    padding-top: 20rpx;
+    line-height: 50rpx;
+    font-size: 16px;
+    color: #999;
+    display: block;
+    position: relative;
+}
+
+.book {
+    padding: 50rpx 40rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.book .book-item {
+    width: 190rpx;
+}
+
+.book .book-item image {
+    width: 100%;
+    height: 270rpx;
+}
+
+.book .book-item .book-name {
+	display: block;
+	width: 190rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+button[type="primary"] {
+	width: 91%;
+	position: absolute;
+	bottom: 0;
+}
+
+.shareText {
+	width: 100%;
+    height: 100rpx;
+    padding-top: 20rpx;
+    line-height: 50rpx;
+    font-size: 16px;
+    color: #999;
+}

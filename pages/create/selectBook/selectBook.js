@@ -31,10 +31,8 @@ Page({
                     loadmore: false,
                     rows: result.data.rows
                 });
-                console.log(result.data.rows);
             },
             fail: function({ errMsg }) {
-                console.log('request fail', errMsg)
                 self.setData({
                     loading: false
                 })

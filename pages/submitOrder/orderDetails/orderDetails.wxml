@@ -1,0 +1,69 @@
+<block wx:for="{{orderDetailList}}" wx:for-item="itemDetail">
+    <view class="submitOrder">
+    	<view class="submitOrder-address" wx:if="{{!itemDetail.give}}">
+    		<view class="address-img">
+    			<image style="width: 32rpx; height: 46rpx" src="../../../image/address.png"></image>
+    		</view>
+    		<view class="address-details">
+    			<view class="contacts">
+    				<text class="name">收货人:{{itemDetail.express.name}}</text>
+    				<text class="mobile">{{itemDetail.express.mobile}}</text>
+    			</view>
+    			<text class="address">收货地址：{{itemDetail.express.provinceName}}{{itemDetail.express.cityName}}{{itemDetail.express.countyName}}{{itemDetail.express.address}}</text>
+    		</view>
+    		<view class="address-img">
+    			<image style="width: 28rpx; height: 42rpx" src="../../../image/right-arrow-gray.png"></image>
+    		</view>
+    	</view>
+    	<view class="cart-item" wx:for="{{itemDetail.itemList}}" wx:for-item="itemList">
+    		<view class="title">书单：{{itemList.title}}</view>
+    		<view class="bookinfo">
+                <view class="item-book" wx:for="{{itemList.items}}">
+                    <view class="book-left">
+                        <view class="left-image">
+                            <image src="{{item.bookListItem.picPath}}"></image>
+                        </view>
+                        <view class="left-text">
+                            <text class="name">{{item.bookListItem.bookName}}</text>
+                            <text class="work-name">{{item.bookListItem.author}} 著</text>
+                            <view class="book-right">
+                                <text class="color-red price">¥{{item.price}}</text>
+                                <text class="number">x{{item.quantity}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+    		</view>
+    	</view>
+        <view class="bookinfo-bottom">
+            <text>合计(不含运费)　¥{{itemDetail.itemMoney}}</text>
+        </view>
+        <view class="submitOrder-bottom">
+            <view class="bottom-item">
+                <text>支付方式</text>
+                <view class="wxzf">
+                    <image src="../../../image/wxzf.png" />
+                    <text>微信支付</text>
+                </view>
+            </view>
+            <view class="bottom-item">
+                <text>运费</text>
+                <text>{{itemDetail.freight ? "¥"+itemDetail.freight : "满88包邮"}}</text>
+            </view>
+            <view class="bottom-item">
+                <label class="radio">
+                    <view class="select-icon">
+                        <icon wx:if="{{itemDetail.invoice}}" type="success" color="#ff4444" data-isInvoice="{{itemDetail.invoice}}" bindtap="selectInvoice"/>
+                        <icon wx:else type="circle" data-isInvoice="{{itemDetail.invoice}}" bindtap="selectInvoice"/>
+                    </view>
+                    <text>开具电子发票</text>
+                </label>
+            </view>
+        </view>
+    </view>
+    <view class="submitOrder-btn">
+        <text class="total">合计：<text class="color-red">¥{{itemDetail.totalMoney}}</text></text>
+        <view class="btn" bindtap="submitOrderFun">立即支付</view>
+    </view>
+</block>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

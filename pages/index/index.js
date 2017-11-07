@@ -1,7 +1,6 @@
 /**
  * Created by Liujx on 2017-10-13 09:42:07
  */
-
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const getBookListUrl = require('../../config').getBookListUrl;
 const addAttentionUrl = require('../../config').addAttentionUrl;
@@ -80,19 +79,21 @@ Page({
         if(this.data.activeIndex == 0) {
             this.setData({
                 pageOne: 1,
+                inputVal: "",
                 loadmoreDef: true,
                 bookListItem: [],
             })
-            this.getBookListDefRequest(self.data.searchVal)
+            this.getBookListDefRequest()
         }
 
         if(this.data.activeIndex == 1) {
             this.setData({
                 pageTwo: 1,
+                inputVal: "",
                 loadmoreHot: true,
                 hotBookListItem: [],
             })
-            this.getBookListHotRequest(self.data.searchVal)
+            this.getBookListHotRequest()
         }
     },
     // 关注
@@ -111,6 +112,18 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, '关注成功！');
+                    if(self.data.activeIndex == 0) {
+                        self.data.bookListItem[index].followed = true;
+                        self.setData({
+                            bookListItem: self.data.bookListItem
+                        })
+                    }
+                    if(self.data.activeIndex == 1) {
+                        self.data.hotBookListItem[index].followed = true;
+                        self.setData({
+                            hotBookListItem: self.data.hotBookListItem
+                        })
+                    }
                 } else {
                     util.showMessage(self, data.data.msg);
                 }
@@ -125,9 +138,10 @@ Page({
         })
     },
     // 点击图书
-    tapBook: function() {
+    tapBook: function(e) {
+        let bookId = e.currentTarget.dataset.id
         wx.navigateTo({
-            url: '../bookDetails/bookDetails?id='
+            url: '../bookDetails/bookDetails?id=' + bookId
         })
     },
     // 分享
@@ -174,6 +188,7 @@ Page({
     collectFun: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
+        let index = e.currentTarget.dataset.index;
         wx.request({
             url: collectUrl,
             data: {
@@ -182,6 +197,18 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, '收藏成功！');
+                    if(self.data.activeIndex == 0) {
+                        self.data.bookListItem[index].collected = true;
+                        self.setData({
+                            bookListItem: self.data.bookListItem
+                        })
+                    }
+                    if(self.data.activeIndex == 1) {
+                        self.data.hotBookListItem[index].collected = true;
+                        self.setData({
+                            hotBookListItem: self.data.hotBookListItem
+                        })
+                    }
                 } else {
                     util.showMessage(self, data.data.msg);
                 }

@@ -42,6 +42,7 @@ Page({
         }
         if(!this.data.isSelectBook) {
             this.setData({
+                isDel: false,
                 isEdit: false,
                 bookListId: '',
                 src: '',
@@ -61,6 +62,7 @@ Page({
                 videoKey: '', // 视频key
                 voiceKey: '', // 音频key
                 imagesKey: [], // 图片key
+                tempImagesKey: [], // 图片key
                 content: '', // 书单内容
                 bookKey: [] // 图书key
             })
@@ -283,7 +285,7 @@ Page({
     // 上传图片
     chooseImage: function() {
         let self = this
-        self.data.imagesKey = [];
+        self.data.tempImagesKey = [];
         self.data.isSelectBook = true;
         wx.chooseImage({
             count: 9 - self.data.imageList.length,
@@ -302,9 +304,21 @@ Page({
     // 删除图片
     delImage: function(e) {
         var self = this;
+        let index = e.target.dataset.index;
+        let imagesKey = self.data.imagesKey;
+        let imagesAllKey = self.data.imagesAllKey;
+        let array;
+        if(imagesAllKey) {
+            array = imagesAllKey
+        } else {
+            array = imagesKey
+        }
+        array.splice(index, 1);
         self.removeByValue(self.data.imageList, e.target.dataset.src)
         self.setData({
-            imageList: self.data.imageList
+            isDel: true,
+            imageList: self.data.imageList,
+            imagesKey: array
         })
     },
     // 查看图片大图
@@ -324,8 +338,7 @@ Page({
             name: 'fileData',
             success: (resp) => {
                 successUp++;
-                self.data.imagesKey.push({ "id": JSON.parse(resp.data).data[0].id })
-                console.log(JSON.parse(resp.data).data[0])
+                self.data.tempImagesKey.push({ "id": JSON.parse(resp.data).data[0].id })
             },
             fail: (res) => {
                 failUp++;
@@ -335,7 +348,9 @@ Page({
                 if (i == length) {
                     util.showMessage(self, '总共' + successUp + '张上传成功', 3000);
                     self.setData({
-                        imagesKey: self.data.imagesKey
+                        isDel: false,
+                        tempImagesKey: self.data.tempImagesKey,
+                        imagesAllKey: self.data.imagesKey.concat(self.data.tempImagesKey)
                     })
                 } else { //递归调用uploadDIY函数
                     self.uploadDIY(filePaths, successUp, failUp, i, length);
@@ -369,9 +384,18 @@ Page({
         let videoKey = self.data.videoKey;
         let voiceKey = self.data.voiceKey;
         let imagesKey = self.data.imagesKey;
+        let tempImagesKey = self.data.tempImagesKey;
         let content = self.data.content;
         let bookKey = self.data.bookKey;
         let bookListId = self.data.bookListId;
+        let imagesAllKey = self.data.imagesAllKey;
+        if(tempImagesKey && !self.data.isDel) {
+            imagesAllKey = imagesKey.concat(tempImagesKey);
+        } else {
+            imagesAllKey = imagesKey;
+        }
+        
+        console.log(imagesAllKey)
         if(bookListName == '') {
             util.showMessage(self, '请填写书单名称！', 2000);
             return false;
@@ -392,7 +416,7 @@ Page({
                     "title": bookListName,
                     "video": { "id": videoKey },
                     "voice": { "id": voiceKey },
-                    "images": imagesKey,
+                    "images": imagesAllKey,
                     "content": content,
                     "id": bookListId
                 },

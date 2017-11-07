@@ -148,14 +148,20 @@ navigator:last-child {
 	align-self: flex-start;
 	max-width:90%;
 	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
 .book-left .left-text .work-name {
-	display: flex;
 	align-self: flex-start;
 	width: 78%;
 	font-size: 12px;
 	color: #999;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .details-item .book-right {
@@ -292,6 +298,10 @@ navigator:last-child {
 .bottom-right .share {
 	padding: 0 26rpx 0 66rpx;
 	background: #ff4444;
+}
+
+.bottom-right .share:after {
+	content: none;
 }
 
 .bottom-right .share text {

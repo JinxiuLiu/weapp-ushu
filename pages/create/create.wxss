@@ -3,7 +3,7 @@
 }
 
 audio {
-    margin:10rpx 30rpx;
+    margin: 10rpx 30rpx;
 }
 
 .weui-cells::after,
@@ -49,7 +49,7 @@ audio {
 .page-body-info {
     display: flex;
     padding: 0;
-    height: 300rpx;
+    height: 340rpx;
     border-top: 1rpx solid #D9D9D9;
     border-bottom: 1rpx solid #D9D9D9;
     align-items: center;
@@ -97,35 +97,41 @@ audio {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20rpx 0;
+    width: 100%;
 }
 
 .video-btn .video-again {
-    width: 200rpx;
-    height: 50rpx;
-    line-height: 50rpx;
+    width: 50%;
+    height: 100%;
+    line-height: 88rpx;
     text-align: center;
-    border-radius: 10rpx;
-    background-color: #ff4444;
-    font-size: 12px;
-    color: #fff;
-    margin-right: 20rpx;
+    font-size: 16px;
+    color: #666;
+    position: relative;
+}
+
+.video-btn .video-again:after {
+    content: "";
+    position: absolute;
+    top: 24rpx;
+    right: 0;
+    width: 1rpx;
+    border-top: 40rpx solid #c8c8c8;
 }
 
 .video-btn .video-del {
-    width: 200rpx;
-    height: 50rpx;
-    line-height: 50rpx;
+    width: 50%;
+    height: 100%;
+    line-height: 88rpx;
     text-align: center;
-    border-radius: 10rpx;
-    background-color: #ff4444;
-    font-size: 12px;
-    color: #fff;
+    font-size: 16px;
+    color: #ff4444;
 }
 
 
-/* 录音 */
 
+
+/* 录音 */
 .page-body-wrapper {
     justify-content: space-between;
     flex-grow: 1;
@@ -148,7 +154,7 @@ audio {
 }
 
 .page-body-buttons {
-    margin-top: 20rpx;
+    margin: 20rpx 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -190,6 +196,13 @@ image {
 .weui-uploader__file .weui-uploader__img {
     width: 100%;
     height: 100%;
+}
+
+.delVoice {
+    border-top: 1rpx solid #ededef;
+    text-align: center;
+    line-height: 88rpx;
+    color: #ff4444;
 }
 
 .del-img {

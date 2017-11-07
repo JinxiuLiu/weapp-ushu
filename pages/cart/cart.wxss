@@ -19,12 +19,17 @@
 }
 
 .cart .cart-item .title {
-	height: 59rpx;
-	line-height: 59rpx;
-	padding-left: 80rpx;
+	display: flex;
+	align-items: center;
+	height: 88rpx;
+	padding: 0 30rpx;
 	font-size: 12px;
 	color: #999;
 	border-bottom: 1rpx solid #dcdcdc;
+}
+
+.cart .cart-item .title text {
+	padding-left: 20rpx;
 }
 
 .weui-cell {
@@ -73,6 +78,7 @@
 .book-left .left-image {
 	width: 140rpx;
 	height: 177rpx;
+	border: 1rpx solid #f0f0f0;
 }
 
 .book-left .left-image image {

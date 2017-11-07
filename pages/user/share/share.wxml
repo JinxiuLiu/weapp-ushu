@@ -11,55 +11,30 @@
             </view>
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <view class="bookList-item">
-                        <text class="bookList-name">2017年最佳治愈系书单</text>
-                        <text class="user-name">showlsla<text class="time">发布于2017-10-10</text></text>
+                    <view class="bookList-item" wx:for="{{shareBookListItem}}">
+                        <text class="bookList-name">{{item.title}}</text>
+                        <text class="user-name">{{item.name}}<text class="time">发布于{{item.created}}</text></text>
                     </view>
-                    <view class="bookList-item">
-                        <text class="bookList-name">2017年最佳治愈系书单</text>
-                        <text class="user-name">showlsla<text class="time">发布于2017-10-10</text></text>
-                    </view>
-                    <view class="bookList-item">
-                        <text class="bookList-name">2017年最佳治愈系书单</text>
-                        <text class="user-name">showlsla<text class="time">发布于2017-10-10</text></text>
-                    </view>
-                    <view class="bookList-item">
-                        <view class="item-top">
-                            <text class="bookList-name">2017年最佳治愈系书单2017年最佳治愈系书单2017年最佳治愈系书单</text>
-                        </view>
-                        <text class="user-name">showlsla<text class="time">发布于2017-10-10</text></text>
+                    <view wx:if="{{shareBookListItem.length == 0}}" class="NoData">暂无分享</view>
+                    <view class="weui-loadmore" wx:if="{{bookListLoadMore}}">
+                        <view class="weui-loading"></view>
+                        <view class="weui-loadmore__tips">正在加载</view>
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="collect-book">
+                    <view class="collect-book" wx:for="{{shareBookItem}}">
                         <view class="book-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
+                            <image src="{{item.picPath}}"></image>
                         </view>
                         <view class="book-text">
-                            <text class="book-name">2017年最佳治愈系书单2017年最佳治愈系书单2017年最佳治愈系书单2017年最佳治愈系书单2017年最佳治愈系书单2017年最佳治愈系书单</text>
-                            <text class="book-from">出自书单 2017必备的10本好处</text>
+                            <text class="book-name">{{item.bookName}}</text>
+                            <text class="book-from">出自书单 {{item.title}}</text>
                         </view>
                     </view>
-                    <view class="collect-book">
-                        <view class="book-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
-                        </view>
-                        <view class="book-text">
-                            <text class="book-name">2017年最佳治愈系书单</text>
-                            <text class="book-from">出自书单 2017必备的10本好处</text>
-                        </view>
-                    </view>
-                    <view class="collect-book">
-                        <view class="book-img">
-                            <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
-                        </view>
-                        <view class="book-text">
-                            <text class="book-name">2017年最佳治愈系书单</text>
-                            <text class="book-from">出自书单 2017必备的10本好处</text>
-                        </view>
-                    </view>
+                    <view wx:if="{{shareBookItem.length == 0}}" class="NoData">暂无分享</view>
                 </view>
             </view>
         </view>
     </view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

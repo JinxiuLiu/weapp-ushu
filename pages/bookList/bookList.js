@@ -25,9 +25,10 @@ Page({
     },
     // 首屏渲染
     onLoad: function(options) {
-        this.detailRequest(options.id);
-        this.readBookListRequest(options.id);
-        this.commentRequest(options.id);
+        let id = options.id || options.scene;
+        this.detailRequest(id);
+        this.readBookListRequest(id);
+        this.commentRequest(id);
         this.cartTotalRequest();
         let fromId = options.uuid || '';
         this.setData({
@@ -76,7 +77,7 @@ Page({
             data: {
                 bookId: bookId,
                 bookListItemId: bookListId,
-                fromShareId: ''
+                fromShareId: self.data.fromId
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -251,7 +252,7 @@ Page({
             success: data => {
                 if(data.data.success) {
                     self.setData({
-                        cartTotal: data.data.data
+                        cartTotal: data.data.data || 0
                     })
                 }
             }

@@ -7,12 +7,18 @@
         <view class="weui-loadmore__tips">正在加载</view>
     </view>
     <view class="cart-item" wx:for="{{cartList}}" wx:for-index="index">
-        <view class="title">书单：{{item.title}}</view>
+        <view class="title">
+            <view class="select-icon">
+                <icon wx:if="{{selectAllListStatus}}" type="success" color="#ff4444" bindtap="selectAllBookList" data-index="{{index}}" data-i="{{i}}"/>
+                <icon wx:else type="circle" bindtap="selectAllBookList" data-index="{{index}}" data-i="{{i}}"/>
+            </view>
+            <text>书单：{{item.title}}</text>
+        </view>
         <view class="bookinfo" wx:for="{{item.items}}" wx:for-index="i">
             <view class="weui-cell__bd">
                 <view class="select-icon">
-                    <icon wx:if="{{item.checked}}" type="success" color="#ff4444" bindtap="selectList" data-index="{{index}}" data-i="{{i}}"/>
-                    <icon wx:else type="circle" bindtap="selectList" data-index="{{index}}" data-i="{{i}}"/>
+                    <icon wx:if="{{item.checked}}" type="success" color="#ff4444" bindtap="selectList"/>
+                    <icon wx:else type="circle" bindtap="selectList"/>
                 </view>
                 <view class="book-left">
                     <view class="left-image">
@@ -37,6 +43,7 @@
             </view>
         </view>
     </view>
+    <view wx:if="{{cartList.length == 0}}" class="NoData">暂无商品</view>
 </view>
 <view class="cart-bottom">
     <view class="select-icon">

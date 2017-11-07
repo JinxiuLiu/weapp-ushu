@@ -109,6 +109,22 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, data.data.msg);
+                    self.setData({
+                        page: 1,
+                    })
+                    wx.request({
+                        url: myBookListUrl,
+                        data: {
+                            page: 1
+                        },
+                        success: data => {
+                            self.setData({
+                                loadmore: false,
+                                page: 1,
+                                myBookList: data.data.rows
+                            })
+                        }
+                    })
                 } else {
                     util.showMessage(self, data.data.msg);
                 }

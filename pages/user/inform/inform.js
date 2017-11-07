@@ -97,6 +97,9 @@ Page({
             success: data => {
                 if(!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
+                    self.setData({
+                        systemLoad: false,
+                    })
                     return false;
                 }
                 self.data.systemPage++
@@ -119,6 +122,9 @@ Page({
             success: data => {
                 if(!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
+                    self.setData({
+                        attentionLoad: false,
+                    })
                     return false;
                 }
                 self.data.attentionPage++
@@ -141,6 +147,9 @@ Page({
             success: data => {
                 if(!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
+                    self.setData({
+                        earningsLoad: false,
+                    })
                     return false;
                 }
                 self.data.earningsPage++
@@ -163,6 +172,9 @@ Page({
             success: data => {
                 if(!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
+                    self.setData({
+                        commentLoad: false,
+                    })
                     return false;
                 }
                 self.data.commentPage++

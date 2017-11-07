@@ -144,7 +144,7 @@
 }
 
 .bookList-item {
-    padding-left: 40rpx;
+    padding: 0 40rpx;
 }
 
 .bookList-item swiper swiper-item {

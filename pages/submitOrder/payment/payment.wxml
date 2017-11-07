@@ -1,0 +1,9 @@
+<view class="bottom-item">
+    <text>支付方式</text>
+    <view class="wxzf">
+        <image src="../../../image/wxzf.png" />
+        <text>微信支付</text>
+    </view>
+</view>
+<button type="primary" bindtap="paymentFun">确认支付</button>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

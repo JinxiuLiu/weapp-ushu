@@ -154,3 +154,11 @@
 	border: 1rpx solid #ff761b;
 	margin-left: 18rpx;
 }
+
+.order-item .item-bottom .give {
+	margin-right: 0;
+}
+
+.order-item .item-bottom .give:after {
+	content: none;
+}

@@ -14,7 +14,7 @@
         <image src="../../image/ranking.png"></image>
     </navigator>
 </view>
-<swiper indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
+<swiper wx:if="{{imgUrls.length}}" indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
     <block wx:for="{{imgUrls}}">
         <swiper-item>
             <image src="{{item.image.url}}" class="slide-image" height="150" />
@@ -56,7 +56,7 @@
                         <view class="bookList-name" data-id="{{item.id}}" bindtap="tapBookList">
                             <text>{{item.title}}</text>
                         </view>
-                        <swiper wx-if="{{!!item.images}}" class="bookList-img" indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
+                        <swiper wx-if="{{item.images.length}}" class="bookList-img" indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
                             <block wx:for="{{item.images}}">
                                 <swiper-item>
                                     <image src="{{item.url}}" class="slide-image" />
@@ -74,13 +74,15 @@
                         </view>
                         <view class="bookList-item" id="bookList">
                             <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
-                                <view class="scroll-view-item_H" bindtap="tapBook" wx:for="{{item.items}}">
-                                    <image style="width: 100%; height: 100%;" src="{{item.picPath}}"></image>
-                                </view>
+                                <block wx:for="{{item.items}}">
+                                    <view class="scroll-view-item_H" bindtap="tapBook" data-id="{{item.id}}">
+                                        <image style="width: 100%; height: 100%;" src="{{item.picPath}}"></image>
+                                    </view>
+                                </block>
                             </scroll-view>
                         </view>
                         <view class="bookList-tag" wx-if="{{item.tags}}">
-                            <view class="tag" wx:for="{{item.tags}}">
+                            <view class="tag" wx:if="{{index < 3}}" wx:for="{{item.tags}}" wx:for-index="index">
                                 <text>{{item}}</text>
                             </view>
                         </view>
@@ -97,7 +99,7 @@
                                 <button hover-class="" data-item="{{item}}" open-type="share" class="share">
                                     <image style="width: 37rpx; height: 37rpx;" src="../../image/index-share.png"></image>
                                 </button>
-                                <view class="collect" data-id="{{item.id}}" bindtap="collectFun">
+                                <view class="collect" data-index="{{index}}" data-id="{{item.id}}" bindtap="collectFun">
                                     <image wx:if="{{!item.collected}}" style="width: 37rpx; height: 37rpx;" src="../../image/collect.png"></image>
                                     <image wx:else style="width: 37rpx; height: 37rpx;" src="../../image/collect-select.png"></image>
                                 </view>
@@ -136,7 +138,7 @@
                         <view class="bookList-name" data-id="{{item.id}}" bindtap="tapBookList">
                             <text>{{item.title}}</text>
                         </view>
-                        <swiper wx-if="{{!!item.images}}" class="bookList-img" indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
+                        <swiper wx-if="{{item.images.length}}" class="bookList-img" indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
                             <block wx:for="{{item.images}}">
                                 <swiper-item>
                                     <image src="{{item.url}}" class="slide-image" />
@@ -159,15 +161,9 @@
                                 </view>
                             </scroll-view>
                         </view>
-                        <view class="bookList-tag">
-                            <view class="tag">
-                                <text>插画</text>
-                            </view>
-                            <view class="tag">
-                                <text>水彩</text>
-                            </view>
-                            <view class="tag">
-                                <text>123</text>
+                        <view class="bookList-tag" wx-if="{{item.tags}}">
+                            <view class="tag" wx:if="{{index < 3}}" wx:for="{{item.tags}}" wx:for-index="index">
+                                <text>{{item}}</text>
                             </view>
                         </view>
                         <view class="bookList-footer">

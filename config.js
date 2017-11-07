@@ -3,7 +3,7 @@
  * 小程序配置文件
  */
 
-var host = "http://192.168.0.111:8081"
+var host = "http://rkkscs.xatime.com"
 
 var config = {
 
@@ -14,6 +14,12 @@ var config = {
 
     // 身份证上传接口
     identityCardUrl: `${host}/identityCard/upload`,
+
+    // 登录接口
+    loginUrl: `${host}/wxa/login`,
+
+    // 赠朋友-地址
+    giveAddressUrl: `${host}/order/express/add`,
 
     // 身份证提交认证
     commitCardUrl: `${host}/identityCard/commit`,
@@ -26,6 +32,9 @@ var config = {
 
     // 绑定手机号
     bindMobileUrl: `${host}/mobile/bind`,
+
+    // 注册
+    registerUrl: `${host}/wxa/register`,
 
     // 选择图书
     getBookListUrl: `${host}/bookList/grid_items`,
@@ -64,7 +73,7 @@ var config = {
     collectBookListUrl: `${host}/collection/grid_list_my`,
 
     // 我的收藏（图书）
-    collectBookUrl: `${host}/collection/grid_item_my`,
+    collectBookViewUrl: `${host}/collection/grid_item_my`,
 
     // 新增收货地址
     addAddressUrl: `${host}/consignee/edit`,
@@ -130,13 +139,31 @@ var config = {
     canGetMoneyUrl: `${host}/profit/can_get_money`,
 
     // 收益列表
-    moneyListUrl: `${host}/profit/money_list`,
+    moneyListUrl: `${host}/profit/money_list_by_book_list_my`,
+
+    // 提现记录
+    withdrawalRecordUrl: `${host}/withdrawal/grid_my`,
+
+    // 提现
+    addWithdrawalUrl: `${host}/withdrawal/add`,
+
+    // 支付
+    paymentUrl: `${host}/charge/req_lite`,
 
     // 书单收益明细
     gridMyListUrl: `${host}/profit/grid_my`,
 
+    // 书单收益排行
+    gridMyListRankingUrl: `${host}/profit/money_list_by_book_list`,
+
+    // 用户收益排行
+    userMoneyRankingUrl: `${host}/profit/money_list_by_member`,
+
     // 分享成功回调
     shareSaveUrl: `${host}/share/save`,
+
+    // 我的分享
+    shareListUrl: `${host}/share/grid_distinct_my`,
 
     // 关注通知
     informAttentionUrl: `${host}/follow/grid_follow_me`,
@@ -149,6 +176,12 @@ var config = {
 
     // 评论通知
     informCommentUrl: `${host}/comment/to_me`,
+
+    // 图书详情
+    bookDetailUrl: `${host}/bookListItem/detail`,
+
+    // 图书收藏
+    collectBookUrl: `${host}/collection/add`,
 
 };
 

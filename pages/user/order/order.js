@@ -10,6 +10,7 @@ Page({
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
+        loadmore: true,
         orderList: [],
     },
     onLoad: function () {
@@ -25,13 +26,16 @@ Page({
         wx.request({
             url: orderListUrl,
             method: 'POST',
-            data: {},
+            data: {
+                rows: 999
+            },
             header: {
                   'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: data => {
                 if (data.data.success) {
                     that.setData({
+                        loadmore: false,
                         orderList: data.data.data
                     })
                 } else {
@@ -45,5 +49,20 @@ Page({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         });
+    },
+    // 查看详情
+    SeeDetailsFun: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../submitOrder/orderDetails/orderDetails?id=' + id
+        })
+    },
+    // 赠朋友
+    giveFriendFun: function(e) {
+        let self = this;
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: './giveFriend/giveFriend?id=' + id
+        })
     }
 });

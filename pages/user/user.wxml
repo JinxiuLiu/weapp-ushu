@@ -106,4 +106,4 @@
 		</view>
 	</navigator>
 </view>
-<button type="primary">退出登录</button>
+<!-- <button type="primary">退出登录</button> -->

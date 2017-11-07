@@ -81,4 +81,8 @@ Page({
             }
         })
     },
+    // 提现
+    withdrawFun: function() {
+        
+    }
 });

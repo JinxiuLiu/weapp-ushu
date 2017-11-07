@@ -1,34 +1,39 @@
 /**
  * Created by Liujx on 2017-10-23 13:35:56
  */
+const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+const bookDetailUrl = require('../../config').bookDetailUrl;
+const collectBookUrl = require('../../config').collectBookUrl;
+const addCartUrl = require('../../config').addCartUrl;
+const shareSaveUrl = require('../../config').shareSaveUrl;
+const generateUrl = require('../../config').generateUrl;
+const cartTotalUrl = require('../../config').cartTotalUrl;
+const util = require('../../utils/util');
 
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 Page({
     data: {
-        imgUrls: [
-            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-        ],
-        indicatorDots: false,
-        autoplay: true,
-        interval: 5000,
-        duration: 1000,
         tabs: ["图书详情", "图书目录", "内容简介", "作者简介"],
         activeIndex: 0,
         sliderOffset: 0,
-        sliderLeft: 0
+        sliderLeft: 0,
+        cartTotal: 0,
+        bookDetailItem: [],
+        fromId: ''
     },
-    onLoad: function() {
-        var that = this;
+    onLoad: function(option) {
+        let self = this;
+        let id = option.id || option.scene;
+        let fromId = option.uuid || '';
+        this.setData({
+            fromId: fromId
+        })
+        this.bookDetail(id)
+        this.cartTotalRequest();
         wx.getSystemInfo({
             success: function(res) {
-                that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+                self.setData({
+                    sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
+                    sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
                 });
             }
         });
@@ -38,5 +43,169 @@ Page({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         });
+    },
+    // 图书详情
+    bookDetail: function(id) {
+        let self = this;
+        wx.request({
+            url: bookDetailUrl,
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                id: id
+            },
+            success: data => {
+                self.setData({
+                    bookDetailItem: [data.data]
+                })
+            }
+        })
+    },
+    // 收藏图书
+    collectBookFun: function(e) {
+        let self = this;
+        let id = e.currentTarget.dataset.id;
+        wx.request({
+            url: collectBookUrl,
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                bookListItemId: id
+            },
+            success: data => {
+                if(data.data.success) {
+                    util.showMessage(self, '收藏成功！')
+                    self.bookDetail()
+                } else {
+                    util.showMessage(self, data.data.msg)
+                }
+            }
+        })
+    },
+    // 加入购物车
+    addCartFun: function(e) {
+        let self = this;
+        let bookId = e.currentTarget.dataset.bookid;
+        let bookListId = e.currentTarget.dataset.booklistid;
+        wx.request({
+            url: addCartUrl,
+            method: 'POST',
+            data: {
+                bookId: bookId,
+                bookListItemId: bookListId,
+                fromShareId: self.data.fromId
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            success: data => {
+                if(data.data.success) {
+                    self.data.cartTotal++
+                    self.setData({
+                        cartTotal: self.data.cartTotal
+                    })
+                    util.showMessage(self, data.data.msg)
+                } else {
+                    util.showMessage(self, data.data.msg)
+                }
+            }
+        })
+    },
+    // 立即购买 && 赠送朋友
+    settlementFun: function(e) {
+        const self = this;
+        let isGive = e.currentTarget.dataset.give;
+        let bookListItemId = e.currentTarget.dataset.id;
+        wx.request({
+            url: generateUrl,
+            method: 'POST',
+            data: {
+                give: isGive,
+                items: [{
+                    'bookListItemId': bookListItemId,
+                    'fromShareId': self.data.fromId,
+                    'quantity': 1,
+                }]
+            },
+            success: function(data) {
+                if (data.data.success) {
+                    wx.navigateTo({
+                        url: '../submitOrder/submitOrder?id=' + data.data.data
+                    })
+                } else {
+                    util.showMessage(self, data.data.msg)
+                }
+            }
+        });
+    },
+    // 分享
+    onShareAppMessage: function(res) {
+        let self = this;
+        let title = '';
+        let path = '';
+        let bookListItemId = res.target.dataset.id;
+        let uuid = util.uuid();
+        if (res.from === 'button') {
+            title = res.target.dataset.title;
+            path = '/pages/bookDetail/bookDetail?id=' + bookListItemId + '&uuid=' + uuid
+        }
+        return {
+            title: title,
+            path: path,
+            success: function(res) {
+                // 转发成功
+                wx.request({
+                    url: shareSaveUrl,
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    data: {
+                        id: uuid,
+                        bookListItemId: bookListItemId,
+                        fromId: self.data.fromId
+                    },
+                    success: data => {
+                        if(data.data.success) {
+                            util.showMessage(self, data.data.msg)
+                        } else {
+                            util.showMessage(self, data.data.msg)
+                        }
+                    }
+                })
+            },
+            fail: function(res) {
+                // 转发失败
+            }
+        }
+    },
+    // 获取购物车总数量
+    cartTotalRequest: function() {
+        let self = this;
+        wx.request({
+            url: cartTotalUrl,
+            method: 'POST',
+            data: {},
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            success: data => {
+                if(data.data.success) {
+                    self.setData({
+                        cartTotal: data.data.data || 0
+                    })
+                }
+            }
+        })
+    },
+    // 跳转购物车
+    navigateToCart: function() {
+        wx.switchTab({
+            url: '../cart/cart'
+        })
     }
 })

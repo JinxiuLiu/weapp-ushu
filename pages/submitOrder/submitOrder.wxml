@@ -1,6 +1,6 @@
 <block wx:for="{{orderDetailList}}" wx:for-item="itemDetail">
     <view class="submitOrder">
-    	<view class="submitOrder-address" wx:if="{{!itemDetail.give}}">
+    	<view class="submitOrder-address" wx:if="{{!itemDetail.give && itemDetail.consignee}}" bindtap="selectAddress">
     		<view class="address-img">
     			<image style="width: 32rpx; height: 46rpx" src="../../image/address.png"></image>
     		</view>
@@ -15,6 +15,10 @@
     			<image style="width: 28rpx; height: 42rpx" src="../../image/right-arrow-gray.png"></image>
     		</view>
     	</view>
+        <view class="submitOrder-address" wx:elif="{{!itemDetail.give}}" bindtap="addAddressFun">
+            <image style="width: 80rpx; height: 80rpx" src="../../image/bookadd.png"></image>
+            <text style="padding-left: 20rpx;">添加地址</text>
+        </view>
     	<view class="cart-item" wx:for="{{itemDetail.itemList}}" wx:for-item="itemList">
     		<view class="title">书单：{{itemList.title}}</view>
     		<view class="bookinfo">

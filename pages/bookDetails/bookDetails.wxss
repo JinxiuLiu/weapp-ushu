@@ -71,6 +71,12 @@
 	color: #666;
 }
 
+rich-text {
+	line-height: 60rpx;
+	font-size: 14px;
+	color: #666;
+}
+
 /* 底部 */
 .bookDetails-bottom {
 	display: flex;
@@ -92,13 +98,6 @@
 	background: #ff4444;
 	font-size: 14px;
 	color: #fff;
-}
-
-.bookDetails-bottom .bottom-item:first-child {
-	flex-direction: column;
-	background: #fff;
-	font-size: 12px;
-	color: #999;
 }
 
 .bookDetails-bottom .bottom-item image {
@@ -132,4 +131,64 @@
 
 .bookDetails-bottom .give image {
 	padding-right: 18rpx;
+}
+
+.bookDetails-bottom .bottom-item.left-btn {
+	display: flex;
+	flex-direction: space-between;
+	background:#fff;
+	font-size:12px;
+	color:#999;
+}
+
+.left-btn .collect {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	padding-right: 10rpx;
+}
+
+.left-btn .share {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	padding-left: 10rpx;
+	padding-right: 0;
+	margin: 0;
+	font-size: 12px;
+	line-height: 0;
+	color: #999;
+	background: #fff;
+}
+
+.left-btn .share:after {
+	content: none;
+}
+
+/* 购物篮 */
+.cart {
+	position: fixed;
+	right: 10px;
+	bottom: 100px;
+}
+
+.cart .cart-img {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 92rpx;
+	height: 92rpx;
+	background: #666;
+	border-radius: 50%;
+}
+
+.cart .cart-img image {
+	width: 42rpx;
+	height: 42rpx;
+}
+
+.weui-badge {
+	position: absolute;
+	top: -.3em;
+	right: -.3em;
 }

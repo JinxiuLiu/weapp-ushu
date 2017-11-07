@@ -15,6 +15,7 @@
                         <text class="bookList-name">{{item.title}}</text>
                         <text class="user-name">{{item.creatorName}}<text class="time">发布于{{item.created}}</text></text>
                     </view>
+                    <view wx:if="{{bookListItem.length == 0}}" class="NoData">暂无收藏</view>
                     <view class="weui-loadmore" wx:if="{{loadmore}}">
                         <view class="weui-loading"></view>
                         <view class="weui-loadmore__tips">正在加载</view>
@@ -30,6 +31,7 @@
                             <text class="book-from">出自书单 {{item.bookListTitle}}</text>
                         </view>
                     </view>
+                    <view wx:if="{{bookItem.length == 0}}" class="NoData">暂无收藏</view>
                     <view class="weui-loadmore" wx:if="{{loadmore}}">
                         <view class="weui-loading"></view>
                         <view class="weui-loadmore__tips">正在加载</view>

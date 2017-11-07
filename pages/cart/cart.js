@@ -18,6 +18,7 @@ Page({
         isChecked: false,
         goodsChecked: false,
         selectAllStatus: false,
+        selectAllListStatus: false,
         total: '0'
     },
     onShow: function() {
@@ -44,7 +45,6 @@ Page({
         let tempCartList = self.data.cartList;
         for (var j = 0; j < tempCartList.length; j++) {
             for (var k = 0; k < tempCartList[j].items.length; k++) {
-                console.log(tempCartList[j].items[k].checked);
                 if (!tempCartList[j].items[k].checked) {
                     self.data.selectAllStatus = false;
                     break;
@@ -53,7 +53,6 @@ Page({
                 }
             }
         }
-
         self.data.selectGoods = [];
         self.data.settlementItems = [];
         for (var j = 0; j < tempCartList.length; j++) {
@@ -64,7 +63,6 @@ Page({
                 }
             }
         }
-
         // 判断是否为空数组
         if (self.data.selectGoods.length) {
             // 获取总价
@@ -74,11 +72,15 @@ Page({
                 total: '0'
             })
         }
-
         self.setData({
             selectAllStatus: self.data.selectAllStatus,
             cartList: self.data.cartList
         })
+    },
+    // 书单全选
+    selectAllBookList: function(e) {
+        let self = this;
+        let selectAllStatus = !self.data.selectAllStatus;
     },
     // 全选
     selectAll: function(e) {

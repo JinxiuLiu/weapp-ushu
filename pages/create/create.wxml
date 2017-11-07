@@ -28,18 +28,18 @@
 	</view>
 	<view class="weui-cells__title">上传音频</view>
 	<view class="weui-cells weui-cells_after-title">
-		<block wx:if="{{!isEdit}}">
+		<block wx:if="{{!voiceSrc}}">
 			<block wx:if="{{recording === false && playing === false && hasRecord === false}}">
-			<view class="page-body-time">
-				<text class="time-big">{{formatedRecordTime}}</text>
-			</view>
-			<view class="page-body-buttons">
-				<view class="page-body-button"></view>
-				<view class="page-body-button" bindtap="startRecord">
-					<image src="../../image/record.png"></image>
+				<view class="page-body-time">
+					<text class="time-big">{{formatedRecordTime}}</text>
 				</view>
-				<view class="page-body-button"></view>
-			</view>
+				<view class="page-body-buttons">
+					<view class="page-body-button"></view>
+					<view class="page-body-button" bindtap="startRecord">
+						<image src="../../image/start.png"></image>
+					</view>
+					<view class="page-body-button"></view>
+				</view>
 			</block>
 			<block wx:if="{{recording === true}}">
 				<view class="page-body-time">
@@ -48,7 +48,7 @@
 				<view class="page-body-buttons">
 					<view class="page-body-button"></view>
 					<view class="page-body-button" bindtap="stopRecord">
-						<view class="button-stop-record"></view>
+						<image src="../../image/start.png"></image>
 					</view>
 					<view class="page-body-button"></view>
 				</view>
@@ -56,34 +56,30 @@
 			<block wx:if="{{hasRecord === true && playing === false}}">
 				<view class="page-body-time">
 					<text class="time-big">{{formatedPlayTime}}</text>
-					<text class="time-small">{{formatedRecordTime}}</text>
+					<!-- <text class="time-small">{{formatedRecordTime}}</text> -->
 				</view>
 				<view class="page-body-buttons">
 					<view class="page-body-button"></view>
 					<view class="page-body-button" bindtap="playVoice">
 						<image src="../../image/play.png"></image>
 					</view>
-					<view class="page-body-button" bindtap="clear">
-						<image src="../../image/trash.png"></image>
-					</view>
+					<view class="page-body-button"></view>
 				</view>
 			</block>
 			<block wx:if="{{hasRecord === true && playing === true}}">
 				<view class="page-body-time">
 					<text class="time-big">{{formatedPlayTime}}</text>
-					<text class="time-small">{{formatedRecordTime}}</text>
+					<!-- <text class="time-small">{{formatedRecordTime}}</text> -->
 				</view>
 				<view class="page-body-buttons">
 					<view class="page-body-button" bindtap="stopVoice">
 						<image src="../../image/stop.png"></image>
 					</view>
-					<view class="page-body-button" bindtap="clear">
-						<image src="../../image/trash.png"></image>
-					</view>
 				</view>
 			</block>
 		</block>
 		<audio wx:else name="{{bookListName}}" src="{{voiceSrc}}" id="myAudio" controls loop></audio>
+		<view class="delVoice" bindtap="clear">删除</view>
 	</view>
 	<view class="weui-cells__title">上传图片{{imageList.length}}/9</view>
 	<view class="weui-cells weui-cells_after-title">
@@ -92,7 +88,7 @@
 		        <block wx:for="{{imageList}}" wx:for-item="image">
 		            <view class="weui-uploader__file">
 		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
-		                <view class="del-img" data-src="{{image}}" bindtap="delImage">删除</view>
+		                <view class="del-img" data-src="{{image}}" data-index="{{index}}" bindtap="delImage">删除</view>
 		            </view>
 		        </block>
 		    </view>

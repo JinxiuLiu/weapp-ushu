@@ -11,78 +11,28 @@
             </view>
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <view class="weui-cell">
-		                <view class="weui-cell__hd first">1</view>
-		                <view class="weui-cell__bd">猜猜我是谁</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
+                    <view class="weui-cell" wx:for="{{userRankingItem}}">
+		                <view class="weui-cell__hd">{{index + 1}}</view>
+		                <view class="weui-cell__bd">{{item.name}}</view>
+		                <view class="weui-cell__ft">¥ {{item.money}}</view>
 		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd second">2</view>
-		                <view class="weui-cell__bd">showmetheloli</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">3</view>
-		                <view class="weui-cell__bd">showmetheloli</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">4</view>
-		                <view class="weui-cell__bd">showmetheloli</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">5</view>
-		                <view class="weui-cell__bd">showmetheloli</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">6</view>
-		                <view class="weui-cell__bd">showmetheloli</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">7</view>
-		                <view class="weui-cell__bd">showmetheloli</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
+                    <view class="NoData" wx:if="{{!userRankingItem.length}}">暂无排行</view>
+		            <view class="weui-loadmore" wx:if="{{userLoadMore}}">
+					    <view class="weui-loading"></view>
+					    <view class="weui-loadmore__tips">正在加载</view>
+					</view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="weui-cell">
-		                <view class="weui-cell__hd first">1</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
+                    <view class="weui-cell" wx:for="{{bookListRankingItem}}">
+		                <view class="weui-cell__hd">{{index + 1}}</view>
+		                <view class="weui-cell__bd">{{item.title}}</view>
+		                <view class="weui-cell__ft">¥ {{item.money}}</view>
 		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd second">2</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">3</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">4</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">5</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">6</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
-		            <view class="weui-cell">
-		                <view class="weui-cell__hd">7</view>
-		                <view class="weui-cell__bd">书单书单</view>
-		                <view class="weui-cell__ft">¥ 88888</view>
-		            </view>
+                    <view class="NoData" wx:if="{{!bookListRankingItem.length}}">暂无排行</view>
+		            <view class="weui-loadmore" wx:if="{{bookListLoadMore}}">
+					    <view class="weui-loading"></view>
+					    <view class="weui-loadmore__tips">正在加载</view>
+					</view>
                 </view>
             </view>
         </view>

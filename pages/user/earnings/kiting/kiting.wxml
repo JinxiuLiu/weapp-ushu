@@ -2,11 +2,12 @@
 	<view class="kiting-title">提现金额</view>
 	<view class="kiting-input">
 		<text>¥</text>	
-		<input placeholder="" auto-focus/>
+		<input placeholder="" value="{{inputMoney}}" bindinput="bindKeyInput" auto-focus/>
 	</view>
 	<view class="kiting-title">
-		<text>可提现金额¥888</text>		
-		<view class="all">全部提现</view>		
+		<text>可提现金额¥{{money}}</text>		
+		<view class="all" bindtap="allWithdrawFun">全部提现</view>		
 	</view>
 </view>
-<button type="primary">确认提现</button>
+<button type="primary" bindtap="affirmWithdrawFun">确认提现</button>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
