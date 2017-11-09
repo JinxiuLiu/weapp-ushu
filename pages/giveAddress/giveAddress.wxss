@@ -86,7 +86,7 @@ button[type="primary"] {
     background: #fff;
     text-align: right;
     padding: 0 26rpx;
-    margin-bottom: 110rpx;
+    margin-bottom: 20rpx;
 }
 
 .book-left {
@@ -158,4 +158,12 @@ button[type="primary"] {
     margin-top: 10rpx;
     position: absolute;
     bottom: 0;
+}
+
+.indent {
+    line-height: 28px;
+    background: #fff;
+    padding: 20rpx 26rpx;
+    margin-bottom: 110rpx;
+    font-size: 14px;
 }

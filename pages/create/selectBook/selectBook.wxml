@@ -24,7 +24,7 @@
     </view>
     <view class="selectBook-list">
         <block wx:for="{{rows}}">
-            <view class="bookinfo">
+            <view class="bookinfo" bindtap="selectBook" data-index="{{index}}" data-isSelect="{{item.checked}}">
                 <view class="weui-cell__bd">
                     <view class="book-left">
                         <view class="left-image">
@@ -38,7 +38,7 @@
                             </view>
                         </view>
                     </view>
-                    <view class="select-img">
+                    <view class="select-img" wx:if="{{item.checked}}">
                         <icon type="success" size="30" color="#ff4444"/>
                     </view>
                 </view>
@@ -46,5 +46,5 @@
         </block>
     </view>
 </view>
-<button type="primary" bindtap="submitFun">完成</button>
+<button type="primary" bindtap="confirmSelect">完成</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

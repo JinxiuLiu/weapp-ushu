@@ -95,8 +95,8 @@
                                     <text>评论({{item.commentCount}})</text>
                                 </view>
                                 <view class="collect" data-index="{{index}}" data-id="{{item.id}}" bindtap="collectFun">
-                                    <image wx:if="{{!item.collected}}" style="width: 37rpx; height: 37rpx;" src="../../image/collect.png"></image>
-                                    <image wx:else style="width: 37rpx; height: 37rpx;" src="../../image/collect-select.png"></image>
+                                    <image wx:if="{{!item.collected}}" style="width: 48rpx; height: 48rpx;" src="../../image/collect.png"></image>
+                                    <image wx:else style="width: 48rpx; height: 48rpx;" src="../../image/collect-select.png"></image>
                                 </view>
                             </view>
                             <view class="footer-right">

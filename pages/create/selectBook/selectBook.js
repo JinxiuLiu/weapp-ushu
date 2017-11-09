@@ -13,7 +13,8 @@ Page({
         inputVal: "",
         rows: [],
         seq: 1,
-        page: 2
+        page: 2,
+        number: 0,
     },
     // 首屏加载
     onLoad: function(option) {
@@ -27,6 +28,9 @@ Page({
                 "searchStr": ""
             },
             success: function(result) {
+                for(var i = 0; i < result.data.rows.length; i++) {
+                    result.data.rows[i].checked = false;
+                }
                 self.setData({
                     loadmore: false,
                     rows: result.data.rows
@@ -127,20 +131,30 @@ Page({
     },
     // 选择图书
     selectBook: function(e) {
-        let that = this;
-        let pages = getCurrentPages();
-        let currPage = pages[pages.length - 1]; //当前页面
-        let prevPage = pages[pages.length - 2]; //上一个页面
-        let bookImgUrl = e.target.dataset.img;
-        let bookKey = e.target.dataset.id;
-        that.data.tempBookKey.push({ "bookId": bookKey, "seq": that.data.seq });
-        that.data.tempImgUrl.push(bookImgUrl);
-        prevPage.setData({
-            tempBookImgUrl: that.data.tempImgUrl,
-            tempBookKey: that.data.tempBookKey,
-            isSelectBook: true,
-        });
-        wx.navigateBack();
+        let self = this;
+        let isSelect = !e.currentTarget.dataset.isselect;
+        if(isSelect) {
+            if(self.data.number + self.data.seq > 9) {
+                util.showMessage(self, "最多选择9本图书！");
+                return false;
+            }
+            self.data.number++
+            this.setData({
+                number: self.data.number
+            })
+        } else {
+            self.data.number--
+            this.setData({
+                number: self.data.number--
+            })
+        }
+        let index = e.currentTarget.dataset.index;
+        let rowsArray = this.data.rows;
+        rowsArray[index].checked = isSelect;
+        this.setData({
+            rows: self.data.rows
+        })
+
     },
     // 扫码搜索
     scanFun: function() {
@@ -153,5 +167,26 @@ Page({
                 self.searchRequest(data.result);
             }
         })
+    },
+    // 确认选择
+    confirmSelect: function() {
+        let self = this;
+        let pages = getCurrentPages();
+        let currPage = pages[pages.length - 1]; //当前页面
+        let prevPage = pages[pages.length - 2]; //上一个页面
+        let items = self.data.rows;
+        for(var i = 0; i < items.length; i++) {
+            if(items[i].checked) {
+                let seq = self.data.seq++
+                self.data.tempBookKey.push({ "bookId": items[i].bookId, "seq": seq });
+                self.data.tempImgUrl.push(items[i].picPath);
+            }
+        }
+        prevPage.setData({
+            tempBookImgUrl: self.data.tempImgUrl,
+            tempBookKey: self.data.tempBookKey,
+            isSelectBook: true,
+        });
+        wx.navigateBack();
     }
 })

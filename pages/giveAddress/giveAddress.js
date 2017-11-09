@@ -181,7 +181,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
             },
             data: {
-                id: self.data.orderId
+                id: '8d66253b-1d3c-4b2d-837c-2e628f520beb'
             },
             success: data => {
                 console.log(data);

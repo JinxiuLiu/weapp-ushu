@@ -23,6 +23,8 @@ audio {
 
 .weui-uploader__bd .weui-uploader__input-box {
     margin: 0;
+    width: 21%;
+    height: 168rpx;
 }
 
 .weui-cells__title {

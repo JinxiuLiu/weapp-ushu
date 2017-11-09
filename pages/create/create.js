@@ -104,6 +104,7 @@ Page({
                             let item = data.data.data;
                             let tempImageList = [];
                             let tempBookImgUrl = [];
+                            self.data.bookKey = [];
                             wx.setNavigationBarTitle({
                                 title: '编辑书单'
                             })
@@ -372,7 +373,7 @@ Page({
             isSelectBook: true
         })
         wx.navigateTo({
-            url: './selectBook/selectBook?seq=' + self.data.seq++
+            url: './selectBook/selectBook?seq=' + (self.data.bookImgUrl.length + 1)
         })
     },
     // 删除数组某一项
@@ -402,7 +403,6 @@ Page({
             imagesAllKey = imagesKey;
         }
         
-        console.log(imagesAllKey)
         if(bookListName == '') {
             util.showMessage(self, '请填写书单名称！', 2000);
             return false;

@@ -85,7 +85,12 @@
 		    </view>
 		</view>
 	</view>
-	<view class="statistics">共{{2}}件商品　　合计(含运费)¥{{item.totalMoney}}</view>
+	<view class="statistics">合计(含运费)¥{{item.totalMoney}}</view>
+	<view class="indent">
+		<view>订单编号：{{item.orderNo}}</view>
+		<view>创建时间：{{item.created}}</view>
+		<view>付款时间：{{item.paidTime}}</view>
+	</view>
 </block>
 
 
