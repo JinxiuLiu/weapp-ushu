@@ -201,7 +201,7 @@ image {
 .delVoice {
     border-top: 1rpx solid #ededef;
     text-align: center;
-    line-height: 88rpx;
+    line-height: 54rpx;
     color: #ff4444;
 }
 

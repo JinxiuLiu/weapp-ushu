@@ -254,20 +254,21 @@ Page({
         });
     },
     // 删除
-    delCart: function() {
+    delCart: function(e) {
         let self = this;
-        let id = self.data.selectGoods;
-        if(!id.length) {
-            self.showMessage('请选择删除的图书!');
-            return false;
-        }
+        let id = e.currentTarget.dataset.id;
         wx.request({
             url: delCartUrl,
             method: 'POST',
-            data: id,
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                id: id
+            },
             success: function(data) {
                 if (data.data.success) {
-                    self.onShow();
+                    self.onShow()
                     self.showMessage('删除成功!');
                 } else {
                     self.showMessage(data.data.msg);

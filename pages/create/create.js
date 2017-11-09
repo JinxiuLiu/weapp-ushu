@@ -56,6 +56,7 @@ Page({
                 recordTime: 0,
                 playTime: 0,
                 seq: 1,
+                voiceSrc: '',
                 formatedRecordTime: '00:00:00',
                 formatedPlayTime: '00:00:00',
                 bookListName: '', // 书单名称
@@ -271,16 +272,22 @@ Page({
         wx.stopVoice()
     },
     clear: function() {
-        clearInterval(playTimeInterval)
-        wx.stopVoice()
-        this.setData({
-            playing: false,
-            hasRecord: false,
-            tempFilePath: '',
-            formatedRecordTime: util.formatTime(0),
-            recordTime: 0,
-            playTime: 0
-        })
+        if(this.data.voiceSrc) {
+            this.setData({
+                voiceSrc: ''
+            })
+        } else {
+            clearInterval(playTimeInterval)
+            wx.stopVoice()
+            this.setData({
+                playing: false,
+                hasRecord: false,
+                tempFilePath: '',
+                formatedRecordTime: util.formatTime(0),
+                recordTime: 0,
+                playTime: 0
+            })
+        }
     },
     // 上传图片
     chooseImage: function() {

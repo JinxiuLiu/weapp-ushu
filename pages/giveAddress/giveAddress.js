@@ -2,12 +2,14 @@
  * Created by Liujx on 2017-10-19 15:35:47
  */
 const giveAddressUrl = require('../../config').giveAddressUrl
+const orderDetailUrl = require('../../config').orderDetailUrl
 var area = require('../../utils/area')
 var p = 0,
     c = 0,
     d = 0
 Page({
     data: {
+        cartList: [],
         provinceName: [],
         provinceCode: [],
         provinceSelIndex: '',
@@ -33,6 +35,7 @@ Page({
         this.setData({
             orderId: orderId
         })
+        this.orderDetile()
     },
     // 选择省
     changeProvince: function(e) {
@@ -127,6 +130,7 @@ Page({
             })
         }
     },
+    // 提交数据
     savePersonInfo: function(e) {
         var self = this
         var data = e.detail.value
@@ -166,6 +170,28 @@ Page({
                 }
             })
         }
+    },
+    // 订单列表
+    orderDetile: function() {
+        let self = this;
+        wx.request({
+            url: orderDetailUrl,
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                id: self.data.orderId
+            },
+            success: data => {
+                console.log(data);
+                if(data.data.success) {
+                    self.setData({
+                        cartList: [data.data.data]
+                    })
+                }
+            }
+        })
     },
     showMessage: function(text) {
         var that = this

@@ -8,53 +8,53 @@
     </view>
     <view class="cart-item" wx:for="{{cartList}}" wx:for-index="index">
         <view class="title">
-            <view class="select-icon">
+            <view class="select-icon" wx:if="{{!isEdit}}">
                 <icon wx:if="{{item.checked}}" type="success" color="#ff4444" bindtap="selectAllBookList" data-index="{{index}}"/>
                 <icon wx:else type="circle" bindtap="selectAllBookList" data-index="{{index}}"/>
             </view>
             <text>书单：{{item.title}}</text>
         </view>
-        <view class="bookinfo" wx:for="{{item.items}}" wx:for-index="i">
+        <view class="bookinfo" wx:for="{{item.items}}" wx:for-item="bookItem" wx:for-index="i">
             <view class="weui-cell__bd">
-                <view class="select-icon">
-                    <icon wx:if="{{item.checked}}" type="success" color="#ff4444" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
+                <view class="select-icon" wx:if="{{!isEdit}}">
+                    <icon wx:if="{{bookItem.checked}}" type="success" color="#ff4444" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                     <icon wx:else type="circle" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                 </view>
                 <view class="book-left">
                     <view class="left-image">
-                        <image src="{{item.picPath}}"></image>
+                        <image src="{{bookItem.picPath}}"></image>
                     </view>
                     <view class="left-text" wx:if="{{!isEdit}}">
-                        <text class="name">{{item.bookName}}</text>
-                        <text class="work-name">{{item.author}} 著</text>
+                        <text class="name">{{bookItem.bookName}}</text>
+                        <text class="work-name">{{bookItem.author}} 著</text>
                         <view class="book-right">
-                            <text class="color-red price">¥{{item.price}}</text>
-                            <text class="number">x{{item.quantity}}</text>
+                            <text class="color-red price">¥{{bookItem.price}}</text>
+                            <text class="number">x{{bookItem.quantity}}</text>
                         </view>
                     </view>
                     <view class="modified" wx:if="{{isEdit}}">
                         <view class="modified-item">
-                            <view class="minus" bindtap="minusCount" data-index="{{index}}" data-i="{{i}}" data-id="{{item.id}}">-</view>
-                            <input type="number" value="{{item.quantity}}" bindinput="changeInput" data-index="{{index}}" data-i="{{i}}" data-id="{{item.id}}"/>
-                            <view class="add" bindtap="addCount" data-index="{{index}}" data-i="{{i}}" data-id="{{item.id}}">+</view>
+                            <view class="minus" bindtap="minusCount" data-index="{{index}}" data-i="{{i}}" data-id="{{bookItem.id}}">-</view>
+                            <input type="number" value="{{bookItem.quantity}}" bindinput="changeInput" data-index="{{index}}" data-i="{{i}}" data-id="{{item.id}}"/>
+                            <view class="add" bindtap="addCount" data-index="{{index}}" data-i="{{i}}" data-id="{{bookItem.id}}">+</view>
                         </view>
                     </view>
                 </view>
             </view>
+            <view class="bottom-del" wx:if="{{isEdit}}" data-id="{{bookItem.id}}" bindtap="delCart">删除</view>
         </view>
     </view>
     <view wx:if="{{cartList.length == 0}}" class="NoData">暂无商品</view>
 </view>
-<view class="cart-bottom">
+<view class="cart-bottom" wx:if="{{!isEdit}}">
     <view class="select-icon">
         <icon wx:if="{{selectAllStatus}}" type="success" color="#ff4444" bindtap="selectAll" />
         <icon wx:else type="circle" bindtap="selectAll"/>
     </view>
-    <view class="bottom-right" wx:if="{{!isEdit}}">
+    <view class="bottom-right">
         <text class="total">合计：<text class="color-red">¥{{total}}</text></text>
         <view class="give" data-give="true" bindtap="settlementFun">赠朋友</view>
         <view class="settlement" data-give="false" bindtap="settlementFun">结算</view>
     </view>
-    <view class="bottom-del" wx:elif="{{isEdit}}" bindtap="delCart">删除</view>
 </view>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

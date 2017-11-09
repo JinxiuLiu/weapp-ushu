@@ -3,7 +3,7 @@
         <view class="weui-search-bar__form">
             <view class="weui-search-bar__box">
                 <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                <input type="text" class="weui-search-bar__input" placeholder="2017必读10本书" value="{{inputVal}}" bindinput="inputTyping" bindconfirm="searchFun" />
+                <input type="text" confirm-type="search" class="weui-search-bar__input" placeholder="2017必读10本书" value="{{inputVal}}" bindinput="inputTyping" bindconfirm="searchFun" />
                 <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
                     <icon type="clear" size="14"></icon>
                 </view>
@@ -91,18 +91,18 @@
                                 <view class="hot">
                                     <text>热度({{item.readCount}})</text>
                                 </view>
-                                <view class="comment">
+                                <view class="comment" data-id="{{item.id}}" bindtap="tapBookList">
                                     <text>评论({{item.commentCount}})</text>
+                                </view>
+                                <view class="collect" data-index="{{index}}" data-id="{{item.id}}" bindtap="collectFun">
+                                    <image wx:if="{{!item.collected}}" style="width: 37rpx; height: 37rpx;" src="../../image/collect.png"></image>
+                                    <image wx:else style="width: 37rpx; height: 37rpx;" src="../../image/collect-select.png"></image>
                                 </view>
                             </view>
                             <view class="footer-right">
                                 <button hover-class="" data-item="{{item}}" open-type="share" class="share">
                                     <image style="width: 37rpx; height: 37rpx;" src="../../image/index-share.png"></image>
                                 </button>
-                                <view class="collect" data-index="{{index}}" data-id="{{item.id}}" bindtap="collectFun">
-                                    <image wx:if="{{!item.collected}}" style="width: 37rpx; height: 37rpx;" src="../../image/collect.png"></image>
-                                    <image wx:else style="width: 37rpx; height: 37rpx;" src="../../image/collect-select.png"></image>
-                                </view>
                             </view>
                         </view>
                     </view>

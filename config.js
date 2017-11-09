@@ -3,7 +3,7 @@
  * 小程序配置文件
  */
 
-var host = "https://rkkscs.xatime.com"
+var host = "http://rkkscs.xatime.com"
 
 var config = {
 

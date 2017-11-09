@@ -58,14 +58,35 @@
 	            <textarea class="weui-textarea" name="address" value="{{address}}" placeholder="请输入详细地址" />
 	        </view>
 	    </view>
-	    <view class="weui-cell weui-cell_switch">
-	        <view class="weui-cell__bd">设为默认收货地址</view>
-	        <view class="weui-cell__ft">
-	            <switch color="#ff4444" name="def" checked="{{checked}}" />
-	        </view>
-	    </view>
 	    <input type="text" name="orderId" value="{{orderId}}" class="hidden"/>
-	    <button formType="submit" type="primary">提交</button>
+	    <button formType="submit" type="primary">完成</button>
 	</view>
 </form>
+<block wx:for="{{cartList}}">
+	<view class="cart-item" wx:for="{{item.itemList}}">
+		<view class="title">
+		    <text>书单：{{item.title}}</text>
+		</view>
+		<view class="bookinfo" wx:for="{{item.items}}">
+		    <view class="weui-cell__bd">
+		        <view class="book-left">
+		            <view class="left-image">
+		                <image src="{{item.bookListItem.picPath}}"></image>
+		            </view>
+		            <view class="left-text">
+		                <text class="name">{{item.bookListItem.bookName}}</text>
+		                <text class="work-name">{{item.bookListItem.author}} 著</text>
+		                <view class="book-right">
+		                    <text class="color-red price">¥{{item.bookListItem.price}}</text>
+		                    <text class="number">x{{item.quantity}}</text>
+		                </view>
+		            </view>
+		        </view>
+		    </view>
+		</view>
+	</view>
+	<view class="statistics">共{{2}}件商品　　合计(含运费)¥{{item.totalMoney}}</view>
+</block>
+
+
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

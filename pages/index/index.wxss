@@ -199,14 +199,20 @@
 }
 
 .bookList-footer .hot,
-.bookList-footer .comment {
+.bookList-footer .comment,
+.bookList-footer .collect {
     display: inline-block;
     font-size: 30rpx;
     color: #aaa;
 }
 
-.bookList-footer .comment {
+.bookList-footer .comment,
+.bookList-footer .collect {
     padding-left: 40rpx;
+}
+
+.bookList-footer .collect image {
+    vertical-align: text-bottom;
 }
 
 .bookList-footer .footer-right {
@@ -214,8 +220,7 @@
     align-items: center;
 }
 
-.bookList-footer .footer-right .share,
-.bookList-footer .footer-right .collect {
+.bookList-footer .footer-right .share {
     font-size: inherit;
     margin: 0;
     padding: 8rpx 30rpx 0;
@@ -223,8 +228,4 @@
 
 .bookList-footer .footer-right .share:after {
     content: none;
-}
-
-.bookList-footer .footer-right .collect {
-    padding-right: 0;
 }
