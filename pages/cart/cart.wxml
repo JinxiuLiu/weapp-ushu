@@ -9,16 +9,16 @@
     <view class="cart-item" wx:for="{{cartList}}" wx:for-index="index">
         <view class="title">
             <view class="select-icon">
-                <icon wx:if="{{selectAllListStatus}}" type="success" color="#ff4444" bindtap="selectAllBookList" data-index="{{index}}" data-i="{{i}}"/>
-                <icon wx:else type="circle" bindtap="selectAllBookList" data-index="{{index}}" data-i="{{i}}"/>
+                <icon wx:if="{{item.checked}}" type="success" color="#ff4444" bindtap="selectAllBookList" data-index="{{index}}"/>
+                <icon wx:else type="circle" bindtap="selectAllBookList" data-index="{{index}}"/>
             </view>
             <text>书单：{{item.title}}</text>
         </view>
         <view class="bookinfo" wx:for="{{item.items}}" wx:for-index="i">
             <view class="weui-cell__bd">
                 <view class="select-icon">
-                    <icon wx:if="{{item.checked}}" type="success" color="#ff4444" bindtap="selectList"/>
-                    <icon wx:else type="circle" bindtap="selectList"/>
+                    <icon wx:if="{{item.checked}}" type="success" color="#ff4444" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
+                    <icon wx:else type="circle" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                 </view>
                 <view class="book-left">
                     <view class="left-image">

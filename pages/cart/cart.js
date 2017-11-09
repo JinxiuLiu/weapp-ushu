@@ -18,7 +18,6 @@ Page({
         isChecked: false,
         goodsChecked: false,
         selectAllStatus: false,
-        selectAllListStatus: false,
         total: '0'
     },
     onShow: function() {
@@ -53,6 +52,14 @@ Page({
                 }
             }
         }
+        for (var j = 0; j < tempCartList[index].items.length; j++) {
+            if (!tempCartList[index].items[j].checked) {
+                tempCartList[index].checked = false;
+                break;
+            } else {
+                tempCartList[index].checked = true;
+            }
+        }
         self.data.selectGoods = [];
         self.data.settlementItems = [];
         for (var j = 0; j < tempCartList.length; j++) {
@@ -80,7 +87,44 @@ Page({
     // 书单全选
     selectAllBookList: function(e) {
         let self = this;
-        let selectAllStatus = !self.data.selectAllStatus;
+        let index = e.currentTarget.dataset.index;
+        let tempCartList = self.data.cartList;
+        let bookListItem = tempCartList[index];
+        bookListItem.checked = !bookListItem.checked;
+        if (bookListItem.checked) {
+            bookListItem.items.filter(function(val) {
+                val.checked = true;
+            })
+        } else {
+            bookListItem.items.filter(function(val) {
+                val.checked = false;
+            })
+        }
+
+        for (var j = 0; j < tempCartList.length; j++) {
+            if (!tempCartList[j].checked) {
+                self.data.selectAllStatus = false;
+                break;
+            } else {
+                self.data.selectAllStatus = true;
+            }
+        }
+
+        self.data.settlementItems = [];
+        self.data.selectGoods = [];
+        for (var j = 0; j < tempCartList.length; j++) {
+            for (var k = 0; k < tempCartList[j].items.length; k++) {
+                if (tempCartList[j].items[k].checked) {
+                    self.data.selectGoods.push(tempCartList[j].items[k].id);
+                    self.data.settlementItems.push({"bookListItemId": tempCartList[j].items[k].bookListItemId,"shopCartId": tempCartList[j].items[k].id,"fromShareId": tempCartList[j].items[k].fromShareId,"quantity": tempCartList[j].items[k].quantity});
+                }
+            }
+        }
+        self.selectGoodsRequest(self.data.selectGoods);
+        self.setData({
+            selectAllStatus: self.data.selectAllStatus,
+            cartList: self.data.cartList
+        })
     },
     // 全选
     selectAll: function(e) {
@@ -89,12 +133,14 @@ Page({
         let tempCartList = self.data.cartList;
         if (selectAllStatus) {
             tempCartList.filter(function(item) {
+                item.checked = true;
                 item.items.filter(function(val) {
                     val.checked = true;
                 })
             })
         } else {
             tempCartList.filter(function(item) {
+                item.checked = false;
                 item.items.filter(function(val) {
                     val.checked = false;
                 })

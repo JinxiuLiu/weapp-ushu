@@ -79,7 +79,10 @@ Page({
             success: data => {
                 if(data.data.success) {
                     util.showMessage(self, '收藏成功！')
-                    self.bookDetail()
+                    self.data.bookDetailItem[0].collected = true;
+                    self.setData({
+                        bookDetailItem: self.data.bookDetailItem
+                    })
                 } else {
                     util.showMessage(self, data.data.msg)
                 }
