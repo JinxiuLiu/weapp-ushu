@@ -11,7 +11,7 @@ const addAttentionUrl = require('../../config').addAttentionUrl;
 const collectUrl = require('../../config').collectUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         loadmore: true,
@@ -45,7 +45,8 @@ Page({
                 id: val
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if(data.data.success) {
@@ -80,7 +81,8 @@ Page({
                 fromShareId: self.data.fromId
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if(data.data.success) {
@@ -104,7 +106,8 @@ Page({
                 id: val
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {}
         })
@@ -128,13 +131,14 @@ Page({
                 wx.request({
                     url: shareSaveUrl,
                     method: 'POST',
-                    header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                    },
                     data: {
                         id: uuid,
                         bookListId: bookListId,
                         fromId: self.data.fromId
+                    },
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                        'Cookie': 'JSESSIONID=' + sessionId
                     },
                     success: data => {
                         if(data.data.success) {
@@ -163,9 +167,16 @@ Page({
             data: {
                 targetId: creatorId
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, '关注成功！');
+                    self.data.detailList[0].followed = true;
+                    self.setData({
+                        detailList: self.data.detailList
+                    })
                 } else {
                     util.showMessage(self, data.data.msg);
                 }
@@ -180,6 +191,9 @@ Page({
             url: collectUrl,
             data: {
                 bookListId: id
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if (data.data.success) {
@@ -196,14 +210,14 @@ Page({
         let self = this;
         wx.request({
             url: commentGridUrl,
-            method: 'POST',
             data: {
                 bookListId: val,
                 page: 1,
                 rows: 2
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 self.setData({
@@ -229,7 +243,8 @@ Page({
                 bookListId: bookListId
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 self.setData({
@@ -247,7 +262,8 @@ Page({
             method: 'POST',
             data: {},
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if(data.data.success) {

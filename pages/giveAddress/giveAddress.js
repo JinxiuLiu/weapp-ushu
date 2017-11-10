@@ -4,6 +4,7 @@
 const giveAddressUrl = require('../../config').giveAddressUrl
 const orderDetailUrl = require('../../config').orderDetailUrl
 var area = require('../../utils/area')
+let sessionId = wx.getStorageSync('sessionId')
 var p = 0,
     c = 0,
     d = 0
@@ -153,6 +154,9 @@ Page({
             wx.request({
                 url: giveAddressUrl,
                 data: data,
+                header: {
+                    'Cookie': 'JSESSIONID=' + sessionId
+                },
                 success: function(result) {
                     if (result.data.success) {
                         self.showMessage('提交成功！');
@@ -178,10 +182,11 @@ Page({
             url: orderDetailUrl,
             method: 'POST',
             header: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             data: {
-                id: '8d66253b-1d3c-4b2d-837c-2e628f520beb'
+                id: self.data.orderId
             },
             success: data => {
                 console.log(data);

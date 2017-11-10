@@ -2,7 +2,7 @@
  * Created by Liujx on 2017-10-17 13:48:07
  */
 const aboutUrl = require('../../../config').aboutUrl;
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
 	data: {
 		isAuthenticated: false,
@@ -15,6 +15,9 @@ Page({
 			url: aboutUrl,
 			method: 'POST',
 			data: {},
+			header: {
+				'Cookie': 'JSESSIONID=' + sessionId
+			},
 			success: data  => {
 				if(data.data.success) {
 					let mobile = data.data.data.mobile;

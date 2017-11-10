@@ -22,15 +22,17 @@
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="collect-book" wx:for="{{shareBookItem}}">
-                        <view class="book-img">
-                            <image src="{{item.picPath}}"></image>
+                    <block wx:for="{{shareBookItem}}">
+                        <view class="collect-book">
+                            <view class="book-img">
+                                <image src="{{item.picPath}}"></image>
+                            </view>
+                            <view class="book-text">
+                                <text class="book-name">{{item.bookName}}</text>
+                                <text class="book-from">出自书单 {{item.title}}</text>
+                            </view>
                         </view>
-                        <view class="book-text">
-                            <text class="book-name">{{item.bookName}}</text>
-                            <text class="book-from">出自书单 {{item.title}}</text>
-                        </view>
-                    </view>
+                    </block>
                     <view wx:if="{{shareBookItem.length == 0}}" class="NoData">暂无分享</view>
                 </view>
             </view>

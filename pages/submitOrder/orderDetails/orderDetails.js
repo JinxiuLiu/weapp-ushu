@@ -6,48 +6,49 @@ const commitUrl = require('../../../config').commitUrl;
 const paymentUrl = require('../../../config').paymentUrl;
 const pingpp = require('../../../utils/pingpp.js');
 const util = require('../../../utils/util');
-
- Page({
- 	data: {
- 		orderDetailList: []
- 	},
- 	// 生命周期函数--监听页面显示
-	onLoad: function(option) {
-		let self = this;		
-		let id = option.id;
-		wx.request({
+let sessionId = wx.getStorageSync('sessionId')
+Page({
+    data: {
+        orderDetailList: []
+    },
+    // 生命周期函数--监听页面显示
+    onLoad: function(option) {
+        let self = this;
+        let id = option.id;
+        wx.request({
             url: orderDetailUrl,
             method: 'POST',
             data: {
                 id: id
             },
             header: {
-			      'content-type': 'application/x-www-form-urlencoded' // 默认值
-			},
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 console.log(data);
                 if (data.data.success) {
                     self.setData({
-                    	orderDetailList: self.data.orderDetailList.concat(data.data.data)
+                        orderDetailList: self.data.orderDetailList.concat(data.data.data)
                     })
                 } else {
                     util.showMessage(self, data.data.msg)
                 }
             }
         });
-	},
+    },
     // 电子发票
-	selectInvoice: function(e) {
-		let self = this;
-		let isInvoice = !e.currentTarget.dataset.isinvoice;
-		self.data.orderDetailList[0].invoice = isInvoice;
-		self.setData({
-			orderDetailList: self.data.orderDetailList
-		})
-	},
+    selectInvoice: function(e) {
+        let self = this;
+        let isInvoice = !e.currentTarget.dataset.isinvoice;
+        self.data.orderDetailList[0].invoice = isInvoice;
+        self.setData({
+            orderDetailList: self.data.orderDetailList
+        })
+    },
     // 支付
-	submitOrderFun: function() {
-		let self = this;
+    submitOrderFun: function() {
+        let self = this;
         let sessionId = wx.getStorageSync('sessionId');
         let data = self.data.orderDetailList[0];
         let id = data.id;
@@ -64,9 +65,9 @@ const util = require('../../../utils/util');
                 money: totalMoney
             },
             success: data => {
-                if(data.data.success) {
+                if (data.data.success) {
                     pingpp.createPayment(data.data.data, function(result, err) {
-                        if (result=="success") {
+                        if (result == "success") {
                             // payment succeeded
                             util.showMessage(self, '支付成功！')
                             setTimeout(function() {
@@ -81,5 +82,5 @@ const util = require('../../../utils/util');
                 }
             }
         })
-	}
- })
+    }
+})

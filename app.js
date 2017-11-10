@@ -11,13 +11,13 @@ App({
                 this.authorizeFun();
             }
         })
-
     },
     globalData: {
         code: '',
         encryptedData: null,
         ivStr: null
     },
+    // 授权
     authorizeFun: function() {
         let self = this;
         // 获取用户信息
@@ -61,6 +61,7 @@ App({
             }
         })
     },
+    // 注册请求
     loginRequest: function() {
         let self = this;
         wx.request({

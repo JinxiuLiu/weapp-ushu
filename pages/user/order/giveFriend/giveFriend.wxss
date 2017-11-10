@@ -4,7 +4,7 @@ Page {
 }
 
 .giveAdvice {
-    padding: 48rpx 40rpx;
+    padding: 30rpx 40rpx;
     border-bottom: 1rpx solid #f0f0f0;
 }
 
@@ -60,4 +60,10 @@ button[type="primary"] {
     line-height: 50rpx;
     font-size: 16px;
     color: #999;
+}
+
+.confirm {
+    text-align: center;
+    font-size: 14px;
+    color: #ff4444;
 }

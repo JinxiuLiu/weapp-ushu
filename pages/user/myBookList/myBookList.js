@@ -5,7 +5,7 @@ const myBookListUrl = require('../../../config').myBookListUrl;
 const changeBookListUrl = require('../../../config').changeBookListUrl;
 const deleteBookListUrl = require('../../../config').deleteBookListUrl;
 const util = require('../../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         page: 1,
@@ -25,8 +25,11 @@ Page({
             data: {
                 page: self.data.page
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(!data.data.rows.length) {
+                if (!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！');
                     self.setData({
                         loadmore: false
@@ -34,11 +37,11 @@ Page({
                     return false;
                 }
                 self.data.page++
-                self.setData({
-                    loadmore: false,
-                    page: self.data.page,
-                    myBookList: self.data.myBookList.concat(data.data.rows)
-                })
+                    self.setData({
+                        loadmore: false,
+                        page: self.data.page,
+                        myBookList: self.data.myBookList.concat(data.data.rows)
+                    })
             }
         })
     },
@@ -50,16 +53,19 @@ Page({
         let published = e.detail.value;
         let id = e.currentTarget.dataset.id;
         myBookList.filter(function(item) {
-            if(item.published) {
+            if (item.published) {
                 publishedNum++
             }
         })
-        if(publishedNum >= 5 && published) {
+        if (publishedNum >= 5 && published) {
             util.showMessage(self, '最多开启5个书单！');
             wx.request({
                 url: myBookListUrl,
                 data: {
                     page: 1
+                },
+                header: {
+                    'Cookie': 'JSESSIONID=' + sessionId
                 },
                 success: data => {
                     self.setData({
@@ -76,12 +82,18 @@ Page({
                 id: id,
                 published: published
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 if (data.data.success) {
                     wx.request({
                         url: myBookListUrl,
                         data: {
                             page: 1
+                        },
+                        header: {
+                            'Cookie': 'JSESSIONID=' + sessionId
                         },
                         success: data => {
                             self.setData({
@@ -106,6 +118,9 @@ Page({
             data: {
                 id: id
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, data.data.msg);
@@ -116,6 +131,9 @@ Page({
                         url: myBookListUrl,
                         data: {
                             page: 1
+                        },
+                        header: {
+                            'Cookie': 'JSESSIONID=' + sessionId
                         },
                         success: data => {
                             self.setData({

@@ -20,7 +20,7 @@
                     <icon wx:if="{{bookItem.checked}}" type="success" color="#ff4444" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                     <icon wx:else type="circle" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                 </view>
-                <view class="book-left">
+                <view class="book-left" bindtap="tapBook" data-id="{{bookItem.bookListItemId}}">
                     <view class="left-image">
                         <image src="{{bookItem.picPath}}"></image>
                     </view>

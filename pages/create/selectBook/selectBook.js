@@ -3,7 +3,7 @@
  */
 const util = require('../../../utils/util.js');
 const SelectBookUrl = require('../../../config').SelectBookUrl
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         loadmore: true,
@@ -26,6 +26,9 @@ Page({
             url: SelectBookUrl,
             data: {
                 "searchStr": ""
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: function(result) {
                 for(var i = 0; i < result.data.rows.length; i++) {
@@ -56,6 +59,9 @@ Page({
             data: {
                 "searchStr": self.data.inputVal || '',
                 "page": self.data.page
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: function(result) {
                 wx.hideToast();
@@ -105,6 +111,9 @@ Page({
             url: SelectBookUrl,
             data: {
                 "searchStr": val
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if(!data.data.rows.length) {

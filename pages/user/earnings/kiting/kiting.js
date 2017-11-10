@@ -3,50 +3,53 @@
  */
 const addWithdrawalUrl = require('../../../../config').addWithdrawalUrl;
 const util = require('../../../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
- 	data: {
- 		money: '',
- 		inputMoney: ''
- 	},
- 	onLoad: function(option) {
- 		this.setData({
- 			money: option.money
- 		})
- 	},
- 	// 全部提现
- 	allWithdrawFun: function() {
- 		let self = this;
- 		this.setData({
- 			inputMoney: self.data.money
- 		})
- 	},
- 	// 确认提现
- 	affirmWithdrawFun: function() {
- 		let self = this;
- 		let money = self.data.inputMoney;
- 		console.log(money > 0)
- 		if(!(money > 0)) {
- 			util.showMessage(self, '提现金额不正确！');
- 			return false;
- 		}
- 		wx.request({
+    data: {
+        money: '',
+        inputMoney: ''
+    },
+    onLoad: function(option) {
+        this.setData({
+            money: option.money
+        })
+    },
+    // 全部提现
+    allWithdrawFun: function() {
+        let self = this;
+        this.setData({
+            inputMoney: self.data.money
+        })
+    },
+    // 确认提现
+    affirmWithdrawFun: function() {
+        let self = this;
+        let money = self.data.inputMoney;
+        console.log(money > 0)
+        if (!(money > 0)) {
+            util.showMessage(self, '提现金额不正确！');
+            return false;
+        }
+        wx.request({
             url: addWithdrawalUrl,
             data: {
-            	money : money
+                money: money
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
-                if(data.data.success) {
-                	util.showMessage(self, '提现成功！');
+                if (data.data.success) {
+                    util.showMessage(self, '提现成功！');
                 } else {
-                	util.showMessage(self, data.data.msg);
+                    util.showMessage(self, data.data.msg);
                 }
             }
         })
- 	},
- 	bindKeyInput: function(e) {
- 		this.setData({
-	    	inputMoney: e.detail.value
-	    })
- 	}
+    },
+    bindKeyInput: function(e) {
+        this.setData({
+            inputMoney: e.detail.value
+        })
+    }
 })

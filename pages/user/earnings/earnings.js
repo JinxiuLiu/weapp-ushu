@@ -4,7 +4,7 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const canGetMoneyUrl = require('../../../config').canGetMoneyUrl;
 const moneyListUrl = require('../../../config').moneyListUrl;
-
+let sessionId = wx.getStorageSync('sessionId')
 
 Page({
     data: {
@@ -18,7 +18,7 @@ Page({
         bookListMoneyItem: [],
         shareMoneyItem: []
     },
-    onLoad: function (option) {
+    onLoad: function(option) {
         let self = this;
         self.setData({
             totalMoney: option.totalMoney
@@ -31,15 +31,15 @@ Page({
                     sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
                 });
-            } 
+            }
         })
     },
-    tabClick: function (e) {
+    tabClick: function(e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         });
-        if(this.data.activeIndex == '0') {
+        if (this.data.activeIndex == '0') {
             this.moneyListRequest(false);
         } else {
             this.moneyListRequest(true);
@@ -51,6 +51,9 @@ Page({
         wx.request({
             url: canGetMoneyUrl,
             data: {},
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 self.setData({
                     canGetMoney: data.data.data,
@@ -68,8 +71,11 @@ Page({
                 page: self.data.page,
                 rows: 30
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(isShare) {
+                if (isShare) {
                     self.setData({
                         shareMoneyItem: data.data.data,
                     })
@@ -80,9 +86,5 @@ Page({
                 }
             }
         })
-    },
-    // 提现
-    withdrawFun: function() {
-        
     }
 });

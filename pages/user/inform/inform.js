@@ -7,7 +7,7 @@ const informEarningsUrl = require('../../../config').informEarningsUrl;
 const informSystemUrl = require('../../../config').informSystemUrl;
 const informCommentUrl = require('../../../config').informCommentUrl;
 const util = require('../../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["系统", "收益", "关注", "评论"],
@@ -25,7 +25,7 @@ Page({
         earningsList: []
     },
     // 加载页面
-    onLoad: function () {
+    onLoad: function() {
         var self = this;
         wx.getSystemInfo({
             success: function(res) {
@@ -33,33 +33,33 @@ Page({
                     sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
                 });
-            } 
+            }
         })
         this.informSystem()
     },
     // 上拉加载
     onReachBottom: function() {
         let activeIndex = this.data.activeIndex;
-        if(activeIndex == 0) {
+        if (activeIndex == 0) {
             this.informSystem()
         }
-        if(activeIndex == 1) {
+        if (activeIndex == 1) {
             this.informEarnings()
         }
-        if(activeIndex == 2) {
+        if (activeIndex == 2) {
             this.informAttention()
         }
-        if(activeIndex == 3) {
+        if (activeIndex == 3) {
             this.informComment()
         }
     },
-    tabClick: function (e) {
+    tabClick: function(e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         })
 
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 earningsPage: 1,
                 earningsLoad: true,
@@ -68,7 +68,7 @@ Page({
             this.informEarnings()
         }
 
-        if(this.data.activeIndex == 2) {
+        if (this.data.activeIndex == 2) {
             this.setData({
                 attentionPage: 1,
                 attentionLoad: true,
@@ -77,7 +77,7 @@ Page({
             this.informAttention()
         }
 
-        if(this.data.activeIndex == 3) {
+        if (this.data.activeIndex == 3) {
             this.setData({
                 commentPage: 1,
                 commentLoad: true,
@@ -94,8 +94,11 @@ Page({
             data: {
                 page: self.data.systemPage
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(!data.data.rows.length) {
+                if (!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
                     self.setData({
                         systemLoad: false,
@@ -103,11 +106,11 @@ Page({
                     return false;
                 }
                 self.data.systemPage++
-                self.setData({
-                    systemPage: self.data.systemPage,
-                    systemLoad: false,
-                    systemList: self.data.systemList.concat(data.data.rows)
-                })
+                    self.setData({
+                        systemPage: self.data.systemPage,
+                        systemLoad: false,
+                        systemList: self.data.systemList.concat(data.data.rows)
+                    })
             }
         })
     },
@@ -119,8 +122,11 @@ Page({
             data: {
                 page: self.data.attentionPage
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(!data.data.rows.length) {
+                if (!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
                     self.setData({
                         attentionLoad: false,
@@ -128,11 +134,11 @@ Page({
                     return false;
                 }
                 self.data.attentionPage++
-                self.setData({
-                    attentionPage: self.data.attentionPage,
-                    attentionLoad: false,
-                    attentionList: self.data.attentionList.concat(data.data.rows)
-                })
+                    self.setData({
+                        attentionPage: self.data.attentionPage,
+                        attentionLoad: false,
+                        attentionList: self.data.attentionList.concat(data.data.rows)
+                    })
             }
         })
     },
@@ -144,8 +150,11 @@ Page({
             data: {
                 page: self.data.earningsPage
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(!data.data.rows.length) {
+                if (!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
                     self.setData({
                         earningsLoad: false,
@@ -153,11 +162,11 @@ Page({
                     return false;
                 }
                 self.data.earningsPage++
-                self.setData({
-                    earningsPage: self.data.earningsPage,
-                    earningsLoad: false,
-                    earningsList: self.data.earningsList.concat(data.data.rows)
-                })
+                    self.setData({
+                        earningsPage: self.data.earningsPage,
+                        earningsLoad: false,
+                        earningsList: self.data.earningsList.concat(data.data.rows)
+                    })
             }
         })
     },
@@ -169,8 +178,11 @@ Page({
             data: {
                 page: self.data.commentPage
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(!data.data.rows.length) {
+                if (!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！')
                     self.setData({
                         commentLoad: false,
@@ -178,11 +190,11 @@ Page({
                     return false;
                 }
                 self.data.commentPage++
-                self.setData({
-                    commentPage: self.data.commentPage,
-                    commentLoad: false,
-                    commentList: self.data.commentList.concat(data.data.rows)
-                })
+                    self.setData({
+                        commentPage: self.data.commentPage,
+                        commentLoad: false,
+                        commentList: self.data.commentList.concat(data.data.rows)
+                    })
             }
         })
     },

@@ -5,7 +5,7 @@ const identityCardUrl = require('../../../../config').identityCardUrl;
 const commitCardUrl = require('../../../../config').commitCardUrl;
 const myCardUrl = require('../../../../config').myCardUrl;
 const util = require('../../../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         imageListOne: [],
@@ -20,9 +20,12 @@ Page({
             url: myCardUrl,
             method: 'POST',
             data: {},
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(data.data.success) {
-                    if(!data.data.data) return false;
+                if (data.data.success) {
+                    if (!data.data.data) return false;
                     self.setData({
                         imageListOne: [data.data.data.front.url],
                         imageListTwo: [data.data.data.back.url],
@@ -120,7 +123,7 @@ Page({
             },
             success: data => {
                 let self = this;
-                if(data.data.success) {
+                if (data.data.success) {
                     util.showMessage(this, data.data.msg);
                     setTimeout(function() {
                         wx.navigateBack()

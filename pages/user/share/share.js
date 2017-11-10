@@ -4,7 +4,7 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const shareListUrl = require('../../../config').shareListUrl;
 const util = require('../../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["分享的书单", "分享的书"],
@@ -32,13 +32,13 @@ Page({
     },
     // 上拉加载
     onReachBottom: function() {
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 bookListLoadMore: true,
             })
             this.shareBookList()
         }
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 bookLoadMore: true,
             })
@@ -50,7 +50,7 @@ Page({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         })
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 bookListPage: 1,
                 bookListLoadMore: true,
@@ -58,7 +58,7 @@ Page({
             })
             this.shareBookList()
         }
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 bookPage: 1,
                 bookLoadMore: true,
@@ -77,9 +77,12 @@ Page({
                 page: self.data.bookListPage,
                 rows: 10
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(data.data.success) {
-                    if(data.data.data.length == 0) {
+                if (data.data.success) {
+                    if (data.data.data.length == 0) {
                         self.setData({
                             bookListLoadMore: false,
                         })
@@ -87,11 +90,11 @@ Page({
                         return false;
                     }
                     self.data.bookListPage++
-                    self.setData({
-                        bookListLoadMore: false,
-                        bookListPage: self.data.bookListPage,
-                        shareBookListItem: self.data.shareBookListItem.concat(data.data.data)
-                    })
+                        self.setData({
+                            bookListLoadMore: false,
+                            bookListPage: self.data.bookListPage,
+                            shareBookListItem: self.data.shareBookListItem.concat(data.data.data)
+                        })
                 }
             }
         })
@@ -106,9 +109,12 @@ Page({
                 page: self.data.bookPage,
                 rows: 10
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(data.data.success) {
-                    if(data.data.data.length == 0) {
+                if (data.data.success) {
+                    if (data.data.data.length == 0) {
                         self.setData({
                             bookLoadMore: false,
                         })
@@ -116,11 +122,11 @@ Page({
                         return false;
                     }
                     self.data.bookPage++
-                    self.setData({
-                        bookPage: self.data.bookPage,
-                        bookLoadMore: false,
-                        shareBookItem: self.data.shareBookItem.concat(data.data.data)
-                    })
+                        self.setData({
+                            bookPage: self.data.bookPage,
+                            bookLoadMore: false,
+                            shareBookItem: self.data.shareBookItem.concat(data.data.data)
+                        })
                 }
             }
         })

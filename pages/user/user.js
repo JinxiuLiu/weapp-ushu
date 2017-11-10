@@ -3,23 +3,26 @@
  */
 const aboutUrl = require('../../config').aboutUrl;
 const totalMoneyUrl = require('../../config').totalMoneyUrl;
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
-	data: {
-		userName: '',
-		avatarUrl: '',
-		totalMoney: '',
-	},
-	onLoad: function() {
-		this.userRequest();
-		this.totalMoneyRequest();
-	},
-	// 获取用户头像
-	userRequest: function() {
-		let self = this;
-		wx.request({
+    data: {
+        userName: '',
+        avatarUrl: '',
+        totalMoney: '',
+    },
+    onLoad: function() {
+        this.userRequest();
+        this.totalMoneyRequest();
+    },
+    // 获取用户头像
+    userRequest: function() {
+        let self = this;
+        wx.request({
             url: aboutUrl,
             data: {},
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 self.setData({
                     userName: data.data.data.name,
@@ -27,12 +30,15 @@ Page({
                 })
             }
         })
-	},
-	// 获取总收益
-	totalMoneyRequest: function() {
-		let self = this;
-		wx.request({
+    },
+    // 获取总收益
+    totalMoneyRequest: function() {
+        let self = this;
+        wx.request({
             url: totalMoneyUrl,
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             data: {},
             success: data => {
                 self.setData({
@@ -40,5 +46,5 @@ Page({
                 })
             }
         })
-	}
+    }
 })

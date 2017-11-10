@@ -48,7 +48,7 @@
                                 </view>
                             </view>
                         </view>
-                        <view class="founder-concern" data-followed="{{item.followed}}" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
+                        <view class="founder-concern" data-index="{{index}}" data-followed="{{item.followed}}" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
                             <text>{{item.followed ? '已关注' : '关注'}}</text>
                         </view>
                     </view>
@@ -95,8 +95,8 @@
                                     <text>评论({{item.commentCount}})</text>
                                 </view>
                                 <view class="collect" data-index="{{index}}" data-id="{{item.id}}" bindtap="collectFun">
-                                    <image wx:if="{{!item.collected}}" style="width: 48rpx; height: 48rpx;" src="../../image/collect.png"></image>
-                                    <image wx:else style="width: 48rpx; height: 48rpx;" src="../../image/collect-select.png"></image>
+                                    <image wx:if="{{!item.collected}}" style="width: 46rpx; height: 46rpx;" src="../../image/collect.png"></image>
+                                    <image wx:else style="width: 46rpx; height: 46rpx;" src="../../image/collect-select.png"></image>
                                 </view>
                             </view>
                             <view class="footer-right">
@@ -130,8 +130,8 @@
                                 </view>
                             </view>
                         </view>
-                        <view class="founder-concern" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
-                            <text>关注</text>
+                        <view class="founder-concern" data-followed="{{item.followed}}" data-creatorId="{{item.creatorId}}" bindtap="attentionFun">
+                            <text>{{item.followed ? '已关注' : '关注'}}</text>
                         </view>
                     </view>
                     <view class="bookList-info">

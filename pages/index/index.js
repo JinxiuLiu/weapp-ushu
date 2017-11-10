@@ -8,7 +8,7 @@ const collectUrl = require('../../config').collectUrl;
 const bannerUrl = require('../../config').bannerUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         inputVal: "",
@@ -100,6 +100,7 @@ Page({
     attentionFun: function(e) {
         let self = this;
         let creatorId = e.currentTarget.dataset.creatorid;
+        let index = e.currentTarget.dataset.index;
         if(e.currentTarget.dataset.followed) {
             util.showMessage(self, '已关注');
             return false;
@@ -108,6 +109,9 @@ Page({
             url: addAttentionUrl,
             data: {
                 targetId: creatorId
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if (data.data.success) {
@@ -164,7 +168,8 @@ Page({
                     url: shareSaveUrl,
                     method: 'POST',
                     header: {
-                        'content-type': 'application/x-www-form-urlencoded'
+                        'content-type': 'application/x-www-form-urlencoded',
+                        'Cookie': 'JSESSIONID=' + sessionId
                     },
                     data: {
                         id: uuid,
@@ -193,6 +198,9 @@ Page({
             url: collectUrl,
             data: {
                 bookListId: id
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if (data.data.success) {
@@ -226,6 +234,9 @@ Page({
                 sort: 'created',
                 order: "desc",
                 keyword: keyword || ''
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: result => {
                 if (result.data.success) {
@@ -265,6 +276,9 @@ Page({
                 sort: 'readCount',
                 order: "desc",
                 keyword: keyword || ''
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: result => {
                 if (result.data.success) {
@@ -321,6 +335,9 @@ Page({
         wx.request({
             url: bannerUrl,
             data: {},
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
                 self.setData({
                     imgUrls: data.data

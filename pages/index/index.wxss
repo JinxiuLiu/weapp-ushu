@@ -49,6 +49,7 @@
 }
 
 
+
 /* 书单 */
 
 .bookList {
@@ -103,6 +104,9 @@
     font-size: 20px;
     color: #333;
     line-height: 85rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .bookList-img {

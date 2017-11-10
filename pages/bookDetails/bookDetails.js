@@ -9,7 +9,7 @@ const shareSaveUrl = require('../../config').shareSaveUrl;
 const generateUrl = require('../../config').generateUrl;
 const cartTotalUrl = require('../../config').cartTotalUrl;
 const util = require('../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["图书详情", "图书目录", "内容简介", "作者简介"],
@@ -51,7 +51,8 @@ Page({
             url: bookDetailUrl,
             method: 'POST',
             header: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             data: {
                 id: id
@@ -71,7 +72,8 @@ Page({
             url: collectBookUrl,
             method: 'POST',
             header: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             data: {
                 bookListItemId: id
@@ -103,7 +105,8 @@ Page({
                 fromShareId: self.data.fromId
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if(data.data.success) {
@@ -133,6 +136,9 @@ Page({
                     'fromShareId': self.data.fromId,
                     'quantity': 1,
                 }]
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: function(data) {
                 if (data.data.success) {
@@ -164,13 +170,14 @@ Page({
                 wx.request({
                     url: shareSaveUrl,
                     method: 'POST',
-                    header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                    },
                     data: {
                         id: uuid,
                         bookListItemId: bookListItemId,
                         fromId: self.data.fromId
+                    },
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                        'Cookie': 'JSESSIONID=' + sessionId
                     },
                     success: data => {
                         if(data.data.success) {
@@ -194,7 +201,8 @@ Page({
             method: 'POST',
             data: {},
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
                 if(data.data.success) {

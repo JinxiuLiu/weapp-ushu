@@ -42,10 +42,10 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                     <view class="attention" wx:for="{{attentionList}}">
                         <view class="attention-img">
-                            <image src="{{item.targetPhoto.url}}"></image>
+                            <image src="{{item.creatorPhoto.url}}"></image>
                         </view>
                         <view class="attention-text">
-                            <text><text class="name">{{item.targetName}}</text>　关注了你</text>
+                            <text><text class="name">{{item.creatorName}}</text>　关注了你</text>
                             <text class="time">{{item.created}}</text>
                         </view>
                     </view>

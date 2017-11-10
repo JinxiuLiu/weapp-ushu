@@ -42,6 +42,7 @@
 .collect-book image {
 	width: 140rpx;
 	height: 178rpx;
+	border: 1rpx solid #f0f0f0;
 }
 
 .collect-book .book-img,

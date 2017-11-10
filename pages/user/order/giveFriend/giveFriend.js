@@ -1,53 +1,63 @@
 /**
  * Created by Liujx on 2017-11-07 17:32:05
  */
- const orderDetailUrl = require('../../../../config').orderDetailUrl;
- Page({
- 	data: {
- 		id: '',
- 		isShare: true,
- 		bookItem: [],
- 		bindinput: '那是我们有梦，关于文学，关于爱情，关于穿越世界。'
- 	},
- 	onLoad: function(options) {
- 		let self = this;
- 		let id = options.id;
- 		wx.request({
+const orderDetailUrl = require('../../../../config').orderDetailUrl;
+const util = require('../../../../utils/util');
+let sessionId = wx.getStorageSync('sessionId')
+Page({
+    data: {
+        id: '',
+        isShare: true,
+        bookItem: [],
+        bindinput: '那时我们有梦，关于文学，关于爱情，关于穿越世界。'
+    },
+    onLoad: function(options) {
+        let self = this;
+        let id = options.id;
+        wx.request({
             url: orderDetailUrl,
             method: 'POST',
             header: {
-		        'content-type': 'application/x-www-form-urlencoded'
-		    },
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             data: {
                 id: id
             },
             success: data => {
-            	console.log(data);
-                if(data.data.success) {
+                console.log(data);
+                if (data.data.success) {
                     self.setData({
-                    	id: id,
-                    	bookItem: data.data.data.itemList
+                        id: id,
+                        bookItem: data.data.data.itemList
                     })
                 }
             }
         })
- 	},
- 	bindinput: function(e) {
- 		this.setData({
-	    	bindinput: e.detail.value
-	    })
- 	},
- 	// 赠朋友
+    },
+    bindinput: function(e) {
+        this.setData({
+            bindinput: e.detail.value
+        })
+    },
+    // 确认赠言
+    confirmGiveText: function() {
+        this.setData({
+            isShare: false,
+        })
+    },
+    // 赠朋友
     onShareAppMessage: function(res) {
         let self = this;
+        if (self.data.isShare) {
+            util.showMessage(self, '请先确认赠言~');
+            return false;
+        }
         let id = self.data.id;
         let item = self.data.bookItem;
         let array = [];
         let title = '';
         let path = '';
-        self.setData({
-        	isShare: false,
-        })
         for (var j = 0; j < item.length; j++) {
             for (var k = 0; k < item[j].items.length; k++) {
                 array.push(item[j].items[k]);
@@ -68,7 +78,7 @@
                     confirmText: '确定',
                     content: '请提示朋友尽快填写收货地址~',
                     success: function(res) {
-                        
+
                     }
                 })
             },
@@ -77,4 +87,4 @@
             }
         }
     }
- })
+})

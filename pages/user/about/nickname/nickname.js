@@ -1,14 +1,14 @@
 /**
  * Created by Liujx on 2017-10-19 11:30:56
  */
- const updateNameUrl = require('../../../../config').updateNameUrl;
- const util = require('../../../../utils/util');
-
- Page({
- 	data: {
- 		inputVal: '',
+const updateNameUrl = require('../../../../config').updateNameUrl;
+const util = require('../../../../utils/util');
+let sessionId = wx.getStorageSync('sessionId')
+Page({
+    data: {
+        inputVal: '',
         memberId: ''
- 	},
+    },
     onLoad: function(option) {
         this.setData({
             inputVal: option.name,
@@ -22,14 +22,15 @@
             url: updateNameUrl,
             method: 'POST',
             header: {
-                  'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             data: {
                 memberId: self.data.memberId,
                 name: self.data.inputVal
             },
             success: data => {
-                if(data.data.success) {
+                if (data.data.success) {
                     util.showMessage(self, data.data.msg)
                     setTimeout(function() {
                         wx.navigateBack()
@@ -40,25 +41,25 @@
             }
         })
     },
- 	showInput: function () {
+    showInput: function() {
         this.setData({
             inputShowed: true
         });
     },
-    hideInput: function () {
+    hideInput: function() {
         this.setData({
             inputVal: "",
             inputShowed: false
         });
     },
-    clearInput: function () {
+    clearInput: function() {
         this.setData({
             inputVal: ""
         });
     },
-    inputTyping: function (e) {
+    inputTyping: function(e) {
         this.setData({
             inputVal: e.detail.value
         });
     }
- })
+})

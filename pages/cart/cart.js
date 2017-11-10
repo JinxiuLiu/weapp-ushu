@@ -7,7 +7,7 @@ const selectCartUrl = require('../../config').selectCartUrl;
 const changeCartUrl = require('../../config').changeCartUrl;
 const delCartUrl = require('../../config').delCartUrl;
 const generateUrl = require('../../config').generateUrl;
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         isEdit: false,
@@ -26,6 +26,9 @@ Page({
             url: shopCartUrl,
             method: 'POST',
             data: {},
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: function(res) {
                 self.setData({
                     loadmore: false,
@@ -169,6 +172,9 @@ Page({
             url: selectCartUrl,
             method: 'POST',
             data: data,
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: function(res) {
                 let price = Number(res.data.data);
                 self.setData({
@@ -238,7 +244,8 @@ Page({
                 checkedIds: idArr
             },
             header: {
-                'content-type': 'application/x-www-form-urlencoded' // 默认值
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             success: function(data) {
                 if (data.data.success) {
@@ -261,7 +268,8 @@ Page({
             url: delCartUrl,
             method: 'POST',
             header: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + sessionId
             },
             data: {
                 id: id
@@ -299,6 +307,9 @@ Page({
                 give: isGive,
                 items: items
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: function(data) {
                 if (data.data.success) {
                     wx.navigateTo({
@@ -310,6 +321,13 @@ Page({
             }
         });
         
+    },
+    // 点击图书
+    tapBook: function(e) {
+        let bookId = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '../bookDetails/bookDetails?id=' + bookId
+        })
     },
     showMessage: function(text) {
         var that = this

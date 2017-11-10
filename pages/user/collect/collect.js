@@ -5,7 +5,7 @@ const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位�
 const collectBookViewUrl = require('../../../config').collectBookViewUrl;
 const collectBookListUrl = require('../../../config').collectBookListUrl;
 const util = require('../../../utils/util');
-
+let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["收藏的书单", "收藏的书"],
@@ -19,7 +19,7 @@ Page({
         bookListItem: [],
         bookItem: []
     },
-    onLoad: function () {
+    onLoad: function() {
         var self = this;
         self.collectBookList();
         wx.getSystemInfo({
@@ -28,18 +28,18 @@ Page({
                     sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
                 });
-            } 
+            }
         });
     },
     // 上拉加载更多
     onReachBottom: function() {
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 bookListLoadMore: true,
             })
             this.collectBookList()
         }
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 bookLoadMore: true,
             })
@@ -47,12 +47,12 @@ Page({
         }
     },
     // tab栏切换
-    tabClick: function (e) {
+    tabClick: function(e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         })
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 bookListPage: 1,
                 bookListLoadMore: true,
@@ -60,7 +60,7 @@ Page({
             })
             this.collectBookList()
         }
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 bookPage: 1,
                 bookLoadMore: true,
@@ -78,8 +78,11 @@ Page({
                 page: self.data.bookListPage,
                 rows: 10
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(data.data.rows.length == 0) {
+                if (data.data.rows.length == 0) {
                     self.setData({
                         bookListLoadMore: false,
                     })
@@ -87,11 +90,11 @@ Page({
                     return false;
                 }
                 self.data.bookListPage++
-                self.setData({
-                    bookListPage: self.data.bookListPage,
-                    bookListLoadMore: false,
-                    bookListItem: self.data.bookListItem.concat(data.data.rows)
-                })
+                    self.setData({
+                        bookListPage: self.data.bookListPage,
+                        bookListLoadMore: false,
+                        bookListItem: self.data.bookListItem.concat(data.data.rows)
+                    })
             }
         })
     },
@@ -104,8 +107,11 @@ Page({
                 page: self.data.bookPage,
                 rows: 10
             },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
             success: data => {
-                if(data.data.rows.length == 0) {
+                if (data.data.rows.length == 0) {
                     self.setData({
                         bookLoadMore: false,
                     })
@@ -113,11 +119,11 @@ Page({
                     return false;
                 }
                 self.data.bookPage++
-                self.setData({
-                    bookPage: self.data.bookPage,
-                    bookLoadMore: false,
-                    bookItem: self.data.bookItem.concat(data.data.rows)
-                })
+                    self.setData({
+                        bookPage: self.data.bookPage,
+                        bookLoadMore: false,
+                        bookItem: self.data.bookItem.concat(data.data.rows)
+                    })
             }
         })
     }
