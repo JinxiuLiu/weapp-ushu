@@ -126,5 +126,19 @@ Page({
                     })
             }
         })
+    },
+    // 跳转书单
+    tapBookList: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../bookList/bookList?id=' + id
+        })
+    },
+    // 跳转图书
+    tapBook: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../bookDetails/bookDetails?id=' + id
+        })
     }
 });

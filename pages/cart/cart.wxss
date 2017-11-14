@@ -90,9 +90,9 @@
 	display: flex;
 	flex-direction: column;
 	align-self: flex-start;
+	justify-content:space-between;
 	width: 72%;
 	height:177rpx;
-	position: relative;
 }
 
 .book-left .left-text .name {
@@ -116,9 +116,6 @@
 	justify-content: space-between;
 	width: 100%;
 	font-size: 14px;
-	margin-top: 10rpx;
-	position: absolute;
-	bottom: 0;
 }
 
 .book-right .number {

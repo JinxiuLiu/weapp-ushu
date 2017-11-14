@@ -12,7 +12,7 @@
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
                     <view class="bookList-item" wx:for="{{bookListItem}}">
-                        <text class="bookList-name">{{item.title}}</text>
+                        <view class="bookList-name" bindtap="tapBookList" data-id="{{item.id}}">{{item.title}}</view>
                         <text class="user-name">{{item.creatorName}}<text class="time">发布于{{item.created}}</text></text>
                     </view>
                     <view wx:if="{{bookListItem.length == 0}}" class="NoData">暂无收藏</view>
@@ -22,15 +22,17 @@
                     </view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="collect-book" wx:for="{{bookItem}}">
-                        <view class="book-img">
-                            <image src="{{item.picPath}}"></image>
+                    <block wx:for="{{bookItem}}">
+                        <view class="collect-book" bindtap="tapBook" data-id="{{item.id}}">
+                            <view class="book-img">
+                                <image src="{{item.picPath}}"></image>
+                            </view>
+                            <view class="book-text">
+                                <text class="book-name">{{item.bookName}}</text>
+                                <text class="book-from">出自书单 {{item.bookListTitle}}</text>
+                            </view>
                         </view>
-                        <view class="book-text">
-                            <text class="book-name">{{item.bookName}}</text>
-                            <text class="book-from">出自书单 {{item.bookListTitle}}</text>
-                        </view>
-                    </view>
+                    </block>
                     <view wx:if="{{bookItem.length == 0}}" class="NoData">暂无收藏</view>
                     <view class="weui-loadmore" wx:if="{{loadmore}}">
                         <view class="weui-loading"></view>

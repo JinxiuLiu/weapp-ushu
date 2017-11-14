@@ -1,7 +1,7 @@
 <view class="myBookList">
 	<view class="booklist-item" wx:for="{{myBookList}}">
 		<view class="item-top">
-			<view class="item-top-left">
+			<view class="item-top-left" data-id="{{item.id}}" bindtap="tapBookList">
 				<text>{{item.title}}</text>		
 				<text class="time">{{item.created}}</text>		
 			</view>
@@ -19,7 +19,7 @@
 					<image src="../../../image/compile.png"></image>
 					<text>编辑</text>
 				</view>
-				<view class="text" data-id="{{item.id}}" bindtap="delBookListFun">
+				<view class="text" data-id="{{item.id}}" data-index="{{item.index}}" bindtap="delBookListFun">
 					<image src="../../../image/delete.png"></image>
 					<text>删除</text>
 				</view>

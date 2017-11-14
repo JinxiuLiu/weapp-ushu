@@ -1,5 +1,5 @@
 .create {
-    margin-bottom: 137rpx;
+    padding-bottom: 137rpx;
 }
 
 audio {

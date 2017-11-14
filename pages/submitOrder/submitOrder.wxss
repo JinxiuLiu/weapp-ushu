@@ -1,6 +1,6 @@
 .submitOrder {
 	border-top: 1rpx solid #dcdcdc;
-	margin-bottom: 108rpx;
+	padding-bottom: 108rpx;
 }
 
 .submitOrder-address {
@@ -72,7 +72,7 @@
 	flex-direction: column;
 	height: 100%;
 	width:75%;
-	position: relative;
+	justify-content: space-between;
 }
 
 .book-left .left-text .name {
@@ -96,8 +96,6 @@
 	display: flex;
 	justify-content: space-between;
 	font-size: 14px;
-	position: absolute;
-	bottom: 0;
 }
 
 .item-book .book-right .number {

@@ -8,7 +8,9 @@ const commentListUrl = require('../../config').commentListUrl;
 const commentGridUrl = require('../../config').commentGridUrl;
 const cartTotalUrl = require('../../config').cartTotalUrl;
 const addAttentionUrl = require('../../config').addAttentionUrl;
+const cancelAttentionUrl = require('../../config').cancelAttentionUrl;
 const collectUrl = require('../../config').collectUrl;
+const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
 let sessionId = wx.getStorageSync('sessionId')
@@ -159,11 +161,17 @@ Page({
         let self = this;
         let creatorId = e.currentTarget.dataset.creatorid;
         if(e.currentTarget.dataset.followed) {
-            util.showMessage(self, '已关注');
-            return false;
+            self.attentionRequest(cancelAttentionUrl, creatorId, '取消关注成功！', false)
+        } else {
+            self.attentionRequest(addAttentionUrl, creatorId, '关注成功！', true)
         }
+        
+    },
+    // 关注&&取消关注接口
+    attentionRequest: function(url, creatorId, msg, isFollowed) {
+        let self = this;
         wx.request({
-            url: addAttentionUrl,
+            url: url,
             data: {
                 targetId: creatorId
             },
@@ -172,8 +180,8 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    util.showMessage(self, '关注成功！');
-                    self.data.detailList[0].followed = true;
+                    util.showMessage(self, msg);
+                    self.data.detailList[0].followed = isFollowed;
                     self.setData({
                         detailList: self.data.detailList
                     })
@@ -187,8 +195,18 @@ Page({
     collectFun: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
+        let isCollect = e.currentTarget.dataset.iscollect;
+        if(isCollect) {
+            self.collectRequest(cancelCollectUrl, id, '取消收藏成功！')
+        } else {
+            self.collectRequest(collectUrl, id, '收藏成功！')
+        }
+    },
+    // 收藏&&取消收藏
+    collectRequest: function(url, id, msg) {
+        let self = this;
         wx.request({
-            url: collectUrl,
+            url: url,
             data: {
                 bookListId: id
             },
@@ -198,7 +216,7 @@ Page({
             success: data => {
                 if (data.data.success) {
                     self.detailRequest(id);
-                    util.showMessage(self, '收藏成功！');
+                    util.showMessage(self, msg);
                 } else {
                     util.showMessage(self, data.data.msg);
                 }
@@ -272,6 +290,13 @@ Page({
                     })
                 }
             }
+        })
+    },
+    // 进入图书详情
+    tapBookDetails: function(e) {
+        let bookId = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '../bookDetails/bookDetails?id=' + bookId
         })
     },
     // 跳转购物车

@@ -45,6 +45,15 @@
 	color: #ff4444;
 }
 
+.bookDetails .book-info .origPrice {
+	display: inline-flex;
+	font-size: 16px;
+	color: #999;
+	font-weight: normal;
+	text-decoration:line-through;
+	padding-left: 20rpx;
+}
+
 .bookDetails .book-info .name {
 	font-size: 14px;
 	color: #999;
@@ -169,7 +178,7 @@ rich-text {
 .cart {
 	position: fixed;
 	right: 10px;
-	bottom: 100px;
+	bottom: 260rpx;
 }
 
 .cart .cart-img {

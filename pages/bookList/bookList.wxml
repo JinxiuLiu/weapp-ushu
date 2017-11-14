@@ -34,7 +34,7 @@
             </view>
             <view class="bookList-details">
                 <view class="details-item" wx:for="{{item.items}}">
-                    <view class="book-left">
+                    <view class="book-left" bindtap="tapBookDetails" data-id="{{item.id}}">
                         <view class="left-image">
                             <image src="{{item.picPath}}"></image>
                         </view>
@@ -45,11 +45,11 @@
                                 <text class="color-red price">¥{{item.price}}
                                     <!-- <text class="old-price">¥59</text> -->
                                 </text>
-                                <view class="number" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">
-                                    <image src="../../image/bookadd.png"></image>
-                                </view>
                             </view>
                         </view>
+                    </view>
+                    <view class="number" data-bookId="{{item.bookId}}" data-bookListId="{{item.id}}" bindtap="addCartFun">
+                        <image src="../../image/bookadd.png"></image>
                     </view>
                 </view>
             </view>
@@ -93,7 +93,7 @@
     <view class="bookList-bottom">
         <text class="hot">热度({{readCount}})</text>
         <view class="bottom-right">
-            <view class="collect" data-id="{{item.id}}" bindtap="collectFun">
+            <view class="collect" data-id="{{item.id}}" data-iscollect="{{item.collected}}" bindtap="collectFun">
                 <image src="../../image/collect-white.png"></image>
                 <text>{{item.collected ? '已收藏' : '收藏'}}</text>
             </view>

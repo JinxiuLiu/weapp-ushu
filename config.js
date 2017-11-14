@@ -2,8 +2,9 @@
  * Created by Liujx on 2017-10-24 14:59:47
  * 小程序配置文件
  */
-
+// var host = "http://192.168.0.111:8081"
 var host = "http://rkkscs.xatime.com"
+// var host = "http://59.110.47.139:80"
 
 var config = {
 
@@ -69,6 +70,9 @@ var config = {
     // 收藏接口
     collectUrl: `${host}/collection/add`,
 
+    // 取消收藏接口
+    cancelCollectUrl: `${host}/collection/cancel`,
+
     // 我的收藏（书单)
     collectBookListUrl: `${host}/collection/grid_list_my`,
 
@@ -122,6 +126,9 @@ var config = {
 
     // 添加关注
     addAttentionUrl: `${host}/follow/add`,
+
+    // 取消关注
+    cancelAttentionUrl: `${host}/follow/cancel`,
 
     // 我的关注
     myAttentionUrl: `${host}/follow/grid_my`,

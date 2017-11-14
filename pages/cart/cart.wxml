@@ -20,11 +20,11 @@
                     <icon wx:if="{{bookItem.checked}}" type="success" color="#ff4444" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                     <icon wx:else type="circle" data-index="{{index}}"  data-i="{{i}}" bindtap="selectList"/>
                 </view>
-                <view class="book-left" bindtap="tapBook" data-id="{{bookItem.bookListItemId}}">
-                    <view class="left-image">
+                <view class="book-left">
+                    <view class="left-image" bindtap="tapBook" data-id="{{bookItem.bookListItemId}}">
                         <image src="{{bookItem.picPath}}"></image>
                     </view>
-                    <view class="left-text" wx:if="{{!isEdit}}">
+                    <view class="left-text" bindtap="tapBook" data-id="{{bookItem.bookListItemId}}" wx:if="{{!isEdit}}">
                         <text class="name">{{bookItem.bookName}}</text>
                         <text class="work-name">{{bookItem.author}} 著</text>
                         <view class="book-right">

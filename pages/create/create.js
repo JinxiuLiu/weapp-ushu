@@ -13,6 +13,7 @@ Page({
         isEdit: false,
         isSelectBook: false,
         bookListId: '',
+        imagesAllKey: [],
         src: '',
         imageList: [],
         bookImgUrl: [],
@@ -40,10 +41,12 @@ Page({
         } else if (this.data.recording) {
             this.stopRecordUnexpectedly()
         }
-        if(!this.data.isSelectBook) {
+        if (!this.data.isSelectBook) {
             this.setData({
                 isDel: false,
+                editImagesKey: [],
                 isEdit: false,
+                isDisabled: false,
                 bookListId: '',
                 src: '',
                 imageList: [],
@@ -64,8 +67,9 @@ Page({
                 voiceKey: '', // 音频key
                 imagesKey: [], // 图片key
                 tempImagesKey: [], // 图片key
+                imagesAllKey: [],
                 content: '', // 书单内容
-                bookKey: [] // 图书key
+                bookKey: [], // 图书key
             })
         }
         this.setData({
@@ -79,7 +83,7 @@ Page({
     // 页面显示
     onShow: function(option) {
         let self = this;
-        if(self.data.isSelectBook) {
+        if (self.data.isSelectBook) {
             self.setData({
                 bookImgUrl: self.data.bookImgUrl.concat(self.data.tempBookImgUrl),
                 bookKey: self.data.bookKey.concat(self.data.tempBookKey)
@@ -89,7 +93,7 @@ Page({
             key: 'bookListId',
             success: data => {
                 let bookListId = data.data;
-                if(!bookListId) return false;
+                if (!bookListId) return false;
                 wx.request({
                     url: detailUrl,
                     method: 'POST',
@@ -101,7 +105,7 @@ Page({
                         'Cookie': 'JSESSIONID=' + sessionId
                     },
                     success: data => {
-                        if(data.data.success) {
+                        if (data.data.success) {
                             let item = data.data.data;
                             let tempImageList = [];
                             let tempBookImgUrl = [];
@@ -115,7 +119,7 @@ Page({
                             })
                             item.items.filter(function(item, index) {
                                 tempBookImgUrl.push(item.picPath);
-                                self.data.bookKey.push({'bookId': item.bookId, "id": item.id, "seq": index+1});
+                                self.data.bookKey.push({ 'bookId': item.bookId, "id": item.id, "seq": index + 1 });
                             })
                             self.setData({
                                 isEdit: true,
@@ -128,9 +132,11 @@ Page({
                                 voiceSrc: item.voice ? item.voice.url : '',
                                 imageList: tempImageList,
                                 imagesKey: self.data.imagesKey,
+                                editImagesKey: self.data.imagesKey,
                                 content: item.content,
                                 bookImgUrl: tempBookImgUrl,
-                                bookKey: self.data.bookKey
+                                bookKey: self.data.bookKey,
+                                imagesAllKey: [],
                             })
                         } else {
                             util.showMessage(self, data.data.msg)
@@ -157,6 +163,7 @@ Page({
         var self = this
         self.data.isSelectBook = true;
         wx.chooseVideo({
+            sourceType: ['camera'],
             success: function(res) {
                 self.setData({
                     src: res.tempFilePath
@@ -182,6 +189,7 @@ Page({
             videoKey: ''
         })
     },
+    // 开始录音
     startRecord: function() {
         this.setData({ recording: true })
         var self = this
@@ -217,6 +225,7 @@ Page({
             }
         })
     },
+    // 停止录音
     stopRecord: function() {
         wx.stopRecord()
     },
@@ -274,7 +283,7 @@ Page({
         wx.stopVoice()
     },
     clear: function() {
-        if(this.data.voiceSrc) {
+        if (this.data.voiceSrc) {
             this.setData({
                 voiceSrc: ''
             })
@@ -310,34 +319,6 @@ Page({
             }
         })
     },
-    // 删除图片
-    delImage: function(e) {
-        var self = this;
-        let index = e.target.dataset.index;
-        let imagesKey = self.data.imagesKey;
-        let imagesAllKey = self.data.imagesAllKey;
-        let array;
-        if(imagesAllKey) {
-            array = imagesAllKey
-        } else {
-            array = imagesKey
-        }
-        array.splice(index, 1);
-        self.removeByValue(self.data.imageList, e.target.dataset.src)
-        self.setData({
-            isDel: true,
-            imageList: self.data.imageList,
-            imagesKey: array
-        })
-    },
-    // 查看图片大图
-    previewImage: function(e) {
-        var current = e.target.dataset.src
-        wx.previewImage({
-            current: current,
-            urls: this.data.imageList
-        })
-    },
     // 递归 上传图片
     uploadDIY(filePaths, successUp, failUp, i, length) {
         var self = this;
@@ -352,20 +333,66 @@ Page({
             fail: (res) => {
                 failUp++;
             },
-            complete: () => {
+            complete: (res) => {
                 i++;
                 if (i == length) {
                     util.showMessage(self, '总共' + successUp + '张上传成功', 3000);
                     self.setData({
                         isDel: false,
                         tempImagesKey: self.data.tempImagesKey,
-                        imagesAllKey: self.data.imagesKey.concat(self.data.tempImagesKey)
+                        imagesAllKey: self.data.imagesKey.concat(self.data.tempImagesKey),
+                        editImagesKey: self.data.imagesKey.concat(self.data.tempImagesKey)
                     })
                 } else { //递归调用uploadDIY函数
                     self.uploadDIY(filePaths, successUp, failUp, i, length);
                 }
             },
         });
+    },
+    // 删除图片
+    delImage: function(e) {
+        var self = this;
+        let index = e.target.dataset.index;
+        let imagesKey = self.data.imagesKey;
+        let imagesAllKey = self.data.imagesAllKey;
+        let array;
+        if (imagesAllKey.length) {
+            array = imagesAllKey
+        } else {
+            array = imagesKey
+        }
+        array.splice(index, 1);
+        self.removeByValue(self.data.imageList, e.target.dataset.src)
+        self.setData({
+            isDel: true,
+            imageList: self.data.imageList,
+        })
+        if (imagesAllKey.length) {
+            self.setData({
+                imagesAllKey: array
+            })
+        } else {
+            self.setData({
+                imagesKey: array
+            })
+        }
+        if (this.data.isEdit) {
+            self.setData({
+                editImagesKey: array
+            })
+        }
+    },
+    // 查看图片大图
+    previewImage: function(e) {
+        var current = e.target.dataset.src
+        this.setData({
+            isSelectBook: true
+        })
+        wx.previewImage({
+            current: current,
+            urls: this.data.imageList
+        })
+
     },
     // 选择图书
     selectBook: function() {
@@ -393,29 +420,33 @@ Page({
         let videoKey = self.data.videoKey;
         let voiceKey = self.data.voiceKey;
         let imagesKey = self.data.imagesKey;
-        let tempImagesKey = self.data.tempImagesKey;
         let content = self.data.content;
         let bookKey = self.data.bookKey;
         let bookListId = self.data.bookListId;
         let imagesAllKey = self.data.imagesAllKey;
-        if(tempImagesKey && !self.data.isDel) {
-            imagesAllKey = imagesKey.concat(tempImagesKey);
+        if (imagesAllKey.length) {
+            imagesAllKey = imagesKey.concat(imagesAllKey);
         } else {
             imagesAllKey = imagesKey;
         }
-        
-        if(bookListName == '') {
-            util.showMessage(self, '请填写书单名称！', 2000);
+        if (this.data.isEdit) {
+            imagesAllKey = this.data.editImagesKey;
+        }
+        if (self.trim(bookListName) == '') {
+            util.showMessage(self, '书单名称不能为空！', 2000);
             return false;
         }
-        if(content == '') {
-            util.showMessage(self, '请填写书单内容！', 2000);
+        if (self.trim(content) == '') {
+            util.showMessage(self, '书单内容不能为空！', 2000);
             return false;
         }
-        if(!bookKey.length) {
+        if (!bookKey.length) {
             util.showMessage(self, '请选择图书！', 2000);
             return false;
         }
+        this.setData({
+            isDisabled: true
+        })
         wx.request({
             url: CreateListUrl,
             method: 'POST',
@@ -436,16 +467,41 @@ Page({
             success: result => {
                 if (result.data.success) {
                     util.showMessage(self, result.data.msg, 2000);
+
+                    setTimeout(function() {
+                        self.setData({
+                            isSelectBook: false,
+                            isDisabled: false
+                        })
+                        if(result.data.data.published) {
+                            wx.switchTab({
+                                url: '../index/index'
+                            })
+                        } else {
+                            wx.navigateTo({
+                                url: '../user/myBookList/myBookList'
+                            })
+                        }
+                        
+                    }, 500)
                 } else {
                     util.showMessage(self, result.data.msg, 2000);
+                    this.setData({
+                        isDisabled: false
+                    })
                 }
             },
             fail: function({ errMsg }) {
                 util.showMessage(self, errMsg, 2000);
                 self.setData({
-                    loading: false
+                    loading: false,
+                    isDisabled: false
                 })
             }
         })
+    },
+    // 去首尾空格
+    trim: function(str) {
+        return str.replace(/(^\s+)|(\s+$)/g, "");
     }
 })

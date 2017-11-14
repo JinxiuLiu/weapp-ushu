@@ -1,12 +1,13 @@
 /**
  * Created by Liujx on 2017-10-10 15:44:49
  */
+
 @import 'weui.wxss';
 
 page {
-	background: #ececec;
-	font-size: 16px;
-	color: #333;
+    background: #ececec;
+    font-size: 16px;
+    color: #333;
 }
 
 .NoData {
@@ -18,50 +19,55 @@ page {
 }
 
 .color-red {
-	color: #ff4444;
+    color: #ff4444;
 }
 
 .marginBottom {
-	margin-bottom: 20rpx;
+    margin-bottom: 20rpx;
 }
 
 button[type="primary"] {
-	margin: 28rpx 32rpx 54rpx;
-	background-color: #ff4444;
+    margin: 28rpx 32rpx 54rpx;
+    background-color: #ff4444;
+}
+
+button[disabled][type="primary"] {
+    background-color: #ff6666;
 }
 
 .button-hover[type="primary"] {
-	color:rgba(255, 255, 255, 0.6);
-	background-color: rgba(255, 69, 68, 0.8);
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 69, 68, 0.8);
 }
 
 /* tab切换栏 */
 .page__bd {
-	border-top: 1rpx solid #dcdcdc;
-	background: #fff;
+    border-top: 1rpx solid #dcdcdc;
+    background: #fff;
 }
 
 .weui-navbar {
-	border-bottom: 1rpx solid #dcdcdc;
+    border-bottom: 1rpx solid #dcdcdc;
 }
 
 .weui-navbar__item.weui-bar__item_on {
-	color: #ff4444;
+    color: #ff4444;
 }
 
 .weui-navbar__item {
-	height: 80rpx;
-	line-height: 80rpx;
-	padding: 0;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0;
 }
 
 .weui-navbar__slider {
-	background-color: #ff4444;
+    background-color: #ff4444;
 }
 
 .weui-tab__panel {
-	padding-top: 82rpx;
+    padding-top: 82rpx;
 }
+
 /* tab切换栏END */
 
 /* toast */
@@ -85,15 +91,15 @@ button[type="primary"] {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
 
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
 }

@@ -23,7 +23,9 @@ Page({
         wx.request({
             url: myBookListUrl,
             data: {
-                page: self.data.page
+                page: self.data.page,
+                sort: "created",
+                order: "desc"
             },
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId
@@ -113,6 +115,7 @@ Page({
     delBookListFun: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
+        let index = e.currentTarget.dataset.index;
         wx.request({
             url: deleteBookListUrl,
             data: {
@@ -124,24 +127,10 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, data.data.msg);
+                    let myBookList = self.data.myBookList
+                    myBookList.splice(index, 1)
                     self.setData({
-                        page: 1,
-                    })
-                    wx.request({
-                        url: myBookListUrl,
-                        data: {
-                            page: 1
-                        },
-                        header: {
-                            'Cookie': 'JSESSIONID=' + sessionId
-                        },
-                        success: data => {
-                            self.setData({
-                                loadmore: false,
-                                page: 1,
-                                myBookList: data.data.rows
-                            })
-                        }
+                        myBookList: self.data.myBookList
                     })
                 } else {
                     util.showMessage(self, data.data.msg);
@@ -158,6 +147,13 @@ Page({
         })
         wx.switchTab({
             url: '../../create/create'
+        })
+    },
+    // 进入书单
+    tapBookList: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../bookList/bookList?id=' + id
         })
     }
 })

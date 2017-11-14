@@ -4,7 +4,9 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const getBookListUrl = require('../../config').getBookListUrl;
 const addAttentionUrl = require('../../config').addAttentionUrl;
+const cancelAttentionUrl = require('../../config').cancelAttentionUrl;
 const collectUrl = require('../../config').collectUrl;
+const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const bannerUrl = require('../../config').bannerUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
@@ -50,6 +52,13 @@ Page({
                 });
             }
         })
+    },
+    onShow: function() {
+        this.setData({
+            pageOne: 1,
+            bookListItem: []
+        })
+        this.getBookListDefRequest()
     },
     // 上拉加载更多
     onReachBottom: function() {
@@ -102,11 +111,17 @@ Page({
         let creatorId = e.currentTarget.dataset.creatorid;
         let index = e.currentTarget.dataset.index;
         if(e.currentTarget.dataset.followed) {
-            util.showMessage(self, '已关注');
-            return false;
+            self.attentionRequest(cancelAttentionUrl, creatorId, index, '取消关注成功！', false)
+        } else {
+            self.attentionRequest(addAttentionUrl, creatorId, index, '关注成功！', true)
         }
+        
+    },
+    // 关注&&取消关注接口
+    attentionRequest: function(url, creatorId, index, msg, isFollowed) {
+        let self = this;
         wx.request({
-            url: addAttentionUrl,
+            url: url,
             data: {
                 targetId: creatorId
             },
@@ -115,15 +130,15 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    util.showMessage(self, '关注成功！');
+                    util.showMessage(self, msg);
                     if(self.data.activeIndex == 0) {
-                        self.data.bookListItem[index].followed = true;
+                        self.data.bookListItem[index].followed = isFollowed;
                         self.setData({
                             bookListItem: self.data.bookListItem
                         })
                     }
                     if(self.data.activeIndex == 1) {
-                        self.data.hotBookListItem[index].followed = true;
+                        self.data.hotBookListItem[index].followed = isFollowed;
                         self.setData({
                             hotBookListItem: self.data.hotBookListItem
                         })
@@ -194,8 +209,19 @@ Page({
         let self = this;
         let id = e.currentTarget.dataset.id;
         let index = e.currentTarget.dataset.index;
+        let isCollect = e.currentTarget.dataset.iscollect;
+        console.log(isCollect)
+        if(isCollect) {
+            self.collectRequest(cancelCollectUrl, id, index, '取消收藏成功！', false)
+        } else {
+            self.collectRequest(collectUrl, id, index, '收藏成功！', true)
+        }
+    },
+    // 收藏&&取消收藏
+    collectRequest: function(url, id, index, msg, isCollect) {
+        let self = this;
         wx.request({
-            url: collectUrl,
+            url: url,
             data: {
                 bookListId: id
             },
@@ -204,15 +230,15 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    util.showMessage(self, '收藏成功！');
+                    util.showMessage(self, msg);
                     if(self.data.activeIndex == 0) {
-                        self.data.bookListItem[index].collected = true;
+                        self.data.bookListItem[index].collected = isCollect;
                         self.setData({
                             bookListItem: self.data.bookListItem
                         })
                     }
                     if(self.data.activeIndex == 1) {
-                        self.data.hotBookListItem[index].collected = true;
+                        self.data.hotBookListItem[index].collected = isCollect;
                         self.setData({
                             hotBookListItem: self.data.hotBookListItem
                         })

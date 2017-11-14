@@ -7,7 +7,7 @@
 		<view class="from">出自书单  {{item.bookListTitle}}</view>
 		<view class="book-info">
 			<text class="title">{{item.bookName}}</text>
-			<text class="price">¥ {{item.price}}</text>
+			<text class="price">¥ {{item.price}}<text class="origPrice">¥ {{item.origPrice}} </text></text>
 			<text class="name">{{item.author}} 著</text>
 			<!-- <rich-text nodes="{{item.author_intro}}" class="introduce"></rich-text> -->
 		</view>
@@ -24,12 +24,12 @@
 	        </view>
 	        <view class="weui-tab__panel">
 	            <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-	                <text>ISBN：{{item.isbn}}</text>
-	                <text>开本：{{item.format}}</text>
-	                <text>语种：{{item.edition}}</text>
-	                <text>出版时间：{{item.publishDate}}</text>
-	                <text>包装：{{item.frame}}</text>
-	                <text>页数：{{item.pages}}</text>
+	                <text>ISBN：{{item.isbn || ''}}</text>
+	                <text>开本：{{item.format || ''}}</text>
+	                <text>语种：{{item.edition || ''}}</text>
+	                <text>出版时间：{{item.publishDate || ''}}</text>
+	                <text>包装：{{item.frame || ''}}</text>
+	                <text>页数：{{item.pages || ''}}</text>
 	            </view>
 	            <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 	                <rich-text nodes="{{item.directory}}"></rich-text>
@@ -46,7 +46,7 @@
 	</view>
 	<view class="bookDetails-bottom">
 	<view class="bottom-item left-btn">
-		<view class="collect" bindtap="collectBookFun" data-id="{{item.id}}">
+		<view class="collect" bindtap="collectBookFun" data-iscollect="{{item.collected}}" data-id="{{item.id}}">
 			<image src="../../image/collect-kong.png"></image>
 			<text>{{item.collected ? '已收藏' : '收藏'}}</text>
 		</view>

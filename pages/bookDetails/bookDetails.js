@@ -4,6 +4,7 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const bookDetailUrl = require('../../config').bookDetailUrl;
 const collectBookUrl = require('../../config').collectBookUrl;
+const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const addCartUrl = require('../../config').addCartUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const generateUrl = require('../../config').generateUrl;
@@ -68,8 +69,18 @@ Page({
     collectBookFun: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
+        let isCollect = e.currentTarget.dataset.iscollect
+        if(isCollect) {
+            self.collectBookRequest(cancelCollectUrl, id, '取消收藏成功！', false)
+        } else {
+            self.collectBookRequest(collectBookUrl, id, '收藏成功！', true)
+        }
+    },
+    // 收藏&&取消收藏
+    collectBookRequest: function(url, id, msg, isCollect) {
+        let self = this;
         wx.request({
-            url: collectBookUrl,
+            url: url,
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
@@ -80,8 +91,8 @@ Page({
             },
             success: data => {
                 if(data.data.success) {
-                    util.showMessage(self, '收藏成功！')
-                    self.data.bookDetailItem[0].collected = true;
+                    util.showMessage(self, msg)
+                    self.data.bookDetailItem[0].collected = isCollect;
                     self.setData({
                         bookDetailItem: self.data.bookDetailItem
                     })
@@ -160,7 +171,7 @@ Page({
         let uuid = util.uuid();
         if (res.from === 'button') {
             title = res.target.dataset.title;
-            path = '/pages/bookDetail/bookDetail?id=' + bookListItemId + '&uuid=' + uuid
+            path = '/pages/bookDetails/bookDetails?id=' + bookListItemId + '&uuid=' + uuid
         }
         return {
             title: title,

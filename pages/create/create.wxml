@@ -3,11 +3,11 @@
 	<view class="weui-cells weui-cells_after-title">
 	    <view class="weui-cell weui-cell_input">
 	        <view class="weui-cell__bd">
-	            <input class="weui-input" value="{{bookListName}}" placeholder="请输入书单名称" bindinput="bindinput" />
+	            <input class="weui-input" value="{{bookListName}}" placeholder="请输入书单名称" maxlength="50" bindinput="bindinput" />
 	        </view>
 	    </view>
 	</view>
-	<view class="weui-cells__title">上传视频</view>
+	<view class="weui-cells__title">视频</view>
 	<view class="weui-cells weui-cells_after-title">
 		<view class="page-body-info">
 			<block wx:if="{{src === ''}}">
@@ -26,7 +26,7 @@
 			</block>
 		</view>
 	</view>
-	<view class="weui-cells__title">上传音频</view>
+	<view class="weui-cells__title">音频</view>
 	<view class="weui-cells weui-cells_after-title">
 		<block wx:if="{{!voiceSrc}}">
 			<block wx:if="{{recording === false && playing === false && hasRecord === false}}">
@@ -121,5 +121,5 @@
 		</view>
 	</view>
 </view>
-<button type="primary" bindtap="submitFun">{{isEdit ? '提交编辑' : '提交'}}</button>
+<button type="primary" disabled="{{isDisabled}}" bindtap="submitFun">{{isEdit ? '提交编辑' : '提交'}}</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

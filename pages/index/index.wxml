@@ -67,7 +67,7 @@
                             <video id="myVideo" src="{{item.video.url}}" controls></video>
                         </view>
                         <view class="bookList-audio" wx-if="{{!!item.voice}}">
-                            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
+                            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop="false"></audio>
                         </view>
                         <view class="bookList-text" wx-if="{{item.content}}">
                             <text>{{item.content}}</text>
@@ -94,7 +94,7 @@
                                 <view class="comment" data-id="{{item.id}}" bindtap="tapBookList">
                                     <text>评论({{item.commentCount}})</text>
                                 </view>
-                                <view class="collect" data-index="{{index}}" data-id="{{item.id}}" bindtap="collectFun">
+                                <view class="collect" data-index="{{index}}" data-isCollect="{{item.collected}}" data-id="{{item.id}}" bindtap="collectFun">
                                     <image wx:if="{{!item.collected}}" style="width: 46rpx; height: 46rpx;" src="../../image/collect.png"></image>
                                     <image wx:else style="width: 46rpx; height: 46rpx;" src="../../image/collect-select.png"></image>
                                 </view>
@@ -138,6 +138,12 @@
                         <view class="bookList-name" data-id="{{item.id}}" bindtap="tapBookList">
                             <text>{{item.title}}</text>
                         </view>
+                        <view class="bookList-video" wx-if="{{!!item.video}}">
+                            <video id="myVideo" src="{{item.video.url}}" controls></video>
+                        </view>
+                        <view class="bookList-audio" wx-if="{{!!item.voice}}">
+                            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
+                        </view>
                         <swiper wx-if="{{item.images.length}}" class="bookList-img" indicator-dots="false" autoplay="true" interval="5000" duration="1000" circular="true" indicator-color="#ffffff" indicator-active-color="#ff4444">
                             <block wx:for="{{item.images}}">
                                 <swiper-item>
@@ -145,20 +151,16 @@
                                 </swiper-item>
                             </block>
                         </swiper>
-                        <view class="bookList-video" wx-if="{{!!item.video}}">
-                            <video id="myVideo" src="{{item.video.url}}" controls></video>
-                        </view>
-                        <view class="bookList-audio" wx-if="{{!!item.voice}}">
-                            <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
-                        </view>
                         <view class="bookList-text" wx-if="{{item.content}}">
                             <text>{{item.content}}</text>
                         </view>
                         <view class="bookList-item" id="bookList">
                             <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
-                                <view class="scroll-view-item_H" bindtap="tapBook" wx:for="{{item.items}}">
-                                    <image style="width: 100%; height: 100%;" src="{{item.picPath}}"></image>
-                                </view>
+                                <block wx:for="{{item.items}}">
+                                    <view class="scroll-view-item_H" bindtap="tapBook" data-id="{{item.id}}">
+                                        <image style="width: 100%; height: 100%;" src="{{item.picPath}}"></image>
+                                    </view>
+                                </block>
                             </scroll-view>
                         </view>
                         <view class="bookList-tag" wx-if="{{item.tags}}">
