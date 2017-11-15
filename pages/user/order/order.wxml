@@ -26,21 +26,23 @@
                         </view>
                         <view class="item-center">
                             <view>
-                                <view class="item-book" wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
-                                    <view class="book-left">
-                                        <view class="left-image">
-                                            <image src="{{bookItem.bookListItem.picPath}}"></image>
+                                <block wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
+                                    <view class="item-book" bindtap="tapBookFun" data-id="{{bookItem.bookListItem.id}}">
+                                        <view class="book-left">
+                                            <view class="left-image">
+                                                <image src="{{bookItem.bookListItem.picPath}}"></image>
+                                            </view>
+                                            <view class="left-text">
+                                                <text class="name">{{bookItem.bookListItem.bookName}}</text>
+                                                <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                            </view>
                                         </view>
-                                        <view class="left-text">
-                                            <text class="name">{{bookItem.bookListItem.bookName}}</text>
-                                            <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                        <view class="book-right">
+                                            <text class="color-red price">¥{{bookItem.bookListItem.price}}</text>
+                                            <text class="number">x{{bookItem.quantity}}</text>
                                         </view>
                                     </view>
-                                    <view class="book-right">
-                                        <text class="color-red price">¥{{bookItem.bookListItem.price}}</text>
-                                        <text class="number">x{{bookItem.quantity}}</text>
-                                    </view>
-                                </view>
+                                </block>
                             </view>
                             <view class="statistics">
                                 <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
@@ -60,6 +62,7 @@
                         </view>
                         <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
                             <view class="logistics"><text>查看物流</text></view>
+                            <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
                             <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
                         </view>

@@ -188,7 +188,7 @@ Page({
             if(items[i].checked) {
                 let seq = self.data.seq++
                 self.data.tempBookKey.push({ "bookId": items[i].bookId, "seq": seq });
-                self.data.tempImgUrl.push(items[i].picPath);
+                self.data.tempImgUrl.push({'picPath': items[i].picPath, 'bookId': items[i].bookId });
             }
         }
         prevPage.setData({
@@ -197,5 +197,12 @@ Page({
             isSelectBook: true,
         });
         wx.navigateBack();
+    },
+    // 查看图书详情
+    tapBookFun: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../bookDetails/bookDetails?id=' + id
+        })
     }
 })

@@ -8,7 +8,7 @@
 		<view class="book-info">
 			<text class="title">{{item.bookName}}</text>
 			<text class="price">¥ {{item.price}}<text class="origPrice">¥ {{item.origPrice}} </text></text>
-			<text class="name">{{item.author}} 著</text>
+			<text class="name">{{item.author}}</text>
 			<!-- <rich-text nodes="{{item.author_intro}}" class="introduce"></rich-text> -->
 		</view>
 	</view>

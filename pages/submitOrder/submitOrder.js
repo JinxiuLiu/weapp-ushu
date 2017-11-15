@@ -12,12 +12,9 @@ Page({
     },
     // 生命周期函数--监听页面显示
     onLoad: function(option) {
-        let self = this;
         this.setData({
             id: option.id
         })
-    },
-    onShow: function() {
         this.orderDetailRequest()
     },
     orderDetailRequest: function() {
@@ -61,6 +58,10 @@ Page({
         let totalMoney = data.totalMoney;
         let invoice = data.invoice;
         let consigneeId = data.consignee ? data.consignee.id : '';
+        if(!data.give && !data.consignee) {
+            util.showMessage(self, '请选择收货地址！')
+            return false
+        }
         wx.request({
             url: commitUrl,
             method: 'POST',
@@ -86,16 +87,23 @@ Page({
             }
         });
     },
+    // 跳转图书
+    tapBookFun: function(e) {
+        let id = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '../bookDetails/bookDetails?id=' + id
+        })
+    },
     // 添加收货地址
     addAddressFun: function() {
         wx.navigateTo({
-            url: '../user/addAddress/addAddress'
+            url: '../user/addAddress/addAddress?order=true'
         })
     },
     // 选择地址
     selectAddress: function() {
         wx.navigateTo({
-            url: '../user/myAddress/myAddress'
+            url: '../user/myAddress/myAddress?order=true'
         })
     }
 })

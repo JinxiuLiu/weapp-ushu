@@ -32,7 +32,7 @@
                         </view>
                         <view class="left-text" wx:if="{{!isEdit}}">
                             <text class="name">{{item.bookName}}</text>
-                            <text class="work-name">{{item.author}} 著</text>
+                            <text class="work-name">{{item.author}}</text>
                             <view class="book-right">
                                 <text class="color-red price">¥{{item.price}}</text>
                             </view>

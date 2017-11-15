@@ -26,7 +26,6 @@ Page({
                 'Cookie': 'JSESSIONID=' + sessionId
             },
             success: data => {
-                console.log(data);
                 if (data.data.success) {
                     self.setData({
                         orderDetailList: self.data.orderDetailList.concat(data.data.data)
@@ -81,6 +80,13 @@ Page({
                     })
                 }
             }
+        })
+    },
+    // 跳转图书
+    tapBookFun: function(e) {
+        let id = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '../../bookDetails/bookDetails?id=' + id
         })
     }
 })

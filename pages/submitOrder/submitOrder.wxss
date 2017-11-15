@@ -100,8 +100,6 @@
 
 .item-book .book-right .number {
 	color: #999;
-	position: absolute;
-	right: 0;
 }
 
 .bookinfo-bottom {

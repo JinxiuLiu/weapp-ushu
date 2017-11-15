@@ -111,7 +111,7 @@
 		    <view class="weui-uploader__files">
 		        <block wx:for="{{bookImgUrl}}" wx:for-item="image">
 		            <view class="weui-uploader__file">
-		                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}"></image>
+		                <image class="weui-uploader__img" src="{{image.picPath}}" data-id="{{image.bookId}}" bindtap="tapBookFun"></image>
 		            </view>
 		        </block>
 		    </view>

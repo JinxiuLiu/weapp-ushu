@@ -4,7 +4,7 @@
 </view>
 <view class="myAddress">
 	<view class="address-item" wx:for="{{addressList}}">
-		<view class="item-top">
+		<view class="item-top" bindtap="selectAddressFun" data-list="{{item}}">
 			<text class="name">{{item.name}}</text>
 			<text class="address">{{item.provinceName}}{{item.cityName}}{{item.countyName}}{{item.address}}</text>
 		</view>

@@ -20,7 +20,7 @@ Page({
         selectAllStatus: false,
         total: '0'
     },
-    onShow: function() {
+    onShow: function(options) {
         let self = this;
         wx.request({
             url: shopCartUrl,
@@ -29,10 +29,13 @@ Page({
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId
             },
-            success: function(res) {
+            success: res => {
                 self.setData({
                     loadmore: false,
-                    cartList: res.data.data
+                    total: '0',
+                    cartList: res.data.data,
+                    selectAllStatus: false,
+                    settlementItems: [],
                 })
             }
         })
@@ -175,7 +178,7 @@ Page({
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId
             },
-            success: function(res) {
+            success: res => {
                 let price = Number(res.data.data);
                 self.setData({
                     total: price
@@ -247,7 +250,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + sessionId
             },
-            success: function(data) {
+            success: data => {
                 if (data.data.success) {
                     if (!!data.data.data) {
                         self.setData({
@@ -274,7 +277,7 @@ Page({
             data: {
                 id: id
             },
-            success: function(data) {
+            success: data => {
                 if (data.data.success) {
                     self.onShow()
                     self.showMessage('删除成功!');
@@ -310,7 +313,7 @@ Page({
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId
             },
-            success: function(data) {
+            success: data => {
                 if (data.data.success) {
                     wx.navigateTo({
                         url: '../submitOrder/submitOrder?id=' + data.data.data

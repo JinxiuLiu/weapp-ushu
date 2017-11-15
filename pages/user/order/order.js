@@ -65,5 +65,12 @@ Page({
         wx.navigateTo({
             url: './giveFriend/giveFriend?id=' + id
         })
+    },
+    // 图书详情
+    tapBookFun: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../bookDetails/bookDetails?id=' + id
+        })
     }
 });

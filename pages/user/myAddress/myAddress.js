@@ -10,8 +10,17 @@ Page({
         checked: false,
         loadmore: true,
         addressList: [],
+        isOrder: false,
     },
-    onLoad: function() {
+    // 加载页面
+    onLoad: function(options) {
+        let isOrder = options ? options.order : false;
+        this.setData({
+            isOrder: isOrder
+        })
+    },
+    // 显示页面
+    onShow: function() {
         let self = this;
         wx.request({
             url: addressListUrl,
@@ -30,9 +39,7 @@ Page({
             }
         })
     },
-    onShow: function() {
-        this.onLoad();
-    },
+    // 单选-设为默认地址
     radioChange: function(e) {
         let self = this;
         wx.request({
@@ -53,6 +60,7 @@ Page({
             }
         })
     },
+    // 删除地址
     delAddress: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
@@ -75,6 +83,7 @@ Page({
             }
         })
     },
+    // 编辑地址
     editFun: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
@@ -82,6 +91,19 @@ Page({
         wx.navigateTo({
             url: '../addAddress/addAddress?id=' + id + '&item=' + JSON.stringify(item)
         })
+    },
+    // 订单-选择地址
+    selectAddressFun: function(e) {
+        if(!this.data.isOrder) return false;
+        let item = e.currentTarget.dataset.list;
+        let pages = getCurrentPages();
+        let currPage = pages[pages.length - 1]; //当前页面
+        let prevPage = pages[pages.length - 2]; //上一个页面
+        prevPage.data.orderDetailList[0].consignee = item;
+        prevPage.setData({
+            orderDetailList: prevPage.data.orderDetailList
+        })
+        wx.navigateBack();
     },
     showMessage: function(text) {
         var that = this

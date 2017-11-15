@@ -23,12 +23,16 @@ Page({
         showMessage: false,
         messageContent: '',
         checked: false,
+        isDisabled: false,
         defProvinceName: '请选择所在省',
         defCityName: '请选择所在市',
         defDistrictName: '请选择所在区',
+        isOrder: false,
     },
     onLoad: function(options) {
-        this.setAreaData()
+        this.setData({
+            isOrder: options.order
+        })
         if (options.id) {
             let item = JSON.parse(options.item);
             wx.setNavigationBarTitle({
@@ -40,10 +44,10 @@ Page({
                 name: item.name,
                 tel: item.mobile,
                 defProvinceName: item.provinceName,
-                provinceName: item.provinceName,
+                provinceDefName: item.provinceName,
                 provinceId: item.provinceId,
                 defCityName: item.cityName,
-                cityName: item.cityName,
+                cityDefName: item.cityName,
                 cityId: item.cityId,
                 defDistrictName: item.countyName,
                 countyName: item.countyName,
@@ -52,11 +56,16 @@ Page({
                 checked: item.def
             })
         }
+        this.setAreaData()
     },
     // 选择省
     changeProvince: function(e) {
         this.resetAreaData('province')
         p = e.detail.value
+        this.setData({
+            defCityName: '请选择所在市',
+            defDistrictName: '请选择所在区'
+        })
         this.setAreaData('province', p)
     },
     // 选择市
@@ -146,6 +155,7 @@ Page({
             })
         }
     },
+    // 保存地址
     savePersonInfo: function(e) {
         var self = this
         var data = e.detail.value
@@ -165,6 +175,9 @@ Page({
         } else if (data.address == '') {
             this.showMessage('请输入详细地址')
         } else {
+            this.setData({
+                isDisabled: true
+            })
             wx.request({
                 url: addAddressUrl,
                 data: data,
@@ -172,22 +185,31 @@ Page({
                     'Cookie': 'JSESSIONID=' + sessionId
                 },
                 success: function(result) {
-                    console.log(result)
                     if (result.statusCode == 200) {
                         self.showMessage(data.id ? '修改成功！' : '保存成功！');
                         setTimeout(function() {
+                            self.setData({
+                                isDisabled: false
+                            })
                             wx.navigateBack();
-                        }, 2000)
+                        }, 1000)
                     } else {
+                        self.setData({
+                            isDisabled: false
+                        })
                         self.showMessage(result.errMsg);
                     }
                 },
                 fail: function(errMsg) {
                     self.showMessage(errMsg);
+                    this.setData({
+                        isDisabled: false
+                    })
                 }
             })
         }
     },
+    // 提示
     showMessage: function(text) {
         var that = this
         that.setData({

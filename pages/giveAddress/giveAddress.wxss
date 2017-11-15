@@ -164,6 +164,6 @@ button[type="primary"] {
     line-height: 28px;
     background: #fff;
     padding: 20rpx 26rpx;
-    margin-bottom: 110rpx;
+    padding-bottom: 110rpx;
     font-size: 14px;
 }

@@ -6,7 +6,7 @@
     		</view>
     		<view class="address-details">
     			<view class="contacts">
-    				<text class="name">收货人:{{itemDetail.express.name}}</text>
+    				<text class="name">收货人:{{itemDetail.express.addressee}}</text>
     				<text class="mobile">{{itemDetail.express.mobile}}</text>
     			</view>
     			<text class="address">收货地址：{{itemDetail.express.provinceName}}{{itemDetail.express.cityName}}{{itemDetail.express.countyName}}{{itemDetail.express.address}}</text>
@@ -19,7 +19,7 @@
     		<view class="title">书单：{{itemList.title}}</view>
     		<view class="bookinfo">
                 <view class="item-book" wx:for="{{itemList.items}}">
-                    <view class="book-left">
+                    <view class="book-left" data-id="{{item.bookListItem.id}}" bindtap="tapBookFun">
                         <view class="left-image">
                             <image src="{{item.bookListItem.picPath}}"></image>
                         </view>
@@ -63,7 +63,8 @@
     </view>
     <view class="submitOrder-btn">
         <text class="total">合计：<text class="color-red">¥{{itemDetail.totalMoney}}</text></text>
-        <view class="btn" bindtap="submitOrderFun">立即支付</view>
+        <view class="btn" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapLogistics">查看物流</view>
+        <view class="btn" wx:else bindtap="submitOrderFun">立即支付</view>
     </view>
 </block>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

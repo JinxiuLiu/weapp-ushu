@@ -23,7 +23,7 @@
     		<view class="title">书单：{{itemList.title}}</view>
     		<view class="bookinfo">
                 <view class="item-book" wx:for="{{itemList.items}}">
-                    <view class="book-left">
+                    <view class="book-left" data-id="{{item.bookListItem.id}}" bindtap="tapBookFun">
                         <view class="left-image">
                             <image src="{{item.bookListItem.picPath}}"></image>
                         </view>

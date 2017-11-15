@@ -216,7 +216,8 @@
 }
 
 .bookList-footer .collect image {
-    vertical-align: text-bottom;
+    padding-left: 20rpx;
+    vertical-align: middle;
 }
 
 .bookList-footer .footer-right {
@@ -228,6 +229,7 @@
     font-size: inherit;
     margin: 0;
     padding: 8rpx 30rpx 0;
+    line-height:0
 }
 
 .bookList-footer .footer-right .share:after {

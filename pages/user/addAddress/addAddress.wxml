@@ -24,7 +24,7 @@
 	        <view class="weui-cell__bd">
 	            <picker mode="selector" bindchange="changeProvince" value="{{provinceSelIndex}}" range="{{provinceName}}">
 	                <view class="weui-select weui-select_in-select-after {{!provinceName[provinceSelIndex] ? 'input-placeholder' : ''}}">{{provinceName[provinceSelIndex] || defProvinceName}}</view>
-	                <input type="text" name="provinceName" value="{{provinceName[provinceSelIndex] || provinceName}}" class="hidden"/>
+	                <input type="text" name="provinceName" value="{{provinceName[provinceSelIndex] || provinceDefName}}" class="hidden"/>
 	                <input type="text" name="provinceId" value="{{provinceCode[provinceSelIndex] || provinceId}}" class="hidden"/>
 	            </picker>
 	        </view>
@@ -36,7 +36,7 @@
 	        <view class="weui-cell__bd">
 	            <picker mode="selector" bindchange="changeCity" value="{{citySelIndex}}"  range="{{cityName}}" disabled="{{!cityEnabled}}">
 	                <view class="weui-select weui-select_in-select-after {{!cityName[citySelIndex] ? 'input-placeholder' : ''}}">{{cityName[citySelIndex] || defCityName}}</view>
-	                <input type="text" name="cityName" value="{{cityName[citySelIndex] || cityName}}" class="hidden"/>
+	                <input type="text" name="cityName" value="{{cityName[citySelIndex] || cityDefName}}" class="hidden"/>
 	                <input type="text" name="cityId" value="{{cityCode[citySelIndex] || cityId}}" class="hidden"/>
 	            </picker>
 	        </view>
@@ -58,14 +58,15 @@
 	            <textarea class="weui-textarea" name="address" value="{{address}}" placeholder="请输入详细地址" />
 	        </view>
 	    </view>
-	    <view class="weui-cell weui-cell_switch">
+	    <view class="weui-cell weui-cell_switch" wx:if="{{!isOrder}}">
 	        <view class="weui-cell__bd">设为默认收货地址</view>
 	        <view class="weui-cell__ft">
 	            <switch color="#ff4444" name="def" checked="{{checked}}" />
 	        </view>
 	    </view>
+	    <input wx:if="{{isOrder}}" type="text" name="def" value="true" class="hidden"/>
 	    <input type="text" name="id" value="{{addressID}}" class="hidden"/>
-	    <button formType="submit" type="primary">{{isEdit ? '保存修改' : '完成'}}</button>
+	    <button formType="submit" disabled="{{isDisabled}}" type="primary">{{isEdit ? '保存修改' : '完成'}}</button>
 	</view>
 </form>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

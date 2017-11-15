@@ -29,6 +29,7 @@ Page({
         bookListItem: [],
         hotBookListItem: [],
         isCollect: false,
+        isCreate: false,
     },
     clearInput: function() {
         this.setData({
@@ -54,23 +55,26 @@ Page({
         })
     },
     onShow: function() {
+        let isCreate = wx.getStorageSync('isCreate')
+        if (!isCreate) return false;
         this.setData({
             pageOne: 1,
             bookListItem: []
         })
         this.getBookListDefRequest()
+        wx.setStorageSync('isCreate', false)
     },
     // 上拉加载更多
     onReachBottom: function() {
         let self = this;
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 loadmoreDef: true,
             })
             this.getBookListDefRequest(self.data.searchVal)
         }
 
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 loadmoreHot: true,
             })
@@ -85,7 +89,7 @@ Page({
             activeIndex: e.currentTarget.id
         })
 
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 pageOne: 1,
                 inputVal: "",
@@ -95,7 +99,7 @@ Page({
             this.getBookListDefRequest()
         }
 
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 pageTwo: 1,
                 inputVal: "",
@@ -110,12 +114,12 @@ Page({
         let self = this;
         let creatorId = e.currentTarget.dataset.creatorid;
         let index = e.currentTarget.dataset.index;
-        if(e.currentTarget.dataset.followed) {
+        if (e.currentTarget.dataset.followed) {
             self.attentionRequest(cancelAttentionUrl, creatorId, index, '取消关注成功！', false)
         } else {
             self.attentionRequest(addAttentionUrl, creatorId, index, '关注成功！', true)
         }
-        
+
     },
     // 关注&&取消关注接口
     attentionRequest: function(url, creatorId, index, msg, isFollowed) {
@@ -131,13 +135,13 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, msg);
-                    if(self.data.activeIndex == 0) {
+                    if (self.data.activeIndex == 0) {
                         self.data.bookListItem[index].followed = isFollowed;
                         self.setData({
                             bookListItem: self.data.bookListItem
                         })
                     }
-                    if(self.data.activeIndex == 1) {
+                    if (self.data.activeIndex == 1) {
                         self.data.hotBookListItem[index].followed = isFollowed;
                         self.setData({
                             hotBookListItem: self.data.hotBookListItem
@@ -191,7 +195,7 @@ Page({
                         bookListId: bookListId
                     },
                     success: data => {
-                        if(data.data.success) {
+                        if (data.data.success) {
                             util.showMessage(self, data.data.msg)
                         } else {
                             util.showMessage(self, data.data.msg)
@@ -211,7 +215,7 @@ Page({
         let index = e.currentTarget.dataset.index;
         let isCollect = e.currentTarget.dataset.iscollect;
         console.log(isCollect)
-        if(isCollect) {
+        if (isCollect) {
             self.collectRequest(cancelCollectUrl, id, index, '取消收藏成功！', false)
         } else {
             self.collectRequest(collectUrl, id, index, '收藏成功！', true)
@@ -231,13 +235,13 @@ Page({
             success: data => {
                 if (data.data.success) {
                     util.showMessage(self, msg);
-                    if(self.data.activeIndex == 0) {
+                    if (self.data.activeIndex == 0) {
                         self.data.bookListItem[index].collected = isCollect;
                         self.setData({
                             bookListItem: self.data.bookListItem
                         })
                     }
-                    if(self.data.activeIndex == 1) {
+                    if (self.data.activeIndex == 1) {
                         self.data.hotBookListItem[index].collected = isCollect;
                         self.setData({
                             hotBookListItem: self.data.hotBookListItem
@@ -267,7 +271,7 @@ Page({
             success: result => {
                 if (result.data.success) {
                     let items = result.data.data.rows;
-                    if(items.length == 0) {
+                    if (items.length == 0) {
                         self.setData({
                             loadmoreDef: false
                         })
@@ -275,7 +279,7 @@ Page({
                         return false;
                     }
                     items.filter(function(item) {
-                        if(item.tags) {
+                        if (item.tags) {
                             item.tags = item.tags.split(',')
                         }
                     })
@@ -286,7 +290,7 @@ Page({
                             bookListItem: self.data.bookListItem.concat(result.data.data.rows)
                         })
                 } else {
-                    util.showMessage(self, '服务端错误！');
+                    util.showMessage(self, result.data.msg);
                 }
             }
         })
@@ -309,7 +313,7 @@ Page({
             success: result => {
                 if (result.data.success) {
                     let items = result.data.data.rows;
-                    if(items.length == 0) {
+                    if (items.length == 0) {
                         self.setData({
                             loadmoreHot: false
                         })
@@ -317,16 +321,16 @@ Page({
                         return false;
                     }
                     items.filter(function(item) {
-                        if(item.tags) {
+                        if (item.tags) {
                             item.tags = item.tags.split(',')
                         }
                     })
                     self.data.pageTwo++
-                    self.setData({
-                        page: self.data.pageTwo,
-                        loadmoreHot: false,
-                        hotBookListItem: self.data.hotBookListItem.concat(result.data.data.rows)
-                    })
+                        self.setData({
+                            page: self.data.pageTwo,
+                            loadmoreHot: false,
+                            hotBookListItem: self.data.hotBookListItem.concat(result.data.data.rows)
+                        })
                 } else {
                     util.showMessage(self, '服务端错误！');
                 }
@@ -338,7 +342,7 @@ Page({
         this.setData({
             searchVal: e.detail.value
         })
-        if(this.data.activeIndex == 0) {
+        if (this.data.activeIndex == 0) {
             this.setData({
                 pageOne: 1,
                 loadmoreDef: true,
@@ -346,7 +350,7 @@ Page({
             })
             this.getBookListDefRequest(e.detail.value);
         }
-        if(this.data.activeIndex == 1) {
+        if (this.data.activeIndex == 1) {
             this.setData({
                 pageTwo: 1,
                 loadmoreHot: true,

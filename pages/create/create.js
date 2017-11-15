@@ -404,6 +404,16 @@ Page({
             url: './selectBook/selectBook?seq=' + (self.data.bookImgUrl.length + 1)
         })
     },
+    // 查看图书详情 => id有误，后端处理
+    tapBookFun: function(e) {
+        let id = e.currentTarget.dataset.id
+        this.setData({
+            isSelectBook: true
+        })
+        wx.navigateTo({
+            url: '../bookDetails/bookDetails?id=' + id
+        })
+    },
     // 删除数组某一项
     removeByValue: function(arr, val) {
         for (var i = 0; i < arr.length; i++) {    
@@ -474,6 +484,7 @@ Page({
                             isDisabled: false
                         })
                         if(result.data.data.published) {
+                            wx.setStorageSync('isCreate', true)
                             wx.switchTab({
                                 url: '../index/index'
                             })
