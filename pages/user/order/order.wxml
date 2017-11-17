@@ -61,7 +61,7 @@
                             <view class="delete"><text>删除订单</text></view>
                         </view>
                         <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
-                            <view class="logistics"><text>查看物流</text></view>
+                            <view class="logistics" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
                             <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
                             <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
@@ -194,3 +194,4 @@
         </view>
     </view>
 </view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

@@ -6,6 +6,7 @@
     "pages/giveAddress/giveAddress",
     "pages/cart/cart",
     "pages/login/login",
+    "pages/user/getLogistics/getLogistics",
     "pages/submitOrder/payment/payment",
     "pages/user/order/giveFriend/giveFriend",
     "pages/submitOrder/orderDetails/orderDetails",

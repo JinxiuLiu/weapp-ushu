@@ -124,6 +124,9 @@ var config = {
     // 书单详情
     detailUrl: `${host}/bookList/detail`,
 
+    // 查看物流
+    getLogisticsUrl: `${host}/order/express/getLogistics`,
+
     // 添加关注
     addAttentionUrl: `${host}/follow/add`,
 

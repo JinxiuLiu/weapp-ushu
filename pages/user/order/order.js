@@ -3,6 +3,7 @@
  */
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const orderListUrl = require('../../../config').orderListUrl;
+const util = require('../../../utils/util');
 let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
@@ -71,6 +72,17 @@ Page({
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: '../../bookDetails/bookDetails?id=' + id
+        })
+    },
+    // 查看物流
+    getLogisticsFun: function(e) {
+        let id = e.currentTarget.dataset.id;
+        if(!id) {
+            util.showMessage(this, '您的订单还未发货哦~')
+            return false
+        }
+        wx.navigateTo({
+            url: '../getLogistics/getLogistics?id=' + id
         })
     }
 });

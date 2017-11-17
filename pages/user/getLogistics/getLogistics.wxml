@@ -1,0 +1,10 @@
+<view class="logistics-top">
+	<text class="title">快递单号：{{expressNo}}</text>
+</view>
+<view class="logistics-bottom">
+	<view class="item" wx:for="{{expressItem}}">
+		<text class="tip">{{item.context}}</text>
+		<text class="time">{{item.time}}</text>
+	</view>
+</view>
+<view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

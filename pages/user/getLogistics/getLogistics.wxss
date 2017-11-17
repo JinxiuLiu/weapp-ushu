@@ -1,0 +1,35 @@
+.logistics-top {
+	border-top: 1px solid #dcdcdc;
+	padding: 30rpx;
+	background-color: #fff;
+	margin-bottom: 30rpx;
+}
+
+.logistics-top .title {
+	font-size: 14px;
+	color: #666;
+}
+
+.logistics-bottom {
+	padding: 30rpx;
+	background-color: #fff;
+}
+
+.logistics-bottom .item {
+	border-bottom: 1px solid #f0f0f0;
+	padding: 10rpx 0;
+}
+
+.logistics-bottom .item .tip {
+	line-height: 50rpx;
+	display: flex;
+	font-size: 14px;
+	color: #666;
+}
+
+.logistics-bottom .item .time {
+	line-height: 50rpx;
+	display: flex;
+	color: #999;
+	font-size: 12px;
+}

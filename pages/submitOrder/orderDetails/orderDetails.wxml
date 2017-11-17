@@ -63,7 +63,7 @@
     </view>
     <view class="submitOrder-btn">
         <text class="total">合计：<text class="color-red">¥{{itemDetail.totalMoney}}</text></text>
-        <view class="btn" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapLogistics">查看物流</view>
+        <view class="btn" data-id="{{itemDetail.express.expressNo}}" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapLogistics">查看物流</view>
         <view class="btn" wx:else bindtap="submitOrderFun">立即支付</view>
     </view>
 </block>

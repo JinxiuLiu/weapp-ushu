@@ -64,8 +64,7 @@ Page({
                         detailList: [data.data.data],
                         readCount: data.data.data.readCount,
                         title: data.data.data.content,
-                        imageUrl: data.data.data.thumbnail.url,
-                        imageUrl: data.data.data.thumbnail.url,
+                        imageUrl: data.data.data.thumbnail ? data.data.data.thumbnail.url : '',
                         path: '/pages/bookList/bookList?id=' + data.data.data.id + '&uuid=' + uuid
                     })
                 } else {

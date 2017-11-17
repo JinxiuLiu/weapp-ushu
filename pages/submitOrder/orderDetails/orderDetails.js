@@ -88,5 +88,16 @@ Page({
         wx.navigateTo({
             url: '../../bookDetails/bookDetails?id=' + id
         })
+    },
+    // 查看物流
+    tapLogistics: function(e) {
+        let id = e.currentTarget.dataset.id;
+        if(!id) {
+            util.showMessage(this, '您的订单还未发货哦~')
+            return false
+        }
+        wx.navigateTo({
+            url: '../../user/getLogistics/getLogistics?id=' + id
+        })
     }
 })
