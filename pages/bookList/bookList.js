@@ -58,10 +58,15 @@ Page({
                     if(data.data.data.tags) {
                         data.data.data.tags = data.data.data.tags.split(',')
                     }
+                    let uuid = util.uuid();
                     self.setData({
                         loadmore: false,
                         detailList: [data.data.data],
-                        readCount: data.data.data.readCount
+                        readCount: data.data.data.readCount,
+                        title: data.data.data.content,
+                        imageUrl: data.data.data.thumbnail.url,
+                        imageUrl: data.data.data.thumbnail.url,
+                        path: '/pages/bookList/bookList?id=' + data.data.data.id + '&uuid=' + uuid
                     })
                 } else {
                     util.showMessage(self, data.data.msg)
@@ -117,17 +122,13 @@ Page({
     // 分享
     onShareAppMessage: function(res) {
         let self = this;
-        let title = '';
-        let path = '';
-        let bookListId = res.target.dataset.item.id;
-        let uuid = util.uuid();
-        if (res.from === 'button') {
-            title = res.target.dataset.item.title;
-            path = '/pages/bookList/bookList?id=' + bookListId + '&uuid=' + uuid
-        }
+        let title = self.data.title;
+        let path = self.data.path;
+        let imageUrl = self.data.imageUrl;
         return {
             title: title,
             path: path,
+            imageUrl: imageUrl,
             success: function(res) {
                 // 转发成功
                 wx.request({

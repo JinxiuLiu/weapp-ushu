@@ -6,7 +6,7 @@
 				<text class="time">{{item.created}}</text>		
 			</view>
 			<view class="item-top-right">
-				<switch checked="{{item.published}}" data-id="{{item.id}}" color="#ff4444" bindchange="switchChange"/>
+				<switch checked="{{item.published}}" data-id="{{item.id}}" data-index="{{index}}" color="#ff4444" bindchange="switchChange"/>
 			</view>
 		</view>
 		<view class="item-bottom">
@@ -19,10 +19,10 @@
 					<image src="../../../image/compile.png"></image>
 					<text>编辑</text>
 				</view>
-				<view class="text" data-id="{{item.id}}" data-index="{{index}}" bindtap="delBookListFun">
+				<!-- <view class="text" data-id="{{item.id}}" data-index="{{index}}" bindtap="delBookListFun">
 					<image src="../../../image/delete.png"></image>
 					<text>删除</text>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>

@@ -54,28 +54,18 @@ Page({
         let publishedNum = 0;
         let published = e.detail.value;
         let id = e.currentTarget.dataset.id;
+        let index = e.currentTarget.dataset.index;
         myBookList.filter(function(item) {
             if (item.published) {
                 publishedNum++
+                myBookList[index].published = false;
+                self.setData({
+                    myBookList: self.data.myBookList
+                })
             }
         })
         if (publishedNum >= 5 && published) {
-            util.showMessage(self, '最多开启5个书单！');
-            wx.request({
-                url: myBookListUrl,
-                data: {
-                    page: 1
-                },
-                header: {
-                    'Cookie': 'JSESSIONID=' + sessionId
-                },
-                success: data => {
-                    self.setData({
-                        loadmore: false,
-                        myBookList: data.data.rows
-                    })
-                }
-            })
+            util.showMessage(self, '最多开启5个书单！', 3000);
             return false;
         }
         wx.request({
@@ -89,20 +79,9 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    wx.request({
-                        url: myBookListUrl,
-                        data: {
-                            page: 1
-                        },
-                        header: {
-                            'Cookie': 'JSESSIONID=' + sessionId
-                        },
-                        success: data => {
-                            self.setData({
-                                loadmore: false,
-                                myBookList: data.data.rows
-                            })
-                        }
+                    self.data.myBookList[index].published = published;
+                    self.setData({
+                        myBookList: self.data.myBookList
                     })
                     util.showMessage(self, data.data.msg);
                 } else {

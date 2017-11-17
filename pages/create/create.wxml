@@ -112,6 +112,7 @@
 		        <block wx:for="{{bookImgUrl}}" wx:for-item="image">
 		            <view class="weui-uploader__file">
 		                <image class="weui-uploader__img" src="{{image.picPath}}" data-id="{{image.bookId}}" bindtap="tapBookFun"></image>
+		                <view class="del-img" data-src="{{image.picPath}}" data-id="{{image.bookId}}" data-index="{{index}}" bindtap="delBookFun">删除</view>
 		            </view>
 		        </block>
 		    </view>

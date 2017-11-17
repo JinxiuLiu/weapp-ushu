@@ -76,7 +76,9 @@ Page({
             url: collectBookListUrl,
             data: {
                 page: self.data.bookListPage,
-                rows: 10
+                rows: 10,
+                sort: "created",
+                sorder: "desc"
             },
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId
@@ -105,7 +107,9 @@ Page({
             url: collectBookViewUrl,
             data: {
                 page: self.data.bookPage,
-                rows: 10
+                rows: 10,
+                sort: "created",
+                sorder: "desc"
             },
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId

@@ -3,6 +3,7 @@
  */
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const bookDetailUrl = require('../../config').bookDetailUrl;
+const creatBookDetailUrl = require('../../config').creatBookDetailUrl;
 const collectBookUrl = require('../../config').collectBookUrl;
 const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const addCartUrl = require('../../config').addCartUrl;
@@ -23,12 +24,16 @@ Page({
     },
     onLoad: function(option) {
         let self = this;
-        let id = option.id || option.scene;
-        let fromId = option.uuid || '';
+        let id = option.id || option.scene || option.CreateBookId;
+        let fromId = option.uuid || option.fromId || '';
         this.setData({
             fromId: fromId
         })
-        this.bookDetail(id)
+        if(option.CreateBookId) {
+            this.bookDetail(creatBookDetailUrl, id)
+        } else {
+            this.bookDetail(bookDetailUrl, id)
+        }
         this.cartTotalRequest();
         wx.getSystemInfo({
             success: function(res) {
@@ -46,10 +51,10 @@ Page({
         });
     },
     // 图书详情
-    bookDetail: function(id) {
+    bookDetail: function(url, id) {
         let self = this;
         wx.request({
-            url: bookDetailUrl,
+            url: url,
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',

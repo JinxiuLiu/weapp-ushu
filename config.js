@@ -187,6 +187,9 @@ var config = {
     // 图书详情
     bookDetailUrl: `${host}/bookListItem/detail`,
 
+    // 图书详情
+    creatBookDetailUrl: `${host}/book/detail`,
+
     // 图书收藏
     collectBookUrl: `${host}/collection/add`,
 

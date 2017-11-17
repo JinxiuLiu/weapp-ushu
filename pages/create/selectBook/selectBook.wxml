@@ -24,13 +24,13 @@
     </view>
     <view class="selectBook-list">
         <block wx:for="{{rows}}">
-            <view class="bookinfo" bindtap="selectBook" data-index="{{index}}" data-isSelect="{{item.checked}}">
+            <view class="bookinfo">
                 <view class="weui-cell__bd">
                     <view class="book-left">
-                        <view class="left-image">
+                        <view class="left-image" bindtap="tapBookDetails" data-id="{{item.bookId}}">
                             <image src="{{item.picPath}}"></image>
                         </view>
-                        <view class="left-text" wx:if="{{!isEdit}}">
+                        <view class="left-text" wx:if="{{!isEdit}}" bindtap="selectBook" data-index="{{index}}" data-isSelect="{{item.checked}}">
                             <text class="name">{{item.bookName}}</text>
                             <text class="work-name">{{item.author}}</text>
                             <view class="book-right">

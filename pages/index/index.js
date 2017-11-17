@@ -172,15 +172,18 @@ Page({
         let self = this;
         let title = '';
         let path = '';
+        let imageUrl = '';
         let bookListId = res.target.dataset.item.id;
         let uuid = util.uuid();
         if (res.from === 'button') {
             title = res.target.dataset.item.title;
             path = '/pages/bookList/bookList?id=' + bookListId + '&uuid=' + uuid
+            imageUrl = res.target.dataset.item.thumbnail.url;
         }
         return {
             title: title,
             path: path,
+            imageUrl: imageUrl,
             success: function(res) {
                 // 转发成功
                 wx.request({
@@ -263,7 +266,8 @@ Page({
                 rows: 10,
                 sort: 'created',
                 order: "desc",
-                keyword: keyword || ''
+                keyword: keyword || '',
+                published: true
             },
             header: {
                 'Cookie': 'JSESSIONID=' + sessionId

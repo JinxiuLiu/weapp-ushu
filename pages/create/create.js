@@ -118,7 +118,7 @@ Page({
                                 self.data.imagesKey.push({ "id": item.id })
                             })
                             item.items.filter(function(item, index) {
-                                tempBookImgUrl.push(item.picPath);
+                                tempBookImgUrl.push({'picPath': item.picPath, 'bookId': item.bookId});
                                 self.data.bookKey.push({ 'bookId': item.bookId, "id": item.id, "seq": index + 1 });
                             })
                             self.setData({
@@ -404,14 +404,27 @@ Page({
             url: './selectBook/selectBook?seq=' + (self.data.bookImgUrl.length + 1)
         })
     },
-    // 查看图书详情 => id有误，后端处理
+    // 查看图书详情
     tapBookFun: function(e) {
         let id = e.currentTarget.dataset.id
         this.setData({
             isSelectBook: true
         })
         wx.navigateTo({
-            url: '../bookDetails/bookDetails?id=' + id
+            url: '../bookDetails/bookDetails?CreateBookId=' + id
+        })
+    },
+    // 删除图书
+    delBookFun: function(e) {
+        let self = this;
+        let index = e.currentTarget.dataset.index;
+        let bookImgUrl = this.data.bookImgUrl;
+        let bookKey = this.data.bookKey;
+        bookImgUrl.splice(index, 1)
+        bookKey.splice(index, 1)
+        this.setData({
+            bookImgUrl: self.data.bookImgUrl,
+            bookKey: self.data.bookKey
         })
     },
     // 删除数组某一项

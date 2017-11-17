@@ -138,6 +138,13 @@ Page({
     searchFun: function(e) {
         this.searchRequest(e.detail.value);
     },
+    // 进入图书详情
+    tapBookDetails: function(e) {
+        let bookId = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../../bookDetails/bookDetails?CreateBookId=' + bookId
+        })
+    },
     // 选择图书
     selectBook: function(e) {
         let self = this;
