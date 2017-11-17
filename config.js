@@ -193,6 +193,9 @@ var config = {
     // 图书收藏
     collectBookUrl: `${host}/collection/add`,
 
+    // 搜索提示
+    suggestionUrl: `${host}/bookListSuggestion/list`,
+
 };
 
 module.exports = config

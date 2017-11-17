@@ -5,11 +5,30 @@
 
 .page__bd {
     display: flex;
+    position: relative;
 }
 
 .page__bd .weui-search-bar {
     width: 90%;
     padding-right: 0;
+}
+
+.searchbar-result {
+    width: 100%;
+    margin-top: 0;
+    font-size: 14px;
+    position: absolute;
+    top: 42px;
+    z-index: 9999;
+}
+
+.searchbar-result:before {
+    display: none;
+}
+
+.weui-cell__bd {
+    line-height: 50rpx;
+    padding-left: 60rpx;
 }
 
 .page__bd .ranking {
@@ -47,6 +66,8 @@
     width: 100%;
     height: 300rpx;
 }
+
+
 
 
 
@@ -229,7 +250,7 @@
     font-size: inherit;
     margin: 0;
     padding: 8rpx 30rpx 0;
-    line-height:0
+    line-height: 0
 }
 
 .bookList-footer .footer-right .share:after {

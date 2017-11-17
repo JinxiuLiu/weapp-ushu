@@ -9,6 +9,7 @@ const collectUrl = require('../../config').collectUrl;
 const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const bannerUrl = require('../../config').bannerUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
+const suggestionUrl = require('../../config').suggestionUrl;
 const util = require('../../utils/util');
 let sessionId = wx.getStorageSync('sessionId')
 Page({
@@ -30,6 +31,8 @@ Page({
         hotBookListItem: [],
         isCollect: false,
         isCreate: false,
+        isShowList: true,
+        suggestionList: []
     },
     clearInput: function() {
         this.setData({
@@ -37,8 +40,31 @@ Page({
         });
     },
     inputTyping: function(e) {
+        let self = this;
+        this.data.suggestionList = [];
         this.setData({
-            inputVal: e.detail.value
+            inputVal: e.detail.value,
+            isShowList: true,
+        })
+        if(e.detail.value == '') return false;
+        wx.request({
+            url: suggestionUrl,
+            data: {
+                keyword: e.detail.value,
+                count: 6
+            },
+            header: {
+                'Cookie': 'JSESSIONID=' + sessionId
+            },
+            success: data => {
+                if(data.data.success) {
+                    self.setData({
+                        suggestionList: data.data.data
+                    })
+                } else {
+                    util.showMessage(self, data.data.msg)
+                }
+            }
         })
     },
     onLoad: function() {
@@ -361,6 +387,31 @@ Page({
                 hotBookListItem: []
             })
             this.getBookListHotRequest(e.detail.value);
+        }
+    },
+    // 书单提示搜索
+    tapSuggestionFun: function(e) {
+        let self = this;
+        let keyword = e.currentTarget.dataset.item;
+        this.setData({
+            inputVal: keyword,
+            isShowList: false,
+        })
+        if (this.data.activeIndex == 0) {
+            this.setData({
+                pageOne: 1,
+                loadmoreDef: true,
+                bookListItem: []
+            })
+            this.getBookListDefRequest(keyword);
+        }
+        if (this.data.activeIndex == 1) {
+            this.setData({
+                pageTwo: 1,
+                loadmoreHot: true,
+                hotBookListItem: []
+            })
+            this.getBookListHotRequest(keyword);
         }
     },
     // banner 

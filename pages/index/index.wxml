@@ -10,6 +10,11 @@
             </view>
         </view>
     </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0 && isShowList}}">
+        <view class="weui-cell__bd" wx:for="{{suggestionList}}">
+            <view bindtap="tapSuggestionFun" data-item="{{item}}">{{item}}</view>
+        </view>
+    </view>
     <navigator class="ranking" url="../ranking/ranking" hover-class="none">
         <image src="../../image/ranking.png"></image>
     </navigator>
