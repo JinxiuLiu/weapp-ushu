@@ -4,7 +4,6 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const orderListUrl = require('../../../config').orderListUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["全部", "待付款", "待收货"],
@@ -15,12 +14,12 @@ Page({
         orderList: [],
     },
     onLoad: function() {
-        var that = this;
+        var self = this;
         wx.getSystemInfo({
             success: function(res) {
-                that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+                self.setData({
+                    sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
+                    sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
                 });
             }
         });
@@ -32,16 +31,16 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
-                    that.setData({
+                    self.setData({
                         loadmore: false,
                         orderList: data.data.data
                     })
                 } else {
-                    util.showMessage(that, data.data.msg)
+                    util.showMessage(self, data.data.msg)
                 }
             }
         });

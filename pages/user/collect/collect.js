@@ -5,7 +5,6 @@ const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位�
 const collectBookViewUrl = require('../../../config').collectBookViewUrl;
 const collectBookListUrl = require('../../../config').collectBookListUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["收藏的书单", "收藏的书"],
@@ -17,7 +16,7 @@ Page({
         bookPage: 1,
         bookListPage: 1,
         bookListItem: [],
-        bookItem: []
+        bookItem: [],
     },
     onLoad: function() {
         var self = this;
@@ -81,7 +80,7 @@ Page({
                 sorder: "desc"
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.rows.length == 0) {
@@ -112,7 +111,7 @@ Page({
                 sorder: "desc"
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.rows.length == 0) {

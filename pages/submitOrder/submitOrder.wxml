@@ -54,7 +54,7 @@
                 <text>运费</text>
                 <text>{{itemDetail.freight ? "¥"+itemDetail.freight : "满88包邮"}}</text>
             </view>
-            <view class="bottom-item">
+            <!-- <view class="bottom-item">
                 <label class="radio">
                     <view class="select-icon">
                         <icon wx:if="{{itemDetail.invoice}}" type="success" color="#ff4444" data-isInvoice="{{itemDetail.invoice}}" bindtap="selectInvoice"/>
@@ -62,7 +62,7 @@
                     </view>
                     <text>开具电子发票</text>
                 </label>
-            </view>
+            </view> -->
         </view>
     </view>
     <view class="submitOrder-btn">

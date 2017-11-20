@@ -3,7 +3,6 @@
  */
 const withdrawalRecordUrl = require('../../../../config').withdrawalRecordUrl;
 const util = require('../../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         page: 1,
@@ -24,7 +23,7 @@ Page({
                 page: self.data.page
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {

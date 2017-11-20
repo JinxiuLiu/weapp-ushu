@@ -4,7 +4,6 @@
 const paymentUrl = require('../../../config').paymentUrl;
 const pingpp = require('../../../utils/pingpp.js');
 const util = require('../../../utils/util.js');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         id: '',
@@ -19,13 +18,12 @@ Page({
     // 支付
     paymentFun: function() {
         let self = this;
-        let sessionId = wx.getStorageSync('sessionId')
         wx.request({
             url: paymentUrl,
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 orderId: self.data.id,

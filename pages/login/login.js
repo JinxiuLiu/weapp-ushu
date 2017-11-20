@@ -4,7 +4,6 @@
 const sendCodeUrl = require('../../config').sendCodeUrl;
 const registerUrl = require('../../config').registerUrl;
 const util = require('../../utils/util');
-
 Page({
     data: {
         countDown: "发送验证码",
@@ -37,7 +36,8 @@ Page({
             url: sendCodeUrl,
             method: 'POST',
             header: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 mobile: NowMobile
@@ -57,7 +57,6 @@ Page({
         let self = this;
         let NowMobile = self.data.NowMobile;
         let verificationCode = self.data.verificationCode;
-        let sessionId = wx.getStorageSync('sessionId')
 
         if (!/^1\d{10}$/.test(NowMobile) || NowMobile == "") {
             util.showMessage(self, '请输入正确的新手机号!')
@@ -74,7 +73,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 mobile: NowMobile,

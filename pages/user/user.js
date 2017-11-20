@@ -3,7 +3,6 @@
  */
 const aboutUrl = require('../../config').aboutUrl;
 const totalMoneyUrl = require('../../config').totalMoneyUrl;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         userName: '',
@@ -21,7 +20,7 @@ Page({
             url: aboutUrl,
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 self.setData({
@@ -37,7 +36,7 @@ Page({
         wx.request({
             url: totalMoneyUrl,
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {},
             success: data => {

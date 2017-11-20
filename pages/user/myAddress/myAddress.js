@@ -4,7 +4,6 @@
 const addressListUrl = require('../../../config').addressListUrl;
 const defAddressUrl = require('../../../config').defAddressUrl;
 const delAddressUrl = require('../../../config').delAddressUrl;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         checked: false,
@@ -27,7 +26,7 @@ Page({
             method: 'POST',
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: function(res) {
                 if (res.statusCode == 200) {
@@ -50,7 +49,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: function(res) {
                 if (res.statusCode == 200) {
@@ -72,7 +71,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: function(res) {
                 if (res.statusCode == 200) {

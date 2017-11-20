@@ -4,11 +4,10 @@
 const orderDetailUrl = require('../../config').orderDetailUrl;
 const commitUrl = require('../../config').commitUrl;
 const util = require('../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         id: '',
-        orderDetailList: []
+        orderDetailList: [],
     },
     // 生命周期函数--监听页面显示
     onLoad: function(option) {
@@ -27,7 +26,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 console.log(data);
@@ -66,7 +65,7 @@ Page({
             url: commitUrl,
             method: 'POST',
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 id: id,

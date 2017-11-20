@@ -5,12 +5,11 @@ const myBookListUrl = require('../../../config').myBookListUrl;
 const changeBookListUrl = require('../../../config').changeBookListUrl;
 const deleteBookListUrl = require('../../../config').deleteBookListUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         page: 1,
         loadmore: true,
-        myBookList: []
+        myBookList: [],
     },
     onReachBottom: function() {
         this.onLoad();
@@ -28,7 +27,7 @@ Page({
                 order: "desc"
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (!data.data.rows.length) {
@@ -75,7 +74,7 @@ Page({
                 published: published
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -101,7 +100,7 @@ Page({
                 id: id
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {

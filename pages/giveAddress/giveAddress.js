@@ -4,7 +4,6 @@
 const giveAddressUrl = require('../../config').giveAddressUrl
 const orderDetailUrl = require('../../config').orderDetailUrl
 var area = require('../../utils/area')
-let sessionId = wx.getStorageSync('sessionId')
 var p = 0,
     c = 0,
     d = 0
@@ -155,7 +154,7 @@ Page({
                 url: giveAddressUrl,
                 data: data,
                 header: {
-                    'Cookie': 'JSESSIONID=' + sessionId
+                    'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                 },
                 success: function(result) {
                     if (result.data.success) {
@@ -183,7 +182,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 id: self.data.orderId

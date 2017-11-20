@@ -50,7 +50,7 @@
                 <text>运费</text>
                 <text>{{itemDetail.freight ? "¥"+itemDetail.freight : "满88包邮"}}</text>
             </view>
-            <view class="bottom-item">
+            <!-- <view class="bottom-item">
                 <label class="radio">
                     <view class="select-icon">
                         <icon wx:if="{{itemDetail.invoice}}" type="success" color="#ff4444" data-isInvoice="{{itemDetail.invoice}}" bindtap="selectInvoice"/>
@@ -58,12 +58,13 @@
                     </view>
                     <text>开具电子发票</text>
                 </label>
-            </view>
+            </view> -->
         </view>
     </view>
     <view class="submitOrder-btn">
         <text class="total">合计：<text class="color-red">¥{{itemDetail.totalMoney}}</text></text>
-        <view class="btn" data-id="{{itemDetail.express.expressNo}}" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapLogistics">查看物流</view>
+        <view class="btn" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapRefunds">退货退款</view>
+        <view class="btn invoice" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapInvoice">申请发票</view>
         <view class="btn" wx:else bindtap="submitOrderFun">立即支付</view>
     </view>
 </block>

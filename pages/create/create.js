@@ -7,7 +7,6 @@ const CreateListUrl = require('../../config').CreateListUrl;
 const detailUrl = require('../../config').detailUrl;
 var playTimeInterval;
 var recordTimeInterval;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         isEdit: false,
@@ -102,7 +101,7 @@ Page({
                     },
                     header: {
                         'content-type': 'application/x-www-form-urlencoded', // 默认值
-                        'Cookie': 'JSESSIONID=' + sessionId
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
                     success: data => {
                         if (data.data.success) {
@@ -485,7 +484,7 @@ Page({
                 "items": bookKey
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: result => {
                 if (result.data.success) {

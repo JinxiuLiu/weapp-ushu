@@ -50,7 +50,7 @@
                         </view>
                         <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
                             <view class="delete"><text>删除订单</text></view>
-                            <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                            <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             <view class="give" wx:if="{{allItem.give}}"><text>赠朋友</text></view>
                         </view>
                         <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
@@ -58,17 +58,17 @@
                             <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                         </view>
                         <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
-                            <view class="delete"><text>删除订单</text></view>
+                            <!-- <view class="delete"><text>删除订单</text></view> -->
                         </view>
                         <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
                             <view class="logistics" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
                             <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
-                            <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                            <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
                         </view>
                         <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
                             <view class="logistics"><text>查看物流</text></view>
-                            <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                            <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
                         </view>
                     </view>
@@ -108,25 +108,25 @@
                                 </view>
                             </view>
                             <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
-                                <view class="delete"><text>删除订单</text></view>
-                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <!-- <view class="delete"><text>删除订单</text></view> -->
+                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
                                 <!-- <view class="delete"><text>删除订单</text></view> -->
                             <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
-                                <view class="delete"><text>删除订单</text></view>
+                                <!-- <view class="delete"><text>删除订单</text></view> -->
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
                                 <view class="logistics"><text>查看物流</text></view>
                                 <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
                                 <view class="logistics"><text>查看物流</text></view>
                                 <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             </view>
                         </view>
                         <!-- <view class="NoData" wx:if="{{!allItem.status == 'PendingPay'}}">暂无订单</view> -->
@@ -167,24 +167,24 @@
                             </view>
                             <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
                                 <view class="delete"><text>删除订单</text></view>
-                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
                                 <!-- <view class="delete"><text>删除订单</text></view> -->
                             <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
-                                <view class="delete"><text>删除订单</text></view>
+                                <!-- <view class="delete"><text>删除订单</text></view> -->
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
                                 <view class="logistics"><text>查看物流</text></view>
                                 <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             </view>
                             <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
                                 <view class="logistics"><text>查看物流</text></view>
                                 <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view>
+                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
                             </view>
                         </view>
                         <!-- <view class="NoData" wx:if="{{!(allItem.status == 'Delivered')}}">暂无订单</view> -->

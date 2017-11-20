@@ -2,12 +2,11 @@
  * Created by Liujx on 2017-10-17 13:48:07
  */
 const aboutUrl = require('../../../config').aboutUrl;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
 	data: {
 		isAuthenticated: false,
 		aboutList: [],
-		phone: ''
+		phone: '',
 	},
 	onLoad: function() {
 		let self = this;
@@ -16,7 +15,7 @@ Page({
 			method: 'POST',
 			data: {},
 			header: {
-				'Cookie': 'JSESSIONID=' + sessionId
+				'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
 			},
 			success: data  => {
 				if(data.data.success) {

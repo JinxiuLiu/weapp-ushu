@@ -172,10 +172,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 300rpx;
+	width: 240rpx;
 	height: 100%;
 	margin-left: 30rpx;
 	text-align: center;
 	background: #ff4444;
 	color: #fff;
+	font-size: 14px;
+}
+
+.submitOrder-btn .btn.invoice {
+	margin-left: 0;
+	background: #ff761b;
 }

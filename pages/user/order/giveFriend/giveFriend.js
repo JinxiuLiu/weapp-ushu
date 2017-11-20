@@ -3,7 +3,6 @@
  */
 const orderDetailUrl = require('../../../../config').orderDetailUrl;
 const util = require('../../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         id: '',
@@ -19,7 +18,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 id: id

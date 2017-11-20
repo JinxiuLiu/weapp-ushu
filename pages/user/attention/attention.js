@@ -3,12 +3,11 @@
  */
 const myAttentionUrl = require('../../../config').myAttentionUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         loadmore: true,
         myAttentionList: [],
-        page: 1
+        page: 1,
     },
     onReachBottom: function() {
         this.onLoad();
@@ -24,7 +23,7 @@ Page({
                 page: self.data.page
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (!data.data.rows.length) {

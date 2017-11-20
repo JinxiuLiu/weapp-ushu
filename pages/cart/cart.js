@@ -7,7 +7,6 @@ const selectCartUrl = require('../../config').selectCartUrl;
 const changeCartUrl = require('../../config').changeCartUrl;
 const delCartUrl = require('../../config').delCartUrl;
 const generateUrl = require('../../config').generateUrl;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         isEdit: false,
@@ -18,7 +17,7 @@ Page({
         isChecked: false,
         goodsChecked: false,
         selectAllStatus: false,
-        total: '0'
+        total: '0',
     },
     onShow: function(options) {
         let self = this;
@@ -27,7 +26,7 @@ Page({
             method: 'POST',
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: res => {
                 self.setData({
@@ -176,7 +175,7 @@ Page({
             method: 'POST',
             data: data,
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: res => {
                 let price = Number(res.data.data);
@@ -248,7 +247,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -272,7 +271,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 id: id
@@ -311,7 +310,7 @@ Page({
                 items: items
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {

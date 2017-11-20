@@ -11,7 +11,6 @@ const bannerUrl = require('../../config').bannerUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const suggestionUrl = require('../../config').suggestionUrl;
 const util = require('../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         inputVal: "",
@@ -54,7 +53,7 @@ Page({
                 count: 6
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {
@@ -156,7 +155,7 @@ Page({
                 targetId: creatorId
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -217,7 +216,7 @@ Page({
                     method: 'POST',
                     header: {
                         'content-type': 'application/x-www-form-urlencoded',
-                        'Cookie': 'JSESSIONID=' + sessionId
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
                     data: {
                         id: uuid,
@@ -259,7 +258,7 @@ Page({
                 bookListId: id
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -296,7 +295,7 @@ Page({
                 published: true
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: result => {
                 if (result.data.success) {
@@ -338,7 +337,7 @@ Page({
                 keyword: keyword || ''
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: result => {
                 if (result.data.success) {
@@ -421,7 +420,7 @@ Page({
             url: bannerUrl,
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 self.setData({

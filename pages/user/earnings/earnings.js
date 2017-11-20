@@ -4,7 +4,6 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const canGetMoneyUrl = require('../../../config').canGetMoneyUrl;
 const moneyListUrl = require('../../../config').moneyListUrl;
-let sessionId = wx.getStorageSync('sessionId')
 
 Page({
     data: {
@@ -16,7 +15,7 @@ Page({
         canGetMoney: '',
         totalMoney: '',
         bookListMoneyItem: [],
-        shareMoneyItem: []
+        shareMoneyItem: [],
     },
     onLoad: function(option) {
         let self = this;
@@ -52,7 +51,7 @@ Page({
             url: canGetMoneyUrl,
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 self.setData({
@@ -72,7 +71,7 @@ Page({
                 rows: 30
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (isShare) {

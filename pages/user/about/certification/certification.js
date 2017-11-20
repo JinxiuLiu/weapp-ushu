@@ -5,14 +5,13 @@ const identityCardUrl = require('../../../../config').identityCardUrl;
 const commitCardUrl = require('../../../../config').commitCardUrl;
 const myCardUrl = require('../../../../config').myCardUrl;
 const util = require('../../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         imageListOne: [],
         imageListTwo: [],
         id: '',
         frontId: '',
-        backId: ''
+        backId: '',
     },
     onLoad: function() {
         let self = this;
@@ -21,7 +20,7 @@ Page({
             method: 'POST',
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -108,10 +107,12 @@ Page({
     // 提交认证
     authenticationFun: function() {
         let self = this;
-        console.log(self.data.id);
         wx.request({
             url: commitCardUrl,
             method: 'POST',
+            header: {
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+            },
             data: {
                 id: self.data.id,
                 front: {

@@ -3,7 +3,6 @@
  */
 const addAddressUrl = require('../../../config').addAddressUrl
 var area = require('../../../utils/area')
-let sessionId = wx.getStorageSync('sessionId')
 var p = 0,
     c = 0,
     d = 0
@@ -182,7 +181,7 @@ Page({
                 url: addAddressUrl,
                 data: data,
                 header: {
-                    'Cookie': 'JSESSIONID=' + sessionId
+                    'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                 },
                 success: function(result) {
                     if (result.statusCode == 200) {

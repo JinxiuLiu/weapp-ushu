@@ -11,7 +11,6 @@ const shareSaveUrl = require('../../config').shareSaveUrl;
 const generateUrl = require('../../config').generateUrl;
 const cartTotalUrl = require('../../config').cartTotalUrl;
 const util = require('../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["图书详情", "图书目录", "内容简介", "作者简介"],
@@ -20,7 +19,7 @@ Page({
         sliderLeft: 0,
         cartTotal: 0,
         bookDetailItem: [],
-        fromId: ''
+        fromId: '',
     },
     onLoad: function(option) {
         let self = this;
@@ -58,7 +57,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 id: id
@@ -89,7 +88,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 bookListItemId: id
@@ -122,7 +121,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {
@@ -154,7 +153,7 @@ Page({
                 }]
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: function(data) {
                 if (data.data.success) {
@@ -193,7 +192,7 @@ Page({
                     },
                     header: {
                         'content-type': 'application/x-www-form-urlencoded',
-                        'Cookie': 'JSESSIONID=' + sessionId
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
                     success: data => {
                         if(data.data.success) {
@@ -218,7 +217,7 @@ Page({
             data: {},
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {

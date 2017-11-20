@@ -3,11 +3,10 @@
  */
 const addWithdrawalUrl = require('../../../../config').addWithdrawalUrl;
 const util = require('../../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         money: '',
-        inputMoney: ''
+        inputMoney: '',
     },
     onLoad: function(option) {
         this.setData({
@@ -36,7 +35,7 @@ Page({
                 money: money
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {

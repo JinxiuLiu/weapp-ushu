@@ -6,10 +6,9 @@ const commitUrl = require('../../../config').commitUrl;
 const paymentUrl = require('../../../config').paymentUrl;
 const pingpp = require('../../../utils/pingpp.js');
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
-        orderDetailList: []
+        orderDetailList: [],
     },
     // 生命周期函数--监听页面显示
     onLoad: function(option) {
@@ -23,7 +22,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -48,7 +47,6 @@ Page({
     // 支付
     submitOrderFun: function() {
         let self = this;
-        let sessionId = wx.getStorageSync('sessionId');
         let data = self.data.orderDetailList[0];
         let id = data.id;
         let totalMoney = data.totalMoney;
@@ -57,7 +55,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 orderId: id,
@@ -89,15 +87,36 @@ Page({
             url: '../../bookDetails/bookDetails?id=' + id
         })
     },
-    // 查看物流
-    tapLogistics: function(e) {
-        let id = e.currentTarget.dataset.id;
-        if(!id) {
-            util.showMessage(this, '您的订单还未发货哦~')
-            return false
-        }
-        wx.navigateTo({
-            url: '../../user/getLogistics/getLogistics?id=' + id
+    // 退货退款
+    tapRefunds: function() {
+        wx.showModal({
+            title: '退货退款提示',
+            cancelText: '取消',
+            confirmText: '拨打',
+            content: '如需退款，请在工作时间联系邮书客服\n客服电话：010-6299120\n咨询时间：周一至周五，9:00-16:30',
+            success: function(res) {
+                if (res.confirm) {
+                    wx.makePhoneCall({
+                        phoneNumber: '010-6299120'
+                    })
+                }
+            }
+        })
+    },
+    // 申请发票
+    tapInvoice: function() {
+        wx.showModal({
+            title: '申请发票提示',
+            cancelText: '取消',
+            confirmText: '拨打',
+            content: '如需发票，请在工作时间联系邮书客服\n客服电话：010-6299120\n咨询时间：周一至周五，9:00-16:30',
+            success: function(res) {
+                if (res.confirm) {
+                    wx.makePhoneCall({
+                        phoneNumber: '010-6299120'
+                    })
+                }
+            }
         })
     }
 })

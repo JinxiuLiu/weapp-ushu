@@ -3,11 +3,10 @@
  */
 const updateNameUrl = require('../../../../config').updateNameUrl;
 const util = require('../../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         inputVal: '',
-        memberId: ''
+        memberId: '',
     },
     onLoad: function(option) {
         this.setData({
@@ -23,7 +22,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 memberId: self.data.memberId,

@@ -2,12 +2,11 @@
  * Created by Liujx on 2017-10-19 17:45:27
  */
 const gridMyListUrl = require('../../../../config').gridMyListUrl;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         bookListName: '',
         gridMyList: [],
-        page: 1
+        page: 1,
     },
     onLoad: function(option) {
         this.canGetMoneyRequest(option.id);
@@ -23,7 +22,7 @@ Page({
                 rows: 30,
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 self.setData({

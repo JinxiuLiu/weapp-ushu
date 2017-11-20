@@ -4,14 +4,13 @@
 const sendCodeUrl = require('../../../../config').sendCodeUrl;
 const bindMobileUrl = require('../../../../config').bindMobileUrl;
 const util = require('../../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         countDown: "发送验证码",
         isClick: false,
         originalMobile: '',
         NowMobile: '',
-        verificationCode: ''
+        verificationCode: '',
     },
     // 原手机号 input
     originalMobileFun: function(e) {
@@ -45,7 +44,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 mobile: NowMobile
@@ -87,7 +86,7 @@ Page({
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {
                 mobile_old: originalMobile,

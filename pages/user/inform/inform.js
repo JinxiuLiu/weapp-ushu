@@ -7,7 +7,6 @@ const informEarningsUrl = require('../../../config').informEarningsUrl;
 const informSystemUrl = require('../../../config').informSystemUrl;
 const informCommentUrl = require('../../../config').informCommentUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["系统", "收益", "关注", "评论"],
@@ -22,7 +21,7 @@ Page({
         systemList: [],
         earningsPage: 1,
         earningsLoad: true,
-        earningsList: []
+        earningsList: [],
     },
     // 加载页面
     onLoad: function() {
@@ -95,7 +94,7 @@ Page({
                 page: self.data.systemPage
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (!data.data.rows.length) {
@@ -123,7 +122,7 @@ Page({
                 page: self.data.attentionPage
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (!data.data.rows.length) {
@@ -151,7 +150,7 @@ Page({
                 page: self.data.earningsPage
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (!data.data.rows.length) {
@@ -179,7 +178,7 @@ Page({
                 page: self.data.commentPage
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (!data.data.rows.length) {

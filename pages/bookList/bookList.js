@@ -13,7 +13,6 @@ const collectUrl = require('../../config').collectUrl;
 const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         loadmore: true,
@@ -23,7 +22,7 @@ Page({
         readCount: 0,
         cartTotal: 0,
         isComment: true,
-        fromId: ''
+        fromId: '',
     },
     // 首屏渲染
     onLoad: function(options) {
@@ -48,7 +47,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {
@@ -88,7 +87,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {
@@ -105,6 +104,7 @@ Page({
     },
     // 浏览记录
     readBookListRequest: function(val) {
+        let self = this;
         wx.request({
             url: readBookListUrl,
             method: 'POST',
@@ -113,7 +113,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {}
         })
@@ -140,7 +140,7 @@ Page({
                     },
                     header: {
                         'content-type': 'application/x-www-form-urlencoded',
-                        'Cookie': 'JSESSIONID=' + sessionId
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
                     success: data => {
                         if(data.data.success) {
@@ -176,7 +176,7 @@ Page({
                 targetId: creatorId
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -211,7 +211,7 @@ Page({
                 bookListId: id
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -235,7 +235,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 self.setData({
@@ -262,7 +262,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 self.setData({
@@ -281,7 +281,7 @@ Page({
             data: {},
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {

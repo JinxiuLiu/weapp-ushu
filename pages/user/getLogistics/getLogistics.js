@@ -3,11 +3,10 @@
  */
 const getLogisticsUrl = require('../../../config').getLogisticsUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
 	data: {
 		expressNo: '',
-		expressItem: []
+		expressItem: [],
 	},
 	onLoad: function(options) {
 		let self = this;
@@ -20,7 +19,7 @@ Page({
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {

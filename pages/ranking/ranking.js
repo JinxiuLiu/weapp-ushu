@@ -4,7 +4,6 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const gridMyListRankingUrl = require('../../config').gridMyListRankingUrl;
 const userMoneyRankingUrl = require('../../config').userMoneyRankingUrl;
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["收入排行", "书单排行"],
@@ -42,7 +41,7 @@ Page({
             url: gridMyListRankingUrl,
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {
@@ -61,7 +60,7 @@ Page({
             url: userMoneyRankingUrl,
             data: {},
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(data.data.success) {

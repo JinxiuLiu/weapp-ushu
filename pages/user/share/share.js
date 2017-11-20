@@ -4,7 +4,6 @@
 const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const shareListUrl = require('../../../config').shareListUrl;
 const util = require('../../../utils/util');
-let sessionId = wx.getStorageSync('sessionId')
 Page({
     data: {
         tabs: ["分享的书单", "分享的书"],
@@ -78,7 +77,7 @@ Page({
                 rows: 10
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
@@ -110,7 +109,7 @@ Page({
                 rows: 10
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sessionId
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if (data.data.success) {
