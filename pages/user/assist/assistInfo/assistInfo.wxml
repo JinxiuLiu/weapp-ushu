@@ -1,0 +1,3 @@
+<view class="content">
+	<image style="width: 100%; height: inherit;" mode="widthFix" src="../../../../image/help_image.png"></image>
+</view>

@@ -17,7 +17,7 @@
                             <text class="time">{{item.created}}</text>
                         </view>
                     </view>
-                    <view wx:if="{{systemList.length == 0}}" class="NoData">暂无通知</view>
+                    <view wx:if="{{systemList.length == 0 && !systemLoad}}" class="NoData">暂无通知</view>
                     <view class="weui-loadmore" wx:if="{{systemLoad}}">
                         <view class="weui-loading"></view>
                         <view class="weui-loadmore__tips">正在加载</view>
@@ -33,7 +33,7 @@
                             <text>+ ¥{{item.money}}</text>        
                         </view>
                     </view>
-                    <view wx:if="{{earningsList.length == 0}}" class="NoData">暂无通知</view>
+                    <view wx:if="{{earningsList.length == 0 && !earningsLoad}}" class="NoData">暂无通知</view>
                     <view class="weui-loadmore" wx:if="{{earningsLoad}}">
                         <view class="weui-loading"></view>
                         <view class="weui-loadmore__tips">正在加载</view>
@@ -49,7 +49,7 @@
                             <text class="time">{{item.created}}</text>
                         </view>
                     </view>
-                    <view wx:if="{{attentionList.length == 0}}" class="NoData">暂无通知</view>
+                    <view wx:if="{{attentionList.length == 0 && !attentionLoad}}" class="NoData">暂无通知</view>
                     <view class="weui-loadmore" wx:if="{{attentionLoad}}">
                         <view class="weui-loading"></view>
                         <view class="weui-loadmore__tips">正在加载</view>
@@ -65,7 +65,7 @@
                             <text class="time">{{item.created}}</text>
                         </view>
                     </view>
-                    <view wx:if="{{commentList.length == 0}}" class="NoData">暂无通知</view>
+                    <view wx:if="{{commentList.length == 0 && !commentLoad}}" class="NoData">暂无通知</view>
                     <view class="weui-loadmore" wx:if="{{commentLoad}}">
                         <view class="weui-loading"></view>
                         <view class="weui-loadmore__tips">正在加载</view>

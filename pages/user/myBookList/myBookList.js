@@ -5,8 +5,13 @@ const myBookListUrl = require('../../../config').myBookListUrl;
 const changeBookListUrl = require('../../../config').changeBookListUrl;
 const deleteBookListUrl = require('../../../config').deleteBookListUrl;
 const util = require('../../../utils/util');
+const sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 Page({
     data: {
+        tabs: ["已通过", "审核中", "未通过"],
+        activeIndex: 0,
+        sliderOffset: 0,
+        sliderLeft: 0,
         page: 1,
         loadmore: true,
         myBookList: [],
@@ -16,6 +21,14 @@ Page({
     },
     onLoad: function() {
         let self = this;
+        wx.getSystemInfo({
+            success: function(res) {
+                self.setData({
+                    sliderLeft: (res.windowWidth / self.data.tabs.length - sliderWidth) / 2,
+                    sliderOffset: res.windowWidth / self.data.tabs.length * self.data.activeIndex
+                });
+            }
+        })
         self.setData({
             loadmore: true
         })
@@ -23,8 +36,9 @@ Page({
             url: myBookListUrl,
             data: {
                 page: self.data.page,
-                sort: "created",
-                order: "desc"
+                sort: "operateTime",
+                order: "desc",
+                rows: 100,
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -38,13 +52,19 @@ Page({
                     return false;
                 }
                 self.data.page++
-                    self.setData({
-                        loadmore: false,
-                        page: self.data.page,
-                        myBookList: self.data.myBookList.concat(data.data.rows)
-                    })
+                self.setData({
+                    loadmore: false,
+                    page: self.data.page,
+                    myBookList: self.data.myBookList.concat(data.data.rows)
+                })
             }
         })
+    },
+    tabClick: function(e) {
+        this.setData({
+            sliderOffset: e.currentTarget.offsetLeft,
+            activeIndex: e.currentTarget.id
+        });
     },
     // 更改发布状态
     switchChange: function(e) {
@@ -63,8 +83,8 @@ Page({
                 })
             }
         })
-        if (publishedNum >= 5 && published) {
-            util.showMessage(self, '最多开启5个书单！', 3000);
+        if (publishedNum >= 100 && published) {
+            util.showMessage(self, '最多开启100个书单！', 3000);
             return false;
         }
         wx.request({
@@ -132,6 +152,19 @@ Page({
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: '../../bookList/bookList?id=' + id
+        })
+    },
+    // 查看审核原因
+    reasonFun: function(e) {
+        let reason = e.currentTarget.dataset.reason;
+        wx.showModal({
+            title: '审核结果',
+            showCancel: false,
+            content: reason,
+            confirmColor: '#ff4444',
+            success: res => {
+                
+            }
         })
     }
 })

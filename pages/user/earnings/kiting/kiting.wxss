@@ -30,3 +30,31 @@
 .kiting-title .all {
 	color: #ff4444;
 }
+
+.verification {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 24rpx;
+	background-color: #fff;
+}
+
+.verification input {
+	width: 70%;
+	height: 99rpx;
+	padding-left: 30rpx;
+}
+
+.verification .send {
+	width: 180rpx;
+	height: 99rpx;
+	line-height: 98rpx;
+	background: #ff4444;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
+}
+
+button[type="primary"] {
+	margin: 88rpx 32rpx 54rpx
+}

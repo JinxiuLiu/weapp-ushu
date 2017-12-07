@@ -13,6 +13,7 @@ const collectUrl = require('../../config').collectUrl;
 const cancelCollectUrl = require('../../config').cancelCollectUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const util = require('../../utils/util');
+const app = getApp();
 Page({
     data: {
         loadmore: true,
@@ -22,18 +23,24 @@ Page({
         readCount: 0,
         cartTotal: 0,
         isComment: true,
+        isIndex: false,
         fromId: '',
+        uuid: '',
     },
     // 首屏渲染
     onLoad: function(options) {
+        let Suuid = util.uuid();
         let id = options.id || options.scene;
         this.detailRequest(id);
-        this.readBookListRequest(id);
         this.commentRequest(id);
         this.cartTotalRequest();
+        this.readBookListRequest(id);
         let fromId = options.uuid || '';
+        let isIndex = options.isIndex || '';
         this.setData({
-            fromId: fromId
+            fromId: fromId,
+            isIndex: isIndex,
+            uuid: Suuid
         })
     },
     // 请求详情
@@ -57,14 +64,13 @@ Page({
                     if(data.data.data.tags) {
                         data.data.data.tags = data.data.data.tags.split(',')
                     }
-                    let uuid = util.uuid();
+                    
                     self.setData({
                         loadmore: false,
                         detailList: [data.data.data],
                         readCount: data.data.data.readCount,
-                        title: data.data.data.content,
-                        imageUrl: data.data.data.thumbnail ? data.data.data.thumbnail.url : '',
-                        path: '/pages/bookList/bookList?id=' + data.data.data.id + '&uuid=' + uuid
+                        title: data.data.data.title,
+                        imageUrl: data.data.data.thumbnail ? data.data.data.thumbnail.url : ''
                     })
                 } else {
                     util.showMessage(self, data.data.msg)
@@ -86,6 +92,7 @@ Page({
                 fromShareId: self.data.fromId
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
@@ -97,6 +104,10 @@ Page({
                     })
                     util.showMessage(self, data.data.msg)
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun()
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg)
                 }
             }
@@ -115,15 +126,24 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
-            success: data => {}
+            success: data => {
+                if(data.data.success) {
+                    self.data.readCount++
+                    self.setData({
+                        readCount: self.data.readCount
+                    })
+                }
+            }
         })
     },
     // 分享
     onShareAppMessage: function(res) {
         let self = this;
+        let uuid = util.uuid();
         let title = self.data.title;
-        let path = self.data.path;
+        let path = '/pages/bookList/bookList?id=' + self.data.detailList[0].id + '&uuid=' + uuid
         let imageUrl = self.data.imageUrl;
+        let bookListId = self.data.detailList[0].id;
         return {
             title: title,
             path: path,
@@ -139,13 +159,17 @@ Page({
                         fromId: self.data.fromId
                     },
                     header: {
+                        'X-Requested-With': 'XMLHttpRequest',
                         'content-type': 'application/x-www-form-urlencoded',
                         'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
                     success: data => {
                         if(data.data.success) {
-                            util.showMessage(self, data.data.msg)
                         } else {
+                            if(data.data.data == 401) {
+                                app.loginFun()
+                                return false;
+                            }
                             util.showMessage(self, data.data.msg)
                         }
                     }
@@ -165,7 +189,6 @@ Page({
         } else {
             self.attentionRequest(addAttentionUrl, creatorId, '关注成功！', true)
         }
-        
     },
     // 关注&&取消关注接口
     attentionRequest: function(url, creatorId, msg, isFollowed) {
@@ -176,6 +199,7 @@ Page({
                 targetId: creatorId
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
@@ -186,6 +210,10 @@ Page({
                         detailList: self.data.detailList
                     })
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun()
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg);
                 }
             }
@@ -211,6 +239,7 @@ Page({
                 bookListId: id
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
@@ -218,6 +247,10 @@ Page({
                     self.detailRequest(id);
                     util.showMessage(self, msg);
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun()
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg);
                 }
             }
@@ -234,6 +267,7 @@ Page({
                 rows: 2
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
@@ -261,14 +295,23 @@ Page({
                 bookListId: bookListId
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
-                self.setData({
-                    commentList: data.data,
-                    isComment: false
-                })
+                if(data.data.success) {
+                    self.setData({
+                        commentList: data.data,
+                        isComment: false
+                    })
+                } else {
+                    if(data.data.data == 401) {
+                        app.loginFun()
+                        return false;
+                    }
+                }
+                
             }
         })
     },
@@ -280,6 +323,7 @@ Page({
             method: 'POST',
             data: {},
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
@@ -294,9 +338,10 @@ Page({
     },
     // 进入图书详情
     tapBookDetails: function(e) {
+        let self = this
         let bookId = e.currentTarget.dataset.id
         wx.navigateTo({
-            url: '../bookDetails/bookDetails?id=' + bookId
+            url: '../bookDetails/bookDetails?id=' + bookId + '&fromId=' + self.data.fromId
         })
     },
     // 跳转购物车

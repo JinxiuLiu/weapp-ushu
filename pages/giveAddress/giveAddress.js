@@ -3,12 +3,14 @@
  */
 const giveAddressUrl = require('../../config').giveAddressUrl
 const orderDetailUrl = require('../../config').orderDetailUrl
-var area = require('../../utils/area')
+const area = require('../../utils/area')
 var p = 0,
     c = 0,
     d = 0
 Page({
     data: {
+        isExpress: false,
+        receiverName: '',
         cartList: [],
         provinceName: [],
         provinceCode: [],
@@ -28,12 +30,14 @@ Page({
         defCityName: '请选择所在市',
         defDistrictName: '请选择所在区',
         orderId: '',
+        cookie: ''
     },
     onLoad: function(options) {
         this.setAreaData()
         let orderId = options.orderId;
         this.setData({
             orderId: orderId
+            // orderId: 'b9a2ce70-764a-4cd7-8870-89ad493367ee'
         })
         this.orderDetile()
     },
@@ -135,8 +139,8 @@ Page({
         var self = this
         var data = e.detail.value
         var telRule = /^1[3|4|5|7|8]\d{9}$/
-        if (data.name == '') {
-            this.showMessage('请输入姓名')
+        if (data.addressee == '') {
+            this.showMessage('请输入收货人姓名')
         } else if (data.mobile == '') {
             this.showMessage('请输入手机号码')
         } else if (!telRule.test(data.mobile)) {
@@ -150,19 +154,21 @@ Page({
         } else if (data.address == '') {
             this.showMessage('请输入详细地址')
         } else {
+            let cookie = self.data.cookie || 'JSESSIONID=' + wx.getStorageSync('sessionId')
             wx.request({
                 url: giveAddressUrl,
+                method: 'POST',
                 data: data,
                 header: {
-                    'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'Cookie': cookie
                 },
                 success: function(result) {
                     if (result.data.success) {
                         self.showMessage('提交成功！');
                         setTimeout(function() {
-                            wx.switchTab({
-                                url: '../index/index'
-                            })
+                            self.orderDetile()
                         }, 2000)
                     } else {
                         self.showMessage(result.data.msg);
@@ -177,24 +183,75 @@ Page({
     // 订单列表
     orderDetile: function() {
         let self = this;
-        wx.request({
-            url: orderDetailUrl,
-            method: 'POST',
-            header: {
-                'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
-            },
-            data: {
-                id: self.data.orderId
-            },
-            success: data => {
-                console.log(data);
-                if(data.data.success) {
-                    self.setData({
-                        cartList: [data.data.data]
-                    })
-                }
+        wx.login({
+            success: res => {
+                wx.request({
+                    url: orderDetailUrl,
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+                    },
+                    data: {
+                        id: self.data.orderId,
+                        code: res.code
+                    },
+                    success: data => {
+                        self.data.cookie = data.header['Set-Cookie'] ? data.header['Set-Cookie'].split(';')[0] : '';
+                        if(data.data.success) {
+                            if(data.data.data.express) {
+                                self.setData({
+                                    isExpress: true,
+                                    receiverName: data.data.data.receiverName
+                                })
+                            }
+                            if(data.data.data.status == 'Cancelled') {
+                                wx.showModal({
+                                    title: '提示',
+                                    content: '该订单已失效！',
+                                    confirmColor: '#ff4444',
+                                    success: res => {
+                                        if (res.confirm) {
+                                            wx.switchTab({
+                                                url: '../index/index'
+                                            })
+                                        } else if (res.cancel) {
+                                            wx.navigateBack()
+                                        }
+                                    }
+                                })
+                            }
+                            self.setData({
+                                cartList: [data.data.data]
+                            })
+                        }
+                    }
+                })
             }
+        })
+    },
+    // 我也送&回馈礼物
+    feedbackFun: function() {
+        wx.switchTab({
+            url: '../index/index'
+        })
+    },
+    // 查看物流
+    logisticsFun: function(e) {
+        let expressNo = e.currentTarget.dataset.id;
+        if(!expressNo) {
+            this.showMessage('暂无物流信息~');
+            return false;
+        }
+        wx.navigateTo({
+            url: '../user/getLogistics/getLogistics?id=' + expressNo
+        })
+    },
+    // 点击图书
+    tapBookDetailsFun: function(e) {
+        let bookId = e.currentTarget.dataset.id
+        wx.navigateTo({
+            url: '../bookDetails/bookDetails?id=' + bookId
         })
     },
     showMessage: function(text) {

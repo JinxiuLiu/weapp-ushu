@@ -4,6 +4,7 @@
  */
 // var host = "http://192.168.0.111:8081"
 var host = "http://rkkscs.xatime.com"
+// var host = "https://www.ushu.com"
 // var host = "http://59.110.47.139:80"
 
 var config = {
@@ -16,11 +17,14 @@ var config = {
     // 身份证上传接口
     identityCardUrl: `${host}/identityCard/upload`,
 
+    // 提现验证手机号
+    kitingSendUrl: `${host}/mobile/send`,
+    
     // 登录接口
     loginUrl: `${host}/wxa/login`,
 
     // 赠朋友-地址
-    giveAddressUrl: `${host}/order/express/add`,
+    giveAddressUrl: `${host}/order/express/receive`,
 
     // 身份证提交认证
     commitCardUrl: `${host}/identityCard/commit`,
@@ -173,7 +177,7 @@ var config = {
     shareSaveUrl: `${host}/share/save`,
 
     // 我的分享
-    shareListUrl: `${host}/share/grid_distinct_my`,
+    shareListUrl: `${host}/share/grid_my`,
 
     // 关注通知
     informAttentionUrl: `${host}/follow/grid_follow_me`,
@@ -198,6 +202,9 @@ var config = {
 
     // 搜索提示
     suggestionUrl: `${host}/bookListSuggestion/list`,
+
+    // 易盾校验-文字
+    checkTextUrl: `${host}/check/text`,
 
 };
 

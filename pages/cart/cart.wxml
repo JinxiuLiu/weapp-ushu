@@ -44,7 +44,7 @@
             <view class="bottom-del" wx:if="{{isEdit}}" data-id="{{bookItem.id}}" bindtap="delCart">删除</view>
         </view>
     </view>
-    <view wx:if="{{cartList.length == 0}}" class="NoData">暂无商品</view>
+    <view wx:if="{{cartList.length == 0 && !loadmore}}" class="NoData">暂无商品</view>
 </view>
 <view class="cart-bottom" wx:if="{{!isEdit}}">
     <view class="select-icon">

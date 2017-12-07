@@ -12,7 +12,7 @@
 			<view class="bottom-right">
 				<radio-group bindchange="radioChange">
 					<label class="radio">
-					    <radio value="{{item.id}}" checked="{{item.def}}" color="#ff4444"/>默认地址
+					    <radio value="{{[item.id, index]}}" checked="{{item.def}}" color="#ff4444"/>默认地址
 					</label>
 				</radio-group>
 			</view>
@@ -21,7 +21,7 @@
 					<image src="../../../image/compile.png"></image>
 					<text>编辑</text>
 				</view>
-				<view class="text" data-id="{{item.id}}" bindtap="delAddress">
+				<view class="text" data-id="{{item.id}}" data-index="{{index}}" bindtap="delAddress">
 					<image src="../../../image/delete.png"></image>
 					<text>删除</text>
 				</view>

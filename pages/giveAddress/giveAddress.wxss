@@ -1,5 +1,6 @@
 .addAddress {
     border-top: 1rpx solid #dcdcdc;
+    margin-bottom: 20rpx;
 }
 
 .hidden {
@@ -64,18 +65,16 @@ button[type="primary"] {
     display: flex;
     align-items: center;
     height: 88rpx;
-    padding: 0 30rpx;
     font-size: 12px;
     color: #999;
     border-bottom: 1rpx solid #dcdcdc;
 }
 
 .cart-item .title text {
-    padding-left: 20rpx;
+    /*padding-left: 20rpx;*/
 }
 
 .cart-item {
-    margin-top: 20rpx;
     padding: 0 26rpx;
     background: #fff;
 }
@@ -166,4 +165,89 @@ button[type="primary"] {
     padding: 20rpx 26rpx;
     padding-bottom: 110rpx;
     font-size: 14px;
+}
+
+/* 领取之后 */
+.get {
+    border-bottom: 1rpx solid #dcd9d9;
+}
+.get .get-bg {
+    width: 100%;
+    height: 640rpx;
+}
+
+.get .get-bg image {
+    width: 100%;
+    height: 100%;
+}
+
+.get .get-name {
+    width: 100%;
+    height: 117rpx;
+    background-color: #fff;
+    position: relative;
+}
+
+.get-name .get-name-info {
+    width: 556rpx;
+    height: 140rpx;
+    line-height: 140rpx;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0 30px 14px #ffe5e6;
+    border-radius: 26rpx;
+    position: absolute;
+    top: -80rpx;
+    left: 50%;
+    margin-left: -278rpx;
+}
+
+.get-name-info:after {
+    content: "";
+    width: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 14px solid #fff;
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    margin-left: -7px;
+}
+
+/* 我也送 */
+.you-give {
+    width: 100%;
+    height: 98rpx;
+    line-height: 98rpx;
+    text-align: center;
+    color: #fff;
+    background-color: #ff4444;
+    position: fixed;
+    bottom: 0;
+}
+
+.me-give {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    -ms-align-items: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.me-give .logistics,
+.me-give .feedback {
+    width: 50%;
+    height: 98rpx;
+    line-height: 98rpx;
+    text-align: center;
+    background-color: #fff;
+    color: #666;
+}
+
+.me-give .feedback {
+    background-color: #ff4444;
+    color: #fff;
 }

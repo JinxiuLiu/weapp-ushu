@@ -2,6 +2,7 @@
  * Created by Liujx on 2017-11-07 17:32:05
  */
 const orderDetailUrl = require('../../../../config').orderDetailUrl;
+const checkTextUrl = require('../../../../config').checkTextUrl;
 const util = require('../../../../utils/util');
 Page({
     data: {
@@ -24,7 +25,6 @@ Page({
                 id: id
             },
             success: data => {
-                console.log(data);
                 if (data.data.success) {
                     self.setData({
                         id: id,
@@ -41,17 +41,48 @@ Page({
     },
     // 确认赠言
     confirmGiveText: function() {
-        this.setData({
-            isShare: false,
+        let self = this;
+        wx.showLoading({
+            title: '易盾校验中...'
+        })
+        wx.request({
+            url: checkTextUrl,
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+            },
+            data: {
+                content: self.data.bindinput
+            },
+            success: data => {
+                if (data.data.success) {
+                    wx.hideLoading()
+                    if(data.data.msg == '') {
+                        self.setData({
+                            isShare: false,
+                        })
+                    } else {
+                        wx.showModal({
+                            title: '审核结果',
+                            showCancel: false,
+                            confirmText: '确定',
+                            confirmColor: '#ff4444',
+                            content: '赠言内容涉嫌违规，请您重新修改！',
+                            success: function(res) {
+                                if (res.confirm) {
+                                   
+                                }
+                            }
+                        })
+                    }
+                }
+            }
         })
     },
     // 赠朋友
     onShareAppMessage: function(res) {
         let self = this;
-        if (self.data.isShare) {
-            util.showMessage(self, '请先确认赠言~');
-            return false;
-        }
         let id = self.data.id;
         let item = self.data.bookItem;
         let array = [];
@@ -73,11 +104,14 @@ Page({
                 // 转发成功
                 wx.showModal({
                     title: '赠送成功',
-                    cancelText: '取消',
+                    showCancel: false,
                     confirmText: '确定',
+                    confirmColor: '#ff4444',
                     content: '请提示朋友尽快填写收货地址~',
                     success: function(res) {
-
+                        if (res.confirm) {
+                            wx.navigateBack()
+                        }
                     }
                 })
             },
@@ -85,5 +119,6 @@ Page({
                 // 转发失败
             }
         }
+        
     }
 })

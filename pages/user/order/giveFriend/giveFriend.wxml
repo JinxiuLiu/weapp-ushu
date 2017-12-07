@@ -14,5 +14,5 @@
 		</view>
 	</block>
 </view>
-<button type="primary" open-type="share">发送给朋友</button>
+<button type="primary" disabled="{{isShare}}" open-type="share">{{isShare ? "请先确认赠言"  : "发送给朋友"}}</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

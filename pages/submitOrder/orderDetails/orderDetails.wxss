@@ -164,6 +164,11 @@
 	bottom: 0;
 }
 
+.submitOrder-btn .total {
+	padding-right: 40rpx;
+	font-size: 14px;
+}
+
 .submitOrder-btn .color-red {
 	font-weight: bold;
 }

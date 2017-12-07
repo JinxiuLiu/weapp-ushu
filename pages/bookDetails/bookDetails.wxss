@@ -1,5 +1,5 @@
 .bookDetails {
-	margin-bottom: 118rpx;
+	padding-bottom: 100rpx;
 }
 
 .bookDetails .bookDetails-info {

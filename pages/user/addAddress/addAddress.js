@@ -29,9 +29,13 @@ Page({
         isOrder: false,
     },
     onLoad: function(options) {
+        p = 0;
+        c = 0;
+        d = 0;
         this.setData({
             isOrder: options.order
         })
+        
         if (options.id) {
             let item = JSON.parse(options.item);
             wx.setNavigationBarTitle({
@@ -54,8 +58,30 @@ Page({
                 address: item.address,
                 checked: item.def
             })
+            for (var itemS in area['100000']) {
+                if(itemS === this.data.provinceId) {
+                    break;
+                }
+                p++
+            }
+            for (var itemS in area[item.provinceId]) {
+                if(itemS === this.data.cityId) {
+                    break;
+                }
+                c++
+            }
+            for (var itemS in area[item.cityId]) {
+                if(itemS === this.data.countyId) {
+                    break;
+                }
+                d++
+            }
+            this.setAreaData('province', p)
+            this.setAreaData('city', p, c)
+            this.setAreaData('district', p, c, d)
+        } else {
+            this.setAreaData()
         }
-        this.setAreaData()
     },
     // 选择省
     changeProvince: function(e) {
@@ -69,8 +95,11 @@ Page({
     },
     // 选择市
     changeCity: function(e) {
-        this.resetAreaData()
+        this.resetAreaData('city')
         c = e.detail.value
+        this.setData({
+            defDistrictName: '请选择所在区'
+        })
         this.setAreaData('city', p, c)
     },
     // 选择区
@@ -153,6 +182,15 @@ Page({
                 citySelIndex: ''
             })
         }
+        if (type == 'city') {
+            this.setData({
+                districtName: [],
+                districtCode: [],
+                districtSelIndex: '',
+                countyName: '',
+                countyId: '',
+            })
+        }
     },
     // 保存地址
     savePersonInfo: function(e) {
@@ -184,11 +222,18 @@ Page({
                     'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                 },
                 success: function(result) {
-                    if (result.statusCode == 200) {
+                    if (result.data.success) {
                         self.showMessage(data.id ? '修改成功！' : '保存成功！');
                         setTimeout(function() {
                             self.setData({
                                 isDisabled: false
+                            })
+                            let pages = getCurrentPages();
+                            let currPage = pages[pages.length - 1]; //当前页面
+                            let prevPage = pages[pages.length - 2]; //上一个页面
+                            prevPage.data.orderDetailList[0].consignee = result.data.data;
+                            prevPage.setData({
+                                orderDetailList: prevPage.data.orderDetailList
                             })
                             wx.navigateBack();
                         }, 1000)
@@ -196,7 +241,7 @@ Page({
                         self.setData({
                             isDisabled: false
                         })
-                        self.showMessage(result.errMsg);
+                        self.showMessage(result.data.data[0].msg);
                     }
                 },
                 fail: function(errMsg) {

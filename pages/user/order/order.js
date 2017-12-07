@@ -23,6 +23,17 @@ Page({
                 });
             }
         });
+        this.orderListRequest();
+    },
+    onPullDownRefresh: function () {
+        wx.showToast({
+            title: 'loading...',
+            icon: 'loading'
+        })
+        this.orderListRequest();
+    },
+    orderListRequest: function() {
+        let self = this;
         wx.request({
             url: orderListUrl,
             method: 'POST',
@@ -42,6 +53,11 @@ Page({
                 } else {
                     util.showMessage(self, data.data.msg)
                 }
+                wx.stopPullDownRefresh({
+                    complete: function (res) {
+                        wx.hideToast()
+                    }
+                })
             }
         });
     },
@@ -54,8 +70,14 @@ Page({
     // 查看详情
     SeeDetailsFun: function(e) {
         let id = e.currentTarget.dataset.id;
+        let myself = e.currentTarget.dataset.myself;
         wx.navigateTo({
-            url: '../../submitOrder/orderDetails/orderDetails?id=' + id
+            url: '../../submitOrder/orderDetails/orderDetails?id=' + id + '&myself=' + myself,
+            fail: res => {
+                wx.redirectTo({
+                    url: '../../submitOrder/orderDetails/orderDetails?id=' + id + '&myself=' + myself,
+                })
+            }
         })
     },
     // 赠朋友
@@ -63,14 +85,24 @@ Page({
         let self = this;
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: './giveFriend/giveFriend?id=' + id
+            url: './giveFriend/giveFriend?id=' + id,
+            fail: res => {
+                wx.redirectTo({
+                    url: './giveFriend/giveFriend?id=' + id
+                })
+            }
         })
     },
     // 图书详情
     tapBookFun: function(e) {
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '../../bookDetails/bookDetails?id=' + id
+            url: '../../bookDetails/bookDetails?id=' + id,
+            fail: res => {
+                wx.redirectTo({
+                    url: '../../bookDetails/bookDetails?id=' + id
+                })
+            }
         })
     },
     // 查看物流
@@ -81,7 +113,12 @@ Page({
             return false
         }
         wx.navigateTo({
-            url: '../getLogistics/getLogistics?id=' + id
+            url: '../getLogistics/getLogistics?id=' + id,
+            fail: res => {
+                wx.redirectTo({
+                    url: '../getLogistics/getLogistics?id=' + id
+                })
+            }
         })
     }
 });

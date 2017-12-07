@@ -1,5 +1,5 @@
 <form bindsubmit="savePersonInfo">
-	<view class="addAddress">
+	<view wx:if="{{!isExpress}}" class="addAddress">
 		<view class="weui-cell weui-cell_input">
 		    <view class="weui-cell__hd">
 		        <view class="weui-label">收货人</view>
@@ -61,6 +61,16 @@
 	    <input type="text" name="orderId" value="{{orderId}}" class="hidden"/>
 	    <button formType="submit" type="primary">完成</button>
 	</view>
+	<view wx:else class="get">
+		<view class="get-bg">
+			<image src="../../image/get-bg-1.png"></image>
+		</view>
+		<view class="get-name">
+			<view class="get-name-info">
+				已被 {{receiverName ? receiverName : ''}} 领取
+			</view>
+		</view>
+	</view>
 </form>
 <block wx:for="{{cartList}}">
 	<view class="cart-item" wx:for="{{item.itemList}}">
@@ -68,7 +78,7 @@
 		    <text>书单：{{item.title}}</text>
 		</view>
 		<view class="bookinfo" wx:for="{{item.items}}">
-		    <view class="weui-cell__bd">
+		    <view class="weui-cell__bd" bindtap="tapBookDetailsFun" data-id="{{item.bookListItemId}}">
 		        <view class="book-left">
 		            <view class="left-image">
 		                <image src="{{item.bookListItem.picPath}}"></image>
@@ -85,11 +95,16 @@
 		    </view>
 		</view>
 	</view>
-	<view class="statistics">合计(含运费)¥{{item.totalMoney}}</view>
-	<view class="indent">
+	<view class="statistics" style="padding-bottom: {{isExpress ? '98rpx' : '0'}};">合计(含运费)¥{{item.totalMoney}}</view>
+	<view class="indent" wx:if="{{!isExpress}}">
 		<view>订单编号：{{item.orderNo}}</view>
 		<view>创建时间：{{item.created}}</view>
 		<view>付款时间：{{item.paidTime}}</view>
+	</view>
+	<view wx:if="{{isExpress && !item.express.myself}}" class="you-give" bindtap="feedbackFun">我也送</view>
+	<view wx:if="{{isExpress && item.express.myself}}" class="me-give">
+		<view class="logistics" data-id="{{item.express.expressNo}}" bindtap="logisticsFun">追踪物流</view>
+		<view class="feedback" bindtap="feedbackFun">回馈礼物</view>
 	</view>
 </block>
 

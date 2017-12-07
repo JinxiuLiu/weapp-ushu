@@ -1,9 +1,11 @@
 <view class="attention">
-	<view class="attention-item" wx:for="{{myAttentionList}}">
-		<image src="{{item.targetPhoto.url}}"></image>
-		<text>{{item.targetName}}</text>
-	</view>
-	<view wx:if="{{myAttentionList.length == 0}}" class="NoData">暂无关注</view>
+	<block wx:for="{{myAttentionList}}">
+		<view class="attention-item" data-name="{{item.targetName}}" data-id="{{item.targetId}}" bindtap="tapOtherList">
+			<image src="{{item.targetPhoto.url}}"></image>
+			<text>{{item.targetName}}</text>
+		</view>
+	</block>
+	<view wx:if="{{myAttentionList.length == 0 && !loadmore}}" class="NoData">暂无关注</view>
 </view>
 <view class="weui-loadmore" wx:if="{{loadmore}}">
     <view class="weui-loading"></view>

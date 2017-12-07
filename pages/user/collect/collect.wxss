@@ -21,6 +21,12 @@
     -webkit-line-clamp: 2;
 }
 
+.bookList-item .bookList-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .bookList-item .user-name {
 	font-size: 12px;
 	color: #929ebb;

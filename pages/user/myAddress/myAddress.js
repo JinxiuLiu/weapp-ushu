@@ -41,20 +41,32 @@ Page({
     // 单选-设为默认地址
     radioChange: function(e) {
         let self = this;
+        let value = e.detail.value.split(',')
+        let id = value[0];
+        let tapIndex = value[1];
         wx.request({
             url: defAddressUrl,
             method: 'POST',
             data: {
-                'id': e.detail.value
+                id: id
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
-            success: function(res) {
-                if (res.statusCode == 200) {
+            success: data => {
+                if (data.data.success) {
+                    let items = self.data.addressList
+                    items.filter(function(item, index) {
+                        item.def = false;
+                        if(index == tapIndex) {
+                            item.def = true;
+                        }
+                    })
+                    self.setData({
+                        addressList: self.data.addressList
+                    })
                     self.showMessage('设置成功！')
-                    self.onLoad();
                 }
             }
         })
@@ -63,6 +75,7 @@ Page({
     delAddress: function(e) {
         let self = this;
         let id = e.currentTarget.dataset.id;
+        let index = e.currentTarget.dataset.index;
         wx.request({
             url: delAddressUrl,
             method: 'POST',
@@ -73,11 +86,16 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
-            success: function(res) {
-                if (res.statusCode == 200) {
+            success: data => {
+                if (data.data.success) {
+                    let items = self.data.addressList;
+                    items.splice(index, 1)
+                    self.setData({
+                        addressList: self.data.addressList
+                    })
                     self.showMessage('删除成功！')
-                    self.onLoad();
-                    return false;
+                } else {
+                    self.showMessage(data.data.msg);
                 }
             }
         })

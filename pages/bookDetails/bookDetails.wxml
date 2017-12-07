@@ -8,7 +8,7 @@
 		<view class="book-info">
 			<text class="title">{{item.bookName}}</text>
 			<text class="price">¥ {{item.price}}<text class="origPrice">¥ {{item.origPrice}} </text></text>
-			<text class="name">{{item.author}}</text>
+			<text class="name">{{item.author == 'null' ? '' : item.author}}</text>
 			<!-- <rich-text nodes="{{item.author_intro}}" class="introduce"></rich-text> -->
 		</view>
 	</view>
@@ -47,11 +47,11 @@
 	<view class="bookDetails-bottom">
 	<view class="bottom-item left-btn">
 		<view class="collect" bindtap="collectBookFun" data-iscollect="{{item.collected}}" data-id="{{item.id}}">
-			<image src="../../image/collect-kong.png"></image>
-			<text>{{item.collected ? '已收藏' : '收藏'}}</text>
+			<image wx:if="{{item.collected}}" src="../../image/book-collect-select.png"></image>
+			<image wx:else src="../../image/book-collect.png"></image>
 		</view>
 		<button hover-class="" open-type="share" class="share" bindtap="onShareAppMessage" data-id="{{item.id}}" data-title="{{item.bookName}}">
-			<image src="../../image/index-share.png"></image>
+			<image src="../../image/book-share.png"></image>
 		</button>
 	</view>
 	<view class="bottom-item give" data-give="true" data-id="{{item.id}}" bindtap="settlementFun">

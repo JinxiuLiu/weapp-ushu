@@ -9,11 +9,16 @@ const util = require('../../../utils/util');
 Page({
     data: {
         orderDetailList: [],
+        myself: true,
     },
     // 生命周期函数--监听页面显示
     onLoad: function(option) {
         let self = this;
         let id = option.id;
+        let myself = option.myself;
+        this.setData({
+            myself: myself
+        })
         wx.request({
             url: orderDetailUrl,
             method: 'POST',
@@ -93,11 +98,11 @@ Page({
             title: '退货退款提示',
             cancelText: '取消',
             confirmText: '拨打',
-            content: '如需退款，请在工作时间联系邮书客服\n客服电话：010-6299120\n咨询时间：周一至周五，9:00-16:30',
+            content: '如需退款，请在工作时间联系邮书客服\n客服电话：010-62991200\n咨询时间：周一至周五，9:00-16:30',
             success: function(res) {
                 if (res.confirm) {
                     wx.makePhoneCall({
-                        phoneNumber: '010-6299120'
+                        phoneNumber: '010-62991200'
                     })
                 }
             }
@@ -109,11 +114,11 @@ Page({
             title: '申请发票提示',
             cancelText: '取消',
             confirmText: '拨打',
-            content: '如需发票，请在工作时间联系邮书客服\n客服电话：010-6299120\n咨询时间：周一至周五，9:00-16:30',
+            content: '如需发票，请在工作时间联系邮书客服\n客服电话：010-62991200\n咨询时间：周一至周五，9:00-16:30',
             success: function(res) {
                 if (res.confirm) {
                     wx.makePhoneCall({
-                        phoneNumber: '010-6299120'
+                        phoneNumber: '010-62991200'
                     })
                 }
             }

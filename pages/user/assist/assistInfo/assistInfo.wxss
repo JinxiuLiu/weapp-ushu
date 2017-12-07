@@ -1,0 +1,5 @@
+.content {
+	background-color: #fff;
+	padding: 30rpx 30rpx 100rpx;
+	border-top: 1rpx solid #dcdcdc;
+}

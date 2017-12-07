@@ -59,6 +59,13 @@
 	color: #666;
 }
 
+.earnings-record .title {
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 navigator {
 	border-bottom: 1rpx solid #f0f0f0;
 }

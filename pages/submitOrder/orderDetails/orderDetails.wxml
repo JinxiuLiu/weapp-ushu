@@ -1,6 +1,6 @@
 <block wx:for="{{orderDetailList}}" wx:for-item="itemDetail">
     <view class="submitOrder">
-    	<view class="submitOrder-address" wx:if="{{!itemDetail.give}}">
+    	<view class="submitOrder-address" wx:if="{{itemDetail.express}}">
     		<view class="address-img">
     			<image style="width: 32rpx; height: 46rpx" src="../../../image/address.png"></image>
     		</view>
@@ -63,9 +63,11 @@
     </view>
     <view class="submitOrder-btn">
         <text class="total">合计：<text class="color-red">¥{{itemDetail.totalMoney}}</text></text>
-        <view class="btn" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapRefunds">退货退款</view>
-        <view class="btn invoice" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapInvoice">申请发票</view>
-        <view class="btn" wx:else bindtap="submitOrderFun">立即支付</view>
+        <block wx:if="{{myself == 'true'}}">
+            <view class="btn" wx:if="{{itemDetail.status == 'Paid' || itemDetail.status == 'Delivered' || itemDetail.status == 'Done'}}" bindtap="tapRefunds">退货退款</view>
+            <view class="btn invoice" wx:if="{{itemDetail.status == 'Paid'}}" bindtap="tapInvoice">申请发票</view>
+        </block>
+        <view class="btn" wx:if="{{itemDetail.status == 'PendingPay'}}" bindtap="submitOrderFun">立即支付</view>
     </view>
 </block>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

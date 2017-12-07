@@ -11,6 +11,7 @@ const bannerUrl = require('../../config').bannerUrl;
 const shareSaveUrl = require('../../config').shareSaveUrl;
 const suggestionUrl = require('../../config').suggestionUrl;
 const util = require('../../utils/util');
+const app = getApp();
 Page({
     data: {
         inputVal: "",
@@ -46,25 +47,25 @@ Page({
             isShowList: true,
         })
         if(e.detail.value == '') return false;
-        wx.request({
-            url: suggestionUrl,
-            data: {
-                keyword: e.detail.value,
-                count: 6
-            },
-            header: {
-                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
-            },
-            success: data => {
-                if(data.data.success) {
-                    self.setData({
-                        suggestionList: data.data.data
-                    })
-                } else {
-                    util.showMessage(self, data.data.msg)
-                }
-            }
-        })
+        // wx.request({
+        //     url: suggestionUrl,
+        //     data: {
+        //         keyword: e.detail.value,
+        //         count: 6
+        //     },
+        //     header: {
+        //         'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+        //     },
+        //     success: data => {
+        //         if(data.data.success) {
+        //             self.setData({
+        //                 suggestionList: data.data.data
+        //             })
+        //         } else {
+        //             util.showMessage(self, data.data.msg)
+        //         }
+        //     }
+        // })
     },
     onLoad: function() {
         var self = this;
@@ -84,7 +85,7 @@ Page({
         if (!isCreate) return false;
         this.setData({
             pageOne: 1,
-            bookListItem: []
+            bookListItem: [],
         })
         this.getBookListDefRequest()
         wx.setStorageSync('isCreate', false)
@@ -155,6 +156,7 @@ Page({
                 targetId: creatorId
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
@@ -173,6 +175,10 @@ Page({
                         })
                     }
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun()
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg);
                 }
             }
@@ -182,7 +188,7 @@ Page({
     tapBookList: function(e) {
         let BookListID = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '../bookList/bookList?id=' + BookListID
+            url: '../bookList/bookList?id=' + BookListID + '&isIndex=true'
         })
     },
     // 点击图书
@@ -195,15 +201,13 @@ Page({
     // 分享
     onShareAppMessage: function(res) {
         let self = this;
-        let title = '';
-        let path = '';
-        let imageUrl = '';
+        let title = res.target.dataset.item.title;
         let bookListId = res.target.dataset.item.id;
         let uuid = util.uuid();
+        let path = '/pages/bookList/bookList?id=' + bookListId + '&uuid=' + uuid;
+        let imageUrl = res.target.dataset.item.thumbnail.url;
         if (res.from === 'button') {
-            title = res.target.dataset.item.title;
-            path = '/pages/bookList/bookList?id=' + bookListId + '&uuid=' + uuid
-            imageUrl = res.target.dataset.item.thumbnail.url;
+            // 来自分享按钮
         }
         return {
             title: title,
@@ -215,6 +219,7 @@ Page({
                     url: shareSaveUrl,
                     method: 'POST',
                     header: {
+                        'X-Requested-With': 'XMLHttpRequest',
                         'content-type': 'application/x-www-form-urlencoded',
                         'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
@@ -224,8 +229,12 @@ Page({
                     },
                     success: data => {
                         if (data.data.success) {
-                            util.showMessage(self, data.data.msg)
+
                         } else {
+                            if(data.data.data == 401) {
+                                app.loginFun()
+                                return false;
+                            }
                             util.showMessage(self, data.data.msg)
                         }
                     }
@@ -242,7 +251,6 @@ Page({
         let id = e.currentTarget.dataset.id;
         let index = e.currentTarget.dataset.index;
         let isCollect = e.currentTarget.dataset.iscollect;
-        console.log(isCollect)
         if (isCollect) {
             self.collectRequest(cancelCollectUrl, id, index, '取消收藏成功！', false)
         } else {
@@ -258,6 +266,7 @@ Page({
                 bookListId: id
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
@@ -276,6 +285,10 @@ Page({
                         })
                     }
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun()
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg);
                 }
             }
@@ -289,7 +302,7 @@ Page({
             data: {
                 page: self.data.pageOne,
                 rows: 10,
-                sort: 'created',
+                sort: 'publishDate',
                 order: "desc",
                 keyword: keyword || '',
                 published: true
@@ -308,15 +321,29 @@ Page({
                         return false;
                     }
                     items.filter(function(item) {
+                        let index = 0;
                         if (item.tags) {
                             item.tags = item.tags.split(',')
                         }
+                        if(item.title) {
+                            item.voiceTitle = item.title.substring(0,6)
+                        }
+                        if(item.video) {
+                            index++
+                        }
+                        if(item.voice) {
+                            index++
+                        }
+                        if(item.images.length) {
+                            index++
+                        }
+                        item.ItemIndex = index;
                     })
                     self.data.pageOne++
                         self.setData({
                             page: self.data.pageOne,
                             loadmoreDef: false,
-                            bookListItem: self.data.bookListItem.concat(result.data.data.rows)
+                            bookListItem: self.data.bookListItem.concat(items)
                         })
                 } else {
                     util.showMessage(self, result.data.msg);
@@ -334,7 +361,8 @@ Page({
                 rows: 10,
                 sort: 'readCount',
                 order: "desc",
-                keyword: keyword || ''
+                keyword: keyword || '',
+                published: true
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -350,16 +378,30 @@ Page({
                         return false;
                     }
                     items.filter(function(item) {
+                        let index = 0;
                         if (item.tags) {
                             item.tags = item.tags.split(',')
                         }
+                        if(item.title) {
+                            item.voiceTitle = item.title.substring(0,6)
+                        }
+                        if(item.video) {
+                            index++
+                        }
+                        if(item.voice) {
+                            index++
+                        }
+                        if(item.images.length) {
+                            index++
+                        }
+                        item.ItemIndex = index;
                     })
                     self.data.pageTwo++
-                        self.setData({
-                            page: self.data.pageTwo,
-                            loadmoreHot: false,
-                            hotBookListItem: self.data.hotBookListItem.concat(result.data.data.rows)
-                        })
+                    self.setData({
+                        page: self.data.pageTwo,
+                        loadmoreHot: false,
+                        hotBookListItem: self.data.hotBookListItem.concat(items)
+                    })
                 } else {
                     util.showMessage(self, '服务端错误！');
                 }

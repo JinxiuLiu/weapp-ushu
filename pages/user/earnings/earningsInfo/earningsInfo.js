@@ -20,6 +20,7 @@ Page({
                 bookListId: val,
                 page: self.data.page,
                 rows: 30,
+                profitType: 'myBookList'
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')

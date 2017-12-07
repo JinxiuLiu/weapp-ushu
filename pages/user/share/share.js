@@ -81,7 +81,7 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    if (data.data.data.length == 0) {
+                    if (data.data.data.rows.length == 0) {
                         self.setData({
                             bookListLoadMore: false,
                         })
@@ -92,8 +92,13 @@ Page({
                         self.setData({
                             bookListLoadMore: false,
                             bookListPage: self.data.bookListPage,
-                            shareBookListItem: self.data.shareBookListItem.concat(data.data.data)
+                            shareBookListItem: self.data.shareBookListItem.concat(data.data.data.rows)
                         })
+                } else {
+                    util.showMessage(self, '服务端错误！')
+                    self.setData({
+                        bookListLoadMore: false,
+                    })
                 }
             }
         })
@@ -113,7 +118,7 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    if (data.data.data.length == 0) {
+                    if (data.data.data.rows.length == 0) {
                         self.setData({
                             bookLoadMore: false,
                         })
@@ -124,7 +129,7 @@ Page({
                         self.setData({
                             bookPage: self.data.bookPage,
                             bookLoadMore: false,
-                            shareBookItem: self.data.shareBookItem.concat(data.data.data)
+                            shareBookItem: self.data.shareBookItem.concat(data.data.data.rows)
                         })
                 }
             }

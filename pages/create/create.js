@@ -5,10 +5,12 @@ const util = require('../../utils/util.js');
 const uploadFileUrl = require('../../config').uploadFileUrl;
 const CreateListUrl = require('../../config').CreateListUrl;
 const detailUrl = require('../../config').detailUrl;
+const app = getApp();
 var playTimeInterval;
 var recordTimeInterval;
 Page({
     data: {
+        isVoice: false,
         isEdit: false,
         isSelectBook: false,
         bookListId: '',
@@ -24,8 +26,8 @@ Page({
         recordTime: 0,
         playTime: 0,
         seq: 1,
-        formatedRecordTime: '00:00:00',
-        formatedPlayTime: '00:00:00',
+        formatedRecordTime: '00:00',
+        formatedPlayTime: '00:00',
         bookListName: '', // 书单名称
         videoKey: '', // 视频key
         voiceKey: '', // 音频key
@@ -59,8 +61,8 @@ Page({
                 playTime: 0,
                 seq: 1,
                 voiceSrc: '',
-                formatedRecordTime: '00:00:00',
-                formatedPlayTime: '00:00:00',
+                formatedRecordTime: '00:00',
+                formatedPlayTime: '00:00',
                 bookListName: '', // 书单名称
                 videoKey: '', // 视频key
                 voiceKey: '', // 音频key
@@ -82,6 +84,12 @@ Page({
     // 页面显示
     onShow: function(option) {
         let self = this;
+        wx.checkSession({
+            fail: function(){
+                app.loginFun()
+                return false;
+            }
+        })
         if (self.data.isSelectBook) {
             self.setData({
                 bookImgUrl: self.data.bookImgUrl.concat(self.data.tempBookImgUrl),
@@ -204,7 +212,8 @@ Page({
                 self.setData({
                     hasRecord: true,
                     tempFilePath: res.tempFilePath,
-                    formatedPlayTime: util.formatTime(self.data.playTime)
+                    formatedPlayTime: util.formatTime(self.data.playTime),
+                    isVoice: true,
                 })
                 wx.uploadFile({
                     url: uploadFileUrl,
@@ -242,6 +251,7 @@ Page({
             }
         })
     },
+    // 播放录音
     playVoice: function() {
         var self = this
         playTimeInterval = setInterval(function() {
@@ -265,6 +275,7 @@ Page({
             }
         })
     },
+    // 暂停录音
     pauseVoice: function() {
         clearInterval(playTimeInterval)
         wx.pauseVoice()
@@ -272,6 +283,7 @@ Page({
             playing: false
         })
     },
+    // 停止录音
     stopVoice: function() {
         clearInterval(playTimeInterval)
         this.setData({
@@ -281,10 +293,12 @@ Page({
         })
         wx.stopVoice()
     },
+    // 清除录音
     clear: function() {
         if (this.data.voiceSrc) {
             this.setData({
-                voiceSrc: ''
+                voiceSrc: '',
+                isVoice: false,
             })
         } else {
             clearInterval(playTimeInterval)
@@ -292,6 +306,7 @@ Page({
             this.setData({
                 playing: false,
                 hasRecord: false,
+                isVoice: false,
                 tempFilePath: '',
                 formatedRecordTime: util.formatTime(0),
                 recordTime: 0,
@@ -304,17 +319,28 @@ Page({
         let self = this
         self.data.tempImagesKey = [];
         self.data.isSelectBook = true;
+        let tempImageListChoose = self.data.imageList;
         wx.chooseImage({
             count: 9 - self.data.imageList.length,
+            sizeType: ['compressed'],
             success: (res) => {
+                res.tempFiles.filter(function(item) {
+                    if(item.size/1024/1024 < 20) {
+                        tempImageListChoose.push(item.path)
+                    } else {
+                        util.showMessage(self, '图片须小于20MB', 2000);
+                    }
+                })
                 self.setData({
-                    imageList: self.data.imageList.concat(res.tempFilePaths)
+                    imageList: tempImageListChoose
                 })
                 let successUp = 0; //成功个数
                 let failUp = 0; //失败个数
                 let length = self.data.imageList.length; //总共个数
                 let i = 0; //第几个
-                self.uploadDIY(self.data.imageList, successUp, failUp, i, length);
+                if(self.data.imageList.length) {
+                    self.uploadDIY(self.data.imageList, successUp, failUp, i, length);
+                }
             }
         })
     },
@@ -508,7 +534,21 @@ Page({
                         
                     }, 500)
                 } else {
-                    util.showMessage(self, result.data.msg, 2000);
+                    // util.showMessage(self, result.data.msg, 2000);
+                    wx.showModal({
+                        title: '审核结果',
+                        showCancel: false,
+                        confirmText: '确定',
+                        confirmColor: '#ff4444',
+                        content: result.data.msg,
+                        success: res => {
+                            if (res.confirm) {
+                                wx.navigateTo({
+                                    url: '../user/myBookList/myBookList'
+                                })
+                            }
+                        }
+                    })
                     this.setData({
                         isDisabled: false
                     })

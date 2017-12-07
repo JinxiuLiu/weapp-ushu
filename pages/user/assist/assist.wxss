@@ -1,0 +1,30 @@
+.user-list {
+    background: #fff;
+    padding-left: 38rpx;
+    border-top: 1rpx solid #dcdcdc;
+}
+
+.user-list .user-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 120rpx;
+    line-height: 120rpx;
+    padding-right: 38rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.user-list .user-list-item .item-left {
+    font-size: 16px;
+    color: #333;
+}
+
+.user-list .user-list-item .item-left image {
+    padding-right: 18rpx;
+    margin-top: -4px;
+    vertical-align: middle;
+}
+
+.user-list .user-list-item.no-border {
+    border-bottom: none;
+}

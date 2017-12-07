@@ -57,7 +57,6 @@ Page({
         wx.chooseImage({
             count: 1,
             success: res => {
-                console.log(res);
                 self.setData({
                     imageListOne: res.tempFilePaths
                 })
@@ -65,6 +64,9 @@ Page({
                     url: identityCardUrl,
                     filePath: res.tempFilePaths[0],
                     name: 'file',
+                    header: {
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+                    },
                     success: data => {
                         let frontID = JSON.parse(data.data).data[0].id
                         self.setData({
@@ -91,6 +93,9 @@ Page({
                     url: identityCardUrl,
                     filePath: res.tempFilePaths[0],
                     name: 'file',
+                    header: {
+                        'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
+                    },
                     success: data => {
                         let backID = JSON.parse(data.data).data[0].id
                         self.setData({
@@ -125,10 +130,21 @@ Page({
             success: data => {
                 let self = this;
                 if (data.data.success) {
-                    util.showMessage(this, data.data.msg);
+                    util.showMessage(self, data.data.msg);
                     setTimeout(function() {
                         wx.navigateBack()
                     }, 2000)
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        showCancel: false,
+                        confirmText: '确定',
+                        confirmColor: '#ff4444',
+                        content: data.data.msg,
+                        success: res => {
+                            
+                        }
+                    })
                 }
             }
         })

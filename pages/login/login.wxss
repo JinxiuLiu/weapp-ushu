@@ -2,7 +2,6 @@
 	border-top: 1rpx solid #dcdcdc;
 	background: #fff;
 	padding-left: 32rpx;
-	margin-bottom: 58rpx;
 }
 
 .bindmobile input {
@@ -36,5 +35,32 @@
 	background: #ff4444;
 	text-align: center;
 	color: #fff;
-	font-size: 16px;
+	font-size: 14px;
+}
+
+.weui-cell:before {
+	content: none;
+}
+
+.weui-cell__bd {
+	font-size: 14px;
+	margin-top: 10rpx;
+}
+
+.weui-icon-checkbox_circle,
+.weui-icon-checkbox_success {
+	margin-left: 0;
+}
+
+checkbox-group {
+	position: relative;
+}
+
+.agreement {
+	font-size: 14px;
+	display: inline-flex;
+	color: #3586bc;
+	position: absolute;
+	left: 40%;
+	bottom: 22rpx;
 }

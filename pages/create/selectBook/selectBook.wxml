@@ -26,11 +26,11 @@
         <block wx:for="{{rows}}">
             <view class="bookinfo">
                 <view class="weui-cell__bd">
-                    <view class="book-left">
-                        <view class="left-image" bindtap="tapBookDetails" data-id="{{item.bookId}}">
+                    <view class="book-left" bindtap="tapBookDetails" data-id="{{item.bookId}}">
+                        <view class="left-image">
                             <image src="{{item.picPath}}"></image>
                         </view>
-                        <view class="left-text" wx:if="{{!isEdit}}" bindtap="selectBook" data-index="{{index}}" data-isSelect="{{item.checked}}">
+                        <view class="left-text" wx:if="{{!isEdit}}">
                             <text class="name">{{item.bookName}}</text>
                             <text class="work-name">{{item.author}}</text>
                             <view class="book-right">
@@ -38,8 +38,9 @@
                             </view>
                         </view>
                     </view>
-                    <view class="select-img" wx:if="{{item.checked}}">
-                        <icon type="success" size="30" color="#ff4444"/>
+                    <view class="select-img" bindtap="selectBook" data-index="{{index}}" data-isSelect="{{item.checked}}">
+                        <icon wx:if="{{item.checked}}" type="success" size="30" color="#ff4444"/>
+                        <icon wx:else type="success" color="#dcdcdc" size="30" bindtap="selectAll"/>
                     </view>
                 </view>
             </view>

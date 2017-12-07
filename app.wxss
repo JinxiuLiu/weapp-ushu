@@ -75,6 +75,7 @@ button[disabled][type="primary"] {
     position: fixed;
     top: 80%;
     left: 50%;
+    z-index: 9999;
     width: 400rpx;
     height: 80rpx;
     margin-left: -200rpx;

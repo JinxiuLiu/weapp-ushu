@@ -18,9 +18,9 @@
 		</view>
 	</navigator>
 	<view class="about-item no-border" bindtap="authenticatedFun">
-		<text>身份信息验证</text>
+		<text>身份信息认证</text>
 		<view class="item-right">
-			<text>{{item.authenticated ? '已验证' : '未验证'}}</text>
+			<text>{{item.authenticated ? '已认证' : '未认证'}}</text>
 			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
 		</view>
 	</view>

@@ -3,13 +3,15 @@
  */
 const aboutUrl = require('../../config').aboutUrl;
 const totalMoneyUrl = require('../../config').totalMoneyUrl;
+const app = getApp();
+
 Page({
     data: {
         userName: '',
         avatarUrl: '',
         totalMoney: '',
     },
-    onLoad: function() {
+    onShow: function() {
         this.userRequest();
         this.totalMoneyRequest();
     },
@@ -20,13 +22,21 @@ Page({
             url: aboutUrl,
             data: {},
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
-                self.setData({
-                    userName: data.data.data.name,
-                    avatarUrl: data.data.data.photo.url
-                })
+                if(data.data.success) {
+                    self.setData({
+                        userName: data.data.data.name,
+                        avatarUrl: data.data.data.photo.url
+                    })
+                } else {
+                    if(data.data.data == 401) {
+                        app.loginFun(self.onShow)
+                    }
+                }
+                
             }
         })
     },
@@ -36,6 +46,7 @@ Page({
         wx.request({
             url: totalMoneyUrl,
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             data: {},

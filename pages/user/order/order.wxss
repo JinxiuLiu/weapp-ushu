@@ -44,7 +44,7 @@
 .order-item .item-book .book-left {
 	display: flex;
 	align-items: center;
-	max-width: 90%;
+	max-width: 85%;
 }
 
 .book-left .left-image {

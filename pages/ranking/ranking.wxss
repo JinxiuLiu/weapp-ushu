@@ -12,6 +12,9 @@
 .weui-cell__bd {
 	font-size: 14px;
 	color: #666;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .weui-cell__ft {
@@ -25,6 +28,11 @@
 
 .weui-cell:nth-child(2) .weui-cell__hd {
 	background: #ff7200;
+	color: #fff;
+}
+
+.weui-cell:nth-child(3) .weui-cell__hd {
+	background: #fc0;
 	color: #fff;
 }
 

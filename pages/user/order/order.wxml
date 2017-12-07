@@ -21,8 +21,12 @@
                             <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
                             <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
                             <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
+                            <text wx:elif="{{allItem.status == 'Unclaimed'}}" class="color-red">未领取</text>
                             <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
                             <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
+                            <text wx:elif="{{allItem.status == 'Returning'}}" class="color-red">退款/退货中</text>
+                            <text wx:elif="{{allItem.status == 'Refunding'}}" class="color-red">确认退款/退货中</text>
+                            <text wx:elif="{{allItem.status == 'Refunded'}}" class="color-red">已退款</text>
                         </view>
                         <view class="item-center">
                             <view>
@@ -34,7 +38,7 @@
                                             </view>
                                             <view class="left-text">
                                                 <text class="name">{{bookItem.bookListItem.bookName}}</text>
-                                                <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                                <text class="work-name">{{bookItem.bookListItem.author == 'null' ? '' : bookItem.bookListItem.author}} 著</text>
                                             </view>
                                         </view>
                                         <view class="book-right">
@@ -48,31 +52,13 @@
                                 <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
                             </view>
                         </view>
-                        <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
-                            <view class="delete"><text>删除订单</text></view>
-                            <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            <view class="give" wx:if="{{allItem.give}}"><text>赠朋友</text></view>
-                        </view>
-                        <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
-                            <!-- <view class="delete"><text>删除订单</text></view> -->
-                            <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
-                        </view>
-                        <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
-                            <!-- <view class="delete"><text>删除订单</text></view> -->
-                        </view>
-                        <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
-                            <view class="logistics" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
-                            <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
-                            <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                        </view>
-                        <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
-                            <view class="logistics"><text>查看物流</text></view>
-                            <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
+                        <view class="item-bottom">
+                            <view class="give" wx:if="{{allItem.give && allItem.status == 'Unclaimed'}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
+                            <view class="logistics" wx:if="{{allItem.express}}" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
+                            <view class="affirm" data-id="{{allItem.id}}" data-myself="{{allItem.myself}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                         </view>
                     </view>
-                    <view wx:if="{{orderList.length == 0}}" class="NoData">暂无订单</view>
+                    <view wx:if="{{orderList.length == 0 && !loadmore}}" class="NoData">暂无订单</view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                     <block wx:for="{{orderList}}" wx:for-item="allItem">
@@ -82,8 +68,12 @@
                                 <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
                                 <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
                                 <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
+                                <text wx:elif="{{allItem.status == 'Unclaimed'}}" class="color-red">未领取</text>
                                 <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
                                 <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
+                                <text wx:elif="{{allItem.status == 'Returning'}}" class="color-red">退款/退货中</text>
+                                <text wx:elif="{{allItem.status == 'Refunding'}}" class="color-red">确认退款/退货中</text>
+                                <text wx:elif="{{allItem.status == 'Refunded'}}" class="color-red">已退款</text>
                             </view>
                             <view class="item-center">
                                 <view>
@@ -94,7 +84,7 @@
                                             </view>
                                             <view class="left-text">
                                                 <text class="name">{{bookItem.bookListItem.bookName}}</text>
-                                                <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                                <text class="work-name">{{bookItem.bookListItem.author == 'null' ? '' : bookItem.bookListItem.author}} 著</text>
                                             </view>
                                         </view>
                                         <view class="book-right">
@@ -107,26 +97,10 @@
                                     <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
                                 </view>
                             </view>
-                            <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
-                                <!-- <view class="delete"><text>删除订单</text></view> -->
-                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
-                                <!-- <view class="delete"><text>删除订单</text></view> -->
-                            <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
-                                <!-- <view class="delete"><text>删除订单</text></view> -->
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
-                                <view class="logistics"><text>查看物流</text></view>
-                                <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
-                                <view class="logistics"><text>查看物流</text></view>
-                                <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
+                            <view class="item-bottom">
+                                <view class="give" wx:if="{{allItem.give && allItem.status == 'Unclaimed'}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
+                                <view class="logistics" wx:if="{{allItem.express}}" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
+                                <view class="affirm" data-id="{{allItem.id}}" data-myself="{{allItem.myself}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             </view>
                         </view>
                         <!-- <view class="NoData" wx:if="{{!allItem.status == 'PendingPay'}}">暂无订单</view> -->
@@ -140,8 +114,12 @@
                                 <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
                                 <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
                                 <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
+                                <text wx:elif="{{allItem.status == 'Unclaimed'}}" class="color-red">未领取</text>
                                 <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
                                 <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
+                                <text wx:elif="{{allItem.status == 'Returning'}}" class="color-red">退款/退货中</text>
+                                <text wx:elif="{{allItem.status == 'Refunding'}}" class="color-red">确认退款/退货中</text>
+                                <text wx:elif="{{allItem.status == 'Refunded'}}" class="color-red">已退款</text>
                             </view>
                             <view class="item-center">
                                 <view>
@@ -152,7 +130,7 @@
                                             </view>
                                             <view class="left-text">
                                                 <text class="name">{{bookItem.bookListItem.bookName}}</text>
-                                                <text class="work-name">{{bookItem.bookListItem.author}} 著</text>
+                                                <text class="work-name">{{bookItem.bookListItem.author == 'null' ? '' : bookItem.bookListItem.author}} 著</text>
                                             </view>
                                         </view>
                                         <view class="book-right">
@@ -165,29 +143,13 @@
                                     <text>合计：<text class="price">¥{{allItem.totalMoney}}</text></text>
                                 </view>
                             </view>
-                            <view class="item-bottom" wx:if="{{allItem.status == 'Done'}}">
-                                <view class="delete"><text>删除订单</text></view>
-                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'PendingPay'}}">
-                                <!-- <view class="delete"><text>删除订单</text></view> -->
-                            <view class="affirm" data-id="{{allItem.id}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'Cancelled'}}">
-                                <!-- <view class="delete"><text>删除订单</text></view> -->
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'Paid'}}">
-                                <view class="logistics"><text>查看物流</text></view>
-                                <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
-                            </view>
-                            <view class="item-bottom" wx:elif="{{allItem.status == 'Delivered'}}">
-                                <view class="logistics"><text>查看物流</text></view>
-                                <view class="give" wx:if="{{allItem.give}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <!-- <view class="invoice" wx:if="{{allItem.invoice}}"><text>电子发票</text></view> -->
+                            <view class="item-bottom">
+                                <view class="give" wx:if="{{allItem.give && allItem.status == 'Unclaimed'}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
+                                <view class="logistics" wx:if="{{allItem.express}}" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
+                                <view class="affirm" data-id="{{allItem.id}}" data-myself="{{allItem.myself}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             </view>
                         </view>
-                        <!-- <view class="NoData" wx:if="{{!(allItem.status == 'Delivered')}}">暂无订单</view> -->
+                        <!-- <view class="NoData">暂无订单</view> -->
                     </block>
                 </view>
             </view>

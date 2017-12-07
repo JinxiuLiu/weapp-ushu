@@ -9,7 +9,8 @@ Page({
         countDown: "发送验证码",
         isClick: false,
         NowMobile: '',
-        verificationCode: ''
+        verificationCode: '',
+        checked: false,
     },
     // 新手机号 input
     NowMobileFun: function(e) {
@@ -68,6 +69,11 @@ Page({
             return false;
         }
 
+        if(!self.data.checked) {
+            util.showMessage(self, '请同意用户协议!')
+            return false;
+        }
+
         wx.request({
             url: registerUrl,
             method: 'POST',
@@ -83,7 +89,9 @@ Page({
                 if (data.data.success) {
                     util.showMessage(self, data.data.msg);
                     setTimeout(function() {
-                        wx.navigateBack()
+                        wx.switchTab({
+                            url: '../index/index'
+                        })
                     }, 2000)
                 } else {
                     util.showMessage(self, data.data.msg);
@@ -112,5 +120,18 @@ Page({
                 })
             }
         }, 1000)
+    },
+    // 查看用户协议
+    tapAgreementFun: function() {
+        wx.navigateTo({
+            url: '../agreement/agreement'
+        })
+    },
+    // 选择用户协议
+    checkboxChange: function(e) {
+        let checked = !e.currentTarget.dataset.checked;
+        this.setData({
+            checked: checked
+        })
     }
 })

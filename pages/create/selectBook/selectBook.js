@@ -112,7 +112,7 @@ Page({
                 "searchStr": val
             },
             header: {
-                'Cookie': 'JSESSIONID=' + sesswx.getStorageSync('sessionId')
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
                 if(!data.data.rows.length) {

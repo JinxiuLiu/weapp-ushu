@@ -14,7 +14,11 @@ Page({
         this.setData({
             id: option.id
         })
+        this.isCartInto(option.isCart)
         this.orderDetailRequest()
+    },
+    onShow: function() {
+        
     },
     orderDetailRequest: function() {
         let self = this;
@@ -29,7 +33,6 @@ Page({
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
-                console.log(data);
                 if (data.data.success) {
                     self.setData({
                         orderDetailList: [data.data.data]
@@ -39,6 +42,12 @@ Page({
                 }
             }
         })
+    },
+    // 是否从购物车进入
+    isCartInto: function(val) {
+        if(val) {
+            wx.setStorageSync('isCartInto', true)
+        }
     },
     // 电子发票
     selectInvoice: function(e) {

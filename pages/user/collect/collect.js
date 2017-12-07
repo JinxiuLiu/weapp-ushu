@@ -76,8 +76,8 @@ Page({
             data: {
                 page: self.data.bookListPage,
                 rows: 10,
-                sort: "created",
-                sorder: "desc"
+                sort: "t.created",
+                order: "desc"
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -108,7 +108,7 @@ Page({
                 page: self.data.bookPage,
                 rows: 10,
                 sort: "created",
-                sorder: "desc"
+                order: "desc"
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')

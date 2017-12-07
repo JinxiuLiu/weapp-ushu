@@ -20,7 +20,9 @@ Page({
         wx.request({
             url: myAttentionUrl,
             data: {
-                page: self.data.page
+                page: self.data.page,
+                sort: "created",
+                order: "desc",
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -40,6 +42,14 @@ Page({
                         myAttentionList: self.data.myAttentionList.concat(data.data.rows)
                     })
             }
+        })
+    },
+    // 跳转用户书单
+    tapOtherList: function(e) {
+        let id = e.currentTarget.dataset.id;
+        let name = e.currentTarget.dataset.name;
+        wx.navigateTo({
+            url: '../../otherBookList/otherBookList?id=' + id + '&name=' + name
         })
     }
 })

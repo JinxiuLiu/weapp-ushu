@@ -7,6 +7,7 @@ const selectCartUrl = require('../../config').selectCartUrl;
 const changeCartUrl = require('../../config').changeCartUrl;
 const delCartUrl = require('../../config').delCartUrl;
 const generateUrl = require('../../config').generateUrl;
+const app = getApp();
 Page({
     data: {
         isEdit: false,
@@ -21,23 +22,36 @@ Page({
     },
     onShow: function(options) {
         let self = this;
+        let isCartInto = wx.getStorageSync('isCartInto')
+        if(isCartInto) return false;
         wx.request({
             url: shopCartUrl,
             method: 'POST',
             data: {},
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: res => {
-                self.setData({
-                    loadmore: false,
-                    total: '0',
-                    cartList: res.data.data,
-                    selectAllStatus: false,
-                    settlementItems: [],
-                })
+                if(res.data.success) {
+                    self.setData({
+                        loadmore: false,
+                        total: '0',
+                        cartList: res.data.data,
+                        selectAllStatus: false,
+                        settlementItems: [],
+                    })
+                } else {
+                    if(res.data.data == 401) {
+                        app.loginFun(self.onShow)
+                        return false;
+                    }
+                }
             }
         })
+    },
+    onHide: function() {
+        wx.setStorageSync('isCartInto', false)
     },
     // 单选
     selectList: function(e) {
@@ -315,7 +329,7 @@ Page({
             success: data => {
                 if (data.data.success) {
                     wx.navigateTo({
-                        url: '../submitOrder/submitOrder?id=' + data.data.data
+                        url: '../submitOrder/submitOrder?id=' + data.data.data + '&isCart=true'
                     })
                 } else {
                     self.showMessage(data.data.msg);
@@ -328,7 +342,7 @@ Page({
     tapBook: function(e) {
         let bookId = e.currentTarget.dataset.id
         wx.navigateTo({
-            url: '../bookDetails/bookDetails?id=' + bookId
+            url: '../bookDetails/bookDetails?id=' + bookId + '&isCart=true'
         })
     },
     showMessage: function(text) {

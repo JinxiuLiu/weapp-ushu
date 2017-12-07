@@ -7,5 +7,18 @@
 		<view class="send" bindtap="sendMsgFun">{{countDown}}<text hidden="{{countDown == '发送验证码'}}">s</text></view>
 	</view>
 </view>
+<checkbox-group data-checked="{{checked}}" bindchange="checkboxChange">
+	<label class="weui-cell weui-check__label">
+	    <checkbox class="weui-check" value="{{checked}}" checked="{{checked}}"/>
+
+	    <view class="weui-cell__hd weui-check__hd_in-checkbox">
+	        <icon class="weui-icon-checkbox_circle" type="circle" size="18" wx:if="{{!checked}}"></icon>
+	        <icon class="weui-icon-checkbox_success" type="success" size="18" color="#ff4444" wx:if="{{checked}}"></icon>
+	    </view>
+	    <view class="weui-cell__bd">我已看过并同意</view>
+	</label>
+	<view class="agreement" bindtap="tapAgreementFun">《邮书用户协议》</view>
+</checkbox-group>
+
 <button type="primary" bindtap="submitFun">注册</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

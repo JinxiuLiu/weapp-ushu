@@ -11,6 +11,7 @@ const shareSaveUrl = require('../../config').shareSaveUrl;
 const generateUrl = require('../../config').generateUrl;
 const cartTotalUrl = require('../../config').cartTotalUrl;
 const util = require('../../utils/util');
+const app = getApp();
 Page({
     data: {
         tabs: ["图书详情", "图书目录", "内容简介", "作者简介"],
@@ -25,6 +26,7 @@ Page({
         let self = this;
         let id = option.id || option.scene || option.CreateBookId;
         let fromId = option.uuid || option.fromId || '';
+        this.isCartInto(option.isCart)
         this.setData({
             fromId: fromId
         })
@@ -49,6 +51,12 @@ Page({
             activeIndex: e.currentTarget.id
         });
     },
+    // 是否从购物车进入
+    isCartInto: function(val) {
+        if(val) {
+            wx.setStorageSync('isCartInto', true)
+        }
+    },
     // 图书详情
     bookDetail: function(url, id) {
         let self = this;
@@ -56,6 +64,7 @@ Page({
             url: url,
             method: 'POST',
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
@@ -87,6 +96,7 @@ Page({
             url: url,
             method: 'POST',
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
@@ -101,6 +111,10 @@ Page({
                         bookDetailItem: self.data.bookDetailItem
                     })
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun(self.onShow)
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg)
                 }
             }
@@ -120,6 +134,7 @@ Page({
                 fromShareId: self.data.fromId
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
@@ -131,6 +146,10 @@ Page({
                     })
                     util.showMessage(self, data.data.msg)
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun(self.onShow)
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg)
                 }
             }
@@ -141,18 +160,20 @@ Page({
         const self = this;
         let isGive = e.currentTarget.dataset.give;
         let bookListItemId = e.currentTarget.dataset.id;
+        let fromShareId = self.data.fromId
         wx.request({
             url: generateUrl,
             method: 'POST',
             data: {
                 give: isGive,
                 items: [{
-                    'bookListItemId': bookListItemId,
-                    'fromShareId': self.data.fromId,
-                    'quantity': 1,
+                    bookListItemId: bookListItemId,
+                    fromShareId: fromShareId,
+                    quantity: 1,
                 }]
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: function(data) {
@@ -161,6 +182,10 @@ Page({
                         url: '../submitOrder/submitOrder?id=' + data.data.data
                     })
                 } else {
+                    if(data.data.data == 401) {
+                        app.loginFun(self.onShow)
+                        return false;
+                    }
                     util.showMessage(self, data.data.msg)
                 }
             }
@@ -169,13 +194,12 @@ Page({
     // 分享
     onShareAppMessage: function(res) {
         let self = this;
-        let title = '';
-        let path = '';
-        let bookListItemId = res.target.dataset.id;
         let uuid = util.uuid();
+        let bookListItemId = self.data.bookDetailItem[0].id;
+        let title = self.data.bookDetailItem[0].bookName;
+        let path = '/pages/bookDetails/bookDetails?id=' + bookListItemId + '&uuid=' + uuid;
         if (res.from === 'button') {
-            title = res.target.dataset.title;
-            path = '/pages/bookDetails/bookDetails?id=' + bookListItemId + '&uuid=' + uuid
+            // ....
         }
         return {
             title: title,
@@ -191,13 +215,18 @@ Page({
                         fromId: self.data.fromId
                     },
                     header: {
+                        'X-Requested-With': 'XMLHttpRequest',
                         'content-type': 'application/x-www-form-urlencoded',
                         'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
                     },
                     success: data => {
                         if(data.data.success) {
-                            util.showMessage(self, data.data.msg)
+                            
                         } else {
+                            if(data.data.data == 401) {
+                                app.loginFun()
+                                return false;
+                            }
                             util.showMessage(self, data.data.msg)
                         }
                     }

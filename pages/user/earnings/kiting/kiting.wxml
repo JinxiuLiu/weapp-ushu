@@ -9,5 +9,9 @@
 		<view class="all" bindtap="allWithdrawFun">全部提现</view>		
 	</view>
 </view>
+<view class="verification">
+	<input type="number" placeholder="请输入验证码" value="{{verificationCode}}" bindinput="verificationCodeFun" />
+	<view class="send" bindtap="sendMsgFun">{{countDown}}<text hidden="{{countDown == '获取验证码'}}">s</text></view>
+</view>
 <button type="primary" bindtap="affirmWithdrawFun">确认提现</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

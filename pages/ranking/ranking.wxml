@@ -11,24 +11,28 @@
             </view>
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <view class="weui-cell" wx:for="{{userRankingItem}}">
-		                <view class="weui-cell__hd">{{index + 1}}</view>
-		                <view class="weui-cell__bd">{{item.name}}</view>
-		                <view class="weui-cell__ft">¥ {{item.money}}</view>
-		            </view>
-                    <view class="NoData" wx:if="{{!userRankingItem.length}}">暂无排行</view>
+                    <block wx:for="{{userRankingItem}}">
+                        <view class="weui-cell" bindtap="tapOtherList" data-id="{{item.id}}" data-name="{{item.name}}">
+                            <view class="weui-cell__hd">{{index + 1}}</view>
+                            <view class="weui-cell__bd">{{item.name}}</view>
+                            <view class="weui-cell__ft">¥ {{item.money}}</view>
+                        </view>
+                    </block>
+                    <view class="NoData" wx:if="{{!userRankingItem.length && !userLoadMore}}">暂无排行</view>
 		            <view class="weui-loadmore" wx:if="{{userLoadMore}}">
 					    <view class="weui-loading"></view>
 					    <view class="weui-loadmore__tips">正在加载</view>
 					</view>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                    <view class="weui-cell" wx:for="{{bookListRankingItem}}">
-		                <view class="weui-cell__hd">{{index + 1}}</view>
-		                <view class="weui-cell__bd">{{item.title}}</view>
-		                <view class="weui-cell__ft">¥ {{item.money}}</view>
-		            </view>
-                    <view class="NoData" wx:if="{{!bookListRankingItem.length}}">暂无排行</view>
+                    <block wx:for="{{bookListRankingItem}}">
+                        <view class="weui-cell" bindtap="tapBookList" data-id="{{item.id}}">
+                            <view class="weui-cell__hd">{{index + 1}}</view>
+                            <view class="weui-cell__bd">{{item.title}}</view>
+                            <view class="weui-cell__ft">¥ {{item.money}}</view>
+                        </view>
+                    </block>
+                    <view class="NoData" wx:if="{{!bookListRankingItem.length && !bookListLoadMore}}">暂无排行</view>
 		            <view class="weui-loadmore" wx:if="{{bookListLoadMore}}">
 					    <view class="weui-loading"></view>
 					    <view class="weui-loadmore__tips">正在加载</view>

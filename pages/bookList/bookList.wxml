@@ -27,7 +27,7 @@
                 <audio author="{{item.creatorName}}" name="{{item.title}}" src="{{item.voice.url}}" id="myAudio" controls loop></audio>
             </view>
             <view class="bookList-img" wx-if="{{!item.images.length}}" wx:for="{{item.images}}">
-                <image src="{{item.url}}"></image>
+                <image mode="widthFix" src="{{item.url}}"></image>
             </view>
             <view class="bookList-text" wx-if="{{item.content}}">
                 <text>{{item.content}}</text>
@@ -94,12 +94,11 @@
         <text class="hot">热度({{readCount}})</text>
         <view class="bottom-right">
             <view class="collect" data-id="{{item.id}}" data-iscollect="{{item.collected}}" bindtap="collectFun">
-                <image src="../../image/collect-white.png"></image>
-                <text>{{item.collected ? '已收藏' : '收藏'}}</text>
+                <image wx:if="{{item.collected}}" src="../../image/collect-select.png"></image>
+                <image wx:else src="../../image/collect-white.png"></image>
             </view>
-            <button hover-class="" data-item="{{item}}" open-type="share" class="share">
-                <image style="width: 37rpx; height: 37rpx;" src="../../image/share-white.png"></image>
-                <text>分享</text>
+            <button hover-class="" data-id="{{item.id}}" open-type="share" class="share">
+                <image style="width: 40rpx; height: 40rpx;" src="../../image/share-white.png"></image>
             </button>
         </view>
     </view>

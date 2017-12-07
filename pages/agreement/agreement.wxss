@@ -1,0 +1,15 @@
+.content {
+	padding: 20rpx 40rpx;
+	background-color: #fff;
+	border-top: 1rpx solid #dcdcdc;
+}
+
+.content .title {
+	line-height: 60rpx;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+view {
+	line-height: 50rpx;
+}

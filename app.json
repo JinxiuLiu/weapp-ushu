@@ -1,71 +1,80 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/create/create",
-    "pages/create/selectBook/selectBook",
-    "pages/giveAddress/giveAddress",
-    "pages/cart/cart",
-    "pages/login/login",
-    "pages/user/getLogistics/getLogistics",
-    "pages/submitOrder/payment/payment",
-    "pages/user/order/giveFriend/giveFriend",
-    "pages/submitOrder/orderDetails/orderDetails",
-    "pages/user/user",
-    "pages/bookList/bookList",
-    "pages/user/myBookList/myBookList",
-    "pages/ranking/ranking",
-    "pages/user/myAddress/myAddress",
-    "pages/user/addAddress/addAddress",
-    "pages/bookDetails/bookDetails",
-    "pages/submitOrder/submitOrder",
-    "pages/otherBookList/otherBookList",
-    "pages/user/about/about",
-    "pages/user/order/order",
-    "pages/user/earnings/earnings",
-    "pages/user/earnings/earningsInfo/earningsInfo",
-    "pages/user/earnings/withdrawal/withdrawal",
-    "pages/user/earnings/kiting/kiting",
-    "pages/user/about/certification/certification",
-    "pages/user/about/bindmobile/bindmobile",
-    "pages/user/about/nickname/nickname",
-    "pages/user/attention/attention",
-    "pages/user/collect/collect",
-    "pages/user/inform/inform",
-    "pages/user/share/share"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "USHU",
-    "navigationBarTextStyle":"black",
-    "backgroundColor": "#ececec",
-    "onReachBottomDistance": 50
-  },
-  "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#ff4444",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "image/index.png",
-      "selectedIconPath": "image/index-select.png"
-    }, {
-      "pagePath": "pages/create/create",
-      "text": "创建书单",
-      "iconPath": "image/add.png",
-      "selectedIconPath": "image/add-select.png"
-    }, {
-      "pagePath": "pages/cart/cart",
-      "text": "购物车",
-      "iconPath": "image/cart.png",
-      "selectedIconPath": "image/cart-select.png"
-    }, {
-      "pagePath": "pages/user/user",
-      "text": "我的",
-      "iconPath": "image/user.png",
-      "selectedIconPath": "image/user-select.png"
-    }],
-    "backgroundColor": "#ffffff",
-    "borderStyle": "white"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/login/login",
+        "pages/agreement/agreement",
+        "pages/giveAddress/giveAddress",
+        "pages/create/create",
+        "pages/user/myAddress/myAddress",
+        "pages/user/addAddress/addAddress",
+        "pages/create/selectBook/selectBook",
+        "pages/cart/cart",
+        "pages/user/earnings/kiting/kiting",
+        "pages/user/getLogistics/getLogistics",
+        "pages/submitOrder/payment/payment",
+        "pages/user/order/giveFriend/giveFriend",
+        "pages/submitOrder/orderDetails/orderDetails",
+        "pages/user/user",
+        "pages/bookList/bookList",
+        "pages/user/myBookList/myBookList",
+        "pages/ranking/ranking",
+        "pages/bookDetails/bookDetails",
+        "pages/submitOrder/submitOrder",
+        "pages/otherBookList/otherBookList",
+        "pages/user/about/about",
+        "pages/user/order/order",
+        "pages/user/earnings/earnings",
+        "pages/user/earnings/earningsInfo/earningsInfo",
+        "pages/user/earnings/withdrawal/withdrawal",
+        "pages/user/about/certification/certification",
+        "pages/user/about/bindmobile/bindmobile",
+        "pages/user/about/nickname/nickname",
+        "pages/user/attention/attention",
+        "pages/user/collect/collect",
+        "pages/user/assist/assist",
+        "pages/user/assist/assistInfo/assistInfo",
+        "pages/user/inform/inform",
+        "pages/user/share/share"
+    ],
+    "window":
+    {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "USHU邮书",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#ececec",
+        "onReachBottomDistance": 50
+    },
+    "tabBar":
+    {
+        "color": "#999999",
+        "selectedColor": "#ff4444",
+        "list": [
+        {
+            "pagePath": "pages/index/index",
+            "text": "首页",
+            "iconPath": "image/index.png",
+            "selectedIconPath": "image/index-select.png"
+        },
+        {
+            "pagePath": "pages/create/create",
+            "text": "创建书单",
+            "iconPath": "image/add.png",
+            "selectedIconPath": "image/add-select.png"
+        },
+        {
+            "pagePath": "pages/cart/cart",
+            "text": "购物车",
+            "iconPath": "image/cart.png",
+            "selectedIconPath": "image/cart-select.png"
+        },
+        {
+            "pagePath": "pages/user/user",
+            "text": "我的",
+            "iconPath": "image/user.png",
+            "selectedIconPath": "image/user-select.png"
+        }],
+        "backgroundColor": "#ffffff",
+        "borderStyle": "#e7e7e7"
+    }
 }

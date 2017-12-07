@@ -50,6 +50,17 @@
 			</view>
 		</view>
 	</navigator>
+	<navigator url="./order/order" hover-class="none">
+		<view class="user-list-item">
+			<view class="item-left">
+				<image style="width: 42rpx; height: 42rpx" src="../../image/indent.png"></image>
+				<text>我的订单</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
+			</view>
+		</view>
+	</navigator>
 	<navigator url="./attention/attention" hover-class="none">
 		<view class="user-list-item">
 			<view class="item-left">
@@ -83,22 +94,22 @@
 			</view>
 		</view>
 	</navigator>
-	<navigator url="./order/order" hover-class="none">
+	<navigator url="./myAddress/myAddress" hover-class="none">
 		<view class="user-list-item">
 			<view class="item-left">
-				<image style="width: 42rpx; height: 42rpx" src="../../image/indent.png"></image>
-				<text>我的订单</text>
+				<image style="width: 42rpx; height: 42rpx" src="../../image/location.png"></image>
+				<text>收货地址</text>
 			</view>
 			<view class="item-right">
 				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>
 			</view>
 		</view>
 	</navigator>
-	<navigator url="./myAddress/myAddress" hover-class="none">
+	<navigator url="./assist/assist" hover-class="none">
 		<view class="user-list-item no-border">
 			<view class="item-left">
-				<image style="width: 42rpx; height: 42rpx" src="../../image/location.png"></image>
-				<text>收货地址</text>
+				<image style="width: 42rpx; height: 42rpx" src="../../image/assist.png"></image>
+				<text>帮助文档</text>
 			</view>
 			<view class="item-right">
 				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../image/right-arrow-gray.png"></image>

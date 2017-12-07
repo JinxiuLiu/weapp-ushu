@@ -91,7 +91,9 @@ Page({
         wx.request({
             url: informSystemUrl,
             data: {
-                page: self.data.systemPage
+                page: self.data.systemPage,
+                sort: "created",
+                order: "desc",
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -119,7 +121,9 @@ Page({
         wx.request({
             url: informAttentionUrl,
             data: {
-                page: self.data.attentionPage
+                page: self.data.attentionPage,
+                sort: "created",
+                order: "desc",
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -147,7 +151,9 @@ Page({
         wx.request({
             url: informEarningsUrl,
             data: {
-                page: self.data.earningsPage
+                page: self.data.earningsPage,
+                sort: "created",
+                order: "desc",
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
@@ -175,7 +181,9 @@ Page({
         wx.request({
             url: informCommentUrl,
             data: {
-                page: self.data.commentPage
+                page: self.data.commentPage,
+                sort: "created",
+                order: "desc",
             },
             header: {
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')

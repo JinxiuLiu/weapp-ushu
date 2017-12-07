@@ -6,7 +6,7 @@ const gridMyListRankingUrl = require('../../config').gridMyListRankingUrl;
 const userMoneyRankingUrl = require('../../config').userMoneyRankingUrl;
 Page({
     data: {
-        tabs: ["收入排行", "书单排行"],
+        tabs: ["收益排行", "书单排行"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
@@ -70,6 +70,21 @@ Page({
                     })
                 }
             }
+        })
+    },
+    // 点击查看书单详情
+    tapBookList: function(e) {
+        let BookListID = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../bookList/bookList?id=' + BookListID
+        })
+    },
+    // 点击查看此人书单
+    tapOtherList: function(e) {
+        let id = e.currentTarget.dataset.id;
+        let name = e.currentTarget.dataset.name;
+        wx.navigateTo({
+            url: '../otherBookList/otherBookList?id=' + id + '&name=' + name
         })
     }
 });

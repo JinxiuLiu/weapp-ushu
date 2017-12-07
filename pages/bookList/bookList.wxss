@@ -75,7 +75,7 @@
 }
 
 .bookList-img {
-	height: 350rpx;
+	/*height: 350rpx;*/
 	padding: 0 40rpx;
 	margin-bottom: 59rpx;
 }
@@ -83,6 +83,7 @@
 .bookList-img image {
 	width: 100%;
 	height: 100%;
+	border: 1rpx solid #e5e5e5;
 }
 
 .bookList-text {
@@ -262,7 +263,7 @@ navigator:last-child {
 
 .tag text {
 	padding: 15rpx;
-	font-size: 14px;
+	font-size: 10px;
 	color: #aaa;
 }
 
@@ -314,8 +315,8 @@ navigator:last-child {
 }
 
 .bottom-right image {
-	width: 38rpx;
-	height: 38rpx;
+	width: 42rpx;
+	height: 42rpx;
 	padding-right: 12rpx;
 }
 
