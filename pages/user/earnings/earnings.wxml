@@ -46,7 +46,7 @@
 			<text>提现记录</text>
 		</navigator>
 		<navigator class="bottom-item" url="./kiting/kiting?money={{canGetMoney}}" hover-class="none">
-			<text>提现</text>
+			<text>提现申请</text>
 		</navigator>
 	</view>
 </view>

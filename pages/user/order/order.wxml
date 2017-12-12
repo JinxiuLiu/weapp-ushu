@@ -18,15 +18,7 @@
                     <view class="order-item" wx:for="{{orderList}}" wx:for-item="allItem">
                         <view class="item-top">
                             <text class="booklist-name">订单编号：{{allItem.orderNo}}</text>
-                            <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
-                            <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
-                            <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
-                            <text wx:elif="{{allItem.status == 'Unclaimed'}}" class="color-red">未领取</text>
-                            <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
-                            <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
-                            <text wx:elif="{{allItem.status == 'Returning'}}" class="color-red">退款/退货中</text>
-                            <text wx:elif="{{allItem.status == 'Refunding'}}" class="color-red">确认退款/退货中</text>
-                            <text wx:elif="{{allItem.status == 'Refunded'}}" class="color-red">已退款</text>
+                            <text class="color-red">{{allItem.statusDesc}}</text>
                         </view>
                         <view class="item-center">
                             <view>
@@ -54,7 +46,7 @@
                         </view>
                         <view class="item-bottom">
                             <view class="give" wx:if="{{allItem.give && allItem.status == 'Unclaimed'}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                            <view class="logistics" wx:if="{{allItem.express}}" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
+                            <view class="logistics" wx:if="{{allItem.expressNo}}" data-id="{{allItem.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
                             <view class="affirm" data-id="{{allItem.id}}" data-myself="{{allItem.myself}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                         </view>
                     </view>
@@ -65,20 +57,12 @@
                         <view class="order-item" wx:if="{{allItem.status == 'PendingPay'}}">
                             <view class="item-top">
                                 <text class="booklist-name">订单编号：{{allItem.orderNo}}</text>
-                                <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
-                                <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
-                                <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
-                                <text wx:elif="{{allItem.status == 'Unclaimed'}}" class="color-red">未领取</text>
-                                <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
-                                <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
-                                <text wx:elif="{{allItem.status == 'Returning'}}" class="color-red">退款/退货中</text>
-                                <text wx:elif="{{allItem.status == 'Refunding'}}" class="color-red">确认退款/退货中</text>
-                                <text wx:elif="{{allItem.status == 'Refunded'}}" class="color-red">已退款</text>
+                                <text class="color-red">{{allItem.statusDesc}}</text>
                             </view>
                             <view class="item-center">
                                 <view>
                                     <view class="item-book" wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
-                                        <view class="book-left">
+                                        <view class="book-left" bindtap="tapBookFun" data-id="{{bookItem.bookListItem.id}}">
                                             <view class="left-image">
                                                 <image src="{{bookItem.bookListItem.picPath}}"></image>
                                             </view>
@@ -99,7 +83,7 @@
                             </view>
                             <view class="item-bottom">
                                 <view class="give" wx:if="{{allItem.give && allItem.status == 'Unclaimed'}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <view class="logistics" wx:if="{{allItem.express}}" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
+                                <view class="logistics" wx:if="{{allItem.expressNo}}" data-id="{{allItem.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
                                 <view class="affirm" data-id="{{allItem.id}}" data-myself="{{allItem.myself}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             </view>
                         </view>
@@ -111,20 +95,12 @@
                         <view class="order-item" wx:if="{{allItem.status == 'Delivered'}}">
                             <view class="item-top">
                                 <text class="booklist-name">订单编号：{{allItem.orderNo}}</text>
-                                <text wx:if="{{allItem.status == 'Done'}}" class="color-red">交易成功</text>
-                                <text wx:elif="{{allItem.status == 'PendingPay'}}" class="color-red">待付款</text>
-                                <text wx:elif="{{allItem.status == 'Cancelled'}}" class="color-red">已取消</text>
-                                <text wx:elif="{{allItem.status == 'Unclaimed'}}" class="color-red">未领取</text>
-                                <text wx:elif="{{allItem.status == 'Paid'}}" class="color-red">待发货</text>
-                                <text wx:elif="{{allItem.status == 'Delivered'}}" class="color-red">已发货</text>
-                                <text wx:elif="{{allItem.status == 'Returning'}}" class="color-red">退款/退货中</text>
-                                <text wx:elif="{{allItem.status == 'Refunding'}}" class="color-red">确认退款/退货中</text>
-                                <text wx:elif="{{allItem.status == 'Refunded'}}" class="color-red">已退款</text>
+                                <text class="color-red">{{allItem.statusDesc}}</text>
                             </view>
                             <view class="item-center">
                                 <view>
                                     <view class="item-book" wx:for="{{allItem.itemList}}" wx:for-item="bookItem">
-                                        <view class="book-left">
+                                        <view class="book-left" bindtap="tapBookFun" data-id="{{bookItem.bookListItem.id}}">
                                             <view class="left-image">
                                                 <image src="{{bookItem.bookListItem.picPath}}"></image>
                                             </view>
@@ -145,7 +121,7 @@
                             </view>
                             <view class="item-bottom">
                                 <view class="give" wx:if="{{allItem.give && allItem.status == 'Unclaimed'}}" data-id="{{allItem.id}}" bindtap="giveFriendFun"><text>赠朋友</text></view>
-                                <view class="logistics" wx:if="{{allItem.express}}" data-id="{{allItem.express.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
+                                <view class="logistics" wx:if="{{allItem.expressNo}}" data-id="{{allItem.expressNo}}" bindtap="getLogisticsFun"><text>查看物流</text></view>
                                 <view class="affirm" data-id="{{allItem.id}}" data-myself="{{allItem.myself}}" bindtap="SeeDetailsFun"><text>查看详情</text></view>
                             </view>
                         </view>

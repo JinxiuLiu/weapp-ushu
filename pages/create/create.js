@@ -84,12 +84,13 @@ Page({
     // 页面显示
     onShow: function(option) {
         let self = this;
-        wx.checkSession({
-            fail: function(){
-                app.loginFun()
-                return false;
-            }
+        wx.setNavigationBarTitle({
+            title: '创建书单'
         })
+        if(!wx.getStorageSync('sessionId')) {
+            app.loginFun()
+            return false;
+        }
         if (self.data.isSelectBook) {
             self.setData({
                 bookImgUrl: self.data.bookImgUrl.concat(self.data.tempBookImgUrl),

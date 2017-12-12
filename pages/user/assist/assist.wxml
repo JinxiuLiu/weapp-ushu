@@ -1,10 +1,12 @@
 <view class="user-list">
-	<view class="user-list-item" bindtap="tapInfo">
-		<view class="item-left">
-			<text>收益攻略1--教你如何快速赚钱</text>
+	<block wx:for="{{assistList}}">
+		<view class="user-list-item" data-name="{{item.name}}" data-id="{{item.id}}" bindtap="tapInfo">
+			<view class="item-left">
+				<text>{{item.name}}</text>
+			</view>
+			<view class="item-right">
+				<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
+			</view>
 		</view>
-		<view class="item-right">
-			<image style="width: 26rpx; height: 40rpx;vertical-align: middle;" src="../../../image/right-arrow-gray.png"></image>
-		</view>
-	</view>
+	</block>
 </view>

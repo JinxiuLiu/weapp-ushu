@@ -17,6 +17,23 @@ Page({
         bookListMoneyItem: [],
         shareMoneyItem: [],
     },
+    // 下拉刷新
+    onPullDownRefresh: function () {
+        this.setData({
+            page: 1,
+            bookListMoneyItem: [],
+            shareMoneyItem: [],
+        })
+        this.canGetMoneyRequest();
+        if (this.data.activeIndex == '0') {
+            this.moneyListRequest(false);
+        } else {
+            this.moneyListRequest(true);
+        }
+    },
+    onShow: function() {
+        this.canGetMoneyRequest();
+    },
     onLoad: function(option) {
         let self = this;
         self.setData({
@@ -54,6 +71,11 @@ Page({
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
+                wx.stopPullDownRefresh({
+                    complete: function (res) {
+                        wx.hideToast()
+                    }
+                })
                 self.setData({
                     canGetMoney: data.data.data,
                 })
@@ -74,6 +96,7 @@ Page({
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
+                wx.stopPullDownRefresh()
                 if (isShare) {
                     self.setData({
                         shareMoneyItem: data.data.data,

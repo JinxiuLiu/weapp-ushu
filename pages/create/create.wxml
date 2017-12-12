@@ -7,6 +7,30 @@
 	        </view>
 	    </view>
 	</view>
+	<view class="weui-cells__title">选择图书最多选择9本</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-uploader__bd">
+		    <view class="weui-uploader__files">
+		        <block wx:for="{{bookImgUrl}}" wx:for-item="image">
+		            <view class="weui-uploader__file bookBorder">
+		                <image class="weui-uploader__img" src="{{image.picPath}}" data-id="{{image.bookId}}" bindtap="tapBookFun"></image>
+		                <view class="del-img book-del" data-src="{{image.picPath}}" data-id="{{image.bookId}}" data-index="{{index}}" bindtap="delBookFun">删除</view>
+		            </view>
+		        </block>
+		    </view>
+		    <view class="weui-uploader__input-box bookBorder">
+		        <view class="weui-uploader__input" bindtap="selectBook"></view>
+		    </view>
+		</view>
+	</view>
+	<view class="weui-cells__title">编辑内容</view>
+	<view class="weui-cells weui-cells_after-title">
+		 <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea show-confirm-bar="false" value="{{content}}" class="weui-textarea" bindinput="bindTextArea" placeholder="请输入文本" />
+            </view>
+        </view>
+	</view>
 	<view class="weui-cells__title">视频</view>
 	<view class="weui-cells weui-cells_after-title">
 		<view class="page-body-info">
@@ -98,30 +122,8 @@
 		    </view>
 		</view>
 	</view>
-	<view class="weui-cells__title">编辑内容</view>
-	<view class="weui-cells weui-cells_after-title">
-		 <view class="weui-cell">
-            <view class="weui-cell__bd">
-                <textarea show-confirm-bar="false" value="{{content}}" class="weui-textarea" bindinput="bindTextArea" placeholder="请输入文本" />
-            </view>
-        </view>
-	</view>
-	<view class="weui-cells__title">选择图书最多选择9本</view>
-	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-uploader__bd">
-		    <view class="weui-uploader__files">
-		        <block wx:for="{{bookImgUrl}}" wx:for-item="image">
-		            <view class="weui-uploader__file bookBorder">
-		                <image class="weui-uploader__img" src="{{image.picPath}}" data-id="{{image.bookId}}" bindtap="tapBookFun"></image>
-		                <view class="del-img book-del" data-src="{{image.picPath}}" data-id="{{image.bookId}}" data-index="{{index}}" bindtap="delBookFun">删除</view>
-		            </view>
-		        </block>
-		    </view>
-		    <view class="weui-uploader__input-box bookBorder">
-		        <view class="weui-uploader__input" bindtap="selectBook"></view>
-		    </view>
-		</view>
-	</view>
+	
+	
 </view>
-<button type="primary" disabled="{{isDisabled}}" bindtap="submitFun">{{isEdit ? '提交编辑' : '提交'}}</button>
+<button type="primary" disabled="{{isDisabled}}" bindtap="submitFun">提交审核</button>
 <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>

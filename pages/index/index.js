@@ -34,6 +34,29 @@ Page({
         isShowList: true,
         suggestionList: []
     },
+    // 下拉刷新
+    onPullDownRefresh: function () {
+        let self = this;
+        if (this.data.activeIndex == 0) {
+            this.setData({
+                pageOne: 1,
+                inputVal: "",
+                loadmoreDef: true,
+                bookListItem: [],
+            })
+            this.getBookListDefRequest(self.data.searchVal)
+        }
+
+        if (this.data.activeIndex == 1) {
+            this.setData({
+                pageTwo: 1,
+                inputVal: "",
+                loadmoreHot: true,
+                hotBookListItem: [],
+            })
+            this.getBookListHotRequest(self.data.searchVal)
+        }
+    },
     clearInput: function() {
         this.setData({
             inputVal: ""
@@ -313,6 +336,7 @@ Page({
             success: result => {
                 if (result.data.success) {
                     let items = result.data.data.rows;
+                    wx.stopPullDownRefresh()
                     if (items.length == 0) {
                         self.setData({
                             loadmoreDef: false
@@ -370,6 +394,7 @@ Page({
             success: result => {
                 if (result.data.success) {
                     let items = result.data.data.rows;
+                    wx.stopPullDownRefresh()
                     if (items.length == 0) {
                         self.setData({
                             loadmoreHot: false

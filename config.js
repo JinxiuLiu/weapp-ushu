@@ -206,6 +206,12 @@ var config = {
     // 易盾校验-文字
     checkTextUrl: `${host}/check/text`,
 
+    // 帮助文档
+    getAssistListUrl: `${host}/helpDoc/datagrid`,
+
+    // 帮助文档详情
+    getAssistListInfoUrl: `${host}/helpDoc/get`
+
 };
 
 module.exports = config

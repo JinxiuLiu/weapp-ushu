@@ -92,7 +92,7 @@ App({
                     self.openSettingFun(callback)
                 } else {
                     wx.switchTab({
-                        url: '../index/index'
+                        url: '/pages/index/index'
                     })
                 }
             }

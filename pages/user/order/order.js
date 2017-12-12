@@ -26,10 +26,6 @@ Page({
         this.orderListRequest();
     },
     onPullDownRefresh: function () {
-        wx.showToast({
-            title: 'loading...',
-            icon: 'loading'
-        })
         this.orderListRequest();
     },
     orderListRequest: function() {
@@ -53,11 +49,7 @@ Page({
                 } else {
                     util.showMessage(self, data.data.msg)
                 }
-                wx.stopPullDownRefresh({
-                    complete: function (res) {
-                        wx.hideToast()
-                    }
-                })
+                wx.stopPullDownRefresh()
             }
         });
     },

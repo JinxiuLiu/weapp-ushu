@@ -54,9 +54,28 @@ Page({
             },
             success: data => {
                 if (data.data.success) {
-                    util.showMessage(self, '提现成功！');
+                    util.showMessage(self, '申请提现成功！');
+                    setTimeout(function() {
+                        wx.navigateBack()
+                    }, 1500)
                 } else {
-                    util.showMessage(self, data.data.msg);
+                    if(data.data.msg == '您尚未通过身份认证！') {
+                        wx.showModal({
+                            title: '提示',
+                            showCancel: false,
+                            confirmColor: '#ff4444',
+                            content: '申请提现需要实名制，请在“个人资料”中提交身份认证！',
+                            success: function(res) {
+                                if (res.confirm) {
+                                    wx.navigateTo({
+                                        url: '../../about/certification/certification'
+                                    })
+                                }
+                            }
+                        })
+                    } else {
+                        util.showMessage(self, data.data.msg);
+                    }
                 }
             }
         })
@@ -82,6 +101,8 @@ Page({
                 if (data.data.success) {
                     wx.showModal({
                         title: '提示',
+                        showCancel: false,
+                        confirmColor: '#ff4444',
                         content: '短信验证码发送到您的尾号：' + data.data.data + '的手机，请注意查收~',
                         success: function(res) {}
                     })

@@ -20,6 +20,10 @@ Page({
         selectAllStatus: false,
         total: '0',
     },
+    // 下拉刷新
+    onPullDownRefresh: function () {
+        this.onShow()
+    },
     onShow: function(options) {
         let self = this;
         let isCartInto = wx.getStorageSync('isCartInto')
@@ -47,6 +51,7 @@ Page({
                         return false;
                     }
                 }
+                wx.stopPullDownRefresh()
             }
         })
     },

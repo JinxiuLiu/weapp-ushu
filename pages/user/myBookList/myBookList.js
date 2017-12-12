@@ -19,6 +19,15 @@ Page({
     onReachBottom: function() {
         this.onLoad();
     },
+    // 下拉刷新
+    onPullDownRefresh: function () {
+        this.setData({
+            page: 1,
+            loadmore: true,
+            myBookList: [],
+        })
+        this.onLoad();
+    },
     onLoad: function() {
         let self = this;
         wx.getSystemInfo({
@@ -44,6 +53,7 @@ Page({
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: data => {
+                wx.stopPullDownRefresh()
                 if (!data.data.rows.length) {
                     util.showMessage(self, '没有更多数据了！');
                     self.setData({

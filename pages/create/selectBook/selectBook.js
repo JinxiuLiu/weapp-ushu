@@ -3,6 +3,7 @@
  */
 const util = require('../../../utils/util.js');
 const SelectBookUrl = require('../../../config').SelectBookUrl
+const app = getApp();
 Page({
     data: {
         loadmore: true,
@@ -27,9 +28,14 @@ Page({
                 "searchStr": ""
             },
             header: {
+                'X-Requested-With': 'XMLHttpRequest',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('sessionId')
             },
             success: function(result) {
+                if(result.data.data == 401) {
+                    app.loginFun()
+                    return false;
+                }
                 for(var i = 0; i < result.data.rows.length; i++) {
                     result.data.rows[i].checked = false;
                 }
